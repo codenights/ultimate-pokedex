@@ -15,6 +15,11 @@ module.exports.typeDefs = gql`
     speed: Int!
   }
 
+  type PokemonEvolution {
+    # method
+    pokemon: Pokemon!
+  }
+
   type Pokemon {
     id: String!
     name: String!
@@ -23,6 +28,7 @@ module.exports.typeDefs = gql`
     height: Int!
     stats: PokemonStat!
     types: [Type!]!
+    evolutions: [PokemonEvolution!]!
   }
 
   type Query {
