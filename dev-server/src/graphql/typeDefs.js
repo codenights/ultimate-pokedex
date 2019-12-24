@@ -27,6 +27,7 @@ module.exports.typeDefs = gql`
   type Version {
     id: String!
     name: String!
+    color: String!
   }
 
   type PokemonPokedexEntry {

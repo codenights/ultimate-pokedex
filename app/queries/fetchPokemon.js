@@ -32,6 +32,7 @@ export const fetchPokemonQuery = nationalId => `
         version {
           id
           name
+          color
         }
         entry
       }

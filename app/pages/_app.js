@@ -7,6 +7,7 @@ class MyApp extends App {
     return (
       <>
         <Component {...pageProps} />
+
         <style global jsx>{`
           html,
           body,
@@ -144,6 +145,13 @@ class MyApp extends App {
             font-size: 1.6rem;
             min-height: 100vh;
             background: #fafafa;
+            color: #373737;
+          }
+
+          h2 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
           }
         `}</style>
       </>

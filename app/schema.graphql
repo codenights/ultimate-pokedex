@@ -62,6 +62,7 @@ type Type {
 }
 
 type Version {
+  color: String!
   id: String!
   name: String!
 }

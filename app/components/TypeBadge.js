@@ -8,11 +8,11 @@ export const TypeBadge = ({ type }) => (
         display: inline-block;
         border-radius: 4px;
         padding: 4px 12px;
-        font-size: 1.2rem;
         background: ${type.color};
         color: #fff;
-        text-shadow: 0 1px 1px rgba(0, 0, 0, 0.8);
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
         font-family: monospace;
+        border: 2px solid rgba(0, 0, 0, 0.25);
       }
     `}</style>
   </span>
