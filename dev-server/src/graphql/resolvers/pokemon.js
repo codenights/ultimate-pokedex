@@ -31,6 +31,11 @@ const findEvolutions = (pokemon, root) => {
 };
 
 module.exports.PokemonResolver = {
+  name: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
+    return species.names.find(x => x.language.name === "en").name;
+  },
   types: pokemon =>
     pokemon.types.map(x => {
       const typeId = extractTypeIdFromTypeUrl(x.type.url);
