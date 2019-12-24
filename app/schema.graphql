@@ -4,7 +4,13 @@ schema {
   query: Query
 }
 
+type Ability {
+  id: String!
+  name: String!
+}
+
 type Pokemon {
+  abilities: [PokemonAbility!]!
   artworkUrl: String!
   evolutions: [PokemonEvolution!]!
   family: PokemonFamily!
@@ -16,6 +22,11 @@ type Pokemon {
   stats: PokemonStat!
   types: [Type!]!
   weight: Int!
+}
+
+type PokemonAbility {
+  ability: Ability!
+  isHidden: Boolean!
 }
 
 type PokemonEvolution {
@@ -45,6 +56,7 @@ type Query {
 }
 
 type Type {
+  color: String!
   id: String!
   name: String!
 }

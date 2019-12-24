@@ -4,6 +4,7 @@ module.exports.typeDefs = gql`
   type Type {
     id: String!
     name: String!
+    color: String!
   }
 
   type PokemonStat {

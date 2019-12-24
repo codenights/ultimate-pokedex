@@ -1,4 +1,5 @@
 const { findPokemonById } = require("../repository/pokemon");
+const { TypeResolver } = require("./resolvers/type");
 const { AbilityResolver } = require("./resolvers/ability");
 const { PokemonAbilityResolver } = require("./resolvers/pokemonAbility");
 const { VersionResolver } = require("./resolvers/version");
@@ -17,5 +18,6 @@ module.exports.resolvers = {
   PokemonStat: PokemonStatsResolver,
   PokemonAbility: PokemonAbilityResolver,
   Version: VersionResolver,
-  Ability: AbilityResolver
+  Ability: AbilityResolver,
+  Type: TypeResolver
 };

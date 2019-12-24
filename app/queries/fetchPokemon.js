@@ -26,6 +26,7 @@ export const fetchPokemonQuery = nationalId => `
       types {
         id
         name
+        color
       }
       pokedexEntries {
         version {

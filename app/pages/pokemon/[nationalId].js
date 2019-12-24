@@ -3,7 +3,7 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import { TypeBadge } from "../../components/TypeBadge";
-import { fetchPokemonQuery } from "../../fetchPokemon/queries";
+import { fetchPokemonQuery } from "../../queries/fetchPokemon";
 
 const PokemonPreview = ({ pokemon }) => (
   <Link href={`/pokemon/${pokemon.id}`}>
@@ -80,7 +80,7 @@ const PokemonPage = ({ pokemon }) => {
         <ul>
           {pokemon.types.map(type => (
             <li key={type.id}>
-              <TypeBadge type={type.name} />
+              <TypeBadge type={type} />
             </li>
           ))}
         </ul>
