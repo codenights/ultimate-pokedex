@@ -1,8 +1,11 @@
 import React from "react";
 import { PokedexEntries } from "./PokedexEntries";
+import {Stats} from "./Stats";
 
 export const PokemonDetails = ({ pokemon }) => (
   <div>
+    <Stats pokemon={pokemon}/>
+
     <PokedexEntries pokemon={pokemon} />
 
     <style jsx>{`
