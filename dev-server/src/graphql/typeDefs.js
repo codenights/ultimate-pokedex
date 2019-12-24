@@ -16,12 +16,21 @@ module.exports.typeDefs = gql`
   }
 
   type PokemonEvolution {
-    # method
     pokemon: Pokemon!
   }
 
   type PokemonFamily {
     pokemon: Pokemon!
+  }
+
+  type Version {
+    id: String!
+    name: String!
+  }
+
+  type PokemonPokedexEntry {
+    version: Version!
+    entry: String!
   }
 
   type Pokemon {
@@ -35,6 +44,7 @@ module.exports.typeDefs = gql`
     types: [Type!]!
     evolutions: [PokemonEvolution!]!
     family: PokemonFamily!
+    pokedexEntries: [PokemonPokedexEntry!]!
   }
 
   type Query {

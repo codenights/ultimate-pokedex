@@ -3,6 +3,7 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import { TypeBadge } from "../../components/TypeBadge";
+import { fetchPokemonQuery } from "./queries";
 
 const PokemonPreview = ({ pokemon }) => (
   <Link href={`/pokemon/${pokemon.id}`}>
@@ -48,6 +49,25 @@ const Evolution = ({ pokemon }) => (
   </div>
 );
 
+const PokedexEntries = ({ pokemon }) => (
+  <table>
+    <thead>
+      <tr>
+        <td>Game</td>
+        <td>Pokedex entry</td>
+      </tr>
+    </thead>
+    <tbody>
+      {pokemon.pokedexEntries.map(({ entry, version }) => (
+        <tr key={version.id}>
+          <td>{version.name}</td>
+          <td>{entry}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+);
+
 const PokemonPage = ({ pokemon }) => {
   return (
     <main>
@@ -69,7 +89,7 @@ const PokemonPage = ({ pokemon }) => {
       </section>
 
       <section>
-        <pre>{JSON.stringify(pokemon, null, 2)}</pre>
+        <PokedexEntries pokemon={pokemon} />
       </section>
 
       <style jsx>{`
@@ -105,55 +125,10 @@ const PokemonPage = ({ pokemon }) => {
 
 PokemonPage.getInitialProps = async ({ query }) => {
   const { nationalId } = query;
-  const graphqlQuery = `
-  {
-    pokemon(nationalId: "${nationalId}") {
-      id
-      name,
-      artworkUrl
-      weight
-      height,
-      stats {
-        hp,
-        attack,
-        defense
-        specialAttack
-        specialDefense
-        speed
-      }
-      types {
-        id
-        name
-      }
-      family {
-        pokemon {
-          id
-          name
-          spriteUrl
-          evolutions {
-            pokemon {
-              id
-              name
-              spriteUrl
-              evolutions {
-                pokemon {
-                  id
-                  name
-                  spriteUrl
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  `;
-
   const response = await fetch("http://localhost:4000/graphql", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: graphqlQuery })
+    body: JSON.stringify({ query: fetchPokemonQuery(nationalId) })
   });
   const { data } = await response.json();
 

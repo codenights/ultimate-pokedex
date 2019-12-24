@@ -32,6 +32,8 @@ const extractNationalIdFromSpeciesUrl = url =>
 
 const extractTypeIdFromTypeUrl = url => extractIdFromUrl("type", url);
 
+const extractVersionIdFromVersionUrl = url => extractIdFromUrl("version", url);
+
 const findPokemonSpeciesByPokemonId = nationalId =>
   readJSON(path.join(DB_DIR, `pokemon-species/${nationalId}.json`));
 
@@ -45,6 +47,9 @@ const findEvolutionChainByPokemonId = async nationalId => {
     path.join(DB_DIR, `evolution-chain/${evolutionChainId}.json`)
   );
 };
+
+const findVersionById = versionId =>
+  readJSON(path.join(DB_DIR, `version/${versionId}.json`));
 
 const findEvolutions = (pokemon, root) => {
   if (root.species.name === pokemon.name) {
@@ -96,7 +101,21 @@ module.exports.resolvers = {
       const result = await findPokemonById(nationalId);
 
       return { pokemon: result };
+    },
+    pokedexEntries: async pokemon => {
+      const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+      return species.flavor_text_entries.filter(x => x.language.name === "en");
     }
+  },
+  PokemonPokedexEntry: {
+    version: flavorTextEntry => {
+      const versionId = extractVersionIdFromVersionUrl(
+        flavorTextEntry.version.url
+      );
+
+      return findVersionById(versionId);
+    },
+    entry: flavorTextEntry => flavorTextEntry.flavor_text.replace(/\n/, " ")
   },
   PokemonStat: {
     hp: findStatByName("hp"),
@@ -105,5 +124,8 @@ module.exports.resolvers = {
     specialAttack: findStatByName("special-attack"),
     specialDefense: findStatByName("special-defense"),
     speed: findStatByName("speed")
+  },
+  Version: {
+    name: version => version.names.find(x => x.language.name === "en").name
   }
 };
