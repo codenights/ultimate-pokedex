@@ -1,6 +1,8 @@
 import React from "react";
 import { ResponsiveRadar } from "@nivo/radar";
 
+import { Section } from "./Section";
+
 const getDataFromPokemon = pokemon =>
   Object.keys(pokemon.stats).map(statName => ({
     stat: statName
@@ -40,7 +42,7 @@ const getOverallColor = stats => {
 };
 
 export const Stats = ({ pokemon }) => (
-  <section style={{ height: 400 }}>
+  <Section style={{ height: 400 }}>
     <h2>Statistics</h2>
 
     <ResponsiveRadar
@@ -50,7 +52,7 @@ export const Stats = ({ pokemon }) => (
       maxValue="auto"
       curve="linearClosed"
       borderWidth={2}
-      margin={{ top: 20, bottom: 80, left: 100, right: 100 }}
+      margin={{ top: 50, bottom: 80, left: 100, right: 100 }}
       gridLevels={5}
       gridShape="circular"
       gridLabelOffset={36}
@@ -68,8 +70,8 @@ export const Stats = ({ pokemon }) => (
       motionDamping={15}
       isInteractive={false}
       dotColor={getDotColor}
-      dotBorderColor='rgba(0, 0, 0, .3)'
-      borderColor='rgba(0, 0, 0, .3)'
+      dotBorderColor="rgba(0, 0, 0, .3)"
+      borderColor="rgba(0, 0, 0, .3)"
     />
 
     <style jsx>{`
@@ -77,5 +79,5 @@ export const Stats = ({ pokemon }) => (
         padding-bottom: 40px;
       }
     `}</style>
-  </section>
+  </Section>
 );

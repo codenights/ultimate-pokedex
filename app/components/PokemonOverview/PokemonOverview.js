@@ -20,7 +20,7 @@ export const PokemonOverview = ({ pokemon }) => (
         align-items: center;
         justify-content: center;
 
-        background: ${desaturate(0.2, pokemon.types[0].color)};
+        background: ${desaturate(0.5, pokemon.types[0].color)};
       }
     `}</style>
   </section>

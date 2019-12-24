@@ -1,7 +1,9 @@
 import React from "react";
 
+import { Section } from "./Section";
+
 export const PokedexEntries = ({ pokemon }) => (
-  <section>
+  <Section>
     <h2>Pokedex entries</h2>
 
     <table>
@@ -52,5 +54,5 @@ export const PokedexEntries = ({ pokemon }) => (
         background: #fff;
       }
     `}</style>
-  </section>
+  </Section>
 );

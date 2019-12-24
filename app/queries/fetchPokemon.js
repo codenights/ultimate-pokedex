@@ -23,11 +23,13 @@ export const fetchPokemonQuery = nationalId => `
       weight
       height
       stats { ...Stats }
+      
       types {
         id
         name
         color
       }
+      
       pokedexEntries {
         version {
           id
@@ -36,6 +38,7 @@ export const fetchPokemonQuery = nationalId => `
         }
         entry
       }
+      
       family {
         pokemon {
           ...PokemonPreview
@@ -50,6 +53,14 @@ export const fetchPokemonQuery = nationalId => `
             }
           }
         }
+      }
+      
+      abilities {
+        ability {
+          id
+          name
+        }
+        isHidden
       }
     }
   }
