@@ -42,6 +42,7 @@ export const PokemonList = connectInfiniteHits(
 
         <style jsx>{`
           div {
+            padding: 20px;
             display: grid;
             grid-gap: 20px;
             grid-template-columns: repeat(3, 1fr);
