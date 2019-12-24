@@ -14,8 +14,36 @@ const findPokemonById = async nationalId => {
 
   return {
     ...pokemon,
-    spriteUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${spriteId}.png`
+    spriteUrl: pokemon.sprites.front_default,
+    artworkUrl: `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${spriteId}.png`
   };
+};
+
+const extractIdFromUrl = (resource, url) => {
+  const EXTRACT_URL_REGEXP = new RegExp(`/${resource}/([0-9]*)`, "g");
+  return EXTRACT_URL_REGEXP.exec(url)[1];
+};
+
+const extractNationalIdFromEvolutionChainUrl = url =>
+  extractIdFromUrl("evolution-chain", url);
+
+const extractNationalIdFromSpeciesUrl = url =>
+  extractIdFromUrl("pokemon-species", url);
+
+const extractTypeIdFromTypeUrl = url => extractIdFromUrl("type", url);
+
+const findPokemonSpeciesByPokemonId = nationalId =>
+  readJSON(path.join(DB_DIR, `pokemon-species/${nationalId}.json`));
+
+const findEvolutionChainByPokemonId = async nationalId => {
+  const species = await findPokemonSpeciesByPokemonId(nationalId);
+  const evolutionChainId = extractNationalIdFromEvolutionChainUrl(
+    species.evolution_chain.url
+  );
+
+  return readJSON(
+    path.join(DB_DIR, `evolution-chain/${evolutionChainId}.json`)
+  );
 };
 
 const findEvolutions = (pokemon, root) => {
@@ -41,35 +69,33 @@ module.exports.resolvers = {
   Pokemon: {
     types: pokemon =>
       pokemon.types.map(x => {
-        const EXTRACT_ID_FROM_URL_REGEXP = /\/type\/([0-9]*)/g;
-        const typeId = EXTRACT_ID_FROM_URL_REGEXP.exec(x.type.url)[1];
+        const typeId = extractTypeIdFromTypeUrl(x.type.url);
 
         return readJSON(path.join(DB_DIR, `type/${typeId}.json`));
       }),
     evolutions: async pokemon => {
-      const EXTRACT_ID_FROM_URL_REGEXP = /\/evolution-chain\/([0-9]*)/g;
-      const species = await readJSON(
-        path.join(DB_DIR, `pokemon-species/${pokemon.id}.json`)
-      );
-      const evolutionChainId = EXTRACT_ID_FROM_URL_REGEXP.exec(
-        species.evolution_chain.url
-      )[1];
-      const evolutionChain = await readJSON(
-        path.join(DB_DIR, `evolution-chain/${evolutionChainId}.json`)
-      );
-
+      const evolutionChain = await findEvolutionChainByPokemonId(pokemon.id);
       const evolutions = findEvolutions(pokemon, evolutionChain.chain);
 
       return Promise.all(
         evolutions.map(evolution => {
-          const EXTRACT_ID_FROM_URL_REGEXP = /\/pokemon-species\/([0-9]*)/g;
-          const nationalId = EXTRACT_ID_FROM_URL_REGEXP.exec(
+          const nationalId = extractNationalIdFromSpeciesUrl(
             evolution.species.url
-          )[1];
+          );
 
           return { pokemon: findPokemonById(nationalId) };
         })
       );
+    },
+    family: async pokemon => {
+      const evolutionChain = await findEvolutionChainByPokemonId(pokemon.id);
+      const nationalId = extractNationalIdFromSpeciesUrl(
+        evolutionChain.chain.species.url
+      );
+
+      const result = await findPokemonById(nationalId);
+
+      return { pokemon: result };
     }
   },
   PokemonStat: {

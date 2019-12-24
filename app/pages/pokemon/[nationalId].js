@@ -1,24 +1,71 @@
 import React from "react";
+import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import { TypeBadge } from "../../components/TypeBadge";
+
+const PokemonPreview = ({ pokemon }) => (
+  <Link href={`/pokemon/${pokemon.id}`}>
+    <a>
+      <style jsx>{`
+        a {
+          display: inline-block;
+          padding: 20px;
+          text-align: center;
+        }
+
+        img {
+          max-width: 50px;
+        }
+      `}</style>
+
+      <img src={pokemon.spriteUrl} />
+      <p>{pokemon.name}</p>
+    </a>
+  </Link>
+);
+
+const Evolutions = ({ evolutions }) => (
+  <div>
+    {evolutions.map(({ pokemon }) => (
+      <Evolution key={pokemon.id} pokemon={pokemon} />
+    ))}
+  </div>
+);
+
+const Evolution = ({ pokemon }) => (
+  <div>
+    <style jsx>{`
+      div {
+        display: flex;
+        align-items: center;
+      }
+    `}</style>
+
+    <PokemonPreview pokemon={pokemon} />
+
+    {pokemon.evolutions && <Evolutions evolutions={pokemon.evolutions} />}
+  </div>
+);
 
 const PokemonPage = ({ pokemon }) => {
   return (
     <main>
       <section>
         <div>
-          <img alt={`${pokemon.name} sprite`} src={pokemon.spriteUrl} />
+          <img alt={`${pokemon.name} sprite`} src={pokemon.artworkUrl} />
         </div>
         <h1>{pokemon.name}</h1>
 
         <ul>
           {pokemon.types.map(type => (
-            <li>
+            <li key={type.id}>
               <TypeBadge type={type.name} />
             </li>
           ))}
         </ul>
+
+        <Evolution pokemon={pokemon.family.pokemon} />
       </section>
 
       <section>
@@ -37,7 +84,6 @@ const PokemonPage = ({ pokemon }) => {
         section:first-child {
           display: flex;
           flex-direction: column;
-          justify-content: center;
           align-items: center;
         }
 
@@ -64,7 +110,7 @@ PokemonPage.getInitialProps = async ({ query }) => {
     pokemon(nationalId: "${nationalId}") {
       id
       name,
-      spriteUrl
+      artworkUrl
       weight
       height,
       stats {
@@ -78,6 +124,27 @@ PokemonPage.getInitialProps = async ({ query }) => {
       types {
         id
         name
+      }
+      family {
+        pokemon {
+          id
+          name
+          spriteUrl
+          evolutions {
+            pokemon {
+              id
+              name
+              spriteUrl
+              evolutions {
+                pokemon {
+                  id
+                  name
+                  spriteUrl
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

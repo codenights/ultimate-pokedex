@@ -20,15 +20,21 @@ module.exports.typeDefs = gql`
     pokemon: Pokemon!
   }
 
+  type PokemonFamily {
+    pokemon: Pokemon!
+  }
+
   type Pokemon {
     id: String!
     name: String!
     spriteUrl: String!
+    artworkUrl: String!
     weight: Int!
     height: Int!
     stats: PokemonStat!
     types: [Type!]!
     evolutions: [PokemonEvolution!]!
+    family: PokemonFamily!
   }
 
   type Query {
