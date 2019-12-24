@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import algoliasearch from "algoliasearch/lite";
 
-import { Search } from "../components/Search";
+import { Search } from "../components/Search/Search";
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,

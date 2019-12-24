@@ -3,6 +3,7 @@ import React from "react";
 export const TypeBadge = ({ type }) => (
   <span>
     {type.name}
+
     <style jsx>{`
       span {
         display: inline-block;
