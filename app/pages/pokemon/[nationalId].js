@@ -3,7 +3,7 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import { TypeBadge } from "../../components/TypeBadge";
-import { fetchPokemonQuery } from "./queries";
+import { fetchPokemonQuery } from "../../fetchPokemon/queries";
 
 const PokemonPreview = ({ pokemon }) => (
   <Link href={`/pokemon/${pokemon.id}`}>
