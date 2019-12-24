@@ -1,0 +1,64 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+}
+
+type Pokemon {
+  artworkUrl: String!
+  evolutions: [PokemonEvolution!]!
+  family: PokemonFamily!
+  height: Int!
+  id: String!
+  name: String!
+  pokedexEntries: [PokemonPokedexEntry!]!
+  spriteUrl: String!
+  stats: PokemonStat!
+  types: [Type!]!
+  weight: Int!
+}
+
+type PokemonEvolution {
+  pokemon: Pokemon!
+}
+
+type PokemonFamily {
+  pokemon: Pokemon!
+}
+
+type PokemonPokedexEntry {
+  entry: String!
+  version: Version!
+}
+
+type PokemonStat {
+  attack: Int!
+  defense: Int!
+  hp: Int!
+  specialAttack: Int!
+  specialDefense: Int!
+  speed: Int!
+}
+
+type Query {
+  pokemon(nationalId: String!): Pokemon!
+}
+
+type Type {
+  id: String!
+  name: String!
+}
+
+type Version {
+  id: String!
+  name: String!
+}
+
+enum CacheControlScope {
+  PRIVATE
+  PUBLIC
+}
+
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
