@@ -13,10 +13,13 @@ const extractNationalIdFromSpeciesUrl = url =>
 
 const extractVersionIdFromVersionUrl = url => extractIdFromUrl("version", url);
 
+const extractAbilityIdFromUrl = url => extractIdFromUrl("ability", url);
+
 module.exports = {
   extractIdFromUrl,
   extractTypeIdFromTypeUrl,
   extractNationalIdFromEvolutionChainUrl,
   extractNationalIdFromSpeciesUrl,
-  extractVersionIdFromVersionUrl
+  extractVersionIdFromVersionUrl,
+  extractAbilityIdFromUrl
 };

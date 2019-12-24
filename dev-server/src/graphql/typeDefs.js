@@ -33,6 +33,16 @@ module.exports.typeDefs = gql`
     entry: String!
   }
 
+  type Ability {
+    id: String!
+    name: String!
+  }
+
+  type PokemonAbility {
+    isHidden: Boolean!
+    ability: Ability!
+  }
+
   type Pokemon {
     id: String!
     name: String!
@@ -45,6 +55,7 @@ module.exports.typeDefs = gql`
     evolutions: [PokemonEvolution!]!
     family: PokemonFamily!
     pokedexEntries: [PokemonPokedexEntry!]!
+    abilities: [PokemonAbility!]!
   }
 
   type Query {
