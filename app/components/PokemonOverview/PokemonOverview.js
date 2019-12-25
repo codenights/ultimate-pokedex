@@ -1,9 +1,12 @@
 import React from "react";
 
+import { getBackgroundColorFromType } from "../../utils/colors";
 import { EvolutionChain } from "./EvolutionChain";
 import { PokemonHeader } from "./PokemonHeader";
 import { Types } from "./Types";
-import { getBackgroundColorFromType } from "../../utils/colors";
+
+const pokemonHasEvolution = pokemon =>
+  pokemon.family.pokemon.evolutions.length > 0;
 
 export const PokemonOverview = ({ pokemon }) => (
   <section>
@@ -11,7 +14,9 @@ export const PokemonOverview = ({ pokemon }) => (
 
     <Types types={pokemon.types} />
 
-    <EvolutionChain pokemon={pokemon.family.pokemon} />
+    {pokemonHasEvolution(pokemon) && (
+      <EvolutionChain pokemon={pokemon.family.pokemon} />
+    )}
 
     <style jsx>{`
       section {
