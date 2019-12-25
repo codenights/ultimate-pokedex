@@ -130,7 +130,7 @@ export function Search({ searchClient, indexName }) {
           padding: 20px;
           background: #fff;
           border-right: 1px solid #ddd;
-          min-height: 100vh;
+          height: 100vh;
           overflow-y: auto;
         }
 
