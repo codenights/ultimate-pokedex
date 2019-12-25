@@ -1,7 +1,7 @@
 import React from "react";
 import { connectInfiniteHits } from "react-instantsearch-dom";
 
-import { useIntersectionObserver, useShiny } from "../hooks";
+import { useIntersectionObserver } from "../hooks";
 import { PokemonHit } from "./PokemonHit";
 
 export const PokemonList = connectInfiniteHits(
@@ -11,12 +11,10 @@ export const PokemonList = connectInfiniteHits(
       threshold: 0
     });
 
-    const { isShiny } = useShiny();
-
     return (
       <div>
         {pokemons.map(pokemon => (
-          <PokemonHit key={pokemon.id} pokemon={pokemon} isShiny={isShiny} />
+          <PokemonHit key={pokemon.id} pokemon={pokemon} />
         ))}
 
         {hasMore && (

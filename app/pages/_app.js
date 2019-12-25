@@ -1,11 +1,13 @@
 import React from "react";
 import App from "next/app";
+import { ShinyMode } from "../components/ShinyMode";
 
 class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
+
     return (
-      <>
+      <ShinyMode>
         <Component {...pageProps} />
 
         <style global jsx>{`
@@ -164,7 +166,7 @@ class MyApp extends App {
             white-space: nowrap; /* added line */
           }
         `}</style>
-      </>
+      </ShinyMode>
     );
   }
 }

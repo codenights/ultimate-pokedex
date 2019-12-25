@@ -26,6 +26,7 @@ export const fetchPokemonQuery = nationalId => `
     
     artworkUrl
     spriteUrl
+    spriteShinyUrl
     
     weight
     height

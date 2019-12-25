@@ -24,7 +24,7 @@ export const AppBar = () => (
         text-decoration: none;
         font-weight: bold;
         color: inherit;
-        display: flex;
+        display: inline-flex;
         align-items: center;
       }
 

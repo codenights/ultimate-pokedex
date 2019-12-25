@@ -108,7 +108,7 @@ module.exports.PokemonResolver = {
     return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite/${pokemon.id}.png`;
   },
   spriteShinyUrl: pokemon => {
-    if (pokemon.id > 802) {
+    if (pokemon.id > 807) {
       return DEFAULT_SPRITE_URL;
     }
 

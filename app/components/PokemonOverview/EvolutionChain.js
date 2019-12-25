@@ -2,15 +2,15 @@ import React from "react";
 
 import { PokemonPreview } from "./PokemonPreview";
 
-const Evolutions = ({ evolutions, isShiny }) => (
+const Evolutions = ({ evolutions }) => (
   <div>
     {evolutions.map(({ pokemon }) => (
-      <EvolutionChain key={pokemon.id} pokemon={pokemon} isShiny={isShiny} />
+      <EvolutionChain key={pokemon.id} pokemon={pokemon} />
     ))}
   </div>
 );
 
-export const EvolutionChain = ({ pokemon, isShiny }) => (
+export const EvolutionChain = ({ pokemon }) => (
   <div>
     <style jsx>{`
       div {
@@ -19,10 +19,8 @@ export const EvolutionChain = ({ pokemon, isShiny }) => (
       }
     `}</style>
 
-    <PokemonPreview pokemon={pokemon} isShiny={isShiny} />
+    <PokemonPreview pokemon={pokemon} />
 
-    {pokemon.evolutions && (
-      <Evolutions evolutions={pokemon.evolutions} isShiny={isShiny} />
-    )}
+    {pokemon.evolutions && <Evolutions evolutions={pokemon.evolutions} />}
   </div>
 );

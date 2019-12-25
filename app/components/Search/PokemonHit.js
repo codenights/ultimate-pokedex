@@ -4,6 +4,7 @@ import { lighten, saturate } from "polished";
 
 import { Tag } from "../Tag";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
+import { useShiny } from "../ShinyMode";
 
 const COLORS_BY_TYPE = {
   poison: "#a59",
@@ -52,7 +53,8 @@ function getRefinementName(value) {
 }
 
 export const PokemonHit = connectCurrentRefinements(
-  ({ items: refinements, pokemon, isShiny }) => {
+  ({ items: refinements, pokemon }) => {
+    const spriteUrl = useShiny(pokemon.artworkUrl, pokemon.spriteShinyUrl);
     const color = COLORS_BY_TYPE[pokemon.types[0].name.toLowerCase()];
     const statRefinements = refinements.filter(refinement =>
       refinement.attribute.startsWith("stats.")
@@ -93,10 +95,7 @@ export const PokemonHit = connectCurrentRefinements(
             </p>
           </header>
 
-          <img
-            src={isShiny ? pokemon.spriteShinyUrl : pokemon.artworkUrl}
-            alt={pokemon.names.en}
-          />
+          <img src={spriteUrl} alt={pokemon.names.en} />
 
           <p className="watermark-number">#{pokemon.id}</p>
 
