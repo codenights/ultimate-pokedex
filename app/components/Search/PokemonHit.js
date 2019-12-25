@@ -1,5 +1,5 @@
 import React from "react";
-import { Highlight } from "react-instantsearch-dom";
+import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
 import { lighten, saturate } from "polished";
 
 import Link from "next/link";
@@ -27,121 +27,181 @@ const COLORS_BY_TYPE = {
   normal: "#aa9"
 };
 
-export const PokemonHit = ({ pokemon }) => {
-  const color = COLORS_BY_TYPE[pokemon.types[0].name.en.toLowerCase()];
+function getPropertyByPath(object, path) {
+  const parts = path.split(".");
 
-  return (
-    <div
-      style={{
-        borderColor: lighten(0.2, saturate(0.25, color)),
-        background: lighten(0.4, color)
-      }}
-    >
-      <Link href={`pokemon/${pokemon.nationalId}`}>
-        <a>
-          <h3>
-            <Highlight tagName="mark" attribute="name.en" hit={pokemon} />
-          </h3>
-          <img src={pokemon.artworkUrl} alt={pokemon.name.en} />
+  return parts.reduce((current, key) => current && current[key], object);
+}
 
-          <p className="watermark-number">#{pokemon.id}</p>
+function getRefinementName(value) {
+  switch (value) {
+    case "hp":
+      return "HP";
+    case "attack":
+      return "Atk";
+    case "defense":
+      return "Def";
+    case "special_attack":
+      return "Sp. Atk";
+    case "special_defense":
+      return "Sp. Def";
+    case "speed":
+      return "Speed";
+    default:
+      return value;
+  }
+}
 
-          <ul>
-            {pokemon.types.map(type => (
-              <li key={type.name.en}>
-                <TypeBadgeAlgolia type={type.name.en} />
-              </li>
-            ))}
-          </ul>
+export const PokemonHit = connectCurrentRefinements(
+  ({ items: refinements, pokemon }) => {
+    const color = COLORS_BY_TYPE[pokemon.types[0].name.en.toLowerCase()];
+    const statRefinements = refinements.filter(refinement =>
+      refinement.attribute.startsWith("stats.")
+    );
 
-          <p>
-            <Highlight tagName="mark" attribute="name.fr" hit={pokemon} />{" "}
-            <Tag>
-              <span>fr</span>
-            </Tag>
-            {pokemon.name.ja && (
-              <>
-                {" "}
-                / <Highlight
-                  tagName="mark"
-                  attribute="name.ja"
-                  hit={pokemon}
-                />{" "}
+    return (
+      <div
+        style={{
+          borderColor: lighten(0.2, saturate(0.25, color)),
+          background: lighten(0.4, color)
+        }}
+      >
+        <Link href={`pokemon/${pokemon.nationalId}`}>
+          <a>
+            <header>
+              <h3>
+                <Highlight tagName="mark" attribute="name.en" hit={pokemon} />
+              </h3>
+
+              <p>
+                <Highlight tagName="mark" attribute="name.fr" hit={pokemon} />{" "}
                 <Tag>
-                  <span>ja</span>
+                  <span>fr</span>
                 </Tag>
-              </>
+                {pokemon.name.ja && (
+                  <>
+                    {" "}
+                    /{" "}
+                    <Highlight
+                      tagName="mark"
+                      attribute="name.ja"
+                      hit={pokemon}
+                    />{" "}
+                    <Tag>
+                      <span>ja</span>
+                    </Tag>
+                  </>
+                )}
+              </p>
+            </header>
+
+            <img src={pokemon.artworkUrl} alt={pokemon.name.en} />
+
+            <p className="watermark-number">#{pokemon.id}</p>
+
+            <ul>
+              {pokemon.types.map(type => (
+                <li key={type.name.en}>
+                  <TypeBadgeAlgolia type={type.name.en} />
+                </li>
+              ))}
+            </ul>
+
+            {statRefinements && (
+              <ul
+                style={{
+                  flexWrap: "wrap",
+                  lineHeight: 1.6
+                }}
+              >
+                {statRefinements.map(refinement => (
+                  <li key={refinement.attribute}>
+                    <Tag>
+                      {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                      <strong>
+                        {getPropertyByPath(pokemon, refinement.attribute)}
+                      </strong>
+                    </Tag>
+                  </li>
+                ))}
+              </ul>
             )}
-          </p>
-        </a>
-      </Link>
+          </a>
+        </Link>
 
-      <style jsx>{`
-        div {
-          display: block;
-          border-radius: 2px;
-          border-left: 4px solid;
-          background: #fff;
-          box-sizing: border-box;
-          position: relative;
-        }
+        <style jsx>{`
+          div {
+            display: block;
+            border-radius: 2px;
+            border-left: 4px solid;
+            background: #fff;
+            box-sizing: border-box;
+            position: relative;
+          }
 
-        a {
-          padding: 20px;
-          text-decoration: none;
-          color: inherit;
-          display: grid;
-          grid-template-columns: 1fr 150px;
-          grid-template-rows: repeat(3, auto);
-          align-items: center;
-        }
+          a {
+            padding: 20px;
+            text-decoration: none;
+            color: inherit;
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            grid-template-rows: repeat(3, auto);
+            align-items: center;
+          }
 
-        a:hover .watermark-number,
-        a:focus .watermark-number {
-          opacity: 0.7;
-        }
+          a:hover .watermark-number,
+          a:focus .watermark-number {
+            opacity: 0.7;
+          }
 
-        a:hover img,
-        a:focus img {
-          transform: scale(1.25);
-        }
+          a:hover img,
+          a:focus img {
+            transform: scale(1.25);
+          }
 
-        img {
-          position: relative;
-          z-index: 1;
-          height: 150px;
-          grid-row: span 3;
-          transition: transform 0.3s ease;
-        }
+          img {
+            position: relative;
+            z-index: 1;
+            height: 150px;
+            grid-row: span 3;
+            transition: transform 0.3s ease;
+          }
 
-        h3 {
-          font-weight: bold;
-          font-size: 2rem;
-        }
+          h3 {
+            font-weight: bold;
+            font-size: 2rem;
+            margin-bottom: 6px;
+          }
 
-        p {
-          font-size: 1.4rem;
-          opacity: 0.75;
-        }
+          p {
+            font-size: 1.4rem;
+            opacity: 0.75;
+            line-height: 1.6;
+          }
 
-        ul {
-          display: flex;
-        }
+          strong {
+            font-weight: bold;
+          }
 
-        li + li {
-          margin-left: 4px;
-        }
+          ul {
+            display: flex;
+          }
 
-        .watermark-number {
-          position: absolute;
-          top: 10px;
-          right: 10px;
-          font-weight: bold;
-          font-size: 4rem;
-          opacity: 0.3;
-          transition: opacity 0.2s ease;
-        }
-      `}</style>
-    </div>
-  );
-};
+          li:not(:last-of-type) {
+            margin-right: 4px;
+          }
+
+          .watermark-number {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-weight: bold;
+            font-size: 4rem;
+            opacity: 0.3;
+            transition: opacity 0.2s ease;
+          }
+        `}</style>
+      </div>
+    );
+  }
+);
