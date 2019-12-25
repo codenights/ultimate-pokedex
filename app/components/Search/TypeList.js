@@ -31,13 +31,13 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
         li {
           padding-bottom: 10px;
         }
-        
+
         label {
           cursor: pointer;
         }
 
         input + span {
-          opacity: 0.6;
+          opacity: ${hasRefined ? 0.6 : 1};
         }
 
         input:checked + span {
