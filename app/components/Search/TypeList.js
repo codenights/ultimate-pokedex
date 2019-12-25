@@ -21,9 +21,11 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
             />
 
             <span>
-              <TypeBadgeAlgolia type={type.label} /> <Tag>{type.count}</Tag>
+              <TypeBadgeAlgolia type={type.label} />
             </span>
           </label>
+
+          <Tag>{type.count}</Tag>
         </li>
       ))}
 
@@ -34,6 +36,10 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
 
         label {
           cursor: pointer;
+        }
+
+        input:focus + span {
+          outline: 5px auto -webkit-focus-ring-color;
         }
 
         input + span {
