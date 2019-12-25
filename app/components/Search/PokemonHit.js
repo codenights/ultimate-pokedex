@@ -53,7 +53,7 @@ function getRefinementName(value) {
 
 export const PokemonHit = connectCurrentRefinements(
   ({ items: refinements, pokemon }) => {
-    const color = COLORS_BY_TYPE[pokemon.types[0].name.en.toLowerCase()];
+    const color = COLORS_BY_TYPE[pokemon.types[0].name.toLowerCase()];
     const statRefinements = refinements.filter(refinement =>
       refinement.attribute.startsWith("stats.")
     );
@@ -68,15 +68,15 @@ export const PokemonHit = connectCurrentRefinements(
         <a href={`pokemon/${pokemon.nationalId}`}>
           <header>
             <h3>
-              <Highlight tagName="mark" attribute="name.en" hit={pokemon} />
+              <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
             </h3>
 
             <p>
-              <Highlight tagName="mark" attribute="name.fr" hit={pokemon} />{" "}
+              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
               <Tag>
                 <span>fr</span>
               </Tag>
-              {pokemon.name.ja && (
+              {pokemon.names.ja && (
                 <>
                   {" "}
                   /{" "}
@@ -93,14 +93,14 @@ export const PokemonHit = connectCurrentRefinements(
             </p>
           </header>
 
-          <img src={pokemon.artworkUrl} alt={pokemon.name.en} />
+          <img src={pokemon.artworkUrl} alt={pokemon.names.en} />
 
           <p className="watermark-number">#{pokemon.id}</p>
 
           <ul>
             {pokemon.types.map(type => (
-              <li key={type.name.en}>
-                <TypeBadgeAlgolia type={type.name.en} />
+              <li key={type.name}>
+                <TypeBadgeAlgolia type={type.name} />
               </li>
             ))}
           </ul>

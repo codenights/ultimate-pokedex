@@ -60,7 +60,7 @@ export function Search({ searchClient, indexName }) {
                 <ClearRefinements
                   transformItems={items =>
                     items.filter(({ attribute }) =>
-                      attribute.startsWith("types.name.")
+                      attribute.startsWith("types.")
                     )
                   }
                   translations={{
@@ -70,7 +70,7 @@ export function Search({ searchClient, indexName }) {
               </div>
             }
           >
-            <TypeList attribute="types.name.en" operator="and" limit={18} />
+            <TypeList attribute="types.name" operator="and" limit={18} />
           </Panel>
 
           <Panel
@@ -92,22 +92,22 @@ export function Search({ searchClient, indexName }) {
             }
           >
             <p>HP</p>
-            <RangeInput attribute="stats.hp.base" />
+            <RangeInput attribute="stats.hp" />
 
             <p>Attack</p>
-            <RangeInput attribute="stats.attack.base" />
+            <RangeInput attribute="stats.attack" />
 
             <p>Defense</p>
-            <RangeInput attribute="stats.defense.base" />
+            <RangeInput attribute="stats.defense" />
 
             <p>Special Attack</p>
-            <RangeInput attribute="stats.special_attack.base" />
+            <RangeInput attribute="stats.specialAttack" />
 
             <p>Special Defense</p>
-            <RangeInput attribute="stats.special_defense.base" />
+            <RangeInput attribute="stats.specialDefense" />
 
             <p>Speed</p>
-            <RangeInput attribute="stats.speed.base" />
+            <RangeInput attribute="stats.speed" />
           </Panel>
         </aside>
 
