@@ -13,7 +13,7 @@ function Home() {
   return (
     <div>
       <Head>
-        <title>Home</title>
+        <title>Ultimate Pokedex | Home</title>gaa
         <link rel="icon" href="/favicon.ico" />
       </Head>
 

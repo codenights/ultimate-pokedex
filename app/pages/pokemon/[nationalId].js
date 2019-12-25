@@ -1,14 +1,18 @@
 import React from "react";
-import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 
 import { fetchPokemonQuery } from "../../queries/fetchPokemon";
 import { PokemonOverview } from "../../components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../components/PokemonDetails";
+import Head from "next/head";
 
 const PokemonPage = ({ pokemon }) => {
   return (
     <main>
+      <Head>
+        <title>{pokemon.name} | Ultimate Pokedex</title>
+      </Head>
+
       <PokemonOverview pokemon={pokemon} />
 
       <PokemonDetails pokemon={pokemon} />
@@ -22,8 +26,8 @@ const PokemonPage = ({ pokemon }) => {
 
         @media (min-width: 800px) {
           main {
-          overflow: hidden;
-          height: 100vh;
+            overflow: hidden;
+            height: 100vh;
             grid-template-columns: repeat(2, 1fr);
           }
         }
