@@ -133,6 +133,7 @@ export const PokemonHit = connectCurrentRefinements(
           div {
             display: block;
             border-radius: 2px;
+            border: 1px solid;
             border-left: 4px solid;
             background: #fff;
             box-sizing: border-box;
