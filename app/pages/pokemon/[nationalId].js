@@ -55,7 +55,7 @@ const PokemonPage = ({ pokemon }) => {
           main {
             overflow: hidden;
             height: 100vh;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 2fr;
           }
         }
       `}</style>
