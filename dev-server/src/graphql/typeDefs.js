@@ -88,6 +88,7 @@ module.exports.typeDefs = gql`
     id: String!
     names: PokemonName
     spriteUrl: String!
+    spriteShinyUrl: String!
     artworkUrl: String!
     weight: Int!
     height: Int!

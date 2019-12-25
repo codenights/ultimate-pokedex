@@ -29,9 +29,6 @@ const findEvolutions = (pokemon, root) => {
 
 const DEFAULT_SPRITE_URL = "https://www.svgrepo.com/show/54691/pokemon.svg";
 
-const getPokemonSprite = pokemon =>
-  pokemon.sprites.front_default || DEFAULT_SPRITE_URL;
-
 module.exports.PokemonResolver = {
   names: async pokemon => {
     const species = await findPokemonSpeciesByPokemonId(pokemon.id);
@@ -80,14 +77,25 @@ module.exports.PokemonResolver = {
 
     return species.flavor_text_entries.filter(x => x.language.name === "en");
   },
-  spriteUrl: getPokemonSprite,
-  artworkUrl: pokemon => {
+  spriteUrl: pokemon => {
     if (pokemon.id > 807) {
-      return getPokemonSprite(pokemon);
+      return pokemon.sprites.front_default || DEFAULT_SPRITE_URL;
     }
 
-    const spriteId = pokemon.id.toString().padStart(3, "0");
+    return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite/${pokemon.id}.png`;
+  },
+  spriteShinyUrl: pokemon => {
+    if (pokemon.id > 802) {
+      return DEFAULT_SPRITE_URL;
+    }
 
-    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${spriteId}.png`;
+    return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite-shiny/${pokemon.id}.png`;
+  },
+  artworkUrl: pokemon => {
+    if (pokemon.id > 807) {
+      return pokemon.sprites.front_default || DEFAULT_SPRITE_URL;
+    }
+
+    return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.id}.png`;
   }
 };
