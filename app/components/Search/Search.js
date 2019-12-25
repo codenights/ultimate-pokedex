@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 
 import { TypeList } from "./TypeList";
 import { PokemonList } from "./PokemonList";
+import { RangeSlider } from "./RangeSlider";
 
 const createURL = state => `?${qs.stringify(state)}`;
 
@@ -91,23 +92,23 @@ export function Search({ searchClient, indexName }) {
               </div>
             }
           >
-            <p>HP</p>
-            <RangeInput attribute="stats.hp" />
+            <h3>HP</h3>
+            <RangeSlider attribute="stats.hp" />
 
-            <p>Attack</p>
-            <RangeInput attribute="stats.attack" />
+            <h3>Attack</h3>
+            <RangeSlider attribute="stats.attack" />
 
-            <p>Defense</p>
-            <RangeInput attribute="stats.defense" />
+            <h3>Defense</h3>
+            <RangeSlider attribute="stats.defense" />
 
-            <p>Special Attack</p>
-            <RangeInput attribute="stats.specialAttack" />
+            <h3>Special Attack</h3>
+            <RangeSlider attribute="stats.specialAttack" />
 
-            <p>Special Defense</p>
-            <RangeInput attribute="stats.specialDefense" />
+            <h3>Special Defense</h3>
+            <RangeSlider attribute="stats.specialDefense" />
 
-            <p>Speed</p>
-            <RangeInput attribute="stats.speed" />
+            <h3>Speed</h3>
+            <RangeSlider attribute="stats.speed" />
           </Panel>
         </aside>
 
@@ -146,6 +147,12 @@ export function Search({ searchClient, indexName }) {
           z-index: 2;
           top: 0;
           border-bottom: 1px solid #ddd;
+        }
+
+        h3 {
+          font-size: 12px;
+          font-weight: bold;
+          text-transform: uppercase;
         }
       `}</style>
 

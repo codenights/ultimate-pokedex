@@ -1,0 +1,45 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 16 16"
+>
+  <defs>
+    <linearGradient x1="50%" y1="0%" x2="50%" y2="83.545%" id="b">
+      <stop stop-color="#FFF" stop-opacity="0" offset="0%" />
+      <stop stop-opacity=".5" offset="100%" />
+    </linearGradient>
+    <linearGradient x1="50%" y1="34.775%" x2="50%" y2="100%" id="d">
+      <stop stop-color="#FFF" stop-opacity=".15" offset="0%" />
+      <stop stop-opacity=".276" offset="100%" />
+    </linearGradient>
+    <circle id="a" cx="8" cy="8" r="8" />
+    <circle id="e" cx="8" cy="8" r="8" />
+    <path d="M0 8a8 8 0 008 8 8 8 0 008-8H0z" id="c" />
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <g fill-rule="nonzero">
+      <use fill="#FF1A1A" xlink:href="#a" />
+      <use fill="url(#b)" xlink:href="#a" />
+    </g>
+    <g fill-rule="nonzero">
+      <use fill="#FFF" xlink:href="#c" />
+      <use fill="url(#d)" xlink:href="#c" />
+    </g>
+    <path
+      d="M8 10a2.003 2.003 0 01-1.415-3.415c.78-.78 2.049-.78 2.829 0 .378.378.586.88.586 1.415 0 .534-.208 1.036-.586 1.414-.378.378-.88.586-1.415.586zm0-3.672a1.674 1.674 0 000 3.343 1.66 1.66 0 001.181-.49c.316-.315.49-.735.49-1.181 0-.447-.174-.867-.49-1.183A1.666 1.666 0 008 6.328z"
+      fill="#33363A"
+      fill-rule="nonzero"
+    />
+    <mask id="f" fill="#fff"><use xlink:href="#e" /></mask>
+    <path fill="#2E2E2E" mask="url(#f)" d="M-.565 7.5h17v1h-17z" />
+    <circle
+      stroke="#2E2E2E"
+      fill="#FFF"
+      fill-rule="nonzero"
+      mask="url(#f)"
+      cx="8"
+      cy="8"
+      r="1.5"
+    />
+  </g>
+</svg>

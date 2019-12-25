@@ -82,7 +82,7 @@ export const PokemonHit = connectCurrentRefinements(
                   /{" "}
                   <Highlight
                     tagName="mark"
-                    attribute="name.ja"
+                    attribute="names.ja"
                     hit={pokemon}
                   />{" "}
                   <Tag>
