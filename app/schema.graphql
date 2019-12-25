@@ -9,6 +9,16 @@ type Ability {
   name: String!
 }
 
+type Move {
+  accuracy: Int
+  damageClass: String!
+  id: String!
+  name: String!
+  power: Int
+  pp: Int!
+  type: Type!
+}
+
 type Pokemon {
   abilities: [PokemonAbility!]!
   artworkUrl: String!
@@ -16,6 +26,7 @@ type Pokemon {
   family: PokemonFamily!
   height: Int!
   id: String!
+  moves: [PokemonMove!]!
   name: String!
   pokedexEntries: [PokemonPokedexEntry!]!
   spriteUrl: String!
@@ -35,6 +46,17 @@ type PokemonEvolution {
 
 type PokemonFamily {
   pokemon: Pokemon!
+}
+
+type PokemonMove {
+  learn: [PokemonMoveLearn!]!
+  move: Move!
+}
+
+type PokemonMoveLearn {
+  level: Int
+  method: String!
+  versionGroup: VersionGroup!
 }
 
 type PokemonPokedexEntry {
@@ -63,6 +85,11 @@ type Type {
 
 type Version {
   color: String!
+  id: String!
+  name: String!
+}
+
+type VersionGroup {
   id: String!
   name: String!
 }

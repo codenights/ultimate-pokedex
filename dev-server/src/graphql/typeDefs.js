@@ -30,6 +30,11 @@ module.exports.typeDefs = gql`
     color: String!
   }
 
+  type VersionGroup {
+    id: String!
+    name: String!
+  }
+
   type PokemonPokedexEntry {
     version: Version!
     entry: String!
@@ -45,6 +50,27 @@ module.exports.typeDefs = gql`
     ability: Ability!
   }
 
+  type Move {
+    id: String!
+    accuracy: Int
+    pp: Int!
+    power: Int
+    name: String!
+    type: Type!
+    damageClass: String!
+  }
+
+  type PokemonMoveLearn {
+    versionGroup: VersionGroup!
+    level: Int
+    method: String!
+  }
+
+  type PokemonMove {
+    move: Move!
+    learn: [PokemonMoveLearn!]!
+  }
+
   type Pokemon {
     id: String!
     name: String!
@@ -58,6 +84,7 @@ module.exports.typeDefs = gql`
     family: PokemonFamily!
     pokedexEntries: [PokemonPokedexEntry!]!
     abilities: [PokemonAbility!]!
+    moves: [PokemonMove!]!
   }
 
   type Query {

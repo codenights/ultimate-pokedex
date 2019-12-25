@@ -62,6 +62,30 @@ export const fetchPokemonQuery = nationalId => `
         }
         isHidden
       }
+
+      moves {
+        move {
+          id
+          name
+          accuracy
+          pp
+          power
+          damageClass
+          type {
+            id
+            name
+            color
+          }
+        }
+        learn {
+          method
+          level
+          versionGroup {
+            id
+            name
+          }
+        }
+      }
     }
   }
 `;

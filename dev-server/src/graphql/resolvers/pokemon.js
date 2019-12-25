@@ -1,11 +1,8 @@
-const path = require("path");
-const { readJSON } = require("fs-extra");
-
 const {
   extractNationalIdFromSpeciesUrl,
   extractTypeIdFromTypeUrl
 } = require("../../utils");
-const { DB_DIR } = require("../../repository/config");
+const { findTypeById } = require("../../repository/type");
 const {
   findPokemonSpeciesByPokemonId
 } = require("../../repository/pokemonSpecies");
@@ -40,7 +37,7 @@ module.exports.PokemonResolver = {
     pokemon.types.map(x => {
       const typeId = extractTypeIdFromTypeUrl(x.type.url);
 
-      return readJSON(path.join(DB_DIR, `type/${typeId}.json`));
+      return findTypeById(typeId);
     }),
   evolutions: async pokemon => {
     const evolutionChain = await findEvolutionChainByPokemonId(pokemon.id);

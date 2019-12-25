@@ -16,10 +16,16 @@ const PokemonPage = ({ pokemon }) => {
       <style jsx>{`
         main {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr;
           grid-gap: 20px;
-          height: 100vh;
+        }
+
+        @media (min-width: 800px) {
+          main {
           overflow: hidden;
+          height: 100vh;
+            grid-template-columns: repeat(2, 1fr);
+          }
         }
       `}</style>
     </main>

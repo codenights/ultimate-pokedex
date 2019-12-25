@@ -3,7 +3,8 @@ import {
   InstantSearch,
   Panel,
   RefinementList,
-  SearchBox
+  SearchBox,
+  Configure
 } from "react-instantsearch-dom";
 
 import { PokemonList } from "./PokemonList";
@@ -11,6 +12,7 @@ import { PokemonList } from "./PokemonList";
 export function Search({ searchClient, indexName }) {
   return (
     <InstantSearch searchClient={searchClient} indexName={indexName}>
+      <Configure hitsPerPage={50} />
       <div>
         <aside>
           <Panel header={<h2>Filters</h2>}>

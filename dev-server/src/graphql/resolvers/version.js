@@ -31,5 +31,5 @@ const COLOR_BY_VERSION = {
 
 module.exports.VersionResolver = {
   name: version => version.names.find(x => x.language.name === "en").name,
-  color: version => console.log(version.name) || COLOR_BY_VERSION[version.name]
+  color: version => COLOR_BY_VERSION[version.name]
 };

@@ -2,12 +2,15 @@ import React from "react";
 import { PokedexEntries } from "./PokedexEntries";
 import { Stats } from "./Stats";
 import { Abilities } from "./Abilities";
+import { Moves } from "./Moves";
 
 export const PokemonDetails = ({ pokemon }) => (
   <div>
     <Stats pokemon={pokemon} />
 
     <Abilities pokemon={pokemon} />
+
+    <Moves pokemon={pokemon} />
 
     <PokedexEntries pokemon={pokemon} />
 

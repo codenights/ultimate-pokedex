@@ -15,11 +15,18 @@ const extractVersionIdFromVersionUrl = url => extractIdFromUrl("version", url);
 
 const extractAbilityIdFromUrl = url => extractIdFromUrl("ability", url);
 
+const extractMoveIdFromUrl = url => extractIdFromUrl("move", url);
+
+const extractVersionGroupIdFromUrl = url =>
+  extractIdFromUrl("version-group", url);
+
 module.exports = {
   extractIdFromUrl,
   extractTypeIdFromTypeUrl,
   extractNationalIdFromEvolutionChainUrl,
   extractNationalIdFromSpeciesUrl,
   extractVersionIdFromVersionUrl,
-  extractAbilityIdFromUrl
+  extractAbilityIdFromUrl,
+  extractMoveIdFromUrl,
+  extractVersionGroupIdFromUrl
 };
