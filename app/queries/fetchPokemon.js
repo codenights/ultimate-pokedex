@@ -11,14 +11,18 @@ export const fetchPokemonQuery = nationalId => `
 
   fragment PokemonPreview on Pokemon {
     id
-    name
+    names {
+      en
+    }
     spriteUrl
   }
 
   {
     pokemon(nationalId: "${nationalId}") {
       id
-      name
+      names {
+        en
+      }
       artworkUrl
       spriteUrl
       weight

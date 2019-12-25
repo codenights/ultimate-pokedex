@@ -35,7 +35,7 @@ const PokemonPage = ({ pokemon }) => {
   return (
     <main>
       <Head>
-        <title>{pokemon.name} | Ultimate Pokedex</title>
+        <title>{pokemon.names.en} | Ultimate Pokedex</title>
 
         <link rel="icon" id="favicon" type="image/x-icon" />
       </Head>

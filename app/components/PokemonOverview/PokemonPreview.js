@@ -19,7 +19,7 @@ export const PokemonPreview = ({ pokemon }) => (
       `}</style>
 
       <img src={pokemon.spriteUrl} />
-      <p>{pokemon.name}</p>
+      <p>{pokemon.names.en}</p>
     </a>
   </Link>
 );

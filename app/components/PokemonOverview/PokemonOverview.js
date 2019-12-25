@@ -7,7 +7,7 @@ import { getBackgroundColorFromType } from "../../utils/colors";
 
 export const PokemonOverview = ({ pokemon }) => (
   <section>
-    <PokemonHeader name={pokemon.name} src={pokemon.artworkUrl} />
+    <PokemonHeader name={pokemon.names.en} src={pokemon.artworkUrl} />
 
     <Types types={pokemon.types} />
 

@@ -28,10 +28,17 @@ const findEvolutions = (pokemon, root) => {
 };
 
 module.exports.PokemonResolver = {
-  name: async pokemon => {
+  names: async pokemon => {
     const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+    const enLanguage = species.names.find(x => x.language.name === "en");
+    const frLanguage = species.names.find(x => x.language.name === "fr");
+    const jaLanguage = species.names.find(x => x.language.name === "roomaji");
 
-    return species.names.find(x => x.language.name === "en").name;
+    return {
+      en: enLanguage ? enLanguage.name : null,
+      fr: frLanguage ? frLanguage.name : null,
+      ja: jaLanguage ? jaLanguage.name : null
+    };
   },
   types: pokemon =>
     pokemon.types.map(x => {

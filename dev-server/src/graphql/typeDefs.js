@@ -78,9 +78,15 @@ module.exports.typeDefs = gql`
     learn: [PokemonMoveLearn!]!
   }
 
+  type PokemonName {
+    fr: String!
+    en: String!
+    ja: String
+  }
+
   type Pokemon {
     id: String!
-    name: String!
+    names: PokemonName
     spriteUrl: String!
     artworkUrl: String!
     weight: Int!
