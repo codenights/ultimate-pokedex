@@ -34,22 +34,23 @@ const findEvolutions = (pokemon, root) => {
 const DEFAULT_SPRITE_URL = "https://www.svgrepo.com/show/54691/pokemon.svg";
 
 const findByLanguage = language => x => x.language.name === language;
+const makeSuffix = suffix => ` (${suffix})`;
+const appendSuffix = (name, suffix) => `${name}${suffix || ""}`;
 
 module.exports.PokemonResolver = {
   names: async pokemon => {
     // For alternate form, we need to get the name using the pokemon-form
     const form = await findPokemonFormByPokemonId(pokemon.id);
+    const formSuffix = {};
 
     if (form.form_names.length > 0) {
       const enLanguage = form.form_names.find(findByLanguage("en"));
       const frLanguage = form.form_names.find(findByLanguage("fr"));
       const jaLanguage = form.form_names.find(findByLanguage("roomaji"));
 
-      return {
-        en: enLanguage ? enLanguage.name : null,
-        fr: frLanguage ? frLanguage.name : null,
-        ja: jaLanguage ? jaLanguage.name : null
-      };
+      formSuffix.en = enLanguage ? makeSuffix(enLanguage.name) : "";
+      formSuffix.fr = frLanguage ? makeSuffix(frLanguage.name) : "";
+      formSuffix.ja = jaLanguage ? makeSuffix(jaLanguage.name) : "";
     }
 
     // For other forms, we can use the pokemon-species
@@ -59,9 +60,9 @@ module.exports.PokemonResolver = {
     const jaLanguage = species.names.find(findByLanguage("roomaji"));
 
     return {
-      en: enLanguage ? enLanguage.name : null,
-      fr: frLanguage ? frLanguage.name : null,
-      ja: jaLanguage ? jaLanguage.name : null
+      en: enLanguage ? appendSuffix(enLanguage.name, formSuffix.en) : null,
+      fr: frLanguage ? appendSuffix(frLanguage.name, formSuffix.fr) : null,
+      ja: jaLanguage ? appendSuffix(jaLanguage.name, formSuffix.ja) : null
     };
   },
   types: pokemon =>
