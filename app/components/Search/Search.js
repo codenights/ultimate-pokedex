@@ -2,13 +2,13 @@ import React from "react";
 import {
   InstantSearch,
   Panel,
-  RefinementList,
   SearchBox,
   Configure,
   RangeInput,
   ClearRefinements
 } from "react-instantsearch-dom";
 
+import { TypeList } from "./TypeList";
 import { PokemonList } from "./PokemonList";
 
 export function Search({ searchClient, indexName }) {
@@ -17,17 +17,45 @@ export function Search({ searchClient, indexName }) {
       <Configure hitsPerPage={50} />
       <div>
         <aside>
-          <ClearRefinements />
+          <Panel
+            header={
+              <div>
+                <h2>Types</h2>
 
-          <Panel header={<h2>Types</h2>}>
-            <RefinementList
-              attribute="types.name.en"
-              operator="and"
-              limit={18}
-            />
+                <ClearRefinements
+                  transformItems={items =>
+                    items.filter(({ attribute }) =>
+                      attribute.startsWith("types.name.")
+                    )
+                  }
+                  translations={{
+                    reset: "Reset"
+                  }}
+                />
+              </div>
+            }
+          >
+            <TypeList attribute="types.name.en" operator="and" limit={18} />
           </Panel>
 
-          <Panel header={<h2>Statistics</h2>}>
+          <Panel
+            header={
+              <div>
+                <h2>Stats</h2>
+
+                <ClearRefinements
+                  transformItems={items =>
+                    items.filter(({ attribute }) =>
+                      attribute.startsWith("stats.")
+                    )
+                  }
+                  translations={{
+                    reset: "Reset"
+                  }}
+                />
+              </div>
+            }
+          >
             <p>HP</p>
             <RangeInput attribute="stats.hp.base" />
 
@@ -104,6 +132,17 @@ export function Search({ searchClient, indexName }) {
           all: unset;
           font: inherit;
           padding: 10px;
+        }
+
+        .ais-Panel-header h2 {
+          text-transform: uppercase;
+          font-size: 16px;
+          color: #777;
+          letter-spacing: 1px;
+        }
+
+        .ais-Panel-body {
+          margin-bottom: 10px;
         }
       `}</style>
     </InstantSearch>
