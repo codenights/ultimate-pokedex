@@ -11,10 +11,28 @@ export const PokemonList = connectInfiniteHits(
       threshold: 0
     });
 
+    const [isShiny, setIsShiny] = React.useState(false);
+
+    React.useEffect(() => {
+      if (typeof window === undefined) {
+        return;
+      }
+
+      function onKeyDown() {
+        setIsShiny(prevValue => !prevValue);
+      }
+
+      window.addEventListener("keydown", onKeyDown);
+
+      return () => {
+        window.removeEventListener("keydown", onKeyDown);
+      };
+    }, []);
+
     return (
       <div>
         {pokemons.map(pokemon => (
-          <PokemonHit pokemon={pokemon} key={pokemon.id} />
+          <PokemonHit key={pokemon.id} pokemon={pokemon} isShiny={isShiny} />
         ))}
 
         {hasMore && (

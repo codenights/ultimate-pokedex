@@ -52,7 +52,7 @@ function getRefinementName(value) {
 }
 
 export const PokemonHit = connectCurrentRefinements(
-  ({ items: refinements, pokemon }) => {
+  ({ items: refinements, pokemon, isShiny }) => {
     const color = COLORS_BY_TYPE[pokemon.types[0].name.toLowerCase()];
     const statRefinements = refinements.filter(refinement =>
       refinement.attribute.startsWith("stats.")
@@ -93,7 +93,10 @@ export const PokemonHit = connectCurrentRefinements(
             </p>
           </header>
 
-          <img src={pokemon.artworkUrl} alt={pokemon.names.en} />
+          <img
+            src={isShiny ? pokemon.spriteShinyUrl : pokemon.artworkUrl}
+            alt={pokemon.names.en}
+          />
 
           <p className="watermark-number">#{pokemon.id}</p>
 
