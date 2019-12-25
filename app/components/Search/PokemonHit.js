@@ -65,7 +65,7 @@ export const PokemonHit = connectCurrentRefinements(
           background: lighten(0.4, color)
         }}
       >
-        <a href={`pokemon/${pokemon.nationalId}`}>
+        <a href={`pokemon/${pokemon.id}`}>
           <header>
             <h3>
               <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
