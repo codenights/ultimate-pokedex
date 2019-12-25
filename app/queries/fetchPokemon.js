@@ -20,6 +20,7 @@ export const fetchPokemonQuery = nationalId => `
       id
       name
       artworkUrl
+      spriteUrl
       weight
       height
       stats { ...Stats }

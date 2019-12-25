@@ -1,16 +1,43 @@
-import React from "react";
+import React, { useEffect } from "react";
+import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
 import { fetchPokemonQuery } from "../../queries/fetchPokemon";
 import { PokemonOverview } from "../../components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../components/PokemonDetails";
-import Head from "next/head";
+
+const CANVAS_SIZE = 16;
+
+const setFavicon = pokemon => {
+  if (!process.browser) return;
+
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  const img = document.createElement("img");
+  const favicon = document.getElementById("favicon");
+
+  canvas.height = canvas.width = CANVAS_SIZE;
+
+  img.onload = () => {
+    ctx.drawImage(img, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    favicon.href = canvas.toDataURL("image/png");
+  };
+
+  img.crossOrigin = "Anonymous";
+  img.src = pokemon.spriteUrl;
+};
 
 const PokemonPage = ({ pokemon }) => {
+  useEffect(() => {
+    setFavicon(pokemon);
+  }, [pokemon]);
+
   return (
     <main>
       <Head>
         <title>{pokemon.name} | Ultimate Pokedex</title>
+
+        <link rel="icon" id="favicon" type="image/x-icon" />
       </Head>
 
       <PokemonOverview pokemon={pokemon} />
