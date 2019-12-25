@@ -24,8 +24,13 @@ export const PokemonDetails = ({ pokemon }) => (
       div {
         box-sizing: border-box;
         padding: 20px;
-        height: 100%;
-        overflow-y: auto;
+      }
+
+      @media (min-width: 800px) {
+        div {
+          height: 100%;
+          overflow-y: auto;
+        }
       }
     `}</style>
   </div>

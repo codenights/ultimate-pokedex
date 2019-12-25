@@ -3,23 +3,31 @@ import React from "react";
 import { fetchAbilityQuery } from "../../queries/fetchAbility";
 import { AbilityOverview } from "../../components/AbilityOverview";
 import { AbilityDetails } from "../../components/AbilityDetails";
+import { AppBarLayout } from "../../components/AppBarLayout";
 
 const AbilityPage = ({ ability }) => {
   return (
-    <main>
-      <AbilityOverview ability={ability} />
+    <AppBarLayout>
+      <main>
+        <AbilityOverview ability={ability} />
 
-      <AbilityDetails ability={ability} />
+        <AbilityDetails ability={ability} />
 
-      <style jsx>{`
-        main {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-          height: 100vh;
-          overflow: hidden;
-        }
-      `}</style>
-    </main>
+        <style jsx>{`
+          main {
+          }
+
+          @media (min-width: 800px) {
+            main {
+              display: grid;
+              grid-template-columns: 1fr 2fr;
+              height: 100%;
+              overflow: hidden;
+            }
+          }
+        `}</style>
+      </main>
+    </AppBarLayout>
   );
 };
 

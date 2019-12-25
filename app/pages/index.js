@@ -3,6 +3,7 @@ import Head from "next/head";
 import algoliasearch from "algoliasearch/lite";
 
 import { Search } from "../components/Search/Search";
+import { AppBarLayout } from "../components/AppBarLayout";
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,
@@ -11,7 +12,7 @@ const searchClient = algoliasearch(
 
 function Home() {
   return (
-    <div>
+    <AppBarLayout>
       <Head>
         <title>Ultimate Pokedex | Home</title>gaa
         <link rel="icon" href="/favicon.ico" />
@@ -21,7 +22,7 @@ function Home() {
         searchClient={searchClient}
         indexName={process.env.ALGOLIA_INDEX_NAME}
       />
-    </div>
+    </AppBarLayout>
   );
 }
 

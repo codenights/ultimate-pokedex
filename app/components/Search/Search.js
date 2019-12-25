@@ -131,12 +131,13 @@ export function Search({ searchClient, indexName }) {
           padding: 20px;
           background: #fff;
           border-right: 1px solid #ddd;
-          height: 100vh;
+          box-sizing: border-box;
+          height: 100%;
           overflow-y: auto;
         }
 
         main {
-          height: 100vh;
+          height: 100%;
           overflow-y: auto;
         }
 

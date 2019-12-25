@@ -6,6 +6,7 @@ import { fetchPokemonQuery } from "../../queries/fetchPokemon";
 import { useShiny } from "../../components/hooks";
 import { PokemonOverview } from "../../components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../components/PokemonDetails";
+import { AppBarLayout } from "../../components/AppBarLayout";
 
 const CANVAS_SIZE = 16;
 
@@ -36,33 +37,35 @@ const PokemonPage = ({ pokemon }) => {
   }, [pokemon]);
 
   return (
-    <main>
-      <Head>
-        <title>{pokemon.names.en} | Ultimate Pokedex</title>
+    <AppBarLayout>
+      <main>
+        <Head>
+          <title>{pokemon.names.en} | Ultimate Pokedex</title>
 
-        <link rel="icon" id="favicon" type="image/x-icon" />
-      </Head>
+          <link rel="icon" id="favicon" type="image/x-icon" />
+        </Head>
 
-      <PokemonOverview pokemon={pokemon} isShiny={isShiny} />
+        <PokemonOverview pokemon={pokemon} isShiny={isShiny} />
 
-      <PokemonDetails pokemon={pokemon} />
+        <PokemonDetails pokemon={pokemon} />
 
-      <style jsx>{`
-        main {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 20px;
-        }
-
-        @media (min-width: 800px) {
+        <style jsx>{`
           main {
-            overflow: hidden;
-            height: 100vh;
-            grid-template-columns: 1fr 2fr;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 20px;
           }
-        }
-      `}</style>
-    </main>
+
+          @media (min-width: 800px) {
+            main {
+              overflow: hidden;
+              grid-template-columns: 1fr 2fr;
+            }
+          }
+        `}</style>
+      </main>
+    </AppBarLayout>
   );
 };
 

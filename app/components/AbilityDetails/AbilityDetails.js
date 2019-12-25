@@ -52,6 +52,7 @@ export const AbilityDetails = ({ ability }) => (
 
     <style jsx>{`
       div {
+        box-sizing: border-box;
         padding: 20px;
         height: 100%;
         overflow-y: auto;
