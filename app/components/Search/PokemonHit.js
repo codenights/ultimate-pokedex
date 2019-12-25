@@ -2,7 +2,6 @@ import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
 import { lighten, saturate } from "polished";
 
-import Link from "next/link";
 import { Tag } from "../Tag";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
 
@@ -66,68 +65,66 @@ export const PokemonHit = connectCurrentRefinements(
           background: lighten(0.4, color)
         }}
       >
-        <Link href={`pokemon/${pokemon.nationalId}`}>
-          <a>
-            <header>
-              <h3>
-                <Highlight tagName="mark" attribute="name.en" hit={pokemon} />
-              </h3>
+        <a href={`pokemon/${pokemon.nationalId}`}>
+          <header>
+            <h3>
+              <Highlight tagName="mark" attribute="name.en" hit={pokemon} />
+            </h3>
 
-              <p>
-                <Highlight tagName="mark" attribute="name.fr" hit={pokemon} />{" "}
-                <Tag>
-                  <span>fr</span>
-                </Tag>
-                {pokemon.name.ja && (
-                  <>
-                    {" "}
-                    /{" "}
-                    <Highlight
-                      tagName="mark"
-                      attribute="name.ja"
-                      hit={pokemon}
-                    />{" "}
-                    <Tag>
-                      <span>ja</span>
-                    </Tag>
-                  </>
-                )}
-              </p>
-            </header>
+            <p>
+              <Highlight tagName="mark" attribute="name.fr" hit={pokemon} />{" "}
+              <Tag>
+                <span>fr</span>
+              </Tag>
+              {pokemon.name.ja && (
+                <>
+                  {" "}
+                  /{" "}
+                  <Highlight
+                    tagName="mark"
+                    attribute="name.ja"
+                    hit={pokemon}
+                  />{" "}
+                  <Tag>
+                    <span>ja</span>
+                  </Tag>
+                </>
+              )}
+            </p>
+          </header>
 
-            <img src={pokemon.artworkUrl} alt={pokemon.name.en} />
+          <img src={pokemon.artworkUrl} alt={pokemon.name.en} />
 
-            <p className="watermark-number">#{pokemon.id}</p>
+          <p className="watermark-number">#{pokemon.id}</p>
 
-            <ul>
-              {pokemon.types.map(type => (
-                <li key={type.name.en}>
-                  <TypeBadgeAlgolia type={type.name.en} />
+          <ul>
+            {pokemon.types.map(type => (
+              <li key={type.name.en}>
+                <TypeBadgeAlgolia type={type.name.en} />
+              </li>
+            ))}
+          </ul>
+
+          {statRefinements && (
+            <ul
+              style={{
+                flexWrap: "wrap",
+                lineHeight: 1.6
+              }}
+            >
+              {statRefinements.map(refinement => (
+                <li key={refinement.attribute}>
+                  <Tag>
+                    {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                    <strong>
+                      {getPropertyByPath(pokemon, refinement.attribute)}
+                    </strong>
+                  </Tag>
                 </li>
               ))}
             </ul>
-
-            {statRefinements && (
-              <ul
-                style={{
-                  flexWrap: "wrap",
-                  lineHeight: 1.6
-                }}
-              >
-                {statRefinements.map(refinement => (
-                  <li key={refinement.attribute}>
-                    <Tag>
-                      {getRefinementName(refinement.attribute.split(".")[1])}{" "}
-                      <strong>
-                        {getPropertyByPath(pokemon, refinement.attribute)}
-                      </strong>
-                    </Tag>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </a>
-        </Link>
+          )}
+        </a>
 
         <style jsx>{`
           div {

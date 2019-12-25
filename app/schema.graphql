@@ -34,7 +34,7 @@ type Pokemon {
   height: Int!
   id: String!
   moves: [PokemonMove!]!
-  name: String!
+  names: PokemonName
   pokedexEntries: [PokemonPokedexEntry!]!
   spriteUrl: String!
   stats: PokemonStat!
@@ -66,6 +66,12 @@ type PokemonMoveLearn {
   versionGroup: VersionGroup!
 }
 
+type PokemonName {
+  en: String!
+  fr: String!
+  ja: String
+}
+
 type PokemonPokedexEntry {
   entry: String!
   version: Version!
@@ -81,8 +87,10 @@ type PokemonStat {
 }
 
 type Query {
+  abilities: [Ability!]!
   ability(id: String!): Ability!
   pokemon(nationalId: String!): Pokemon!
+  pokemons: [Pokemon!]!
 }
 
 type Type {

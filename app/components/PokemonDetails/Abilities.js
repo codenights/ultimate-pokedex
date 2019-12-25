@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 import { Section } from "./Section";
 
@@ -10,11 +9,9 @@ export const Abilities = ({ pokemon }) => (
     <ul>
       {pokemon.abilities.map(({ isHidden, ability }) => (
         <li key={ability.id}>
-          <Link href={`/ability/${ability.id}`}>
-            <a>
-              {ability.name} {isHidden && <span>(Hidden ability)</span>}
-            </a>
-          </Link>
+          <a href={`/ability/${ability.id}`}>
+            {ability.name} {isHidden && <span>(Hidden ability)</span>}
+          </a>
         </li>
       ))}
     </ul>

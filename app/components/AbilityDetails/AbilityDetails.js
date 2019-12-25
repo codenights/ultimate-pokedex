@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 
 import { TypeBadge } from "../TypeBadge";
 import { Section } from "./Section";
@@ -31,9 +30,7 @@ export const AbilityDetails = ({ ability }) => (
               <td>
                 <img src={pokemon.spriteUrl} alt={pokemon.names.en} />
 
-                <Link href={`/pokemon/${pokemon.id}`}>
-                  <a>{pokemon.names.en}</a>
-                </Link>
+                <a href={`/pokemon/${pokemon.id}`}>{pokemon.names.en}</a>
               </td>
 
               <td>

@@ -9,7 +9,9 @@ export const fetchAbilityQuery = abilityId => `
         isHidden
         pokemon {
           id
-          name
+          names {
+            en
+          }
           spriteUrl
           types {
             id

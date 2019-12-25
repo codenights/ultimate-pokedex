@@ -62,7 +62,7 @@ module.exports = {
     abilities.forEach(ability => {
       paths[`/ability/${ability.id}`] = {
         page: "/ability/[abilityId]",
-        query: { nationalId: ability.id }
+        query: { abilityId: ability.id }
       };
     });
 
