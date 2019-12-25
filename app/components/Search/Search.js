@@ -4,7 +4,9 @@ import {
   Panel,
   RefinementList,
   SearchBox,
-  Configure
+  Configure,
+  RangeInput,
+  ClearRefinements
 } from "react-instantsearch-dom";
 
 import { PokemonList } from "./PokemonList";
@@ -15,12 +17,34 @@ export function Search({ searchClient, indexName }) {
       <Configure hitsPerPage={50} />
       <div>
         <aside>
-          <Panel header={<h2>Filters</h2>}>
+          <ClearRefinements />
+
+          <Panel header={<h2>Types</h2>}>
             <RefinementList
               attribute="types.name.en"
               operator="and"
               limit={18}
             />
+          </Panel>
+
+          <Panel header={<h2>Statistics</h2>}>
+            <p>HP</p>
+            <RangeInput attribute="stats.hp.base" />
+
+            <p>Attack</p>
+            <RangeInput attribute="stats.attack.base" />
+
+            <p>Defense</p>
+            <RangeInput attribute="stats.defense.base" />
+
+            <p>Special Attack</p>
+            <RangeInput attribute="stats.special_attack.base" />
+
+            <p>Special Defense</p>
+            <RangeInput attribute="stats.special_defense.base" />
+
+            <p>Speed</p>
+            <RangeInput attribute="stats.speed.base" />
           </Panel>
         </aside>
 

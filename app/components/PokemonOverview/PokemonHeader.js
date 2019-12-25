@@ -10,6 +10,11 @@ export const PokemonHeader = props => (
         text-align: center;
       }
 
+      img {
+        width: 100%;
+        max-width: 350px;
+      }
+
       h1 {
         font-size: 3.5rem;
         line-height: 1;
