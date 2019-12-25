@@ -14,7 +14,7 @@ export const PokemonList = connectInfiniteHits(
     const [isShiny, setIsShiny] = React.useState(false);
 
     React.useEffect(() => {
-      if (typeof window === undefined) {
+      if (typeof window === "undefined") {
         return;
       }
 
