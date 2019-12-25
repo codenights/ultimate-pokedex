@@ -1,4 +1,5 @@
 import React from "react";
+import qs from "qs";
 import {
   InstantSearch,
   Panel,
@@ -7,13 +8,45 @@ import {
   RangeInput,
   ClearRefinements
 } from "react-instantsearch-dom";
+import { useRouter } from "next/router";
 
 import { TypeList } from "./TypeList";
 import { PokemonList } from "./PokemonList";
 
+const createURL = state => `?${qs.stringify(state)}`;
+
+const searchStateToUrl = searchState => {
+  const { page, configure, ...searchStateToSync } = searchState;
+
+  return searchStateToSync ? `/${createURL(searchStateToSync)}` : "";
+};
+
 export function Search({ searchClient, indexName }) {
+  const router = useRouter();
+
+  const [searchState, setSearchState] = React.useState(router.query);
+  const [debouncedSetState, setDebouncedSetState] = React.useState(null);
+
+  const onSearchStateChange = updatedSearchState => {
+    clearTimeout(debouncedSetState);
+
+    setDebouncedSetState(
+      setTimeout(() => {
+        router.push(searchStateToUrl(updatedSearchState));
+      }, 400)
+    );
+
+    setSearchState(updatedSearchState);
+  };
+
   return (
-    <InstantSearch searchClient={searchClient} indexName={indexName}>
+    <InstantSearch
+      searchClient={searchClient}
+      indexName={indexName}
+      searchState={searchState}
+      onSearchStateChange={onSearchStateChange}
+      createURL={createURL}
+    >
       <Configure hitsPerPage={50} />
       <div>
         <aside>
@@ -125,6 +158,14 @@ export function Search({ searchClient, indexName }) {
           width: 100%;
           box-sizing: border-box;
           font: inherit;
+          appearance: none;
+        }
+
+        .ais-SearchBox-input::-webkit-search-decoration,
+        .ais-SearchBox-input::-webkit-search-cancel-button,
+        .ais-SearchBox-input::-webkit-search-results-button,
+        .ais-SearchBox-input::-webkit-search-results-decoration {
+          display: none;
         }
 
         .ais-SearchBox-submit,
@@ -132,6 +173,10 @@ export function Search({ searchClient, indexName }) {
           all: unset;
           font: inherit;
           padding: 10px;
+        }
+
+        .ais-SearchBox-reset[hidden] {
+          display: none;
         }
 
         .ais-Panel-header h2 {
