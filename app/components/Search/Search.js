@@ -24,8 +24,7 @@ const searchStateToUrl = searchState => {
 export function Search({ searchClient, indexName }) {
   const router = useRouter();
 
-  const queryParams = router.asPath.replace(/^\/?\?/g, "");
-  const [searchState, setSearchState] = React.useState(qs.parse(queryParams));
+  const [searchState, setSearchState] = React.useState(router.query);
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
@@ -40,9 +39,15 @@ export function Search({ searchClient, indexName }) {
     setSearchState(updatedSearchState);
   };
 
-  if (qs.stringify(searchState) !== queryParams) {
-    setSearchState(qs.parse(queryParams));
-  }
+  React.useEffect(() => {
+    router.beforePopState(({ url }) => {
+      const nextUrl = url.charAt(0) === "/" ? url.slice(1) : url;
+
+      setSearchState(
+        qs.parse(nextUrl, { arrayLimit: 1000, ignoreQueryPrefix: true })
+      );
+    });
+  }, []);
 
   return (
     <InstantSearch
