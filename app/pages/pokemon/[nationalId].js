@@ -64,6 +64,10 @@ const PokemonPage = ({ pokemon }) => {
 };
 
 PokemonPage.getInitialProps = async ({ query }) => {
+  if (process.browser) {
+    return __NEXT_DATA__.props.pageProps;
+  }
+
   const { nationalId } = query;
   const response = await fetch("http://localhost:4000/graphql", {
     method: "POST",
