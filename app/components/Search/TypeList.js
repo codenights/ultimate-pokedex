@@ -36,6 +36,7 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
 
         label {
           cursor: pointer;
+          margin-right: 5px;
         }
 
         input:focus + span {
