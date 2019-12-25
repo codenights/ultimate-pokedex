@@ -1,6 +1,6 @@
 import React from "react";
 
-export const PokemonPreview = ({ pokemon }) => (
+export const PokemonPreview = ({ pokemon, isShiny }) => (
   <a href={`/pokemon/${pokemon.id}`}>
     <style jsx>{`
       a {
@@ -16,7 +16,7 @@ export const PokemonPreview = ({ pokemon }) => (
       }
     `}</style>
 
-    <img src={pokemon.spriteUrl} />
+    <img src={isShiny ? pokemon.spriteShinyUrl : pokemon.spriteUrl} />
     <p>{pokemon.names.en}</p>
   </a>
 );

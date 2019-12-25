@@ -15,6 +15,7 @@ export const fetchPokemonQuery = nationalId => `
       en
     }
     spriteUrl
+    spriteShinyUrl
   }
   
   fragment BaseInfo on Pokemon {

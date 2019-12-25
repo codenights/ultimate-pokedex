@@ -1,7 +1,7 @@
 import React from "react";
 import { connectInfiniteHits } from "react-instantsearch-dom";
 
-import { useIntersectionObserver } from "./hooks";
+import { useIntersectionObserver, useShiny } from "../hooks";
 import { PokemonHit } from "./PokemonHit";
 
 export const PokemonList = connectInfiniteHits(
@@ -11,23 +11,7 @@ export const PokemonList = connectInfiniteHits(
       threshold: 0
     });
 
-    const [isShiny, setIsShiny] = React.useState(false);
-
-    React.useEffect(() => {
-      if (typeof window === "undefined") {
-        return;
-      }
-
-      function onKeyDown() {
-        setIsShiny(prevValue => !prevValue);
-      }
-
-      window.addEventListener("keydown", onKeyDown);
-
-      return () => {
-        window.removeEventListener("keydown", onKeyDown);
-      };
-    }, []);
+    const { isShiny } = useShiny();
 
     return (
       <div>

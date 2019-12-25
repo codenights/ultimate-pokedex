@@ -3,6 +3,7 @@ import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
 import { fetchPokemonQuery } from "../../queries/fetchPokemon";
+import { useShiny } from "../../components/hooks";
 import { PokemonOverview } from "../../components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../components/PokemonDetails";
 
@@ -28,6 +29,8 @@ const setFavicon = pokemon => {
 };
 
 const PokemonPage = ({ pokemon }) => {
+  const { isShiny } = useShiny();
+
   useEffect(() => {
     setFavicon(pokemon);
   }, [pokemon]);
@@ -40,7 +43,7 @@ const PokemonPage = ({ pokemon }) => {
         <link rel="icon" id="favicon" type="image/x-icon" />
       </Head>
 
-      <PokemonOverview pokemon={pokemon} />
+      <PokemonOverview pokemon={pokemon} isShiny={isShiny} />
 
       <PokemonDetails pokemon={pokemon} />
 

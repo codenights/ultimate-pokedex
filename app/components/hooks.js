@@ -37,3 +37,32 @@ export function useIntersectionObserver({
     setObservedNode: setNode
   };
 }
+
+export function useShiny({ initialIsShiny = false } = {}) {
+  const [isShiny, setIsShiny] = React.useState(initialIsShiny);
+
+  React.useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    function onKeyDown(event) {
+      if (
+        event.key === "Alt" &&
+        event.ctrlKey === false &&
+        event.shiftKey === false &&
+        event.metaKey === false
+      ) {
+        setIsShiny(prevValue => !prevValue);
+      }
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, []);
+
+  return { isShiny };
+}

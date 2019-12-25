@@ -8,14 +8,14 @@ import { Types } from "./Types";
 const pokemonHasEvolution = pokemon =>
   pokemon.family.pokemon.evolutions.length > 0;
 
-export const PokemonOverview = ({ pokemon }) => (
+export const PokemonOverview = ({ pokemon, isShiny }) => (
   <section>
     <PokemonHeader name={pokemon.names.en} src={pokemon.artworkUrl} />
 
     <Types types={pokemon.types} />
 
     {pokemonHasEvolution(pokemon) && (
-      <EvolutionChain pokemon={pokemon.family.pokemon} />
+      <EvolutionChain pokemon={pokemon.family.pokemon} isShiny={isShiny} />
     )}
 
     <style jsx>{`
