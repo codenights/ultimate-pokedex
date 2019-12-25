@@ -5,7 +5,6 @@ import {
   Panel,
   SearchBox,
   Configure,
-  RangeInput,
   ClearRefinements
 } from "react-instantsearch-dom";
 import { useRouter } from "next/router";
@@ -25,9 +24,8 @@ const searchStateToUrl = searchState => {
 export function Search({ searchClient, indexName }) {
   const router = useRouter();
 
-  const [searchState, setSearchState] = React.useState(
-    qs.parse(router.asPath.replace(/^\/?\?/g, ""))
-  );
+  const queryParams = router.asPath.replace(/^\/?\?/g, "");
+  const [searchState, setSearchState] = React.useState(qs.parse(queryParams));
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
@@ -41,6 +39,10 @@ export function Search({ searchClient, indexName }) {
 
     setSearchState(updatedSearchState);
   };
+
+  if (qs.stringify(searchState) !== queryParams) {
+    setSearchState(qs.parse(queryParams));
+  }
 
   return (
     <InstantSearch

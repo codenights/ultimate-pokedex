@@ -53,10 +53,6 @@ export const RangeSlider = connectRange(
     ]);
 
     const onChange = values => {
-      // const minValue = isNaN(values[0]) ? min : values[0];
-      // const maxValue = isNaN(values[1]) ? max : values[1];
-      // console.log(values + " -> " + minValue + ":" + maxValue);
-
       if (isNaN(values[0]) || isNaN(values[1])) {
         return;
       }
