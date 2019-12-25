@@ -40,9 +40,9 @@ function getRefinementName(value) {
       return "Atk";
     case "defense":
       return "Def";
-    case "special_attack":
+    case "specialAttack":
       return "Sp. Atk";
-    case "special_defense":
+    case "specialDefense":
       return "Sp. Def";
     case "speed":
       return "Speed";
