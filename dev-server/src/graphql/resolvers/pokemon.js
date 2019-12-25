@@ -1,7 +1,11 @@
+const { findPokemonFormByPokemonId } = require("../../repository/pokemonForm");
+const { extractPokemonIdFromPokemonUrl } = require("../../utils");
 const {
   extractNationalIdFromSpeciesUrl,
-  extractTypeIdFromTypeUrl
+  extractTypeIdFromTypeUrl,
+  extractEggGroupIdFromEggGroupUrl
 } = require("../../utils");
+const { findEggGroupById } = require("../../repository/eggGroup");
 const { findTypeById } = require("../../repository/type");
 const {
   findPokemonSpeciesByPokemonId
@@ -29,12 +33,30 @@ const findEvolutions = (pokemon, root) => {
 
 const DEFAULT_SPRITE_URL = "https://www.svgrepo.com/show/54691/pokemon.svg";
 
+const findByLanguage = language => x => x.language.name === language;
+
 module.exports.PokemonResolver = {
   names: async pokemon => {
+    // For alternate form, we need to get the name using the pokemon-form
+    const form = await findPokemonFormByPokemonId(pokemon.id);
+
+    if (form.form_names.length > 0) {
+      const enLanguage = form.form_names.find(findByLanguage("en"));
+      const frLanguage = form.form_names.find(findByLanguage("fr"));
+      const jaLanguage = form.form_names.find(findByLanguage("roomaji"));
+
+      return {
+        en: enLanguage ? enLanguage.name : null,
+        fr: frLanguage ? frLanguage.name : null,
+        ja: jaLanguage ? jaLanguage.name : null
+      };
+    }
+
+    // For other forms, we can use the pokemon-species
     const species = await findPokemonSpeciesByPokemonId(pokemon.id);
-    const enLanguage = species.names.find(x => x.language.name === "en");
-    const frLanguage = species.names.find(x => x.language.name === "fr");
-    const jaLanguage = species.names.find(x => x.language.name === "roomaji");
+    const enLanguage = species.names.find(findByLanguage("en"));
+    const frLanguage = species.names.find(findByLanguage("fr"));
+    const jaLanguage = species.names.find(findByLanguage("roomaji"));
 
     return {
       en: enLanguage ? enLanguage.name : null,
@@ -97,5 +119,37 @@ module.exports.PokemonResolver = {
     }
 
     return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.id}.png`;
+  },
+  baseHappiness: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
+    return species.base_happiness;
+  },
+  captureRate: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
+    return species.capture_rate;
+  },
+  genderRate: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
+    return species.gender_rate;
+  },
+  eggGroups: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+    const eggGroupsIds = species.egg_groups
+      .map(x => x.url)
+      .map(extractEggGroupIdFromEggGroupUrl);
+
+    return Promise.all(eggGroupsIds.map(findEggGroupById));
+  },
+  varieties: async pokemon => {
+    const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
+    return species.varieties
+      .filter(x => !x.is_default)
+      .map(x => x.pokemon.url)
+      .map(extractPokemonIdFromPokemonUrl)
+      .map(findPokemonById);
   }
 };

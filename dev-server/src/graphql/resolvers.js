@@ -1,5 +1,6 @@
 const { findAbilityById, findAllAbilities } = require("../repository/ability");
 const { findPokemonById, findAllPokemons } = require("../repository/pokemon");
+const { EggGroupResolver } = require("./resolvers/eggGroup");
 const { AbilityPokemonResolver } = require("./resolvers/abilityPokemon");
 const { VersionGroupResolver } = require("./resolvers/versionGroup");
 const { PokemonMoveLearnResolver } = require("./resolvers/pokemonMoveLearn");
@@ -33,5 +34,6 @@ module.exports.resolvers = {
   Move: MoveResolver,
   PokemonMoveLearn: PokemonMoveLearnResolver,
   VersionGroup: VersionGroupResolver,
-  AbilityPokemon: AbilityPokemonResolver
+  AbilityPokemon: AbilityPokemonResolver,
+  EggGroup: EggGroupResolver
 };

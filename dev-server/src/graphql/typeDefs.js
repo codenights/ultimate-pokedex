@@ -84,6 +84,12 @@ module.exports.typeDefs = gql`
     ja: String
   }
 
+  type EggGroup {
+    id: String!
+    name: String!
+    pokemons: [Pokemon!]!
+  }
+
   type Pokemon {
     id: String!
     names: PokemonName
@@ -92,6 +98,11 @@ module.exports.typeDefs = gql`
     artworkUrl: String!
     weight: Int!
     height: Int!
+    baseHappiness: Int!
+    captureRate: Int!
+    eggGroups: [EggGroup!]!
+    genderRate: Int!
+    varieties: [Pokemon!]!
     stats: PokemonStat!
     types: [Type!]!
     evolutions: [PokemonEvolution!]!

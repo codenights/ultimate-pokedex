@@ -16,81 +16,118 @@ export const fetchPokemonQuery = nationalId => `
     }
     spriteUrl
   }
-
-  {
-    pokemon(nationalId: "${nationalId}") {
+  
+  fragment BaseInfo on Pokemon {
+    id
+    names {
+      en
+    }
+    
+    artworkUrl
+    spriteUrl
+    
+    weight
+    height
+    baseHappiness
+    captureRate
+    genderRate
+    
+    stats { ...Stats }
+  }
+  
+  fragment Type on Type {
+    id
+    name
+    color
+  }
+  
+  fragment PokedexEntries on PokemonPokedexEntry {
+    version {
       id
-      names {
-        en
-      }
-      artworkUrl
-      spriteUrl
-      weight
-      height
-      stats { ...Stats }
-      
-      types {
-        id
-        name
-        color
-      }
-      
-      pokedexEntries {
-        version {
-          id
-          name
-          color
-        }
-        entry
-      }
-      
-      family {
+      name
+      color
+    }
+    entry
+  }
+  
+  fragment Family on PokemonFamily {
+    pokemon {
+      ...PokemonPreview
+      evolutions {
         pokemon {
           ...PokemonPreview
           evolutions {
             pokemon {
               ...PokemonPreview
-              evolutions {
-                pokemon {
-                  ...PokemonPreview
-                }
-              }
             }
           }
         }
       }
-      
-      abilities {
-        ability {
-          id
-          name
-        }
-        isHidden
+    }
+  }
+  
+  fragment Abilities on PokemonAbility {
+    ability {
+      id
+      name
+    }
+    isHidden
+  }
+  
+  fragment Move on PokemonMove {
+    move {
+      id
+      name
+      accuracy
+      pp
+      power
+      damageClass
+      type {
+        id
+        name
+        color
       }
+    }
+    learn {
+      method
+      level
+      versionGroup {
+        id
+        name
+      }
+    }
+  }
+  
+  fragment EggGroup on EggGroup {
+    id
+    name
+  }
+  
+  fragment Varieties on Pokemon {
+    id
+    names {
+      en
+    }
+    spriteUrl
+  }
 
-      moves {
-        move {
-          id
-          name
-          accuracy
-          pp
-          power
-          damageClass
-          type {
-            id
-            name
-            color
-          }
-        }
-        learn {
-          method
-          level
-          versionGroup {
-            id
-            name
-          }
-        }
-      }
+  {
+    pokemon(nationalId: "${nationalId}") {
+      ...BaseInfo
+      
+      types { ...Type }
+      
+      pokedexEntries { ...PokedexEntries }
+      
+      family { ... Family }
+      
+      abilities { ...Abilities }
+
+      moves { ...Move }
+
+      eggGroups { ...EggGroup }
+
+      varieties { ...Varieties }
     }
   }
 `;

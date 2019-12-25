@@ -16,6 +16,12 @@ type AbilityPokemon {
   pokemon: Pokemon!
 }
 
+type EggGroup {
+  id: String!
+  name: String!
+  pokemons: [Pokemon!]!
+}
+
 type Move {
   accuracy: Int
   damageClass: String!
@@ -29,16 +35,22 @@ type Move {
 type Pokemon {
   abilities: [PokemonAbility!]!
   artworkUrl: String!
+  baseHappiness: Int!
+  captureRate: Int!
+  eggGroups: [EggGroup!]!
   evolutions: [PokemonEvolution!]!
   family: PokemonFamily!
+  genderRate: Int!
   height: Int!
   id: String!
   moves: [PokemonMove!]!
   names: PokemonName
   pokedexEntries: [PokemonPokedexEntry!]!
+  spriteShinyUrl: String!
   spriteUrl: String!
   stats: PokemonStat!
   types: [Type!]!
+  varieties: [Pokemon!]!
   weight: Int!
 }
 
