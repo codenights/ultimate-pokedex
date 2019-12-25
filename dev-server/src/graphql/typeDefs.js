@@ -101,7 +101,10 @@ module.exports.typeDefs = gql`
   }
 
   type Query {
+    pokemons: [Pokemon!]!
     pokemon(nationalId: String!): Pokemon!
+
+    abilities: [Ability!]!
     ability(id: String!): Ability!
   }
 `;

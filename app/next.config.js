@@ -1,4 +1,44 @@
 require("dotenv").config();
+const fetch = require("isomorphic-unfetch");
+
+const graphql = async query => {
+  const response = await fetch("http://localhost:4000/graphql", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query })
+  });
+  const { data } = await response.json();
+
+  return data;
+};
+
+const fetchAllPokemons = async () => {
+  const query = `
+  {
+    pokemons {
+      id
+    } 
+  }
+  `;
+
+  const { pokemons } = await graphql(query);
+
+  return pokemons;
+};
+
+const fetchAllAbilities = async () => {
+  const query = `
+  {
+    abilities {
+      id
+    } 
+  }
+  `;
+
+  const { abilities } = await graphql(query);
+
+  return abilities;
+};
 
 module.exports = {
   exportTrailingSlash: true,
@@ -6,14 +46,25 @@ module.exports = {
     const paths = {
       "/": { page: "/" }
     };
-    const pokemonCount = 807;
 
-    for (let nationalId = 1; nationalId <= pokemonCount; nationalId += 1) {
-      paths[`/pokemon/${nationalId}`] = {
+    const [pokemons, abilities] = await Promise.all([
+      fetchAllPokemons(),
+      fetchAllAbilities()
+    ]);
+
+    pokemons.forEach(pokemon => {
+      paths[`/pokemon/${pokemon.id}`] = {
         page: "/pokemon/[nationalId]",
-        query: { nationalId: nationalId }
+        query: { nationalId: pokemon.id }
       };
-    }
+    });
+
+    abilities.forEach(ability => {
+      paths[`/ability/${ability.id}`] = {
+        page: "/ability/[abilityId]",
+        query: { nationalId: ability.id }
+      };
+    });
 
     return paths;
   },

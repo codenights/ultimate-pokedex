@@ -27,6 +27,11 @@ const findEvolutions = (pokemon, root) => {
   }
 };
 
+const DEFAULT_SPRITE_URL = "https://www.svgrepo.com/show/54691/pokemon.svg";
+
+const getPokemonSprite = pokemon =>
+  pokemon.sprites.front_default || DEFAULT_SPRITE_URL;
+
 module.exports.PokemonResolver = {
   names: async pokemon => {
     const species = await findPokemonSpeciesByPokemonId(pokemon.id);
@@ -75,10 +80,10 @@ module.exports.PokemonResolver = {
 
     return species.flavor_text_entries.filter(x => x.language.name === "en");
   },
-  spriteUrl: pokemon => pokemon.sprites.front_default,
+  spriteUrl: getPokemonSprite,
   artworkUrl: pokemon => {
     if (pokemon.id > 807) {
-      return pokemon.sprites.front_default;
+      return getPokemonSprite(pokemon);
     }
 
     const spriteId = pokemon.id.toString().padStart(3, "0");
