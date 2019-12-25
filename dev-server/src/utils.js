@@ -20,6 +20,8 @@ const extractMoveIdFromUrl = url => extractIdFromUrl("move", url);
 const extractVersionGroupIdFromUrl = url =>
   extractIdFromUrl("version-group", url);
 
+const extractPokemonIdFromPokemonUrl = url => extractIdFromUrl("pokemon", url);
+
 module.exports = {
   extractIdFromUrl,
   extractTypeIdFromTypeUrl,
@@ -28,5 +30,6 @@ module.exports = {
   extractVersionIdFromVersionUrl,
   extractAbilityIdFromUrl,
   extractMoveIdFromUrl,
-  extractVersionGroupIdFromUrl
+  extractVersionGroupIdFromUrl,
+  extractPokemonIdFromPokemonUrl
 };

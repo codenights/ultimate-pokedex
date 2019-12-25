@@ -1,4 +1,6 @@
+const { findAbilityById } = require("../repository/ability");
 const { findPokemonById } = require("../repository/pokemon");
+const { AbilityPokemonResolver } = require("./resolvers/abilityPokemon");
 const { VersionGroupResolver } = require("./resolvers/versionGroup");
 const { PokemonMoveLearnResolver } = require("./resolvers/pokemonMoveLearn");
 const { MoveResolver } = require("./resolvers/move");
@@ -15,7 +17,8 @@ const {
 
 module.exports.resolvers = {
   Query: {
-    pokemon: async (obj, { nationalId }, ctx) => findPokemonById(nationalId)
+    pokemon: async (obj, { nationalId }) => findPokemonById(nationalId),
+    ability: async (obj, { id }) => findAbilityById(id)
   },
   Pokemon: PokemonResolver,
   PokemonPokedexEntry: PokemonPokedexEntryResolver,
@@ -27,5 +30,6 @@ module.exports.resolvers = {
   PokemonMove: PokemonMoveResolver,
   Move: MoveResolver,
   PokemonMoveLearn: PokemonMoveLearnResolver,
-  VersionGroup: VersionGroupResolver
+  VersionGroup: VersionGroupResolver,
+  AbilityPokemon: AbilityPokemonResolver
 };

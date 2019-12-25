@@ -5,8 +5,15 @@ schema {
 }
 
 type Ability {
+  description: String!
   id: String!
   name: String!
+  pokemons: [AbilityPokemon!]!
+}
+
+type AbilityPokemon {
+  isHidden: Boolean!
+  pokemon: Pokemon!
 }
 
 type Move {
@@ -74,6 +81,7 @@ type PokemonStat {
 }
 
 type Query {
+  ability(id: String!): Ability!
   pokemon(nationalId: String!): Pokemon!
 }
 

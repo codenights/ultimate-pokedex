@@ -1,9 +1,9 @@
 import React from "react";
-import { desaturate } from "polished";
 
 import { EvolutionChain } from "./EvolutionChain";
 import { PokemonHeader } from "./PokemonHeader";
 import { Types } from "./Types";
+import { getBackgroundColorFromType } from "../../utils/colors";
 
 export const PokemonOverview = ({ pokemon }) => (
   <section>
@@ -20,7 +20,7 @@ export const PokemonOverview = ({ pokemon }) => (
         align-items: center;
         justify-content: center;
 
-        background: ${desaturate(0.5, pokemon.types[0].color)};
+        background: ${getBackgroundColorFromType(pokemon.types[0])};
       }
     `}</style>
   </section>

@@ -65,6 +65,17 @@ module.exports.PokemonResolver = {
   },
   pokedexEntries: async pokemon => {
     const species = await findPokemonSpeciesByPokemonId(pokemon.id);
+
     return species.flavor_text_entries.filter(x => x.language.name === "en");
+  },
+  spriteUrl: pokemon => pokemon.sprites.front_default,
+  artworkUrl: pokemon => {
+    if (pokemon.id > 807) {
+      return pokemon.sprites.front_default;
+    }
+
+    const spriteId = pokemon.id.toString().padStart(3, "0");
+
+    return `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${spriteId}.png`;
   }
 };

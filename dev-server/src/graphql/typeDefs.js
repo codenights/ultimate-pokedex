@@ -40,9 +40,16 @@ module.exports.typeDefs = gql`
     entry: String!
   }
 
+  type AbilityPokemon {
+    isHidden: Boolean!
+    pokemon: Pokemon!
+  }
+
   type Ability {
     id: String!
     name: String!
+    description: String!
+    pokemons: [AbilityPokemon!]!
   }
 
   type PokemonAbility {
@@ -89,5 +96,6 @@ module.exports.typeDefs = gql`
 
   type Query {
     pokemon(nationalId: String!): Pokemon!
+    ability(id: String!): Ability!
   }
 `;

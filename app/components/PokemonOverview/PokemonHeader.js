@@ -1,9 +1,9 @@
 import React from "react";
 
-export const PokemonHeader = props => (
+export const PokemonHeader = ({ name, src }) => (
   <header>
-    <img alt={`${props.name} sprite`} src={props.src} />
-    <h1>{props.name}</h1>
+    <img alt={`${name} sprite`} src={src} />
+    <h1>{name}</h1>
 
     <style jsx>{`
       header {
