@@ -24,7 +24,9 @@ const searchStateToUrl = searchState => {
 export function Search({ searchClient, indexName }) {
   const router = useRouter();
 
-  const [searchState, setSearchState] = React.useState(router.query);
+  const [searchState, setSearchState] = React.useState(
+    qs.parse(router.asPath.replace(/^\/?\?/g, ""))
+  );
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
