@@ -1,5 +1,4 @@
 import React from "react";
-import qs from "qs";
 import {
   InstantSearch,
   Panel,
@@ -12,19 +11,14 @@ import { useRouter } from "next/router";
 import { TypeList } from "./TypeList";
 import { PokemonList } from "./PokemonList";
 import { RangeSlider } from "./RangeSlider";
-
-const createURL = state => `?${qs.stringify(state)}`;
-
-const searchStateToUrl = searchState => {
-  const { page, configure, ...searchStateToSync } = searchState;
-
-  return searchStateToSync ? `/${createURL(searchStateToSync)}` : "";
-};
+import { getUrlFromState, getStateFromUrl } from "./router";
 
 export function Search({ searchClient, indexName }) {
   const router = useRouter();
 
-  const [searchState, setSearchState] = React.useState(router.query);
+  const [searchState, setSearchState] = React.useState(
+    getStateFromUrl(router.asPath)
+  );
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
@@ -32,7 +26,7 @@ export function Search({ searchClient, indexName }) {
 
     setDebouncedSetState(
       setTimeout(() => {
-        router.push(searchStateToUrl(updatedSearchState));
+        router.push(getUrlFromState(updatedSearchState));
       }, 400)
     );
 
@@ -41,11 +35,7 @@ export function Search({ searchClient, indexName }) {
 
   React.useEffect(() => {
     router.beforePopState(({ url }) => {
-      const nextUrl = url.charAt(0) === "/" ? url.slice(1) : url;
-
-      setSearchState(
-        qs.parse(nextUrl, { arrayLimit: 1000, ignoreQueryPrefix: true })
-      );
+      setSearchState(getStateFromUrl(url));
     });
   }, []);
 
@@ -55,7 +45,7 @@ export function Search({ searchClient, indexName }) {
       indexName={indexName}
       searchState={searchState}
       onSearchStateChange={onSearchStateChange}
-      createURL={createURL}
+      createURL={getUrlFromState}
     >
       <Configure hitsPerPage={50} />
       <div>
