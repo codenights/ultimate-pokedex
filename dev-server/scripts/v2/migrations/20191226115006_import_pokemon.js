@@ -19,6 +19,10 @@ const createPokemonTable = knex =>
       .integer("id")
       .unsigned()
       .notNullable();
+    table
+      .integer("species_id")
+      .unsigned()
+      .notNullable();
     table.string("name_en").notNullable();
     table.string("name_fr");
     table.string("name_ja");
@@ -112,6 +116,7 @@ const findType2Id = findTypeId(2);
 
 const mapPokemonToPokemonDatabase = (species, pokemon) => ({
   id: pokemon.id,
+  species_id: species.id,
   name_en: findEntityByLanguageName(species.names, "en").name,
   name_fr: findEntityByLanguageName(species.names, "fr").name,
   name_ja: findEntityByLanguageName(species.names, "ja").name,

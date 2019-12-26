@@ -1,7 +1,9 @@
-const path = require("path");
-const { readJSON } = require("fs-extra");
-
-const { DB_DIR } = require("./config");
-
-module.exports.findVersionGroupById = versionGroupId =>
-  readJSON(path.join(DB_DIR, `version-group/${versionGroupId}.json`));
+module.exports.VersionGroupRepository = function(knex) {
+  return {
+    findVersionGroupById(versionGroupId) {
+      return knex("version_group")
+        .first()
+        .where({ id: versionGroupId });
+    }
+  };
+};

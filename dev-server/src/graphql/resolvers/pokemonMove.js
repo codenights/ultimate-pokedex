@@ -1,11 +1,7 @@
-const { findMoveById } = require("../../repository/move");
-const { extractMoveIdFromUrl } = require("../../utils");
+const R = require("ramda");
 
 module.exports.PokemonMoveResolver = {
-  move: pokemonMove => {
-    const moveId = extractMoveIdFromUrl(pokemonMove.move.url);
-
-    return findMoveById(moveId);
-  },
-  learn: pokemonMove => pokemonMove.version_group_details
+  move: R.identity,
+  learn: ({ id, pokemon_id }, args, { pokemonMoveRepository }) =>
+    pokemonMoveRepository.findPokemonMoveByPokemonIdAndMoveId(pokemon_id, id)
 };

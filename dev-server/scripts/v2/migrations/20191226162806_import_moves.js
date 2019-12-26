@@ -14,6 +14,7 @@ const createMoveTable = async knex =>
       .unsigned()
       .notNullable()
       .primary();
+    table.string("damage_class").notNullable();
     table.string("name").notNullable();
     table.integer("accuracy").unsigned();
     table.integer("power").unsigned();
@@ -32,6 +33,7 @@ const createMoveTable = async knex =>
 
 const mapMoveToMoveDatabase = move => ({
   id: move.id,
+  damage_class: move.damage_class.name,
   name: findEntityByLanguageName(move.names, "en").name,
   accuracy: move.accuracy,
   power: move.power,

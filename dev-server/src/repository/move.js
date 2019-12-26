@@ -1,7 +1,11 @@
-const path = require("path");
-const { readJSON } = require("fs-extra");
-
-const { DB_DIR } = require("./config");
-
-module.exports.findMoveById = moveId =>
-  readJSON(path.join(DB_DIR, `move/${moveId}.json`));
+module.exports.MoveRepository = function(knex) {
+  return {
+    findMovesByPokemonId(pokemonId) {
+      return knex("move")
+        .distinct("move.id")
+        .innerJoin("pokemon_move", "move.id", "pokemon_move.move_id")
+        .select("move.*")
+        .where({ pokemon_id: pokemonId });
+    }
+  };
+};

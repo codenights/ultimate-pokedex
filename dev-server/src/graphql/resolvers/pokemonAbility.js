@@ -1,11 +1,7 @@
-const { findAbilityById } = require("../../repository/ability");
-const { extractAbilityIdFromUrl } = require("../../utils");
+const R = require("ramda");
 
 module.exports.PokemonAbilityResolver = {
-  isHidden: pokemonAbility => pokemonAbility.is_hidden,
-  ability: pokemonAbility => {
-    const abilityId = extractAbilityIdFromUrl(pokemonAbility.ability.url);
-
-    return findAbilityById(abilityId);
-  }
+  isHidden: R.prop("is_hidden"),
+  ability: ({ ability_id }, args, { abilityRepository }) =>
+    abilityRepository.findAbilityById(ability_id)
 };

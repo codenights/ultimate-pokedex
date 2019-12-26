@@ -1,17 +1,9 @@
-const { findVersionById } = require("../../repository/version");
-const { extractVersionIdFromVersionUrl } = require("../../utils");
+const R = require("ramda");
 
 module.exports.VersionGroupResolver = {
-  name: async versionGroup => {
-    const versions = await Promise.all(
-      versionGroup.versions
-        .map(x => x.url)
-        .map(extractVersionIdFromVersionUrl)
-        .map(findVersionById)
-    );
+  name: async ({ id }, args, { versionRepository }) => {
+    const versions = await versionRepository.findVersionsByVersionGroupId(id);
 
-    return versions
-      .map(x => x.names.find(x => x.language.name === "en").name)
-      .join(" / ");
+    return versions.map(R.prop("name_en")).join(" / ");
   }
 };
