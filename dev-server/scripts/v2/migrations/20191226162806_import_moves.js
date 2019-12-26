@@ -1,7 +1,9 @@
 const path = require("path");
-const { findEntityByLanguageName } = require("../migrations_utils");
-const { extractIdFromUrl } = require("../migrations_utils");
-const { getDirectoryContent } = require("../migrations_utils");
+const {
+  findEntityByLanguageName,
+  extractIdFromUrl,
+  getDirectoryContent
+} = require("../migrations_utils");
 
 const MOVE_DIR = path.join(__dirname, "../../../data/move");
 

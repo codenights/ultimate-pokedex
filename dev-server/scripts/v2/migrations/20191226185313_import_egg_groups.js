@@ -1,6 +1,8 @@
 const path = require("path");
-const { findEntityByLanguageName } = require("../migrations_utils");
-const { getDirectoryContent } = require("../migrations_utils");
+const {
+  getDirectoryContent,
+  findEntityByLanguageName
+} = require("../migrations_utils");
 
 const EGG_GROUP_DIR = path.join(__dirname, "../../../data/egg-group");
 

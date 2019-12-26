@@ -1,7 +1,9 @@
 const path = require("path");
-const { extractIdFromUrl } = require("../migrations_utils");
-const { findEntityByLanguageName } = require("../migrations_utils");
 const { readJSON } = require("fs-extra");
+const {
+  findEntityByLanguageName,
+  extractIdFromUrl
+} = require("../migrations_utils");
 
 const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
 const POKEMON_DIR = path.join(__dirname, "../../../data/pokemon");
