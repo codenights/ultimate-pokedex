@@ -1,6 +1,5 @@
 const path = require("path");
 const { extractIdFromUrl } = require("../migrations_utils");
-const { findEntityByLanguageName } = require("../migrations_utils");
 const { getDirectoryContent } = require("../migrations_utils");
 
 const VERSION_GROUP_DIR = path.join(__dirname, "../../../data/version-group");
