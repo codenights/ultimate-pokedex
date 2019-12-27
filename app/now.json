@@ -1,0 +1,10 @@
+{
+  "name": "ultimate-pokedex",
+  "build": {
+    "env": {
+      "ALGOLIA_INDEX_NAME": "@pokedex_algolia_index_name",
+      "ALGOLIA_APP_ID": "@pokedex_algolia_app_id",
+      "ALGOLIA_API_KEY": "@pokedex_algolia_api_key"
+    }
+  }
+}
