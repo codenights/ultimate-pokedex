@@ -65,6 +65,7 @@ export const typeDefs = gql`
     name: String!
     type: Type!
     damageClass: String!
+    pokemons: [Pokemon!]!
   }
 
   type PokemonMoveLearn {
@@ -118,5 +119,7 @@ export const typeDefs = gql`
 
     abilities: [Ability!]!
     ability(id: String!): Ability!
+
+    move(id: String!): Move!
   }
 `;

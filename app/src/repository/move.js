@@ -1,5 +1,10 @@
 export function MoveRepository(knex) {
   return {
+    findMoveById(moveId) {
+      return knex("move")
+        .first()
+        .where({ id: moveId });
+    },
     findMovesByPokemonId(pokemonId) {
       return knex("move")
         .distinct("move.id")

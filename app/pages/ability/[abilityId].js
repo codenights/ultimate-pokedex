@@ -1,4 +1,5 @@
 import React from "react";
+import fetch from "isomorphic-unfetch";
 
 import { fetchAbilityQuery } from "../../src/queries/fetchAbility";
 import { AbilityOverview } from "../../src/components/AbilityOverview";

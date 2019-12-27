@@ -22,7 +22,8 @@ export const resolvers = {
     abilities: (obj, args, { abilityRepository }) =>
       abilityRepository.findAllAbilities(),
     ability: (obj, { id }, { abilityRepository }) =>
-      abilityRepository.findAbilityById(id)
+      abilityRepository.findAbilityById(id),
+    move: (obj, { id }, { moveRepository }) => moveRepository.findMoveById(id)
   },
   Pokemon: PokemonResolver,
   PokemonPokedexEntry: PokemonPokedexEntryResolver,

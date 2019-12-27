@@ -47,6 +47,16 @@ export function PokemonRepository(knex) {
       return knex("pokemon")
         .first()
         .where({ id: currentStageId });
+    },
+    findPokemonsByMoveId(moveId) {
+      return knex("pokemon").whereIn("id", function() {
+        this.select("pokemon_id")
+          .distinct()
+          .from("pokemon_move")
+          .where({
+            move_id: moveId
+          });
+      });
     }
   };
 }
