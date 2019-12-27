@@ -42,7 +42,7 @@ const PokemonPage = ({ pokemon }) => {
           <link rel="icon" id="favicon" type="image/x-icon" />
         </Head>
 
-        <PokemonOverview pokemon={pokemon}/>
+        <PokemonOverview pokemon={pokemon} />
 
         <PokemonDetails pokemon={pokemon} />
 
@@ -67,7 +67,8 @@ const PokemonPage = ({ pokemon }) => {
 };
 
 PokemonPage.getInitialProps = async ({ query, req }) => {
-  const baseUrl = req ? 'http://localhost:3000' : '';
+  // TODO: fix this
+  const baseUrl = req ? `http://${req.headers.host}:3000` : "";
   const { nationalId } = query;
   const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",
