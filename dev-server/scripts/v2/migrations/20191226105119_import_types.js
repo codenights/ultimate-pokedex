@@ -27,10 +27,7 @@ const createTypeTable = knex =>
   knex.schema.createTable("type", table => {
     table.integer("id").primary();
     table.string("color").notNullable();
-    table
-      .integer("name_en")
-      .notNullable()
-      .unsigned();
+    table.string("name_en").notNullable();
   });
 
 const mapTypeToTypeDatabase = type => ({

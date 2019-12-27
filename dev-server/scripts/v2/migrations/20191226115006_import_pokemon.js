@@ -18,7 +18,8 @@ const createPokemonTable = knex =>
     table
       .integer("id")
       .unsigned()
-      .notNullable();
+      .notNullable()
+      .primary();
     table
       .integer("species_id")
       .unsigned()
@@ -118,8 +119,12 @@ const mapPokemonToPokemonDatabase = (species, pokemon) => ({
   id: pokemon.id,
   species_id: species.id,
   name_en: findEntityByLanguageName(species.names, "en").name,
-  name_fr: findEntityByLanguageName(species.names, "fr").name,
-  name_ja: findEntityByLanguageName(species.names, "ja").name,
+  name_fr: findEntityByLanguageName(species.names, "fr")
+    ? findEntityByLanguageName(species.names, "fr").name
+    : null,
+  name_ja: findEntityByLanguageName(species.names, "roomaji")
+    ? findEntityByLanguageName(species.names, "roomaji").name
+    : null,
   base_experience: pokemon.base_experience,
   height: pokemon.height,
   order: pokemon.order,

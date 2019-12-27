@@ -51,7 +51,7 @@ const createVersionTable = async knex =>
 
 const mapVersionToVersionDatabase = version => ({
   id: version.id,
-  color: COLOR_BY_VERSION[version.name] || console.log(version) || null,
+  color: COLOR_BY_VERSION[version.name],
   name_en: findEntityByLanguageName(version.names, "en").name
 });
 

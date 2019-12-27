@@ -32,8 +32,8 @@ exports.up = async knex => {
       const rawSuffixFr = findEntityByLanguageName(form.form_names, "fr")
         ? findEntityByLanguageName(form.form_names, "fr").name
         : null;
-      const rawSuffixJa = findEntityByLanguageName(form.form_names, "ja")
-        ? findEntityByLanguageName(form.form_names, "ja").name
+      const rawSuffixJa = findEntityByLanguageName(form.form_names, "roomaji")
+        ? findEntityByLanguageName(form.form_names, "roomaji").name
         : null;
       const suffixEn = rawSuffixEn;
       const suffixFr = rawSuffixFr || suffixEn;
@@ -76,8 +76,8 @@ exports.down = async knex => {
       const name_fr = findEntityByLanguageName(species.names, "fr")
         ? findEntityByLanguageName(species.names, "fr").name
         : null;
-      const name_ja = findEntityByLanguageName(species.names, "ja")
-        ? findEntityByLanguageName(species.names, "ja").name
+      const name_ja = findEntityByLanguageName(species.names, "roomaji")
+        ? findEntityByLanguageName(species.names, "roomaji").name
         : null;
 
       await trx("pokemon")

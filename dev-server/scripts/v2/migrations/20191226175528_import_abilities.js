@@ -22,8 +22,12 @@ const createAbilityTable = async knex =>
 const mapAbilityToAbilityDatabase = ability => ({
   id: ability.id,
   name_en: findEntityByLanguageName(ability.names, "en").name,
-  name_fr: findEntityByLanguageName(ability.names, "fr").name,
-  name_ja: findEntityByLanguageName(ability.names, "ja").name,
+  name_fr: findEntityByLanguageName(ability.names, "fr")
+    ? findEntityByLanguageName(ability.names, "fr").name
+    : null,
+  name_ja: findEntityByLanguageName(ability.names, "roomaji")
+    ? findEntityByLanguageName(ability.names, "roomaji").name
+    : null,
   description: findEntityByLanguageName(ability.effect_entries, "en").effect
 });
 
