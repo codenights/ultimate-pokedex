@@ -66,6 +66,11 @@ export const typeDefs = gql`
     type: Type!
     damageClass: String!
     pokemons: [Pokemon!]!
+    description: String!
+    criticalRate: Int!
+    drain: Int
+    flinchChance: Int!
+    healing: Int
   }
 
   type PokemonMoveLearn {

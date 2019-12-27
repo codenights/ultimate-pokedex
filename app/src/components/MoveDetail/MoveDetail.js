@@ -5,6 +5,8 @@ import { AboutMove } from "./AboutMove";
 
 export const MoveDetail = ({ move }) => (
   <div>
+    <p>{move.description}</p>
+
     <AboutMove move={move} />
 
     <PokemonLearningMove move={move} />
