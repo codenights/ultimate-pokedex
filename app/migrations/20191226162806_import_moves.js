@@ -3,7 +3,7 @@ const {
   findEntityByLanguageName,
   extractIdFromUrl,
   getDirectoryContent
-} = require("../migrations_utils");
+} = require("./utils");
 
 const MOVE_DIR = path.join(__dirname, "../../data/move");
 

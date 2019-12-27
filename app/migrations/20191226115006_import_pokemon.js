@@ -1,14 +1,11 @@
 const path = require("path");
 const { readJSON } = require("fs-extra");
-const {
-  findEntityByLanguageName,
-  extractIdFromUrl
-} = require("../migrations_utils");
+const { findEntityByLanguageName, extractIdFromUrl } = require("./utils");
 
 const SPECIES_DIR = path.join(__dirname, "../../data/pokemon-species");
 const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
 
-const { getDirectoryContent } = require("../migrations_utils");
+const { getDirectoryContent } = require("./utils");
 
 const createPokemonTable = knex =>
   knex.schema.createTable("pokemon", table => {

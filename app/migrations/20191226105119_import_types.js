@@ -1,5 +1,5 @@
 const path = require("path");
-const { getDirectoryContent } = require("../migrations_utils");
+const { getDirectoryContent } = require("./utils");
 
 const TYPE_DIR = path.join(__dirname, "../../data/type");
 const COLORS_BY_TYPE = {

@@ -1,8 +1,5 @@
 const path = require("path");
-const {
-  getDirectoryContent,
-  extractIdFromUrl
-} = require("../migrations_utils");
+const { getDirectoryContent, extractIdFromUrl } = require("./utils");
 
 const EVOLUTION_DIR = path.join(__dirname, "../../data/evolution-chain");
 

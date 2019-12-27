@@ -1,8 +1,5 @@
 const path = require("path");
-const {
-  getDirectoryContent,
-  findEntityByLanguageName
-} = require("../migrations_utils");
+const { getDirectoryContent, findEntityByLanguageName } = require("./utils");
 
 const ABILITY_DIR = path.join(__dirname, "../../data/ability");
 

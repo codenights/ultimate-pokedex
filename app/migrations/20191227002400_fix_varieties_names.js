@@ -1,9 +1,9 @@
 const path = require("path");
-const { findEntityByLanguageName } = require("../migrations_utils");
+const { findEntityByLanguageName } = require("./utils");
 const { readJSON } = require("fs-extra");
-const { extractIdFromUrl } = require("../migrations_utils");
+const { extractIdFromUrl } = require("./utils");
 
-const { getDirectoryContent } = require("../migrations_utils");
+const { getDirectoryContent } = require("./utils");
 
 const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
 const POKEMON_FORM_DIR = path.join(__dirname, "../../data/pokemon-form");

@@ -1,8 +1,5 @@
 const path = require("path");
-const {
-  getDirectoryContent,
-  findEntityByLanguageName
-} = require("../migrations_utils");
+const { getDirectoryContent, findEntityByLanguageName } = require("./utils");
 
 const VERSION_DIR = path.join(__dirname, "../../data/version");
 const COLOR_BY_VERSION = {
