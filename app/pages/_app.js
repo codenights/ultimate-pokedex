@@ -1,6 +1,6 @@
 import React from "react";
 import App from "next/app";
-import { ShinyMode } from "../components/ShinyMode";
+import { ShinyMode } from "../src/components/ShinyMode";
 
 class MyApp extends App {
   render() {

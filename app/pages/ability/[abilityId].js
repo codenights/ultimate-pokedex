@@ -1,9 +1,9 @@
 import React from "react";
 
-import { fetchAbilityQuery } from "../../queries/fetchAbility";
-import { AbilityOverview } from "../../components/AbilityOverview";
-import { AbilityDetails } from "../../components/AbilityDetails";
-import { AppBarLayout } from "../../components/AppBarLayout";
+import { fetchAbilityQuery } from "../../src/queries/fetchAbility";
+import { AbilityOverview } from "../../src/components/AbilityOverview";
+import { AbilityDetails } from "../../src/components/AbilityDetails";
+import { AppBarLayout } from "../../src/components/AppBarLayout";
 
 const AbilityPage = ({ ability }) => {
   return (
@@ -31,13 +31,10 @@ const AbilityPage = ({ ability }) => {
   );
 };
 
-AbilityPage.getInitialProps = async ({ query }) => {
-  if (process.browser) {
-    return __NEXT_DATA__.props.pageProps;
-  }
-
+AbilityPage.getInitialProps = async ({ query, req  }) => {
+  const baseUrl = req ? 'http://localhost:3000' : '';
   const { abilityId } = query;
-  const response = await fetch("http://localhost:4000/graphql", {
+  const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: fetchAbilityQuery(abilityId) })

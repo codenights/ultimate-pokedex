@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import fetch from "isomorphic-unfetch";
 
-import { fetchPokemonQuery } from "../../queries/fetchPokemon";
-import { PokemonOverview } from "../../components/PokemonOverview/PokemonOverview";
-import { PokemonDetails } from "../../components/PokemonDetails";
-import { AppBarLayout } from "../../components/AppBarLayout";
+import { fetchPokemonQuery } from "../../src/queries/fetchPokemon";
+import { PokemonOverview } from "../../src/components/PokemonOverview/PokemonOverview";
+import { PokemonDetails } from "../../src/components/PokemonDetails";
+import { AppBarLayout } from "../../src/components/AppBarLayout";
 
 const CANVAS_SIZE = 16;
 
@@ -66,13 +66,10 @@ const PokemonPage = ({ pokemon }) => {
   );
 };
 
-PokemonPage.getInitialProps = async ({ query }) => {
-  if (process.browser) {
-    return __NEXT_DATA__.props.pageProps;
-  }
-
+PokemonPage.getInitialProps = async ({ query, req }) => {
+  const baseUrl = req ? 'http://localhost:3000' : '';
   const { nationalId } = query;
-  const response = await fetch("http://localhost:4000/graphql", {
+  const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: fetchPokemonQuery(nationalId) })

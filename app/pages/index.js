@@ -2,8 +2,8 @@ import React from "react";
 import Head from "next/head";
 import algoliasearch from "algoliasearch/lite";
 
-import { Search } from "../components/Search/Search";
-import { AppBarLayout } from "../components/AppBarLayout";
+import { Search } from "../src/components/Search/Search";
+import { AppBarLayout } from "../src/components/AppBarLayout";
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,
