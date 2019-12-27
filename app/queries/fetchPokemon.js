@@ -110,7 +110,7 @@ export const fetchPokemonQuery = nationalId => `
     names {
       en
     }
-    spriteUrl
+    artworkUrl
   }
 
   {

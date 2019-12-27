@@ -14,7 +14,7 @@ export const AlternateForms = ({ pokemon }) => {
         {pokemon.varieties.map(variety => (
           <li key={variety.id}>
             <a href={`/pokemon/${variety.id}`}>
-              <img src={variety.spriteUrl} alt={variety.name} />
+              <img src={variety.artworkUrl} alt={variety.name} />
               <p>{variety.names.en}</p>
             </a>
           </li>
