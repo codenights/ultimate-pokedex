@@ -1,12 +1,15 @@
 import React from "react";
+import Link from "next/link";
 
 export const AppBar = () => (
   <header>
-    <a href="/">
-      <img src="/img/home.png" alt="Pokedex" />
+    <Link href="/">
+      <a>
+        <img src="/img/home.png" alt="Pokedex" />
 
-      <span>Ultimate Pokedex</span>
-    </a>
+        <span>Ultimate Pokedex</span>
+      </a>
+    </Link>
 
     <style jsx>{`
       header {

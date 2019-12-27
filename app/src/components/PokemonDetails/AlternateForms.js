@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+
 import { Section } from "./Section";
 
 export const AlternateForms = ({ pokemon }) => {
@@ -13,10 +15,12 @@ export const AlternateForms = ({ pokemon }) => {
       <ul>
         {pokemon.varieties.map(variety => (
           <li key={variety.id}>
-            <a href={`/pokemon/${variety.id}`}>
-              <img src={variety.artworkUrl} alt={variety.name} />
-              <p>{variety.names.en}</p>
-            </a>
+            <Link href={`/pokemon/${variety.id}`}>
+              <a>
+                <img src={variety.artworkUrl} alt={variety.name} />
+                <p>{variety.names.en}</p>
+              </a>
+            </Link>
           </li>
         ))}
       </ul>

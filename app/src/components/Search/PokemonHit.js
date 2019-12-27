@@ -1,6 +1,7 @@
 import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
 import { lighten, saturate } from "polished";
+import Link from "next/link";
 
 import { Tag } from "../Tag";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
@@ -67,66 +68,68 @@ export const PokemonHit = connectCurrentRefinements(
           background: lighten(0.4, color)
         }}
       >
-        <a href={`pokemon/${pokemon.id}`}>
-          <header>
-            <h3>
-              <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
-            </h3>
+        <Link href={`pokemon/${pokemon.id}`}>
+          <a>
+            <header>
+              <h3>
+                <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
+              </h3>
 
-            <p>
-              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
-              <Tag>
-                <span>fr</span>
-              </Tag>
-              {pokemon.names.ja && (
-                <>
-                  {" "}
-                  /{" "}
-                  <Highlight
-                    tagName="mark"
-                    attribute="names.ja"
-                    hit={pokemon}
-                  />{" "}
-                  <Tag>
-                    <span>ja</span>
-                  </Tag>
-                </>
-              )}
-            </p>
-          </header>
+              <p>
+                <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
+                <Tag>
+                  <span>fr</span>
+                </Tag>
+                {pokemon.names.ja && (
+                  <>
+                    {" "}
+                    /{" "}
+                    <Highlight
+                      tagName="mark"
+                      attribute="names.ja"
+                      hit={pokemon}
+                    />{" "}
+                    <Tag>
+                      <span>ja</span>
+                    </Tag>
+                  </>
+                )}
+              </p>
+            </header>
 
-          <img src={spriteUrl} alt={pokemon.names.en} />
+            <img src={spriteUrl} alt={pokemon.names.en} />
 
-          <p className="watermark-number">#{pokemon.id}</p>
+            <p className="watermark-number">#{pokemon.id}</p>
 
-          <ul>
-            {pokemon.types.map(type => (
-              <li key={type.name}>
-                <TypeBadgeAlgolia type={type.name} />
-              </li>
-            ))}
-          </ul>
-
-          {statRefinements && (
-            <ul
-              style={{
-                flexWrap: "wrap",
-                lineHeight: 1.6
-              }}
-            >
-              {statRefinements.map(refinement => (
-                <li key={refinement.attribute}>
-                  <Tag>
-                    {getRefinementName(refinement.attribute.split(".")[1])}{" "}
-                    <strong>
-                      {getPropertyByPath(pokemon, refinement.attribute)}
-                    </strong>
-                  </Tag>
+            <ul>
+              {pokemon.types.map(type => (
+                <li key={type.name}>
+                  <TypeBadgeAlgolia type={type.name} />
                 </li>
               ))}
             </ul>
-          )}
-        </a>
+
+            {statRefinements && (
+              <ul
+                style={{
+                  flexWrap: "wrap",
+                  lineHeight: 1.6
+                }}
+              >
+                {statRefinements.map(refinement => (
+                  <li key={refinement.attribute}>
+                    <Tag>
+                      {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                      <strong>
+                        {getPropertyByPath(pokemon, refinement.attribute)}
+                      </strong>
+                    </Tag>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </a>
+        </Link>
 
         <style jsx>{`
           div {

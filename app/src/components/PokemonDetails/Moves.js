@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import uniqBy from "lodash.uniqby";
+import Link from "next/link";
 
 import { Section } from "./Section";
 import { TypeBadge } from "../TypeBadge";
@@ -68,7 +69,9 @@ export const Moves = ({ pokemon }) => {
           {movesByVersionGroup.map(({ move, learn }) => (
             <tr key={move.id}>
               <td>
-                <a href={`/move/${move.id}`}>{move.name}</a>
+                <Link href={`/move/${move.id}`}>
+                  <a>{move.name}</a>
+                </Link>
               </td>
               <td>
                 <TypeBadge type={move.type} />
