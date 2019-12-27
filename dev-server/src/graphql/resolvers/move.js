@@ -1,12 +1,7 @@
-const { extractTypeIdFromTypeUrl } = require("../../utils");
-const { findTypeById } = require("../../repository/type");
+const R = require("ramda");
 
 module.exports.MoveResolver = {
-  name: move => move.names.find(x => x.language.name === "en").name,
-  type: move => {
-    const typeId = extractTypeIdFromTypeUrl(move.type.url);
-
-    return findTypeById(typeId);
-  },
-  damageClass: move => move.damage_class.name
+  type: ({ type_id }, args, { typeRepository }) =>
+    typeRepository.findTypeById(type_id),
+  damageClass: R.prop("damage_class")
 };

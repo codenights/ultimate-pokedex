@@ -1,5 +1,4 @@
-const { findAbilityById, findAllAbilities } = require("../repository/ability");
-const { findPokemonById, findAllPokemons } = require("../repository/pokemon");
+const { PokemonEvolutionResolver } = require("./resolvers/pokemonEvolution");
 const { EggGroupResolver } = require("./resolvers/eggGroup");
 const { AbilityPokemonResolver } = require("./resolvers/abilityPokemon");
 const { VersionGroupResolver } = require("./resolvers/versionGroup");
@@ -18,10 +17,14 @@ const {
 
 module.exports.resolvers = {
   Query: {
-    pokemons: () => findAllPokemons(),
-    pokemon: (obj, { nationalId }) => findPokemonById(nationalId),
-    abilities: () => findAllAbilities(),
-    ability: (obj, { id }) => findAbilityById(id)
+    pokemons: (obj, args, { pokemonRepository }) =>
+      pokemonRepository.findAllPokemons(),
+    pokemon: (obj, { nationalId }, { pokemonRepository }) =>
+      pokemonRepository.findPokemonById(nationalId),
+    abilities: (obj, args, { abilityRepository }) =>
+      abilityRepository.findAllAbilities(),
+    ability: (obj, { id }, { abilityRepository }) =>
+      abilityRepository.findAbilityById(id)
   },
   Pokemon: PokemonResolver,
   PokemonPokedexEntry: PokemonPokedexEntryResolver,
@@ -35,5 +38,6 @@ module.exports.resolvers = {
   PokemonMoveLearn: PokemonMoveLearnResolver,
   VersionGroup: VersionGroupResolver,
   AbilityPokemon: AbilityPokemonResolver,
-  EggGroup: EggGroupResolver
+  EggGroup: EggGroupResolver,
+  PokemonEvolution: PokemonEvolutionResolver
 };

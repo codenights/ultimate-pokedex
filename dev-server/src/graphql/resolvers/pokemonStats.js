@@ -1,11 +1,10 @@
-const findStatByName = statName => allStats =>
-  allStats.find(x => x.stat.name === statName).base_stat;
+const R = require("ramda");
 
 module.exports.PokemonStatsResolver = {
-  hp: findStatByName("hp"),
-  attack: findStatByName("attack"),
-  defense: findStatByName("defense"),
-  specialAttack: findStatByName("special-attack"),
-  specialDefense: findStatByName("special-defense"),
-  speed: findStatByName("speed")
+  hp: R.prop("stat_hp"),
+  attack: R.prop("stat_attack"),
+  defense: R.prop("stat_defense"),
+  specialAttack: R.prop("stat_special_attack"),
+  specialDefense: R.prop("stat_special_defense"),
+  speed: R.prop("stat_speed")
 };
