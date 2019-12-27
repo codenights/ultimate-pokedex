@@ -33,7 +33,7 @@ const AbilityPage = ({ ability }) => {
 
 AbilityPage.getInitialProps = async ({ query, req }) => {
   // TODO: fix this
-  const baseUrl = req ? `http://${req.headers.host}:3000` : "";
+  const baseUrl = req ? `http://${req.headers.host}` : "";
   const { abilityId } = query;
   const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",

@@ -2,7 +2,7 @@ const path = require("path");
 const { writeFile } = require("fs-extra");
 const axios = require("axios");
 
-const DIR = path.join(__dirname, "../../data/image/artwork");
+const DIR = path.join(__dirname, "../../app/public/artwork");
 const POKEMON_COUNT = 809;
 
 for (let nationalId = 1; nationalId <= POKEMON_COUNT; nationalId += 1) {

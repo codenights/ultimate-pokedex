@@ -2,8 +2,8 @@ const path = require("path");
 const { readJSON, writeFile } = require("fs-extra");
 const axios = require("axios");
 
-const DIR = path.join(__dirname, "../../data/image/sprite");
-const DIR_SHINY = path.join(__dirname, "../../data/image/sprite-shiny");
+const DIR = path.join(__dirname, "../../app/public/sprite");
+const DIR_SHINY = path.join(__dirname, "../../app/public/sprite-shiny");
 const POKEMON_COUNT = 807;
 
 async function getPokemonNameFromNationalId(nationalId) {

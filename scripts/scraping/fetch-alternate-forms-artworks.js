@@ -6,7 +6,7 @@ const uniqBy = require("lodash.uniqby");
 const { extractIdFromUrl } = require("../utils");
 
 const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
-const DIR = path.join(__dirname, "../../data/image/artwork");
+const DIR = path.join(__dirname, "../../app/public/artwork");
 
 async function run() {
   const fileNames = await readdir(POKEMON_DIR);
