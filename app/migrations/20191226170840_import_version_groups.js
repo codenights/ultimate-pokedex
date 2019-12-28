@@ -52,6 +52,8 @@ exports.up = async knex => {
 exports.down = knex =>
   knex.schema
     .alterTable("version", table => {
+      // This is not supported for SQLite.
+      // Comment the line below for rollbacking SLIte DBs.
       table.dropForeign("version_group_id");
       table.dropColumn("version_group_id");
     })
