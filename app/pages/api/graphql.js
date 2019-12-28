@@ -35,7 +35,11 @@ const apolloServer = new ApolloServer({
     evolutionRepository: EvolutionRepository(knex),
     pokedexEntryRepository: PokedexEntryRepository(knex),
     pokemonMoveRepository: PokemonMoveRepository(knex)
-  })
+  }),
+  formatError: err => {
+    console.error(err);
+    return new Error("Internal server error.");
+  }
 });
 
 export const config = {
