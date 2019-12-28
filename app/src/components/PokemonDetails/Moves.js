@@ -26,7 +26,7 @@ const getMovesByVersionGroups = (moves, selectedVersionGroupId) =>
       )
     }));
 export const Moves = ({ pokemon }) => {
-  const [selectedVersionGroupId, setSelectedVersionGroupId] = useState("18");
+  const [selectedVersionGroupId, setSelectedVersionGroupId] = useState(18);
   const versionGroups = getAllVersionGroups(pokemon.moves);
   const movesByVersionGroup = getMovesByVersionGroups(
     pokemon.moves,
