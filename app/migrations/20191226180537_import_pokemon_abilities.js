@@ -31,18 +31,21 @@ const mapPokemonAbilityToPokemonAbilityDatabase = (
 const importAllPokemonAbilities = async knex => {
   const allAbilities = await getDirectoryContent(ABILITY_DIR);
 
-  await knex.transaction(async trx => {
-    for (const ability of allAbilities) {
-      for (const pokemonAbility of ability.pokemon) {
-        const pokemonAbilityDatabase = mapPokemonAbilityToPokemonAbilityDatabase(
-          ability,
-          pokemonAbility
-        );
+  for (const ability of allAbilities) {
+    for (const pokemonAbility of ability.pokemon) {
+      const pokemonAbilityDatabase = mapPokemonAbilityToPokemonAbilityDatabase(
+        ability,
+        pokemonAbility
+      );
 
-        await trx.insert(pokemonAbilityDatabase).into("pokemon_ability");
-      }
+      console.log(
+        "Importing pokemon ability: ",
+        pokemonAbilityDatabase.pokemon_id,
+        pokemonAbilityDatabase.ability_id
+      );
+      await knex.insert(pokemonAbilityDatabase).into("pokemon_ability");
     }
-  });
+  }
 };
 
 exports.up = async knex => {

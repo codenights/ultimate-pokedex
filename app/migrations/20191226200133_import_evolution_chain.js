@@ -29,6 +29,7 @@ const findEvolutions = evolution => {
   const evolutionDatabases = mapEvolutionsToEvolutionDatabases(evolution);
 
   for (const nextEvolution of evolution.evolves_to) {
+    console.log("Importing evolution chain...");
     evolutionDatabases.push(...findEvolutions(nextEvolution));
   }
 
@@ -38,16 +39,14 @@ const findEvolutions = evolution => {
 const importAllEvolutions = async knex => {
   const allEvolutions = await getDirectoryContent(EVOLUTION_DIR);
 
-  await knex.transaction(async trx => {
-    for (const evolution of allEvolutions) {
-      const chain = evolution.chain;
-      const evolutionDatabases = findEvolutions(chain);
+  for (const evolution of allEvolutions) {
+    const chain = evolution.chain;
+    const evolutionDatabases = findEvolutions(chain);
 
-      for (const evolutionDatabase of evolutionDatabases) {
-        await trx.insert(evolutionDatabase).into("evolution");
-      }
+    for (const evolutionDatabase of evolutionDatabases) {
+      await knex.insert(evolutionDatabase).into("evolution");
     }
-  });
+  }
 };
 
 exports.up = async knex => {

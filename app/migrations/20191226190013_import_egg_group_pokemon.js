@@ -26,17 +26,15 @@ const mapEggGroupPokemonToEggGroupPokemonDatabase = (species, eggGroup) => ({
 const insertEggGroupPokemons = async knex => {
   const allEggGroups = await getDirectoryContent(EGG_GROUP_DIR);
 
-  await knex.transaction(async trx => {
-    for (const eggGroup of allEggGroups) {
-      const eggGroupPokemonDatabases = eggGroup.pokemon_species.map(species =>
-        mapEggGroupPokemonToEggGroupPokemonDatabase(species, eggGroup)
-      );
+  for (const eggGroup of allEggGroups) {
+    const eggGroupPokemonDatabases = eggGroup.pokemon_species.map(species =>
+      mapEggGroupPokemonToEggGroupPokemonDatabase(species, eggGroup)
+    );
 
-      for (const eggGroupPokemonDatabase of eggGroupPokemonDatabases) {
-        await trx.insert(eggGroupPokemonDatabase).into("egg_group_pokemon");
-      }
+    for (const eggGroupPokemonDatabase of eggGroupPokemonDatabases) {
+      await knex.insert(eggGroupPokemonDatabase).into("egg_group_pokemon");
     }
-  });
+  }
 };
 
 exports.up = async knex => {

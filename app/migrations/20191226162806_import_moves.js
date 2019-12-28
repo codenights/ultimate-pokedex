@@ -45,12 +45,11 @@ const mapMoveToMoveDatabase = move => ({
 const insertAllMoves = async knex => {
   const allMoves = await getDirectoryContent(MOVE_DIR);
 
-  await knex.transaction(async trx => {
-    for (const move of allMoves) {
-      const moveDatabase = mapMoveToMoveDatabase(move);
-      await trx.insert(moveDatabase).into("move");
-    }
-  });
+  for (const move of allMoves) {
+    const moveDatabase = mapMoveToMoveDatabase(move);
+    console.log("Importing move: ", moveDatabase.id);
+    await knex.insert(moveDatabase).into("move");
+  }
 };
 
 exports.up = async knex => {

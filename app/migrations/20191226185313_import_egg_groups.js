@@ -21,13 +21,12 @@ const mapEggGroupToEggGroupDatabase = eggGroup => ({
 const insertAllEggGroups = async knex => {
   const allEggGroups = await getDirectoryContent(EGG_GROUP_DIR);
 
-  await knex.transaction(async trx => {
-    for (const eggGroup of allEggGroups) {
-      const eggGroupDatabase = mapEggGroupToEggGroupDatabase(eggGroup);
+  for (const eggGroup of allEggGroups) {
+    const eggGroupDatabase = mapEggGroupToEggGroupDatabase(eggGroup);
 
-      await trx.insert(eggGroupDatabase).into("egg_group");
-    }
-  });
+    console.log("Importing egg group: ", eggGroupDatabase.id);
+    await knex.insert(eggGroupDatabase).into("egg_group");
+  }
 };
 
 exports.up = async knex => {

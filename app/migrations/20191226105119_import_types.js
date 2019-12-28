@@ -25,7 +25,11 @@ const COLORS_BY_TYPE = {
 
 const createTypeTable = knex =>
   knex.schema.createTable("type", table => {
-    table.integer("id").primary();
+    table
+      .integer("id")
+      .unsigned()
+      .notNullable()
+      .primary();
     table.string("color").notNullable();
     table.string("name_en").notNullable();
   });
@@ -39,13 +43,11 @@ const mapTypeToTypeDatabase = type => ({
 const insertTypes = async knex => {
   const allTypes = await getDirectoryContent(TYPE_DIR);
 
-  await knex.transaction(async trx => {
-    for (const type of allTypes) {
-      const typeDatabase = mapTypeToTypeDatabase(type);
+  for (const type of allTypes) {
+    const typeDatabase = mapTypeToTypeDatabase(type);
 
-      await trx.insert(typeDatabase).into("type");
-    }
-  });
+    await knex.insert(typeDatabase).into("type");
+  }
 };
 
 exports.up = async knex => {

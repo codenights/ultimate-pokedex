@@ -31,13 +31,12 @@ const mapAbilityToAbilityDatabase = ability => ({
 const insertAllAbilities = async knex => {
   const allAbilities = await getDirectoryContent(ABILITY_DIR);
 
-  await knex.transaction(async trx => {
-    for (const ability of allAbilities) {
-      const abilityDatabase = mapAbilityToAbilityDatabase(ability);
+  for (const ability of allAbilities) {
+    const abilityDatabase = mapAbilityToAbilityDatabase(ability);
 
-      await trx.insert(abilityDatabase).into("ability");
-    }
-  });
+    console.log("Importing ability: ", abilityDatabase.id);
+    await knex.insert(abilityDatabase).into("ability");
+  }
 };
 
 exports.up = async knex => {

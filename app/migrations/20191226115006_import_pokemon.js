@@ -151,18 +151,17 @@ const findPokemonByVariety = variety => {
 const insertAllPokemons = async knex => {
   const allSpecies = await getDirectoryContent(SPECIES_DIR);
 
-  await knex.transaction(async trx => {
-    for (const species of allSpecies) {
-      const pokemons = await Promise.all(
-        species.varieties.map(findPokemonByVariety)
-      );
+  for (const species of allSpecies) {
+    const pokemons = await Promise.all(
+      species.varieties.map(findPokemonByVariety)
+    );
 
-      for (const pokemon of pokemons) {
-        const pokemonDatabase = mapPokemonToPokemonDatabase(species, pokemon);
-        await trx.insert(pokemonDatabase).into("pokemon");
-      }
+    for (const pokemon of pokemons) {
+      const pokemonDatabase = mapPokemonToPokemonDatabase(species, pokemon);
+      console.log("Importing pokemon: ", pokemonDatabase.id);
+      await knex.insert(pokemonDatabase).into("pokemon");
     }
-  });
+  }
 };
 
 exports.up = async knex => {

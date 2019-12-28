@@ -16,7 +16,8 @@ import { AbilityRepository } from "../../src/repository/ability";
 import { typeDefs } from "../../src/graphql/typeDefs";
 import { resolvers } from "../../src/graphql/resolvers";
 
-const knex = Knex(require("../../knexfile").development);
+const env = process.env.NODE_ENV || "development";
+const knex = Knex(require("../../knexfile")[env]);
 
 const apolloServer = new ApolloServer({
   typeDefs,

@@ -3,11 +3,5 @@
   "workspaces": [
     "app",
     "scripts"
-  ],
-  "dependencies": {
-    "start-server-and-test": "^1.10.6"
-  },
-  "scripts": {
-    "build": "start-server-and-test 'cd dev-server && yarn start' http://localhost:4000/health 'cd app && yarn build && yarn export'"
-  }
+  ]
 }

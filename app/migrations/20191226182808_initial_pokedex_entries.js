@@ -36,19 +36,22 @@ const mapPokdexEntryToPokedexEntryDatabase = (pokedexEntry, pokemon) => ({
 const insertAllPokedexEntries = async knex => {
   const allPokemons = await getDirectoryContent(POKEMON_DIR);
 
-  await knex.transaction(async trx => {
-    for (const pokemon of allPokemons) {
-      const species = await findSpeciesByPokemon(pokemon);
+  for (const pokemon of allPokemons) {
+    const species = await findSpeciesByPokemon(pokemon);
 
-      const pokedexEntries = species.flavor_text_entries
-        .filter(entry => entry.language.name === "en")
-        .map(entry => mapPokdexEntryToPokedexEntryDatabase(entry, pokemon));
+    const pokedexEntries = species.flavor_text_entries
+      .filter(entry => entry.language.name === "en")
+      .map(entry => mapPokdexEntryToPokedexEntryDatabase(entry, pokemon));
 
-      for (const pokedexEntryDatabase of pokedexEntries) {
-        await trx.insert(pokedexEntryDatabase).into("pokedex_entry");
-      }
+    for (const pokedexEntryDatabase of pokedexEntries) {
+      console.log(
+        "Importing pokedex entry: ",
+        pokedexEntryDatabase.pokemon_id,
+        pokedexEntryDatabase.version_id
+      );
+      await knex.insert(pokedexEntryDatabase).into("pokedex_entry");
     }
-  });
+  }
 };
 
 exports.up = async knex => {

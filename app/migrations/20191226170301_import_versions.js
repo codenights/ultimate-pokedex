@@ -55,13 +55,12 @@ const mapVersionToVersionDatabase = version => ({
 const insertAllVersions = async knex => {
   const allVersions = await getDirectoryContent(VERSION_DIR);
 
-  await knex.transaction(async trx => {
-    for (const version of allVersions) {
-      const versionDatabase = mapVersionToVersionDatabase(version);
+  for (const version of allVersions) {
+    const versionDatabase = mapVersionToVersionDatabase(version);
 
-      await trx.insert(versionDatabase).into("version");
-    }
-  });
+    console.log("Importing version: ", versionDatabase.id);
+    await knex.insert(versionDatabase).into("version");
+  }
 };
 
 exports.up = async knex => {

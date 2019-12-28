@@ -49,21 +49,24 @@ const mapPokemonMoveToPokemonMoveDatabase = (
 const insertPokemonMoves = async knex => {
   const allPokemons = await getDirectoryContent(POKEMON_DIR);
 
-  await knex.transaction(async trx => {
-    for (const pokemon of allPokemons) {
-      for (const { move, version_group_details } of pokemon.moves) {
-        for (const versionGroupDetails of version_group_details) {
-          const pokemonMoveDatabase = mapPokemonMoveToPokemonMoveDatabase(
-            move,
-            pokemon,
-            versionGroupDetails
-          );
+  for (const pokemon of allPokemons) {
+    for (const { move, version_group_details } of pokemon.moves) {
+      for (const versionGroupDetails of version_group_details) {
+        const pokemonMoveDatabase = mapPokemonMoveToPokemonMoveDatabase(
+          move,
+          pokemon,
+          versionGroupDetails
+        );
 
-          await trx.insert(pokemonMoveDatabase).into("pokemon_move");
-        }
+        console.log(
+          "Importing pokemon / move: ",
+          pokemonMoveDatabase.pokemon_id,
+          pokemonMoveDatabase.move_id
+        );
+        await knex.insert(pokemonMoveDatabase).into("pokemon_move");
       }
     }
-  });
+  }
 };
 
 exports.up = async knex => {
