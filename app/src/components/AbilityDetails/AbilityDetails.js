@@ -31,7 +31,10 @@ export const AbilityDetails = ({ ability }) => (
               <td>
                 <img src={pokemon.spriteUrl} alt={pokemon.names.en} />
 
-                <Link href={`/pokemon/${pokemon.id}`}>
+                <Link
+                  href="/pokemon/[nationalId]"
+                  as={`/pokemon/${pokemon.id}`}
+                >
                   <a>{pokemon.names.en}</a>
                 </Link>
               </td>

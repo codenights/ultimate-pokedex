@@ -15,7 +15,7 @@ export const AlternateForms = ({ pokemon }) => {
       <ul>
         {pokemon.varieties.map(variety => (
           <li key={variety.id}>
-            <Link href={`/pokemon/${variety.id}`}>
+            <Link href="/pokemon/[nationalId]" as={`/pokemon/${variety.id}`}>
               <a>
                 <img src={variety.artworkUrl} alt={variety.name} />
                 <p>{variety.names.en}</p>

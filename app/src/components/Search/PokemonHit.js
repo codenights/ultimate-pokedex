@@ -68,7 +68,7 @@ export const PokemonHit = connectCurrentRefinements(
           background: lighten(0.4, color)
         }}
       >
-        <Link href={`pokemon/${pokemon.id}`}>
+        <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
           <a>
             <header>
               <h3>

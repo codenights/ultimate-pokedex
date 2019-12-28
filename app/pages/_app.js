@@ -1,5 +1,7 @@
 import React from "react";
 import App from "next/app";
+import Head from "next/head";
+
 import { ShinyMode } from "../src/components/ShinyMode";
 
 class MyApp extends App {
@@ -8,6 +10,9 @@ class MyApp extends App {
 
     return (
       <ShinyMode>
+        <Head>
+          <link rel="icon" id="favicon" href="/favicon.ico" />
+        </Head>
         <Component {...pageProps} />
 
         <style global jsx>{`

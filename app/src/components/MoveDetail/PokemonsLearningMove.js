@@ -24,7 +24,7 @@ export const PokemonLearningMove = ({ move }) => (
             <td>
               <img src={spriteUrl} alt={names.en} />
 
-              <Link href={`/pokemon/${id}`}>
+              <Link href="/pokemon/[nationalId]" as={`/pokemon/${id}`}>
                 <a>{names.en}</a>
               </Link>
             </td>

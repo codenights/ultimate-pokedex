@@ -7,7 +7,7 @@ export const PokemonPreview = ({ pokemon }) => {
   const spriteUrl = useShiny(pokemon.spriteUrl, pokemon.spriteShinyUrl);
 
   return (
-    <Link href={`/pokemon/${pokemon.id}`}>
+    <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
       <a>
         <style jsx>{`
           a {

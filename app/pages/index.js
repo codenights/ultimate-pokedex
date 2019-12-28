@@ -15,7 +15,6 @@ function Home() {
     <AppBarLayout>
       <Head>
         <title>Ultimate Pokedex | Home</title>gaa
-        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <Search

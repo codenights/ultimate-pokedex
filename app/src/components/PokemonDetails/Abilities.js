@@ -10,7 +10,7 @@ export const Abilities = ({ pokemon }) => (
     <ul>
       {pokemon.abilities.map(({ isHidden, ability }) => (
         <li key={ability.id}>
-          <Link href={`/ability/${ability.id}`}>
+          <Link href="/ability/[abilityId]" as={`/ability/${ability.id}`}>
             <a>
               {ability.name} {isHidden && <span>(Hidden ability)</span>}
             </a>

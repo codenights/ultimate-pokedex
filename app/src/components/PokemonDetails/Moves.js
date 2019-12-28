@@ -69,7 +69,7 @@ export const Moves = ({ pokemon }) => {
           {movesByVersionGroup.map(({ move, learn }) => (
             <tr key={move.id}>
               <td>
-                <Link href={`/move/${move.id}`}>
+                <Link href="/move/[moveId]" as={`/move/${move.id}`}>
                   <a>{move.name}</a>
                 </Link>
               </td>
