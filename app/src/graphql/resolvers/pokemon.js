@@ -17,23 +17,25 @@ export const PokemonResolver = {
 
   types: ({ type_1_id, type_2_id }, args, { typeRepository }) =>
     Promise.all(
-      [type_1_id, type_2_id].filter(Boolean).map(typeRepository.findTypeById)
+      [type_1_id, type_2_id]
+        .filter(Boolean)
+        .map(typeId => typeRepository.findTypeById.load(typeId))
     ),
 
   evolutions: ({ id }, args, { evolutionRepository }) =>
-    evolutionRepository.findEvolutionsByPokemonId(id),
+    evolutionRepository.findEvolutionsByPokemonId.load(id),
 
   pokedexEntries: ({ id }, args, { pokedexEntryRepository }) =>
-    pokedexEntryRepository.findPokedexEntriesByPokemonId(id),
+    pokedexEntryRepository.findPokedexEntriesByPokemonId.load(id),
 
   eggGroups: ({ id }, args, { eggGroupRepository }) =>
-    eggGroupRepository.findEggGroupByPokemonId(id),
+    eggGroupRepository.findEggGroupByPokemonId.load(id),
 
   abilities: ({ id }, args, { pokemonAbilityRepository }) =>
-    pokemonAbilityRepository.findByPokemonId(id),
+    pokemonAbilityRepository.findByPokemonId.load(id),
 
   moves: async ({ id }, args, { moveRepository }) => {
-    const moves = await moveRepository.findMovesByPokemonId(id);
+    const moves = await moveRepository.findMovesByPokemonId.load(id);
 
     return moves.map(x => ({
       ...x,

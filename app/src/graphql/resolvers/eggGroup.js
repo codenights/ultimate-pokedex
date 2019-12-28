@@ -1,4 +1,4 @@
 export const EggGroupResolver = {
   pokemons: (eggGroup, args, { pokemonRepository }) =>
-    pokemonRepository.findPokemonsByEggGroupId(eggGroup.id)
+    pokemonRepository.findPokemonsByEggGroupId.load(eggGroup.id)
 };

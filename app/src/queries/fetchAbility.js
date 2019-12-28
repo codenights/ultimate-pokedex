@@ -1,7 +1,7 @@
 // language=GraphQL
 export const fetchAbilityQuery = abilityId => `
   {
-    ability(id: "${abilityId}") {
+    ability(id: ${Number(abilityId)}) {
       id
       name
       description

@@ -114,7 +114,7 @@ export const fetchPokemonQuery = nationalId => `
   }
 
   {
-    pokemon(nationalId: "${nationalId}") {
+    pokemon(nationalId: ${Number(nationalId)}) {
       ...BaseInfo
       
       types { ...Type }

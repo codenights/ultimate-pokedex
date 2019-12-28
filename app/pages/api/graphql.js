@@ -10,7 +10,6 @@ import { VersionRepository } from "../../src/repository/version";
 import { TypeRepository } from "../../src/repository/type";
 import { PokemonRepository } from "../../src/repository/pokemon";
 import { MoveRepository } from "../../src/repository/move";
-import { EvolutionChainRepository } from "../../src/repository/evolutionChain";
 import { EggGroupRepository } from "../../src/repository/eggGroup";
 import { AbilityRepository } from "../../src/repository/ability";
 import { typeDefs } from "../../src/graphql/typeDefs";
@@ -26,7 +25,6 @@ const apolloServer = new ApolloServer({
     abilityRepository: AbilityRepository(knex),
     pokemonAbilityRepository: PokemonAbilityRepository(knex),
     eggGroupRepository: EggGroupRepository(knex),
-    evolutionChainRepository: EvolutionChainRepository(knex),
     moveRepository: MoveRepository(knex),
     pokemonRepository: PokemonRepository(knex),
     typeRepository: TypeRepository(knex),

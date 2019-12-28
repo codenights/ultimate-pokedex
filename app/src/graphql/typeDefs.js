@@ -2,7 +2,7 @@ import { gql } from "apollo-server-micro";
 
 export const typeDefs = gql`
   type Type {
-    id: String!
+    id: Int!
     name: String!
     color: String!
   }
@@ -25,13 +25,13 @@ export const typeDefs = gql`
   }
 
   type Version {
-    id: String!
+    id: Int!
     name: String!
     color: String!
   }
 
   type VersionGroup {
-    id: String!
+    id: Int!
     name: String!
   }
 
@@ -46,7 +46,7 @@ export const typeDefs = gql`
   }
 
   type Ability {
-    id: String!
+    id: Int!
     name: String!
     description: String!
     pokemons: [AbilityPokemon!]!
@@ -58,7 +58,7 @@ export const typeDefs = gql`
   }
 
   type Move {
-    id: String!
+    id: Int!
     accuracy: Int
     pp: Int!
     power: Int
@@ -91,13 +91,13 @@ export const typeDefs = gql`
   }
 
   type EggGroup {
-    id: String!
+    id: Int!
     name: String!
     pokemons: [Pokemon!]!
   }
 
   type Pokemon {
-    id: String!
+    id: Int!
     names: PokemonName
     spriteUrl: String!
     spriteShinyUrl: String!
@@ -120,11 +120,11 @@ export const typeDefs = gql`
 
   type Query {
     pokemons: [Pokemon!]!
-    pokemon(nationalId: String!): Pokemon!
+    pokemon(nationalId: Int!): Pokemon!
 
     abilities: [Ability!]!
-    ability(id: String!): Ability!
+    ability(id: Int!): Ability!
 
-    move(id: String!): Move!
+    move(id: Int!): Move!
   }
 `;

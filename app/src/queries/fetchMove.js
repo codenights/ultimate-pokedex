@@ -1,7 +1,7 @@
 // language=GraphQL
 export const fetchMoveQuery = moveId => `
   {
-    move(id: "${moveId}") {
+    move(id: ${Number(moveId)}) {
       id
       name
       description

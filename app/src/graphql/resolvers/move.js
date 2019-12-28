@@ -8,7 +8,7 @@ export const MoveResolver = {
   flinchChance: R.prop("flinch_chance"),
 
   type: ({ type_id }, args, { typeRepository }) =>
-    typeRepository.findTypeById(type_id),
+    typeRepository.findTypeById.load(type_id),
 
   pokemons: ({ id }, args, { pokemonRepository }) =>
     pokemonRepository.findPokemonsByMoveId(id)

@@ -18,12 +18,13 @@ export const resolvers = {
     pokemons: (obj, args, { pokemonRepository }) =>
       pokemonRepository.findAllPokemons(),
     pokemon: (obj, { nationalId }, { pokemonRepository }) =>
-      pokemonRepository.findPokemonById(nationalId),
+      pokemonRepository.findPokemonById.load(nationalId),
     abilities: (obj, args, { abilityRepository }) =>
       abilityRepository.findAllAbilities(),
     ability: (obj, { id }, { abilityRepository }) =>
-      abilityRepository.findAbilityById(id),
-    move: (obj, { id }, { moveRepository }) => moveRepository.findMoveById(id)
+      abilityRepository.findAbilityById.load(id),
+    move: (obj, { id }, { moveRepository }) =>
+      moveRepository.findMoveById.load(id)
   },
   Pokemon: PokemonResolver,
   PokemonPokedexEntry: PokemonPokedexEntryResolver,

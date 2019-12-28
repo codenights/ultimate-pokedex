@@ -1,23 +1,32 @@
+import DataLoader from "dataloader";
+import { mapManytoEntities, mapRowsToEntities } from "../utils/dataloader";
+
 export function PokemonRepository(knex) {
   return {
     findAllPokemons() {
       return knex("pokemon").orderBy("order");
     },
-    findPokemonById(pokemonId) {
-      return knex("pokemon")
-        .first()
-        .where({ id: pokemonId });
-    },
-    findPokemonsByEggGroupId(eggGroupId) {
-      return knex("pokemon")
-        .innerJoin(
-          "egg_group_pokemon",
-          "pokemon.id",
-          "egg_group_pokemon.pokemon_id"
-        )
-        .select("pokemon.*")
-        .where({ egg_group_id: eggGroupId });
-    },
+    findPokemonById: new DataLoader(
+      pokemonIds =>
+        console.log("findPokemonById:", pokemonIds) ||
+        knex("pokemon")
+          .whereIn("id", pokemonIds)
+          .then(mapRowsToEntities(pokemonIds, "id"))
+    ),
+    findPokemonsByEggGroupId: new DataLoader(
+      eggGroupIds =>
+        console.log("findPokemonsByEggGroupId:", eggGroupIds) ||
+        knex("pokemon")
+          .innerJoin(
+            "egg_group_pokemon",
+            "pokemon.id",
+            "egg_group_pokemon.pokemon_id"
+          )
+          .select("pokemon.*", "egg_group_id")
+          .whereIn("egg_group_id", eggGroupIds)
+          .then(mapManytoEntities(eggGroupIds, "egg_group_id"))
+    ),
+    // TODO: Dataloader
     findVarietiesByPokemonId(pokemonId) {
       return knex("pokemon")
         .whereIn("species_id", function() {
@@ -48,6 +57,7 @@ export function PokemonRepository(knex) {
         .first()
         .where({ id: currentStageId });
     },
+    // TODO: dataloader
     findPokemonsByMoveId(moveId) {
       return knex("pokemon").whereIn("id", function() {
         this.select("pokemon_id")
