@@ -6,7 +6,7 @@ const MOVE_DIR = path.join(__dirname, "../../data/move");
 const alterMoveTable = async knex =>
   knex.schema.alterTable("move", table => {
     table
-      .string("description")
+      .text("description")
       .notNullable()
       .defaultTo("");
     table

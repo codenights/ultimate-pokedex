@@ -13,7 +13,7 @@ const createAbilityTable = async knex =>
     table.string("name_en").notNullable();
     table.string("name_fr");
     table.string("name_ja");
-    table.string("description").notNullable();
+    table.text("description").notNullable();
   });
 
 const mapAbilityToAbilityDatabase = ability => ({
