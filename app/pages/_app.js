@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import App from "next/app";
 import Head from "next/head";
 
 import { ShinyMode } from "../src/components/ShinyMode";
 import { Router } from "next/router";
 
-class MyApp extends App {
+class UltimatePokedexApp extends App {
   state = { isLoading: false };
 
-  constructor(props) {
+  constructor() {
     super();
 
     Router.events.on("routeChangeStart", this.onRouteChange);
@@ -226,4 +226,4 @@ class MyApp extends App {
   }
 }
 
-export default MyApp;
+export default UltimatePokedexApp;

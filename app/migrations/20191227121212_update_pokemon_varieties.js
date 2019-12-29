@@ -4,7 +4,6 @@ const ARTWORK_DIR = path.join(__dirname, "../public/artwork");
 
 const hasNewArtwork = async pokemon => {
   const fileName = path.join(ARTWORK_DIR, `${pokemon.id}.png`);
-  console.log(fileName);
 
   return pathExists(fileName);
 };
@@ -13,7 +12,6 @@ exports.up = async knex => {
   const pokemons = await knex("pokemon").where("id", ">", 10000);
 
   for (const pokemon of pokemons) {
-    console.log("Is pokemon:", pokemon.id);
     const shouldUpdateArtwork = await hasNewArtwork(pokemon);
 
     if (shouldUpdateArtwork) {
