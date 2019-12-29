@@ -151,13 +151,13 @@ export const PokemonHit = connectCurrentRefinements(
             align-items: center;
           }
 
-          a:hover .watermark-number,
-          a:focus .watermark-number {
+          div > :global(a:hover .watermark-number),
+          div > :global(a:focus .watermark-number) {
             opacity: 0.7;
           }
 
-          a:hover img,
-          a:focus img {
+          div > :global(a:hover img),
+          div > :global(a:focus img) {
             transform: scale(1.25);
           }
 
