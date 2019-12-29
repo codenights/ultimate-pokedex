@@ -41,7 +41,7 @@ export const Moves = ({ pokemon }) => {
         <select
           name="version-gorups"
           id="version-groups"
-          onChange={e => setSelectedVersionGroupId(e.target.value)}
+          onChange={e => setSelectedVersionGroupId(Number(e.target.value))}
           value={selectedVersionGroupId}
         >
           {versionGroups.map(versionGroup => (
