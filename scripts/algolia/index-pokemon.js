@@ -14,7 +14,7 @@ const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
 
 const fetchPokemonQuery = nationalId => `
   {
-    pokemon(nationalId: "${nationalId}") {
+    pokemon(nationalId: ${nationalId}) {
       id
       names {
         en
@@ -75,12 +75,16 @@ function getNameTokens(value) {
   }, []);
 }
 
+function getPublicImageUrl(path) {
+  return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/app/public${path}`;
+}
+
 async function run() {
   const pokemonsToIndex = [];
 
   for (let id = 1; id <= POKEMON_COUNT; id += 1) {
     try {
-      const response = await fetch("http://localhost:4000/graphql", {
+      const response = await fetch("http://localhost:3000/api/graphql", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: fetchPokemonQuery(id) })
@@ -99,7 +103,10 @@ async function run() {
         // Algolia needs a number attribute to sort records.
         order: Number(pokemon.id),
         ...pokemon,
-        nameTokens
+        nameTokens,
+        artworkUrl: getPublicImageUrl(pokemon.artworkUrl),
+        spriteUrl: getPublicImageUrl(pokemon.spriteUrl),
+        spriteShinyUrl: getPublicImageUrl(pokemon.spriteShinyUrl)
       };
 
       pokemonsToIndex.push(algoliaPokemon);
