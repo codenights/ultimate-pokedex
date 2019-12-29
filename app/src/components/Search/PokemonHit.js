@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Tag } from "../Tag";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
 import { useShiny } from "../ShinyMode";
+import { PokemonLink } from "../PokemonLink";
 
 const COLORS_BY_TYPE = {
   poison: "#a59",
@@ -68,68 +69,66 @@ export const PokemonHit = connectCurrentRefinements(
           background: lighten(0.4, color)
         }}
       >
-        <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
-          <a>
-            <header>
-              <h3>
-                <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
-              </h3>
+        <PokemonLink pokemonId={pokemon.id}>
+          <header>
+            <h3>
+              <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
+            </h3>
 
-              <p>
-                <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
-                <Tag>
-                  <span>fr</span>
-                </Tag>
-                {pokemon.names.ja && (
-                  <>
-                    {" "}
-                    /{" "}
-                    <Highlight
-                      tagName="mark"
-                      attribute="names.ja"
-                      hit={pokemon}
-                    />{" "}
-                    <Tag>
-                      <span>ja</span>
-                    </Tag>
-                  </>
-                )}
-              </p>
-            </header>
+            <p>
+              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
+              <Tag>
+                <span>fr</span>
+              </Tag>
+              {pokemon.names.ja && (
+                <>
+                  {" "}
+                  /{" "}
+                  <Highlight
+                    tagName="mark"
+                    attribute="names.ja"
+                    hit={pokemon}
+                  />{" "}
+                  <Tag>
+                    <span>ja</span>
+                  </Tag>
+                </>
+              )}
+            </p>
+          </header>
 
-            <img src={spriteUrl} alt={pokemon.names.en} />
+          <img src={spriteUrl} alt={pokemon.names.en} />
 
-            <p className="watermark-number">#{pokemon.id}</p>
+          <p className="watermark-number">#{pokemon.id}</p>
 
-            <ul>
-              {pokemon.types.map(type => (
-                <li key={type.name}>
-                  <TypeBadgeAlgolia type={type.name} />
+          <ul>
+            {pokemon.types.map(type => (
+              <li key={type.name}>
+                <TypeBadgeAlgolia type={type.name} />
+              </li>
+            ))}
+          </ul>
+
+          {statRefinements && (
+            <ul
+              style={{
+                flexWrap: "wrap",
+                lineHeight: 1.6
+              }}
+            >
+              {statRefinements.map(refinement => (
+                <li key={refinement.attribute}>
+                  <Tag>
+                    {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                    <strong>
+                      {getPropertyByPath(pokemon, refinement.attribute)}
+                    </strong>
+                  </Tag>
                 </li>
               ))}
             </ul>
-
-            {statRefinements && (
-              <ul
-                style={{
-                  flexWrap: "wrap",
-                  lineHeight: 1.6
-                }}
-              >
-                {statRefinements.map(refinement => (
-                  <li key={refinement.attribute}>
-                    <Tag>
-                      {getRefinementName(refinement.attribute.split(".")[1])}{" "}
-                      <strong>
-                        {getPropertyByPath(pokemon, refinement.attribute)}
-                      </strong>
-                    </Tag>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </a>
-        </Link>
+          )}
+        </PokemonLink>
 
         <style jsx>{`
           div {
@@ -142,7 +141,7 @@ export const PokemonHit = connectCurrentRefinements(
             position: relative;
           }
 
-          a {
+          div > :global(a) {
             padding: 20px;
             text-decoration: none;
             color: inherit;

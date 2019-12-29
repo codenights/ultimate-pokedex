@@ -2,30 +2,31 @@ import React from "react";
 import Link from "next/link";
 
 import { useShiny } from "../ShinyMode";
+import { PokemonLink } from "../PokemonLink";
 
 export const PokemonPreview = ({ pokemon }) => {
   const spriteUrl = useShiny(pokemon.spriteUrl, pokemon.spriteShinyUrl);
 
   return (
-    <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
-      <a>
-        <style jsx>{`
-          a {
-            display: inline-block;
-            padding: 20px;
-            text-align: center;
-            color: inherit;
-            text-decoration: none;
-          }
-
-          img {
-            max-width: 100px;
-          }
-        `}</style>
-
+    <div>
+      <PokemonLink pokemonId={pokemon.id}>
         <img src={spriteUrl} />
         <p>{pokemon.names.en}</p>
-      </a>
-    </Link>
+      </PokemonLink>
+
+      <style jsx>{`
+        div > :global(a) {
+          display: inline-block;
+          padding: 20px 10px;
+          text-align: center;
+          color: inherit;
+          text-decoration: none;
+        }
+
+        img {
+          max-width: 100px;
+        }
+      `}</style>
+    </div>
   );
 };

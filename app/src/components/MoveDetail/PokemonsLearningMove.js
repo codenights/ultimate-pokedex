@@ -1,8 +1,8 @@
 import React from "react";
-import Link from "next/link";
 
 import { Section } from "./Section";
 import { TypeBadge } from "../TypeBadge";
+import { PokemonLink } from "../PokemonLink";
 
 export const PokemonLearningMove = ({ move }) => (
   <Section>
@@ -24,9 +24,7 @@ export const PokemonLearningMove = ({ move }) => (
             <td>
               <img src={spriteUrl} alt={names.en} />
 
-              <Link href="/pokemon/[nationalId]" as={`/pokemon/${id}`}>
-                <a>{names.en}</a>
-              </Link>
+              <PokemonLink pokemonId={id}>{names.en}</PokemonLink>
             </td>
             <td>
               <ul>
