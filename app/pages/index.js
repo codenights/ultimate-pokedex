@@ -4,6 +4,7 @@ import algoliasearch from "algoliasearch/lite";
 
 import { Search } from "../src/components/Search/Search";
 import { AppBarLayout } from "../src/components/AppBarLayout";
+import '../styles/main.css';
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,

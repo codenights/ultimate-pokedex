@@ -22,19 +22,11 @@ const COLORS_BY_TYPE = {
 };
 
 export const TypeBadgeAlgolia = ({ type }) => (
-  <span>
+  <span className="inline-block text-center px-2 py-1">
     {type}
-
     <style jsx>{`
       span {
-        display: inline-block;
-        border-radius: 4px;
-        padding: 4px 12px;
         background: ${COLORS_BY_TYPE[type.toLowerCase()]};
-        color: #fff;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        font-family: monospace;
-        border: 2px solid rgba(0, 0, 0, 0.25);
       }
     `}</style>
   </span>
