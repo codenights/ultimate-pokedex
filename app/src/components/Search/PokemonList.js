@@ -12,7 +12,7 @@ export const PokemonList = connectInfiniteHits(
     });
 
     return (
-      <div>
+      <div className="flex flex-wrap p-1">
         {pokemons.map(pokemon => (
           <PokemonHit key={pokemon.id} pokemon={pokemon} />
         ))}
@@ -24,15 +24,6 @@ export const PokemonList = connectInfiniteHits(
             }}
           />
         )}
-
-        <style jsx>{`
-          div {
-            padding: 20px;
-            display: grid;
-            grid-gap: 20px;
-            grid-template-columns: repeat(3, 1fr);
-          }
-        `}</style>
       </div>
     );
   }

@@ -15,7 +15,7 @@ function Home() {
   return (
     <AppBarLayout>
       <Head>
-        <title>Ultimate Pokedex | Home</title>gaa
+        <title>Ultimate Pokedex | Home</title>
       </Head>
 
       <Search
