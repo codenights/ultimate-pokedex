@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 import { Section } from "./Section";
 import { GenderRate } from "./GenderRate";
@@ -39,7 +40,15 @@ export const GeneralInfo = ({ pokemon }) => (
       </dd>
 
       <dt>Egg groups</dt>
-      <dd>{pokemon.eggGroups.map(x => x.name).join(", ")}</dd>
+      <dd>
+        {pokemon.eggGroups.map(({ id, name }) => (
+          <span key={id}>
+            <Link href="/egg-group/[eggGroupId]" as={`/egg-group/${id}`}>
+              <a>{name}</a>
+            </Link>
+          </span>
+        ))}
+      </dd>
     </dl>
 
     <style jsx>{`
@@ -55,6 +64,10 @@ export const GeneralInfo = ({ pokemon }) => (
 
       dd {
         font-weight: bold;
+      }
+
+      span + span::before {
+        content: ", ";
       }
     `}</style>
   </Section>

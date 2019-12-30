@@ -20,5 +20,7 @@ export const QueryResolver = {
   ability: (obj, { id }, { abilityRepository }) =>
     abilityRepository.findAbilityById.load(id).then(throwNotFoundIfEmpty),
   move: (obj, { id }, { moveRepository }) =>
-    moveRepository.findMoveById.load(id).then(throwNotFoundIfEmpty)
+    moveRepository.findMoveById.load(id).then(throwNotFoundIfEmpty),
+  eggGroup: (obj, { id }, { eggGroupRepository }) =>
+    eggGroupRepository.findEggGroupById.load(id).then(throwNotFoundIfEmpty)
 };

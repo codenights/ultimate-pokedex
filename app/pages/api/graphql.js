@@ -35,8 +35,8 @@ const apolloServer = new ApolloServer({
     pokemonMoveRepository: PokemonMoveRepository(knex)
   }),
   formatError: err => {
-    if (err.extensions && err.extensions.code === 'NOT_FOUND') {
-      return err
+    if (err.extensions && err.extensions.code === "NOT_FOUND") {
+      return err;
     }
 
     console.error(err);
