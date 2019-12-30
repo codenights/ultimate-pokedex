@@ -1,16 +1,17 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import fetch from "isomorphic-unfetch";
+import Error from "next/error";
 
 import { fetchPokemonQuery } from "../../src/queries/fetchPokemon";
 import { PokemonOverview } from "../../src/components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../src/components/PokemonDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
+import { executeQuery } from "../../src/queries/executeQuery";
 
 const CANVAS_SIZE = 16;
 
 const setFavicon = pokemon => {
-  if (!process.browser) return;
+  if (!process.browser || !pokemon) return;
 
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
@@ -28,10 +29,14 @@ const setFavicon = pokemon => {
   img.src = pokemon.spriteUrl;
 };
 
-const PokemonPage = ({ pokemon }) => {
+const PokemonPage = ({ pokemon, statusCode }) => {
   useEffect(() => {
     setFavicon(pokemon);
   }, [pokemon]);
+
+  if (statusCode === 404) {
+    return <Error statusCode={404} />;
+  }
 
   return (
     <AppBarLayout>
@@ -64,18 +69,9 @@ const PokemonPage = ({ pokemon }) => {
   );
 };
 
-PokemonPage.getInitialProps = async ({ query, req }) => {
-  // TODO: fix this
-  const baseUrl = req ? `http://${req.headers.host}` : "";
-  const { nationalId } = query;
-  const response = await fetch(`${baseUrl}/api/graphql`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: fetchPokemonQuery(nationalId) })
-  });
-  const { data } = await response.json();
-
-  return { pokemon: data.pokemon };
-};
+PokemonPage.getInitialProps = ({ query, req }) =>
+  executeQuery(fetchPokemonQuery(query.nationalId), req, ({ pokemon }) => ({
+    pokemon
+  }));
 
 export default PokemonPage;

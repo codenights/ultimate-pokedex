@@ -12,20 +12,10 @@ import { PokemonAbilityResolver } from "./resolvers/pokemonAbility";
 import { VersionResolver } from "./resolvers/version";
 import { PokemonResolver } from "./resolvers/pokemon";
 import { PokemonStatsResolver } from "./resolvers/pokemonStats";
+import {QueryResolver} from "./resolvers/query";
 
 export const resolvers = {
-  Query: {
-    pokemons: (obj, args, { pokemonRepository }) =>
-      pokemonRepository.findAllPokemons(),
-    pokemon: (obj, { nationalId }, { pokemonRepository }) =>
-      pokemonRepository.findPokemonById.load(nationalId),
-    abilities: (obj, args, { abilityRepository }) =>
-      abilityRepository.findAllAbilities(),
-    ability: (obj, { id }, { abilityRepository }) =>
-      abilityRepository.findAbilityById.load(id),
-    move: (obj, { id }, { moveRepository }) =>
-      moveRepository.findMoveById.load(id)
-  },
+  Query: QueryResolver,
   Pokemon: PokemonResolver,
   PokemonPokedexEntry: PokemonPokedexEntryResolver,
   PokemonStat: PokemonStatsResolver,

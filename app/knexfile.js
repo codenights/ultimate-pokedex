@@ -21,7 +21,7 @@ if (process.env.DATABASE_DRIVER === "MYSQL") {
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME
     },
-    debug: true
+    debug: !!process.env.DATABASE_DEBUG
   };
 }
 

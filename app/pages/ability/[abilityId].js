@@ -1,15 +1,24 @@
 import React from "react";
-import fetch from "isomorphic-unfetch";
+import Error from "next/error";
 
 import { fetchAbilityQuery } from "../../src/queries/fetchAbility";
 import { AbilityOverview } from "../../src/components/AbilityOverview";
 import { AbilityDetails } from "../../src/components/AbilityDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
+import { executeQuery } from "../../src/queries/executeQuery";
+import Head from "next/head";
 
-const AbilityPage = ({ ability }) => {
+const AbilityPage = ({ ability, statusCode }) => {
+  if (statusCode === 404) {
+    return <Error statusCode={404} />;
+  }
+
   return (
     <AppBarLayout>
       <main>
+        <Head>
+          <title>{ability.name} | Ultimate Pokedex</title>
+        </Head>
         <AbilityOverview ability={ability} />
 
         <AbilityDetails ability={ability} />
@@ -32,18 +41,9 @@ const AbilityPage = ({ ability }) => {
   );
 };
 
-AbilityPage.getInitialProps = async ({ query, req }) => {
-  // TODO: fix this
-  const baseUrl = req ? `http://${req.headers.host}` : "";
-  const { abilityId } = query;
-  const response = await fetch(`${baseUrl}/api/graphql`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: fetchAbilityQuery(abilityId) })
-  });
-  const { data } = await response.json();
-
-  return { ability: data.ability };
-};
+AbilityPage.getInitialProps = ({ query, req }) =>
+  executeQuery(fetchAbilityQuery(query.abilityId), req, ({ ability }) => ({
+    ability
+  }));
 
 export default AbilityPage;
