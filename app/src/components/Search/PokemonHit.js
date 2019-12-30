@@ -36,62 +36,71 @@ function getRefinementName(value) {
 export const PokemonHit = connectCurrentRefinements(
   ({ items: refinements, pokemon }) => {
     const spriteUrl = useShiny(pokemon.artworkUrl, pokemon.spriteShinyUrl);
-    // const color = COLORS_BY_TYPE[pokemon.types[0].name.toLowerCase()];
     const statRefinements = refinements.filter(refinement =>
       refinement.attribute.startsWith("stats.")
     );
 
     return (
-      <article className="w-1/4 mt-32">
+      <article className="w-1/5 mt-24">
         <PokemonLink pokemonId={pokemon.id}>
-          <div className="bg-white border border-solid border-gray-300 rounded p-6 m-2">
-          <img className="-mt-32" src={spriteUrl} alt={pokemon.names.en} />
-            <div className="text-4xl mb-4">
+          <div
+            className={`relative p-6 m-2 bg-gray-900 rounded-lg`}
+          >
+            <img className="-mt-32" src={spriteUrl} alt={pokemon.names.en} />
+            
+            <div className={`text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}>
               <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
-              <span className="text-2xl text-gray-500"> <span className="text-1xl text-gray-400">#</span>{pokemon.id}</span>
+              <span className="text-3xl text-gray-600">
+                <span className="ml-2 text-xl text-gray-700">#</span>
+                {pokemon.id}
+              </span>
             </div>
-            {/* <p className="text-xl text-gray-500">
-              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
-              <Tag>
-              <span>fr</span>
-              </Tag>
-              {pokemon.names.ja && (
-                <>
-                  {" "}
-                  /{" "}
-                  <Highlight
-                    tagName="mark"
-                    attribute="names.ja"
-                    hit={pokemon}
-                  />{" "}
-                  <Tag>
-                    <span>ja</span>
-                  </Tag>
-                </>
-              )}
-            </p> */}
-          <ul>
-            {pokemon.types.map(type => (
-              <li className="inline mr-2" key={type.name}>
-                <TypeBadgeIcon type={type.name} />
-              </li>
-            ))}
-          </ul>
 
-          {statRefinements && (
-            <ul>
-              {statRefinements.map(refinement => (
-                <li key={refinement.attribute}>
-                  <Tag>
-                    {getRefinementName(refinement.attribute.split(".")[1])}{" "}
-                    <strong>
-                      {getPropertyByPath(pokemon, refinement.attribute)}
-                    </strong>
-                  </Tag>
+            <div className="text-center text-xl italic text-gray-600 mb-6">
+              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />
+              {" - "}
+              <Highlight tagName="mark" attribute="names.ja" hit={pokemon} />
+            </div>
+
+            <ul className="absolute top-0 right-0 p-2">
+              {pokemon.types.map(type => (
+                <li className="mb-2" key={type.name}>
+                  <TypeBadgeIcon type={type.name} />
                 </li>
               ))}
             </ul>
-          )}
+
+            <ul>
+            {Object.keys(pokemon.stats).map(statName => (
+              <li key={statName} className="leading-normal text-xl text-gray-700">
+                <span>
+                {statName
+                  .replace(/([A-Z])/g, " $1")
+                  .replace(/^./, str => str.toUpperCase())
+                }
+                </span>
+                <span className="float-right">
+                  {pokemon.stats[statName]}
+                </span>
+              </li>
+            ))}
+            </ul>
+
+            {statRefinements && (
+              <ul>
+                {statRefinements.map(refinement => (
+                  <li key={refinement.attribute}>
+                    <Tag>
+                      {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                      <strong>
+                        {getPropertyByPath(pokemon, refinement.attribute)}
+                      </strong>
+                    </Tag>
+                  </li>
+                ))}
+              </ul>
+            )}
+            
           </div>
         </PokemonLink>
       </article>
