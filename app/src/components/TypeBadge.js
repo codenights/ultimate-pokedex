@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const TypeBadge = ({ type }) => (
   <span>
@@ -18,3 +19,10 @@ export const TypeBadge = ({ type }) => (
     `}</style>
   </span>
 );
+
+TypeBadge.propTypes = {
+  type: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired
+  })
+};

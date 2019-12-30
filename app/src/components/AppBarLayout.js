@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import { AppBar } from "./AppBar";
 
@@ -24,3 +25,7 @@ export const AppBarLayout = ({ children }) => (
     `}</style>
   </div>
 );
+
+AppBarLayout.propTypes = {
+  children: PropTypes.node.isRequired
+};

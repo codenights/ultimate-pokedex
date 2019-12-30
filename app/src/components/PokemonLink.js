@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Link from "next/link";
-import { Router } from "next/router";
 
 export const PokemonLink = ({ pokemonId, children }) => {
   return (
@@ -8,4 +8,12 @@ export const PokemonLink = ({ pokemonId, children }) => {
       <a>{children}</a>
     </Link>
   );
+};
+
+PokemonLink.propTypes = {
+  pokemonId: PropTypes.number.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };

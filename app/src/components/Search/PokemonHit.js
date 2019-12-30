@@ -1,7 +1,6 @@
 import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
 import { lighten, saturate } from "polished";
-import Link from "next/link";
 
 import { Tag } from "../Tag";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
@@ -78,7 +77,7 @@ export const PokemonHit = connectCurrentRefinements(
             <p>
               <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
               <Tag>
-                <span>fr</span>
+                fr
               </Tag>
               {pokemon.names.ja && (
                 <>
@@ -90,7 +89,7 @@ export const PokemonHit = connectCurrentRefinements(
                     hit={pokemon}
                   />{" "}
                   <Tag>
-                    <span>ja</span>
+                    ja
                   </Tag>
                 </>
               )}

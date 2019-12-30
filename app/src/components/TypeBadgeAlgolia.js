@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const COLORS_BY_TYPE = {
   poison: "#a59",
@@ -39,3 +40,7 @@ export const TypeBadgeAlgolia = ({ type }) => (
     `}</style>
   </span>
 );
+
+TypeBadgeAlgolia.propTypes = {
+  type: PropTypes.string.isRequired
+};

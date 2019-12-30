@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const Tag = ({ children }) => (
   <span>
@@ -15,3 +16,12 @@ export const Tag = ({ children }) => (
     `}</style>
   </span>
 );
+
+Tag.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};
