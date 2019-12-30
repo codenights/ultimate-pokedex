@@ -43,12 +43,12 @@ export const PokemonHit = connectCurrentRefinements(
     return (
       <article className="w-1/5 mt-24">
         <PokemonLink pokemonId={pokemon.id}>
-          <div
-            className={`relative p-6 m-2 bg-gray-900 rounded-lg`}
-          >
+          <div className={`card relative p-6 m-2 bg-gray-900 rounded-lg`}>
             <img className="-mt-32" src={spriteUrl} alt={pokemon.names.en} />
-            
-            <div className={`text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}>
+
+            <div
+              className={`text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}
+            >
               <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
               <span className="text-3xl text-gray-600">
                 <span className="ml-2 text-xl text-gray-700">#</span>
@@ -71,19 +71,19 @@ export const PokemonHit = connectCurrentRefinements(
             </ul>
 
             <ul>
-            {Object.keys(pokemon.stats).map(statName => (
-              <li key={statName} className="leading-normal text-xl text-gray-700">
-                <span>
-                {statName
-                  .replace(/([A-Z])/g, " $1")
-                  .replace(/^./, str => str.toUpperCase())
-                }
-                </span>
-                <span className="float-right">
-                  {pokemon.stats[statName]}
-                </span>
-              </li>
-            ))}
+              {Object.keys(pokemon.stats).map(statName => (
+                <li
+                  key={statName}
+                  className="leading-normal text-xl text-gray-700"
+                >
+                  <span>
+                    {statName
+                      .replace(/([A-Z])/g, " $1")
+                      .replace(/^./, str => str.toUpperCase())}
+                  </span>
+                  <span className="float-right">{pokemon.stats[statName]}</span>
+                </li>
+              ))}
             </ul>
 
             {statRefinements && (
@@ -100,9 +100,17 @@ export const PokemonHit = connectCurrentRefinements(
                 ))}
               </ul>
             )}
-            
           </div>
         </PokemonLink>
+        <style jsx>{`
+          .card {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5),
+              inset 1px 1px 2px rgba(100, 100, 100, 0.5),
+              inset -2px -2px 1px rgba(0, 0, 0, 0.2);
+            border: solid 1px rgba(0, 0, 0, 0.5);
+            background-image: linear-gradient(90deg, rgba(26, 32, 44, 0.8), rgba(26, 32, 44, 0.8)), linear-gradient(30deg, #1a202c 60%, var(--color-type-${pokemon.types[0].name.toLowerCase()}));
+          }
+        `}</style>
       </article>
     );
   }
