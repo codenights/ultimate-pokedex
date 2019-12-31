@@ -65,10 +65,6 @@ export const PokemonHit = connectCurrentRefinements(
                     attribute="names.en"
                     hit={pokemon}
                   />
-                  <span className="text-4xl text-black">
-                    <span className="ml-2 text-2xl">#</span>
-                    {pokemon.id}
-                  </span>
                 </div>
 
                 <div className="text-center whitespace-no-wrap text-xl italic text-gray-600 mb-6">
@@ -85,6 +81,12 @@ export const PokemonHit = connectCurrentRefinements(
                   />
                 </div>
               </div>
+
+              <div className="absolute pl-3 pt-2">
+                  <span className="text-3xl font-bold text-gray-900">
+                    {pokemon.id}
+                  </span>
+                </div>
 
               <ul className="absolute top-0 right-0 p-2">
                 {pokemon.types.map(type => (
@@ -113,8 +115,8 @@ export const PokemonHit = connectCurrentRefinements(
         </PokemonLink>
         <style jsx>{`
           .pokemon-name {
-            text-shadow: 0 0 20px var(--color-type-${pokemon.types[0].name.toLowerCase()}),
-            0 0 50px var(--color-type-${pokemon.types[0].name.toLowerCase()});
+            text-shadow: 0 0 24px var(--color-type-${pokemon.types[0].name.toLowerCase()}),
+            0 0 70px var(--color-type-${pokemon.types[0].name.toLowerCase()});
           }
           .card {
             background-image:
@@ -126,7 +128,7 @@ export const PokemonHit = connectCurrentRefinements(
               ),
               linear-gradient(
                 20deg,
-                #1a202c 60%,
+                #1a202c 55%,
                 var(--color-type-${pokemon.types[0].name.toLowerCase()})
               );
           }
