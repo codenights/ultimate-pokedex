@@ -135,10 +135,12 @@ export const PokemonHit = connectCurrentRefinements(
             text-shadow: 0 0 30px var(--color-type-${pokemon.types[0].name.toLowerCase()}), 0 0 60px var(--color-type-${pokemon.types[0].name.toLowerCase()});
           }
           .card {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5),
-              inset 1px 1px 2px rgba(100, 100, 100, 0.5),
-              inset -1px -1px 1px rgba(0, 0, 0, 0.2);
-            border: solid 1px rgba(0, 0, 0, 0.5);
+            box-shadow: 
+              0 0 3px rgba(0, 0, 0, 0.5),
+              0 5px 20px rgba(0, 0, 0, 0.5),
+              inset 1px 1px 2px rgba(255, 255, 255, 0.2),
+              inset -1px -1px 2px rgba(0, 0, 0, 0.5);
+
             background-image: linear-gradient(
                 0deg,
                 rgba(0, 0, 0, 0.3),
@@ -146,9 +148,8 @@ export const PokemonHit = connectCurrentRefinements(
               ),
               radial-gradient(
                 circle at 0%,
-                rgba(65, 75, 92, 0.7),
-                rgba(26, 32, 44, 0.2) 50%,
-                rgba(26, 32, 44, 0.1) 75%,
+                rgba(170, 170, 170, 0.8),
+                rgba(26, 32, 44, 0.3) 40%,
                 rgba(0, 0, 0, 0) 75%
               ),
               linear-gradient(

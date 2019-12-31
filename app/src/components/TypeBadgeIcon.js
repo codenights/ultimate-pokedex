@@ -8,7 +8,7 @@ export const TypeBadgeIcon = ({ type }) => (
 
     <style jsx>{`
           span {
-            box-shadow: 0 0 15px var(--color-type-${type.toLowerCase()});
+            box-shadow: 0 0 20px var(--color-type-${type.toLowerCase()});
           }
         `}</style>
   </span>

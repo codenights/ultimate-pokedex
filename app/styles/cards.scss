@@ -1,5 +1,11 @@
 * {
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+mark{
+    background: transparent;
+    color: white;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
 .card {
