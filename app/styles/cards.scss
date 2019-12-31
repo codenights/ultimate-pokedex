@@ -15,6 +15,11 @@ mark{
   transform-style: preserve-3d;
   background-size: 150% 150%;
   background-position: 25% 75%;
+  box-shadow: 
+  0 0 3px rgba(0, 0, 0, 0.5),
+  0 5px 20px rgba(0, 0, 0, 0.5),
+  inset 1px 1px 1px rgba(255, 255, 255, 0.2),
+  inset -1px -1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .dcard {
@@ -63,7 +68,7 @@ mark{
     top: 0%;
     &:hover ~ .card {
         transform: rotateY(-8deg) rotateX(5deg);
-        background-position: left top;
+        background-position: left bottom;
     }
   }
   &:nth-child(2) {
@@ -71,7 +76,7 @@ mark{
     top: 0%;
     &:hover ~ .card {
       transform: rotateY(0deg) rotateX(5deg);
-      background-position: center top;
+      background-position: center bottom;
     }
   }
   &:nth-child(3) {
@@ -79,7 +84,7 @@ mark{
     top: 0%;
     &:hover ~ .card {
       transform: rotateY(8deg) rotateX(5deg);
-      background-position: right top;
+      background-position: right bottom;
     }
   }
   &:nth-child(4) {
@@ -111,7 +116,7 @@ mark{
     top: 66.666666%;
     &:hover ~ .card {
       transform: rotateY(-8deg) rotateX(-5deg);
-      background-position: left bottom;
+      background-position: left top;
     }
   }
   &:nth-child(8) {
@@ -119,7 +124,7 @@ mark{
     top: 66.666666%;
     &:hover ~ .card {
       transform: rotateY(0deg) rotateX(-5deg);
-      background-position: center bottom;
+      background-position: center top;
     }
   }
   &:nth-child(9) {
@@ -127,7 +132,7 @@ mark{
     top: 66.666666%;
     &:hover ~ .card {
       transform: rotateY(8deg) rotateX(-5deg);
-      background-position: right bottom;
+      background-position: right top;
     }
   }
 }
