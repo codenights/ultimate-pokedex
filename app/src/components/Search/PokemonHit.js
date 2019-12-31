@@ -59,15 +59,15 @@ export const PokemonHit = connectCurrentRefinements(
 
               <div className="card-title">
                 <div
-                  className={`text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}
+                  className={`pokemon-name text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}
                 >
                   <Highlight
                     tagName="mark"
                     attribute="names.en"
                     hit={pokemon}
                   />
-                  <span className="text-3xl text-gray-700">
-                    <span className="ml-2 text-xl text-gray-800">#</span>
+                  <span className="text-4xl text-black">
+                    <span className="ml-2 text-2xl">#</span>
                     {pokemon.id}
                   </span>
                 </div>
@@ -131,6 +131,9 @@ export const PokemonHit = connectCurrentRefinements(
           </div>
         </PokemonLink>
         <style jsx>{`
+          .pokemon-name {
+            text-shadow: 0 0 30px var(--color-type-${pokemon.types[0].name.toLowerCase()}), 0 0 60px var(--color-type-${pokemon.types[0].name.toLowerCase()});
+          }
           .card {
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5),
               inset 1px 1px 2px rgba(100, 100, 100, 0.5),

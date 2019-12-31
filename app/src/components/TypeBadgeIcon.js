@@ -5,5 +5,11 @@ export const TypeBadgeIcon = ({ type }) => (
     <svg className="fill-current text-gray-900 inline align-text-bottom" width="14" viewBox="0 0 512 512">
       <use xlinkHref={`./icons/types/${type.toLowerCase()}.svg#${type.toLowerCase()}`}></use>
     </svg>
+
+    <style jsx>{`
+          span {
+            box-shadow: 0 0 15px var(--color-type-${type.toLowerCase()});
+          }
+        `}</style>
   </span>
 );
