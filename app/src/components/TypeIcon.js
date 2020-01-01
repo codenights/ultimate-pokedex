@@ -1,6 +1,6 @@
 import React from "react";
 
-export const TypeBadgeIcon = ({ type }) => (
+export const TypeIcon = ({ type }) => (
   <span
     className={`inline-block whitespace-no-wrap rounded-full text-center h-5 w-5 bg-type-${type.toLowerCase()}`}
   >

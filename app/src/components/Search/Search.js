@@ -47,7 +47,7 @@ export function Search({ searchClient, indexName }) {
         className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-1/5 lg:block xl:w-1/6"
         >
           <div
-            className="fixed top-16 h-full overflow-y-auto scrolling-touch p-8"
+            className="fixed lg:w-1/5 xl:w-1/6 top-16 w-1/5 h-full overflow-y-auto scrolling-touch p-8"
           >
             <div >
               <Panel

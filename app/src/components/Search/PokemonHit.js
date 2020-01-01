@@ -2,7 +2,7 @@ import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
 
 import { Tag } from "../Tag";
-import { TypeBadgeIcon } from "../TypeBadgeIcon";
+import { TypeIcon } from "../TypeIcon";
 import { useShiny } from "../ShinyMode";
 import { PokemonLink } from "../PokemonLink";
 
@@ -90,7 +90,7 @@ export const PokemonHit = connectCurrentRefinements(
               <ul className="absolute top-0 right-0 p-2">
                 {pokemon.types.map(type => (
                   <li className="mb-2" key={type.name}>
-                    <TypeBadgeIcon type={type.name} />
+                    <TypeIcon type={type.name} />
                   </li>
                 ))}
               </ul>

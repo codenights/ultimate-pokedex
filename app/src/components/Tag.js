@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 export const Tag = ({ children }) => (
-  <span className="text-sm rounded p-2 bg-gray-900 text-gray-600">
+  <span className="text-sm text-gray-600">
     {children}
   </span>
 );
