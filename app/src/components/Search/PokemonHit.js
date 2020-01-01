@@ -131,6 +131,9 @@ export const PokemonHit = connectCurrentRefinements(
                 var(--color-type-${pokemon.types[0].name.toLowerCase()})
               );
           }
+          .card::after {
+            background-color: var(--color-type-${pokemon.types[0].name.toLowerCase()});
+          }
         `}</style>
       </div>
     );

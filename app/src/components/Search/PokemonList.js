@@ -12,7 +12,7 @@ export const PokemonList = connectInfiniteHits(
     });
 
     return (
-      <div className="flex flex-wrap p-4 pl-0">
+      <div className="flex flex-wrap p-4 pl-0 pb-16">
         {pokemons.map(pokemon => (
           <PokemonHit key={pokemon.id} pokemon={pokemon} />
         ))}

@@ -54,11 +54,8 @@ export function Search({ searchClient, indexName }) {
                 className="pb-12"
                 header={
                   <div>
-                    <div className="inline-block text-gray-600 font-semibold uppercase text-xl mb-6">
-                      Types
-                    </div>
                     <ClearRefinements
-                      className="inline-block bg-gray-900 text-gray-600 text-xl p-2 rounded ml-2"
+                      className="inline-block bg-gray-600 text-gray-900 text-sm px-2 rounded"
                       transformItems={items =>
                         items.filter(({ attribute }) =>
                           attribute.startsWith("types.")
@@ -76,19 +73,13 @@ export function Search({ searchClient, indexName }) {
               <Panel
                 header={
                   <div>
-                    <div className="inline-block text-gray-600 font-semibold uppercase text-xl mb-4">
-                      Stats
-                    </div>
                     <ClearRefinements
-                      className="inline-block bg-gray-900 text-gray-600 text-xl p-2 rounded ml-2"
+                      className="inline-block bg-gray-600 text-gray-900 text-sm px-2 rounded"
                       transformItems={items =>
                         items.filter(({ attribute }) =>
                           attribute.startsWith("stats.")
                         )
                       }
-                      cssClasses={{
-                        button: ["text-white", "bg-gray-900"]
-                      }}
                       translations={{
                         reset: "Reset"
                       }}
@@ -96,17 +87,17 @@ export function Search({ searchClient, indexName }) {
                   </div>
                 }
               >
-                <div className="text-gray-400 text-md">HP</div>
+                <div className="text-gray-400">HP</div>
                 <RangeSlider attribute="stats.hp" />
-                <div className="text-gray-400 text-xl">Attack</div>
+                <div className="text-gray-400">Attack</div>
                 <RangeSlider attribute="stats.attack" />
-                <div className="text-gray-400 text-xl">Defense</div>
+                <div className="text-gray-400">Defense</div>
                 <RangeSlider attribute="stats.defense" />
-                <div className="text-gray-400 text-xl">Special Attack</div>
+                <div className="text-gray-400">Special Attack</div>
                 <RangeSlider attribute="stats.specialAttack" />
-                <div className="text-gray-400 text-xl">Special Defense</div>
+                <div className="text-gray-400">Special Defense</div>
                 <RangeSlider attribute="stats.specialDefense" />
-                <div className="text-gray-400 text-xl">Speed</div>
+                <div className="text-gray-400">Speed</div>
                 <RangeSlider attribute="stats.speed" />
               </Panel>
             </div>
