@@ -2,6 +2,7 @@
   position: relative;
   display: block;
   perspective: 500px;
+  height: 160px;
   * {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
@@ -38,12 +39,12 @@
       text-align: center;
     }
   }
-  .card-title {
+  .title {
     position: absolute;
     top: 75%;
     left: 50%;
     transform-origin: center;
-    transform: scale(0.9) translateY(-50%) translateX(-50%) translateZ(50px);
+    transform: scale(0.9) translateY(-50%) translateX(-50%) translateZ(40px);
     text-align: center;
   }
   .trigger {

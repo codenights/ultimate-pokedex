@@ -205,12 +205,6 @@ class UltimatePokedexApp extends App {
             color: #373737;
           }
 
-          h2 {
-            font-size: 2rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-          }
-
           .visually-hidden {
             position: absolute !important;
             height: 1px;

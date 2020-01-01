@@ -10,7 +10,7 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
   return (
     <ul>
       {items.map(type => (
-        <li key={type.label}>
+        <li className="mb-4 whitespace-no-wrap" key={type.label}>
           <label htmlFor={type.label}>
             <input
               className="visually-hidden"
@@ -20,7 +20,7 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
               onChange={() => refine(type.value)}
             />
 
-            <span>
+            <span className="mr-4">
               <TypeBadgeAlgolia type={type.label} />
             </span>
           </label>
@@ -28,29 +28,6 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
           <Tag>{type.count}</Tag>
         </li>
       ))}
-
-      <style jsx>{`
-        li {
-          padding-bottom: 10px;
-        }
-
-        label {
-          cursor: pointer;
-          margin-right: 5px;
-        }
-
-        input:focus + span {
-          outline: 5px auto -webkit-focus-ring-color;
-        }
-
-        input + span {
-          opacity: ${hasRefined ? 0.6 : 1};
-        }
-
-        input:checked + span {
-          opacity: 1;
-        }
-      `}</style>
     </ul>
   );
 });

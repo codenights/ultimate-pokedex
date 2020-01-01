@@ -4,25 +4,9 @@ import PropTypes from "prop-types";
 import { AppBar } from "./AppBar";
 
 export const AppBarLayout = ({ children }) => (
-  <div>
+  <div className="bg-gray-800 h-screen w-full overflow-y-auto pt-16">
     <AppBar />
-
     {children}
-
-    <style jsx>{`
-      div {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow-y: hidden;
-      }
-
-      div > :global(:last-child) {
-        flex: 1;
-        height: 100%;
-        overflow-y: scroll;
-      }
-    `}</style>
   </div>
 );
 

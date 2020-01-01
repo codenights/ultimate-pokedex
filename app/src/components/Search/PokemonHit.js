@@ -1,7 +1,5 @@
 import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
-import { lighten, saturate } from "polished";
-import Link from "next/link";
 
 import { Tag } from "../Tag";
 import { TypeBadgeIcon } from "../TypeBadgeIcon";
@@ -40,8 +38,9 @@ export const PokemonHit = connectCurrentRefinements(
     );
 
     return (
-      <div className="dcard w-1/5 mt-24">
+      <div className="dcard w-1/2 md:w-1/4 xl:w-1/5 mt-24">
         <PokemonLink pokemonId={pokemon.id}>
+        
           <div className="trigger"></div>
           <div className="trigger"></div>
           <div className="trigger"></div>
@@ -52,11 +51,11 @@ export const PokemonHit = connectCurrentRefinements(
           <div className="trigger"></div>
           <div className="trigger"></div>
 
-          <div className="card p-6 m-2 bg-gray-900 rounded-lg">
+          <div className="card p-6 m-3 bg-gray-900 rounded-lg">
             <div className="frame">
               <img className="-mt-32" src={spriteUrl} alt={pokemon.names.en} />
 
-              <div className="card-title">
+              <div className="title">
                 <div
                   className={`pokemon-name text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}
                 >
