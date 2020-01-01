@@ -16,7 +16,7 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
               checked={type.isRefined}
               onChange={() => refine(type.value)}
             />
-            <TypeBadgeAlgolia type={type.label} count={type.count} />
+            <TypeBadgeAlgolia active={type.isRefined} type={type.label} count={type.count} />
           </label>
         </li>
       ))}
