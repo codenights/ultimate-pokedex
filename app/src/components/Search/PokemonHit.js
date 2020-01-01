@@ -51,13 +51,13 @@ export const PokemonHit = connectCurrentRefinements(
           <div className="trigger"></div>
           <div className="trigger"></div>
 
-          <div className="card p-6 m-3 bg-gray-900 rounded-lg">
+          <div className="card p-6 mx-3 bg-gray-900 rounded-lg">
             <div className="frame">
-              <img className="-mt-32" src={spriteUrl} alt={pokemon.names.en} />
+              <img className="-mt-20" src={spriteUrl} alt={pokemon.names.en} />
 
               <div className="title">
                 <div
-                  className={`pokemon-name text-center text-4xl mb-2 text-type-${pokemon.types[0].name.toLowerCase()}`}
+                  className={`pokemon-name text-center text-2xl text-type-${pokemon.types[0].name.toLowerCase()}`}
                 >
                   <Highlight
                     tagName="mark"
@@ -66,7 +66,7 @@ export const PokemonHit = connectCurrentRefinements(
                   />
                 </div>
 
-                <div className="text-center whitespace-no-wrap text-xl italic text-gray-600 mb-6">
+                <div className="text-center whitespace-no-wrap text-xs italic mt-0 mb-6 text-gray-600">
                   <Highlight
                     tagName="mark"
                     attribute="names.fr"
@@ -81,8 +81,8 @@ export const PokemonHit = connectCurrentRefinements(
                 </div>
               </div>
 
-              <div className="absolute pl-3 pt-2">
-                  <span className="text-3xl font-bold text-gray-900">
+              <div className="absolute pl-2 pt-1">
+                  <span className="text-xl font-bold text-gray-900">
                     {pokemon.id}
                   </span>
                 </div>

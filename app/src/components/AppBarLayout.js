@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { AppBar } from "./AppBar";
 
 export const AppBarLayout = ({ children }) => (
-  <div className="bg-gray-800 h-screen w-full overflow-y-auto pt-16">
+  <div className="w-full pt-12">
     <AppBar />
     {children}
   </div>

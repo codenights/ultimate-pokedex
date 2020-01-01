@@ -42,11 +42,12 @@ export function Search({ searchClient, indexName }) {
       createURL={getUrlFromState}
     >
       <Configure hitsPerPage={25} />
-      <div className="flex">
-        <aside className="hidden fixed pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/5 lg:block lg:border-0 xl:w-1/6">
+      <div className="flex w-h-screen overflow-y-auto scrolling-touch">
+        <aside
+        className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-1/5 lg:block xl:w-1/6"
+        >
           <div
-            id="navWrapper"
-            className="h-full overflow-y-auto scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-0 p-10"
+            className="fixed top-16 h-full overflow-y-auto scrolling-touch p-8"
           >
             <div >
               <Panel
@@ -95,7 +96,7 @@ export function Search({ searchClient, indexName }) {
                   </div>
                 }
               >
-                <div className="text-gray-400 text-xl">HP</div>
+                <div className="text-gray-400 text-md">HP</div>
                 <RangeSlider attribute="stats.hp" />
                 <div className="text-gray-400 text-xl">Attack</div>
                 <RangeSlider attribute="stats.attack" />
@@ -111,7 +112,7 @@ export function Search({ searchClient, indexName }) {
             </div>
           </div>
         </aside>
-        <main className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
+        <main className="w-full h-full overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
           <PokemonList />
         </main>
       </div>
@@ -143,6 +144,7 @@ export function Search({ searchClient, indexName }) {
         }
         .ais-SearchBox-reset[hidden] {
           display: none;
+        }
         
       `}</style>
     </InstantSearch>

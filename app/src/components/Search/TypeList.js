@@ -10,7 +10,7 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
   return (
     <ul>
       {items.map(type => (
-        <li className="mb-4 whitespace-no-wrap" key={type.label}>
+        <li className="mb-2 whitespace-no-wrap" key={type.label}>
           <label htmlFor={type.label}>
             <input
               className="visually-hidden"

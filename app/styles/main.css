@@ -1,7 +1,24 @@
-@import './variables.css';
+@import "./variables.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import './cards.scss';
+@import "./cards.scss";
+
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background: rgb(26, 32, 44);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap; /* added line */
+}

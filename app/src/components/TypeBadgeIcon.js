@@ -2,10 +2,10 @@ import React from "react";
 
 export const TypeBadgeIcon = ({ type }) => (
   <span
-    className={`inline-block whitespace-no-wrap rounded-full text-center h-8 w-8 bg-type-${type.toLowerCase()}`}
+    className={`inline-block whitespace-no-wrap rounded-full text-center h-5 w-5 bg-type-${type.toLowerCase()}`}
   >
     <svg
-      className="fill-current text-gray-900 inline align-text-bottom"
+      className="fill-current text-gray-900 inline align-baseline"
       width="14"
       viewBox="0 0 512 512"
     >
