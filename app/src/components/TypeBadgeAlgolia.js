@@ -14,9 +14,8 @@ export const TypeBadgeAlgolia = ({ type, count, active }) => (
     <style jsx>{`
       .tag {
         box-shadow:
-            1px 2px 3px rgba(0, 0, 0, 0.3),
-           inset 1px 1px 1px rgba(255, 255, 255, 0.1);
-
+          1px 2px 3px rgba(0, 0, 0, 0.3),
+          inset 1px 1px 1px rgba(255, 255, 255, 0.1);
         background-image: linear-gradient(
           -40deg,
           rgba(75, 79, 92, 0.3) 15%,
@@ -30,12 +29,11 @@ export const TypeBadgeAlgolia = ({ type, count, active }) => (
       }
       .tag.active {
         box-shadow:
-            1px 2px 3px rgba(0, 0, 0, 0.3),
-           inset 1px 1px 1px rgba(255, 255, 255, 0.1);
-
+          1px 2px 3px rgba(0, 0, 0, 0.3),
+          inset 1px 1px 1px rgba(255, 255, 255, 0.1);
         background-image: linear-gradient(
-          90deg,
-          rgba(75, 79, 92, 0.3) 35%,
+          45deg,
+          rgba(75, 79, 92, 0.3) 45%,
           var(--color-type-${type.toLowerCase()})
         );
       }
@@ -43,18 +41,18 @@ export const TypeBadgeAlgolia = ({ type, count, active }) => (
         color: var(--color-type-${type.toLowerCase()});
         text-shadow: 0 0 12px var(--color-type-${type.toLowerCase()});
       }
-      .active .type-count {
+      .tag:hover .type-count {
+        color: rgb(163, 188, 210);
+      }
+      .tag.active .type-count {
         color: rgb(25, 29, 42);
         font-weight: 600;
       }
       .tag:hover {
         cursor: pointer;
         box-shadow:
-            inset 0 0 2px 0 var(--color-type-${type.toLowerCase()}),
-           inset 1px 1px 20px var(--color-type-${type.toLowerCase()});
-      }
-      .tag:hover .type-count {
-        color: rgb(163, 188, 210);
+          inset 0 0 2px 0 var(--color-type-${type.toLowerCase()}),
+          inset 0 0 10px var(--color-type-${type.toLowerCase()});
       }
     `}</style>
   </span>
