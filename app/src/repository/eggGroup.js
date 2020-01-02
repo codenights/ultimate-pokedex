@@ -1,8 +1,15 @@
 import DataLoader from "dataloader";
-import { mapManytoEntities } from "../utils/dataloader";
+import { mapManytoEntities, mapRowsToEntities } from "../utils/dataloader";
 
 export function EggGroupRepository(knex) {
   return {
+    findEggGroupById: new DataLoader(
+      eggGroupIds =>
+        console.log("findEggGroupById:", eggGroupIds) ||
+        knex("egg_group")
+          .whereIn("id", eggGroupIds)
+          .then(mapRowsToEntities(eggGroupIds, "id"))
+    ),
     findEggGroupByPokemonId: new DataLoader(
       pokemonIds =>
         console.log("findEggGroupByPokemonId:", pokemonIds) ||

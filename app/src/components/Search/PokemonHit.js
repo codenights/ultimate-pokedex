@@ -76,9 +76,7 @@ export const PokemonHit = connectCurrentRefinements(
 
             <p>
               <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
-              <Tag>
-                fr
-              </Tag>
+              <Tag>fr</Tag>
               {pokemon.names.ja && (
                 <>
                   {" "}
@@ -88,9 +86,7 @@ export const PokemonHit = connectCurrentRefinements(
                     attribute="names.ja"
                     hit={pokemon}
                   />{" "}
-                  <Tag>
-                    ja
-                  </Tag>
+                  <Tag>ja</Tag>
                 </>
               )}
             </p>

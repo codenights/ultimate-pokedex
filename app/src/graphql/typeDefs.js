@@ -126,5 +126,7 @@ export const typeDefs = gql`
     ability(id: Int!): Ability!
 
     move(id: Int!): Move!
+
+    eggGroup(id: Int!): EggGroup!
   }
 `;
