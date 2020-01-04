@@ -7,31 +7,18 @@ import { GeneralInfo } from "./GeneralInfo";
 import { AlternateForms } from "./AlternateForms";
 
 export const PokemonDetails = ({ pokemon }) => (
-  <div>
-    <GeneralInfo pokemon={pokemon} />
-
-    <AlternateForms pokemon={pokemon} />
-
-    <Stats pokemon={pokemon} />
-
-    <Abilities pokemon={pokemon} />
-
-    <Moves pokemon={pokemon} />
-
-    <PokedexEntries pokemon={pokemon} />
-
-    <style jsx>{`
-      div {
-        box-sizing: border-box;
-        padding: 20px;
-      }
-
-      @media (min-width: 800px) {
-        div {
-          height: 100%;
-          overflow-y: auto;
-        }
-      }
-    `}</style>
+  <div className="flex flex-wrap w-full px-6 text-gray-600">
+    <div className="w-1/2">
+      <GeneralInfo pokemon={pokemon} />
+      <AlternateForms pokemon={pokemon} />
+      <Abilities pokemon={pokemon} />
+    </div>
+    <div className="w-1/2">
+      <Stats pokemon={pokemon} />
+    </div>
+    <div className="w-full">
+      <Moves pokemon={pokemon} />
+      <PokedexEntries pokemon={pokemon} />
+    </div>
   </div>
 );

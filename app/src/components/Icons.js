@@ -1,6 +1,7 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-const Icons = {
+const icons = {
   Bug: props => (
     <svg width={512} height={512} fill="white" viewBox="0 0 512 512" {...props}>
       <path
@@ -12,7 +13,7 @@ const Icons = {
     </svg>
   ),
   Dark: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="dark"
         fillRule="evenodd"
@@ -22,7 +23,7 @@ const Icons = {
     </svg>
   ),
   Dragon: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="dragon"
         fillRule="evenodd"
@@ -32,7 +33,7 @@ const Icons = {
     </svg>
   ),
   Electric: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="electric"
         fillRule="evenodd"
@@ -42,7 +43,7 @@ const Icons = {
     </svg>
   ),
   Fire: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="fire"
         fillRule="evenodd"
@@ -52,7 +53,7 @@ const Icons = {
     </svg>
   ),
   Fighting: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="fighting"
         fillRule="evenodd"
@@ -62,7 +63,7 @@ const Icons = {
     </svg>
   ),
   Fairy: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="fairy"
         fillRule="evenodd"
@@ -72,7 +73,7 @@ const Icons = {
     </svg>
   ),
   Flying: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="flying"
         fillRule="evenodd"
@@ -82,7 +83,7 @@ const Icons = {
     </svg>
   ),
   Ghost: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="ghost"
         fillRule="evenodd"
@@ -92,7 +93,7 @@ const Icons = {
     </svg>
   ),
   Grass: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="grass"
         fillRule="evenodd"
@@ -102,7 +103,7 @@ const Icons = {
     </svg>
   ),
   Poison: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="poison"
         fillRule="evenodd"
@@ -112,7 +113,7 @@ const Icons = {
     </svg>
   ),
   Steel: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="steel"
         fillRule="evenodd"
@@ -122,7 +123,7 @@ const Icons = {
     </svg>
   ),
   Ground: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="ground"
         fillRule="evenodd"
@@ -132,7 +133,7 @@ const Icons = {
     </svg>
   ),
   Rock: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="rock"
         fillRule="evenodd"
@@ -142,7 +143,7 @@ const Icons = {
     </svg>
   ),
   Normal: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="normal"
         fillRule="evenodd"
@@ -152,14 +153,14 @@ const Icons = {
     </svg>
   ),
   Ice: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <g id="ice" fillRule="evenodd" clipRule="evenodd">
         <path d="M384.304 39.042l1.575 138.35-120.67 57.927-1.488-130.629 120.583-65.648zM505.269 257.047l-119.455 68.327-119.526-68.435 119.464-62.752 119.517 62.86zM245.04 257.047l-119.455 68.327L6.059 256.939l119.464-62.752 119.517 62.86zM124.243 38.475l123.986 61.406-3.17 133.816-117.066-57.978-3.75-137.244zM387.678 473.525l-123.986-61.406 3.17-133.817 117.066 57.979 3.75 137.244zM128.525 474.77l-1.576-138.35 120.671-57.927 1.488 130.628-120.583 65.649z" />
       </g>
     </svg>
   ),
   Psychic: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="psychic"
         fillRule="evenodd"
@@ -169,7 +170,7 @@ const Icons = {
     </svg>
   ),
   Water: props => (
-    <svg width={512} height={512} fill="none" viewBox="0 0 512 512" {...props}>
+    <svg width={512} height={512}  viewBox="0 0 512 512" {...props}>
       <path
         id="water"
         fillRule="evenodd"
@@ -177,7 +178,90 @@ const Icons = {
         clipRule="evenodd"
       />
     </svg>
+  ),
+  status: props => (
+    <svg width={108} height={109} viewBox="0 0 108 109" {...props}>
+      <g
+        id="status"
+        
+        fillRule="evenodd"
+        stroke="none"
+      >
+        <g id="moves-categories" transform="translate(-51 -228)">
+          <path
+            d="M105 336.57c-29.823 0-54-24.176-54-54 0-29.823 24.177-54 54-54s54 24.177 54 54c0 29.824-24.177 54-54 54zm7.792-12.36c20.061-3.3 35.365-20.722 35.365-41.718 0-23.351-18.93-42.281-42.282-42.281h-.391c-11.676 0-21.14 9.465-21.14 21.14 0 11.676 9.464 21.141 21.14 21.141.13 0 .261 0 .391-.003v.011c.195-.005.391-.008.588-.008 11.783 0 21.336 9.553 21.336 21.337 0 9.58-6.314 17.685-15.007 20.382z"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
+  special: props => (
+    <svg width={109} height={109} viewBox="0 0 109 109" {...props}>
+      <g
+        
+        fillRule="evenodd"
+      >
+        <g id="moves-categories" transform="translate(-349 -228)">
+          <path
+            id="special"
+            d="M403.93 336.57c-29.824 0-54-24.176-54-54 0-29.823 24.176-54 54-54 29.823 0 54 24.177 54 54 0 29.824-24.177 54-54 54zm0-13c22.643 0 41-18.356 41-41 0-22.643-18.357-41-41-41-22.644 0-41 18.357-41 41 0 22.644 18.356 41 41 41zm0-11c-16.569 0-30-13.431-30-30 0-16.568 13.431-30 30-30 16.568 0 30 13.432 30 30 0 16.569-13.432 30-30 30zm0-9c11.598 0 21-9.402 21-21s-9.402-21-21-21-21 9.402-21 21 9.402 21 21 21zm0-9c-6.628 0-12-5.372-12-12 0-6.627 5.372-12 12-12 6.627 0 12 5.373 12 12 0 6.628-5.373 12-12 12z"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
+  physical: props => (
+    <svg width={109} height={109} viewBox="0 0 109 109" {...props}>
+      <g
+        id="physical"
+        
+        fillRule="evenodd"
+      >
+        <g id="moves-categories" transform="translate(-203 -228)">
+          <path
+            d="M257.570312 306.044643L236.905407 332.459807 240.971454 299.169171 207.680818 303.235218 234.095982 282.570313 207.680818 261.905407 240.971454 265.971454 236.905407 232.680818 257.570312 259.095982 278.235218 232.680818 274.169171 265.971454 307.459807 261.905407 281.044643 282.570313 307.459807 303.235218 274.169171 299.169171 278.235218 332.459807z"
+            transform="rotate(23 257.57 282.57)"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
+  female: props => (
+    <svg width={77} height={107} viewBox="0 0 77 107" {...props}>
+      <g
+        id="gender-female"
+        
+        fillRule="evenodd"
+      >
+        <g transform="translate(-218 -385)">
+          <path
+            id="female"
+            d="M262.293 460.781v8.804h12.584v12h-12.584v10.416h-12v-10.416h-13.416v-12h13.416v-8.87a37.827 37.827 0 01-20.663-10.622c-14.84-14.84-14.84-38.9 0-53.74 14.84-14.84 38.9-14.84 53.74 0 14.84 14.84 14.84 38.9 0 53.74a37.83 37.83 0 01-21.077 10.688zm-22.764-54.529c-9.372 9.373-9.372 24.569 0 33.941 9.373 9.373 24.569 9.373 33.942 0 9.372-9.372 9.372-24.568 0-33.94-9.373-9.373-24.569-9.373-33.942 0z"
+          />
+        </g>
+      </g>
+    </svg>
+  ),
+  male: props => (
+    <svg width={96} height={95} viewBox="0 0 96 95" {...props}>
+      <g
+        id="gender-male"
+        
+        fillRule="evenodd"
+      >
+        <g transform="translate(-56 -393)">
+          <path
+            id="male"
+            d="M124.832 426.121a37.834 37.834 0 017.826 23.103c0 20.986-17.013 38-38 38s-38-17.014-38-38c0-20.987 17.013-38 38-38 8.328 0 16.03 2.679 22.292 7.222l16.595-15.594h-17.203V393h35v35h-9.852v-17.537l-16.658 15.658zm-30.174 47.103c13.255 0 24-10.746 24-24 0-13.255-10.745-24-24-24s-24 10.745-24 24c0 13.254 10.745 24 24 24z"
+          />
+        </g>
+      </g>
+    </svg>
   )
 };
 
-export const TypeIcons = props => Icons[props.icon](props);
+export const Icons = props => icons[props.icon](props);
+
+Icons.propTypes = {
+  icon: PropTypes.string.isRequired
+};

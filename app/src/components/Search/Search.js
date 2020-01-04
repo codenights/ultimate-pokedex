@@ -2,7 +2,6 @@ import React from "react";
 import {
   InstantSearch,
   Panel,
-  SearchBox,
   Configure,
   ClearRefinements
 } from "react-instantsearch-dom";

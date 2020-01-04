@@ -13,49 +13,34 @@ const decimeterToFeet = amount => (amount * 0.328084).toFixed(2);
 
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
-    <h2>About {pokemon.names.en}</h2>
+    <h2 className="text-2xl text-gray-500">About</h2>
 
-    <dl>
-      <dt>Weight</dt>
-      <dd>
+    <dl className="flex flex-wrap">
+      <dt className="w-4/12">Weight</dt>
+      <dd className="w-1/2 text-gray-400">
         {hectogramToKilogram(pokemon.weight)}kg (
         {hectogramToPound(pokemon.weight)}lbs)
       </dd>
 
-      <dt>Height</dt>
-      <dd>
+      <dt  className="w-4/12">Height</dt>
+      <dd  className="w-1/2 text-gray-400">
         {decimeterToMeter(pokemon.height)}m ({decimeterToFeet(pokemon.height)}')
       </dd>
 
-      <dt>Base Hapiness</dt>
-      <dd>{pokemon.baseHappiness}</dd>
+      <dt  className="w-4/12">Base Hapiness</dt>
+      <dd  className="w-1/2 text-gray-400">{pokemon.baseHappiness}</dd>
 
-      <dt>Capture Rate</dt>
-      <dd>{pokemon.captureRate}</dd>
+      <dt  className="w-4/12">Capture Rate</dt>
+      <dd  className="w-1/2 text-gray-400">{pokemon.captureRate}</dd>
 
-      <dt>Gender rate</dt>
-      <dd>
+      <dt  className="w-4/12">Gender rate</dt>
+      <dd  className="w-1/2 text-gray-400">
         <GenderRate pokemon={pokemon} />
       </dd>
 
-      <dt>Egg groups</dt>
-      <dd>{pokemon.eggGroups.map(x => x.name).join(", ")}</dd>
+      <dt  className="w-4/12">Egg groups</dt>
+      <dd  className="w-1/2 text-gray-400">{pokemon.eggGroups.map(x => x.name).join(", ")}</dd>
     </dl>
 
-    <style jsx>{`
-      dl {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 10px;
-      }
-
-      dt {
-        opacity: 0.75;
-      }
-
-      dd {
-        font-weight: bold;
-      }
-    `}</style>
   </Section>
 );

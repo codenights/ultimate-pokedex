@@ -43,7 +43,7 @@ const getOverallColor = stats => {
 
 export const Stats = ({ pokemon }) => (
   <Section style={{ height: 400 }}>
-    <h2>Statistics</h2>
+    <h2 className="text-2xl text-gray-500">Stats</h2>
 
     <ResponsiveRadar
       data={getDataFromPokemon(pokemon)}
@@ -54,30 +54,23 @@ export const Stats = ({ pokemon }) => (
       borderWidth={2}
       margin={{ top: 50, bottom: 80, left: 100, right: 100 }}
       gridLevels={5}
-      gridShape="circular"
-      gridLabelOffset={36}
+      gridShape="linear"
+      gridLabelOffset={10}
       enableDots={true}
-      dotSize={10}
-      dotBorderWidth={2}
+      dotSize={8}
+      dotBorderWidth={0}
+      borderWidth={0}
       enableDotLabel={true}
       dotLabel="value"
       dotLabelYOffset={-12}
       colors={() => getOverallColor(pokemon.stats)}
-      fillOpacity={0.25}
-      blendMode="multiply"
+      fillOpacity={0.2}
       animate={true}
       motionStiffness={90}
       motionDamping={15}
       isInteractive={false}
       dotColor={getDotColor}
-      dotBorderColor="rgba(0, 0, 0, .3)"
-      borderColor="rgba(0, 0, 0, .3)"
     />
 
-    <style jsx>{`
-      section {
-        padding-bottom: 40px;
-      }
-    `}</style>
   </Section>
 );

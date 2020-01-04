@@ -19,7 +19,12 @@ module.exports = {
           'type-steel': 'rgb(179, 179, 195)',
           'type-fairy': 'rgb(240, 163, 240)',
           'type-ghost': 'rgb(113, 113, 195)',
-          'type-normal': 'rgb(179, 179, 163)'
+          'type-normal': 'rgb(179, 179, 163)',
+          'gender-male': 'rgb(50, 115, 220)',
+          'gender-female': 'rgb(255, 107, 206)',
+          'move-category-status': 'rgb(221, 221, 221)',
+          'move-category-physical': 'rgb(255, 242, 111)',
+          'move-category-special': 'rgb(156, 229, 229)'
         }
       }
     },

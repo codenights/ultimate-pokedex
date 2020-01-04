@@ -11,16 +11,8 @@ const Evolutions = ({ evolutions }) => (
 );
 
 export const EvolutionChain = ({ pokemon }) => (
-  <div>
-    <style jsx>{`
-      div {
-        display: flex;
-        align-items: center;
-      }
-    `}</style>
-
+  <div className="flex justify-center">
     <PokemonPreview pokemon={pokemon} />
-
     {pokemon.evolutions && <Evolutions evolutions={pokemon.evolutions} />}
   </div>
 );

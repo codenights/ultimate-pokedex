@@ -40,30 +40,12 @@ const PokemonPage = ({ pokemon, statusCode }) => {
 
   return (
     <AppBarLayout>
-      <main>
+      <main className="flex w-h-screen overflow-y-auto scrolling-touch">
         <Head>
           <title>{pokemon.names.en} | Ultimate Pokedex</title>
         </Head>
-
         <PokemonOverview pokemon={pokemon} />
-
         <PokemonDetails pokemon={pokemon} />
-
-        <style jsx>{`
-          main {
-            overflow-y: auto;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 20px;
-          }
-
-          @media (min-width: 800px) {
-            main {
-              overflow: hidden;
-              grid-template-columns: 1fr 2fr;
-            }
-          }
-        `}</style>
       </main>
     </AppBarLayout>
   );
