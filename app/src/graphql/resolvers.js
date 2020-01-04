@@ -12,7 +12,7 @@ import { PokemonAbilityResolver } from "./resolvers/pokemonAbility";
 import { VersionResolver } from "./resolvers/version";
 import { PokemonResolver } from "./resolvers/pokemon";
 import { PokemonStatsResolver } from "./resolvers/pokemonStats";
-import {QueryResolver} from "./resolvers/query";
+import { QueryResolver } from "./resolvers/query";
 
 export const resolvers = {
   Query: QueryResolver,
