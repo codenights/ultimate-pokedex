@@ -36,6 +36,8 @@ export function Search({ searchClient, indexName }) {
   React.useEffect(() => {
     router.beforePopState(({ url }) => {
       setSearchState(getStateFromUrl(url));
+
+      return true;
     });
   }, []);
 
