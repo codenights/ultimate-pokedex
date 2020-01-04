@@ -53,7 +53,7 @@ export const Moves = ({ pokemon }) => {
       </header>
       <table className="table-auto">
         <thead>
-          <tr className="border border-gray-800 text-sm text-gray-400">
+          <tr className="border-b border-gray-800 text-sm text-gray-400">
             <th className="w-3/12 font-normal">Move</th>
             <th className="w-2/12 py-2 font-normal">Type</th>
             <th className="w-2/12 py-2 font-normal">Cat.</th>
@@ -63,24 +63,24 @@ export const Moves = ({ pokemon }) => {
             <th className="w-2/12 py-2 font-normal">Learn</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-gray-600">
           {movesByVersionGroup.map(({ move, learn }) => (
             <tr key={move.id}>
-              <td className="border border-gray-800 px-4 py-1">
+              <td className="border-t border-gray-800 px-4 py-1">
                 <Link href="/move/[moveId]" as={`/move/${move.id}`}>
                   <a className="text-gray-400">{move.name}</a>
                 </Link>
               </td>
-              <td className="border border-gray-800 px-4 py-1">
+              <td className="border-t border-gray-800 px-4 py-1">
                 <TypeBadge type={move.type} />
               </td>
-              <td className="border border-gray-800 px-4 py-1">
+              <td className="border-t border-gray-800 px-4 py-1">
                 <MoveCategoryBadge category={move.damageClass} />
               </td>
-              <td className="border border-gray-800 px-4 py-1">{move.power}</td>
-              <td className="border border-gray-800 px-4 py-1">{move.pp}</td>
-              <td className="border border-gray-800 px-4 py-1">{move.accuracy}</td>
-              <td className="border border-gray-800 px-4 py-1">
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.power}</td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.pp}</td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.accuracy}</td>
+              <td className="border-t border-gray-800 px-4 py-1">
                 {learn.method}{" "}
                 {learn.method === "level-up" && <span>({learn.level})</span>}
               </td>

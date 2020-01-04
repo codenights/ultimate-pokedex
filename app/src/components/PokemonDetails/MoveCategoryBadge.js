@@ -6,7 +6,7 @@ export const MoveCategoryBadge = ({ category }) => (
   <div className={`whitespace-no-wrap rounded-full text-center h-5 w-5 text-move-category-${category}`}>
     <Icons
         icon={category}
-        className="fill-current inline align-baseline mr-2"
+        className="fill-current inline mr-2"
         width="16"
         height="16"
       />
