@@ -11,7 +11,7 @@ export const PokemonPreview = ({ pokemon }) => {
     <div className="flex">
       <PokemonLink pokemonId={pokemon.id}>
         <img src={spriteUrl} />
-        <span>{pokemon.names.en}</span>
+        <span className="font-pokemon">{pokemon.names.en}</span>
       </PokemonLink>
     </div>
   );

@@ -11,13 +11,5 @@ export const MoveDetail = ({ move }) => (
 
     <PokemonLearningMove move={move} />
 
-    <style jsx>{`
-      div {
-        box-sizing: border-box;
-        padding: 20px;
-        height: 100%;
-        overflow-y: auto;
-      }
-    `}</style>
   </div>
 );

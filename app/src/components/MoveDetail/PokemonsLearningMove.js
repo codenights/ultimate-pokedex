@@ -8,25 +8,26 @@ export const PokemonLearningMove = ({ move }) => (
   <Section>
     <h2>Pokemons learning {move.name}</h2>
 
-    <table>
+    <table className="table-auto">
       <thead>
-        <tr>
-          <td>#</td>
-          <td>Pokemon</td>
-          <td>Type(s)</td>
+        <tr className="border-b border-gray-800 text-sm text-gray-400">
+          <th className="w-1/12 py-2 font-normal">#</th>
+          <th className="w-4/12 py-2 font-normal">Pokemon</th>
+          <th className="w-3/12 py-2 font-normal">Type(s)</th>
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className="text-gray-600">
         {move.pokemons.map(({ id, names, types, spriteUrl }) => (
           <tr key={id}>
-            <td>#{id}</td>
-            <td>
-              <img src={spriteUrl} alt={names.en} />
-
-              <PokemonLink pokemonId={id}>{names.en}</PokemonLink>
+            <td className="border-t border-gray-800 px-4 py-1">#{id}</td>
+            <td className="border-t border-gray-800 px-4 py-1 text-gray-400 font-pokemon">
+              <PokemonLink pokemonId={id}>
+                <img src={spriteUrl} alt={names.en} />
+                {names.en}
+              </PokemonLink>
             </td>
-            <td>
+            <td className="border-t border-gray-800 px-4 py-1">
               <ul>
                 {types.map(type => (
                   <li key={type.id}>
@@ -39,49 +40,5 @@ export const PokemonLearningMove = ({ move }) => (
         ))}
       </tbody>
     </table>
-
-    <style jsx>{`
-      img {
-        width: 50px;
-        vertical-align: middle;
-      }
-
-      ul {
-        display: inline-flex;
-      }
-
-      li + li {
-        margin-left: 10px;
-      }
-
-      table {
-        width: 100%;
-        border: 1px solid #eee;
-        border-radius: 4px;
-        background: #f1f1f1;
-      }
-
-      thead {
-        background: #373737;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      thead td {
-        padding: 10px;
-      }
-
-      td {
-        padding: 10px 10px;
-      }
-
-      tbody td {
-        vertical-align: middle;
-      }
-
-      tbody tr:nth-child(even) {
-        background: #fff;
-      }
-    `}</style>
   </Section>
 );

@@ -7,7 +7,7 @@ export const PokemonHeader = ({ pokemon }) => {
   return (
     <header>
       <img className="mx-auto" alt={`${pokemon.names.en} sprite`} src={spriteUrl} />
-      <span className="text-3xl">{pokemon.names.en}</span>
+      <span className={`pokemon-name font-pokemon text-center text-2xl text-type-${pokemon.types[0].name.toLowerCase()}`}>{pokemon.names.en}</span>
     </header>
   );
 };

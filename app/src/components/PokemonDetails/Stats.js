@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponsiveRadar } from "@nivo/radar";
+import { linearGradientDef } from '@nivo/core'
 
 import { Section } from "./Section";
 
@@ -64,12 +65,32 @@ export const Stats = ({ pokemon }) => (
       dotLabel="value"
       dotLabelYOffset={-12}
       colors={() => getOverallColor(pokemon.stats)}
-      fillOpacity={0.2}
+      fillOpacity={0.1}
       animate={true}
       motionStiffness={90}
       motionDamping={15}
       isInteractive={false}
       dotColor={getDotColor}
+      theme = {{
+        axis: {
+          ticks: {
+            line: {
+              stroke: "rgb(74, 85, 104)"
+            },
+            text: {
+              fill: "rgb(203, 213, 224)"
+            }
+          }
+        },
+        grid: {
+          line: {
+            stroke: "rgb(74, 85, 104)",
+            strokeWidth: 1,
+            strokeDasharray: "4 4"
+          }
+        }
+      }}
+
     />
 
   </Section>

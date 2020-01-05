@@ -1,5 +1,10 @@
 module.exports = {
     theme: {
+      fontFamily: {
+        'pokemon': ['Cabin'],
+        'body': ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica",
+        "Arial", "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"],
+      },
       extend: {
         colors: {
           'type-poison': 'rgb(187, 107, 173)',

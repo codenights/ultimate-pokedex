@@ -15,7 +15,7 @@ export const PokedexEntries = ({ pokemon }) => (
       <tbody>
         {pokemon.pokedexEntries.map(({ entry, version }) => (
           <tr key={version.id}>
-            <td style={{ color: version.color, fontWeight: 400 }}>
+            <td style={{ color: version.color }}>
               {version.name}
             </td>
             <td>{entry}</td>

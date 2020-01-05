@@ -71,7 +71,9 @@ export function Search({ searchClient, indexName }) {
               >
                 <TypeList attribute="types.name" operator="and" limit={18} />
               </Panel>
+
               <Panel
+                className="pb-12"
                 header={
                   <div>
                     <ClearRefinements
@@ -88,18 +90,30 @@ export function Search({ searchClient, indexName }) {
                   </div>
                 }
               >
-                <div className="text-gray-400">HP</div>
-                <RangeSlider attribute="stats.hp" />
-                <div className="text-gray-400">Attack</div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">HP</span>
+                  <RangeSlider attribute="stats.hp" />
+                </div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">Atk</span>
                 <RangeSlider attribute="stats.attack" />
-                <div className="text-gray-400">Defense</div>
+                </div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">Def</span>
                 <RangeSlider attribute="stats.defense" />
-                <div className="text-gray-400">Special Attack</div>
+                </div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">S-Atk</span>
                 <RangeSlider attribute="stats.specialAttack" />
-                <div className="text-gray-400">Special Defense</div>
+                </div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">S-Def</span>
                 <RangeSlider attribute="stats.specialDefense" />
-                <div className="text-gray-400">Speed</div>
+                </div>
+                <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <span className="w-16">Speed</span>
                 <RangeSlider attribute="stats.speed" />
+                </div>
               </Panel>
             </div>
           </div>
@@ -109,6 +123,16 @@ export function Search({ searchClient, indexName }) {
         </main>
       </div>
       <style global jsx>{`
+      .tag {
+        box-shadow:
+          1px 2px 3px rgba(0, 0, 0, 0.3),
+          inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+        background-image: linear-gradient(
+          -40deg,
+          rgba(75, 79, 92, 0.3) 15%,
+          rgba(0, 0, 0, 0.4) 90%
+        );
+      }
         .ais-SearchBox-form {
           display: grid;
           grid-template-columns: 1fr auto auto;

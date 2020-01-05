@@ -57,7 +57,7 @@ export const PokemonHit = connectCurrentRefinements(
 
               <div className="title">
                 <div
-                  className={`pokemon-name text-center text-2xl text-type-${pokemon.types[0].name.toLowerCase()}`}
+                  className={`pokemon-name font-pokemon text-center text-2xl text-type-${pokemon.types[0].name.toLowerCase()}`}
                 >
                   <Highlight
                     tagName="mark"
