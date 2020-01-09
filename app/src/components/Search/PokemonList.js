@@ -7,18 +7,26 @@ import { PokemonHit } from "./PokemonHit";
 export const PokemonList = connectInfiniteHits(
   ({ hits: pokemons, hasMore, refineNext }) => {
     const { setObservedNode } = useIntersectionObserver({
-      callback: refineNext,
+      callback: loadMore,
       threshold: 0
     });
 
+    function loadMore() {
+      if (typeof window !== "undefined" && window.scrollY > 0) {
+        refineNext();
+      }
+    }
+
     return (
-      <div className="flex flex-wrap p-4 pl-0 pb-16">
-        {pokemons.map(pokemon => (
-          <PokemonHit key={pokemon.id} pokemon={pokemon} />
-        ))}
+      <div>
+        <div className="flex flex-wrap p-4 pl-0 pb-16">
+          {pokemons.map(pokemon => (
+            <PokemonHit key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
 
         {hasMore && (
-          <span
+          <div
             ref={node => {
               setObservedNode(node);
             }}

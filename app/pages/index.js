@@ -65,7 +65,7 @@ function Home() {
           <title>Ultimate Pokedex | Home</title>
         </Head>
 
-        <Configure hitsPerPage={25} />
+        <Configure hitsPerPage={40} />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
           <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-1/5 lg:block xl:w-1/6">
