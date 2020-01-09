@@ -31,8 +31,6 @@ export const AppBar = ({ showSearchBox = false }) => (
 
           .ais-SearchBox-input {
             padding: 10px 40px;
-            background: none;
-            border: none;
             width: 100%;
             box-sizing: border-box;
             font: inherit;

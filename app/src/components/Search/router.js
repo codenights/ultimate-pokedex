@@ -1,5 +1,14 @@
 import qs from "qs";
 
+const supportedIndices = [
+  process.env.ALGOLIA_INDEX_NAME,
+  process.env.ALGOLIA_INDEX_NAME_ID_DESC,
+  process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
+  process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
+  process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
+  process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC
+];
+
 function removeEmptyValues(value) {
   return Object.entries(value).reduce((acc, [key, value]) => {
     if (value === "") {
@@ -34,6 +43,19 @@ function routerUrlReducer(state, [key, value]) {
       ...state,
       query: encodeURIComponent(value)
     };
+  }
+
+  if (key === "sortBy") {
+    const sortMatches = value.match(/^pokemon_(.*)/);
+
+    if (sortMatches) {
+      const sortingStrategy = sortMatches[1];
+
+      return {
+        ...state,
+        sort: sortingStrategy
+      };
+    }
   }
 
   if (key === "refinementList" && value && value["types.name"]) {
@@ -89,6 +111,17 @@ function routerStateReducer(state, [key, value]) {
       ...state,
       query: decodeURIComponent(value)
     };
+  }
+
+  if (key === "sort") {
+    const sortBy = `pokemon_${value}`;
+
+    if (supportedIndices.includes(sortBy)) {
+      return {
+        ...state,
+        sortBy
+      };
+    }
   }
 
   if (key === "types") {

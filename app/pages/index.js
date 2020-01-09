@@ -6,7 +6,8 @@ import {
   InstantSearch,
   Configure,
   ClearRefinements,
-  Panel
+  Panel,
+  SortBy
 } from "react-instantsearch-dom";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
@@ -139,6 +140,38 @@ function Home() {
           </aside>
 
           <main className="w-full h-full overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
+            <div className="flex justify-end mt-4 mr-4">
+              <SortBy
+                defaultRefinement={process.env.ALGOLIA_INDEX_NAME}
+                items={[
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME,
+                    label: "Number asc. ↑"
+                  },
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
+                    label: "Number desc. ↓"
+                  },
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
+                    label: "Height asc. ↑"
+                  },
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
+                    label: "Height desc. ↓"
+                  },
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
+                    label: "Weight asc. ↑"
+                  },
+                  {
+                    value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC,
+                    label: "Weight desc. ↓"
+                  }
+                ]}
+              />
+            </div>
+
             <PokemonList />
           </main>
         </div>
@@ -153,6 +186,31 @@ function Home() {
             rgba(75, 79, 92, 0.3) 15%,
             rgba(0, 0, 0, 0.4) 90%
           );
+        }
+
+        .ais-SortBy-select {
+          appearance: none;
+          color: #fff;
+          border-radius: 8px;
+          min-height: 38px;
+          padding: 8px;
+          border: 1px solid rgba(255, 255, 255, 0.16);
+          background: linear-gradient(
+            40deg,
+            rgba(255, 255, 255, 0.24),
+            rgba(255, 255, 255, 0.1)
+          );
+          box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+            inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+        }
+
+        .ais-SortBy-select:focus {
+          outline: none;
+          border: 1px solid rgba(255, 255, 255, 0.4);
+          box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+            inset 1px 1px 1px rgba(255, 255, 255, 0.1),
+            inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
+            inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
       `}</style>
     </InstantSearch>
