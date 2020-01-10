@@ -7,7 +7,8 @@ import {
   Configure,
   ClearRefinements,
   Panel,
-  SortBy
+  SortBy,
+  RangeInput
 } from "react-instantsearch-dom";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
@@ -140,7 +141,14 @@ function Home() {
           </aside>
 
           <main className="w-full h-full overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
-            <div className="flex justify-end mt-4 mr-4">
+            <div className="flex justify-between my-4 mx-4">
+              <RangeInput
+                attribute="order"
+                translations={{
+                  separator: " → "
+                }}
+              />
+
               <SortBy
                 defaultRefinement={process.env.ALGOLIA_INDEX_NAME}
                 items={[
@@ -188,7 +196,20 @@ function Home() {
           );
         }
 
-        .ais-SortBy-select {
+        .ais-RangeInput {
+          color: #fff;
+        }
+
+        .ais-RangeInput-input {
+          max-width: 62px;
+        }
+
+        .ais-RangeInput-submit {
+          display: none;
+        }
+
+        .ais-SortBy-select,
+        .ais-RangeInput-input {
           appearance: none;
           color: #fff;
           border-radius: 8px;
@@ -204,7 +225,8 @@ function Home() {
             inset 1px 1px 1px rgba(255, 255, 255, 0.1);
         }
 
-        .ais-SortBy-select:focus {
+        .ais-SortBy-select:focus,
+        .ais-RangeInput-input:focus {
           outline: none;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
