@@ -95,7 +95,7 @@ export const typeDefs = gql`
     name: String!
     pokemons: [Pokemon!]!
   }
-  
+
   type Damage {
     type: Type!
     multiplier: Float!
@@ -107,6 +107,7 @@ export const typeDefs = gql`
     spriteUrl: String!
     spriteShinyUrl: String!
     artworkUrl: String!
+    isDefaultForm: Boolean!
     weight: Int!
     height: Int!
     baseHappiness: Int!

@@ -8,6 +8,7 @@ export const PokemonResolver = {
   captureRate: R.prop("capture_rate"),
   genderRate: R.prop("gender_rate"),
   stats: R.identity,
+  isDefaultForm: R.prop("is_default_form"),
 
   names: ({ name_en, name_fr, name_ja }) => ({
     en: name_en,
