@@ -1,36 +1,13 @@
 import React from "react";
 import { Highlight, connectCurrentRefinements } from "react-instantsearch-dom";
-import { lighten, saturate } from "polished";
 
 import { Tag } from "../Tag";
-import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
+import { TypeIcon } from "../TypeIcon";
 import { useShiny } from "../ShinyMode";
 import { PokemonLink } from "../PokemonLink";
 
-const COLORS_BY_TYPE = {
-  poison: "#a59",
-  grass: "#7c5",
-  fire: "#f42",
-  flying: "#89f",
-  water: "#39f",
-  electric: "#fc3",
-  dragon: "#76e",
-  ice: "#6cf",
-  fighting: "#b54",
-  rock: "#ba6",
-  ground: "#db5",
-  psychic: "#f59",
-  bug: "#ab2",
-  dark: "#754",
-  steel: "#aab",
-  fairy: "#e9e",
-  ghost: "#66b",
-  normal: "#aa9"
-};
-
 function getPropertyByPath(object, path) {
   const parts = path.split(".");
-
   return parts.reduce((current, key) => current && current[key], object);
 }
 
@@ -56,146 +33,106 @@ function getRefinementName(value) {
 export const PokemonHit = connectCurrentRefinements(
   ({ items: refinements, pokemon }) => {
     const spriteUrl = useShiny(pokemon.artworkUrl, pokemon.spriteShinyUrl);
-    const color = COLORS_BY_TYPE[pokemon.types[0].name.toLowerCase()];
     const statRefinements = refinements.filter(refinement =>
       refinement.attribute.startsWith("stats.")
     );
 
     return (
-      <div
-        style={{
-          borderColor: lighten(0.2, saturate(0.25, color)),
-          background: lighten(0.4, color)
-        }}
-      >
+      <div className="dcard w-1/2 md:w-1/4 xl:w-1/5 mt-24">
         <PokemonLink pokemonId={pokemon.id}>
-          <header>
-            <h3>
-              <Highlight tagName="mark" attribute="names.en" hit={pokemon} />
-            </h3>
+        
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
+          <div className="trigger"></div>
 
-            <p>
-              <Highlight tagName="mark" attribute="names.fr" hit={pokemon} />{" "}
-              <Tag>fr</Tag>
-              {pokemon.names.ja && (
-                <>
-                  {" "}
-                  /{" "}
+          <div className="card p-6 mx-3 bg-gray-900 rounded-lg">
+            <div className="frame">
+              <img className="-mt-20" src={spriteUrl} alt={pokemon.names.en} />
+
+              <div className="title">
+                <div
+                  className={`pokemon-name font-pokemon text-center text-2xl text-type-${pokemon.types[0].name.toLowerCase()}`}
+                >
+                  <Highlight
+                    tagName="mark"
+                    attribute="names.en"
+                    hit={pokemon}
+                  />
+                </div>
+
+                <div className="text-center whitespace-no-wrap text-xs italic mt-0 mb-6 text-gray-600">
+                  <Highlight
+                    tagName="mark"
+                    attribute="names.fr"
+                    hit={pokemon}
+                  />
+                  {" - "}
                   <Highlight
                     tagName="mark"
                     attribute="names.ja"
                     hit={pokemon}
-                  />{" "}
-                  <Tag>ja</Tag>
-                </>
+                  />
+                </div>
+              </div>
+
+              <div className="absolute pl-2 pt-1">
+                  <span className="text-xl font-bold text-gray-900">
+                    {pokemon.id}
+                  </span>
+                </div>
+
+              <ul className="absolute top-0 right-0 p-2">
+                {pokemon.types.map(type => (
+                  <li className="mb-2" key={type.name}>
+                    <TypeIcon type={type.name} />
+                  </li>
+                ))}
+              </ul>
+
+              {statRefinements && (
+                <ul>
+                  {statRefinements.map(refinement => (
+                    <li key={refinement.attribute}>
+                      <Tag>
+                        {getRefinementName(refinement.attribute.split(".")[1])}{" "}
+                        <strong>
+                          {getPropertyByPath(pokemon, refinement.attribute)}
+                        </strong>
+                      </Tag>
+                    </li>
+                  ))}
+                </ul>
               )}
-            </p>
-          </header>
-
-          <img src={spriteUrl} alt={pokemon.names.en} />
-
-          <p className="watermark-number">#{pokemon.id}</p>
-
-          <ul>
-            {pokemon.types.map(type => (
-              <li key={type.name}>
-                <TypeBadgeAlgolia type={type.name} />
-              </li>
-            ))}
-          </ul>
-
-          {statRefinements && (
-            <ul
-              style={{
-                flexWrap: "wrap",
-                lineHeight: 1.6
-              }}
-            >
-              {statRefinements.map(refinement => (
-                <li key={refinement.attribute}>
-                  <Tag>
-                    {getRefinementName(refinement.attribute.split(".")[1])}{" "}
-                    <strong>
-                      {getPropertyByPath(pokemon, refinement.attribute)}
-                    </strong>
-                  </Tag>
-                </li>
-              ))}
-            </ul>
-          )}
+            </div>
+          </div>
         </PokemonLink>
-
         <style jsx>{`
-          div {
-            display: block;
-            border-radius: 2px;
-            border: 1px solid;
-            border-left: 4px solid;
-            background: #fff;
-            box-sizing: border-box;
-            position: relative;
+          .pokemon-name {
+            text-shadow: 0 0 24px var(--color-type-${pokemon.types[0].name.toLowerCase()}),
+            0 0 70px var(--color-type-${pokemon.types[0].name.toLowerCase()});
           }
-
-          div > :global(a) {
-            padding: 20px;
-            text-decoration: none;
-            color: inherit;
-            display: grid;
-            grid-template-columns: 1fr 150px;
-            grid-template-rows: repeat(3, auto);
-            align-items: center;
+          .card {
+            background-image:
+              radial-gradient(
+                circle at 2%,
+                rgba(230, 230, 255, 0.2),
+                rgba(46, 52, 64, 0.3) 40%,
+                rgba(26, 32, 44, 0.6) 85%
+              ),
+              linear-gradient(
+                20deg,
+                #1a202c 55%,
+                var(--color-type-${pokemon.types[0].name.toLowerCase()})
+              );
           }
-
-          div > :global(a:hover .watermark-number),
-          div > :global(a:focus .watermark-number) {
-            opacity: 0.7;
-          }
-
-          div > :global(a:hover img),
-          div > :global(a:focus img) {
-            transform: scale(1.25);
-          }
-
-          img {
-            position: relative;
-            z-index: 1;
-            height: 150px;
-            grid-row: span 3;
-            transition: transform 0.3s ease;
-          }
-
-          h3 {
-            font-weight: bold;
-            font-size: 2rem;
-            margin-bottom: 6px;
-          }
-
-          p {
-            font-size: 1.4rem;
-            opacity: 0.75;
-            line-height: 1.6;
-          }
-
-          strong {
-            font-weight: bold;
-          }
-
-          ul {
-            display: flex;
-          }
-
-          li:not(:last-of-type) {
-            margin-right: 4px;
-          }
-
-          .watermark-number {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-weight: bold;
-            font-size: 4rem;
-            opacity: 0.3;
-            transition: opacity 0.2s ease;
+          .card::after {
+            background-color: var(--color-type-${pokemon.types[0].name.toLowerCase()});
           }
         `}</style>
       </div>

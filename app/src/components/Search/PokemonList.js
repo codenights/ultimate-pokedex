@@ -7,30 +7,81 @@ import { PokemonHit } from "./PokemonHit";
 export const PokemonList = connectInfiniteHits(
   ({ hits: pokemons, hasMore, refineNext }) => {
     const { setObservedNode } = useIntersectionObserver({
-      callback: refineNext,
+      callback: loadMore,
       threshold: 0
     });
 
+    function loadMore() {
+      if (typeof window !== "undefined" && window.scrollY > 0) {
+        refineNext();
+      }
+    }
+
     return (
       <div>
-        {pokemons.map(pokemon => (
-          <PokemonHit key={pokemon.id} pokemon={pokemon} />
-        ))}
+        <div className="flex flex-wrap p-4 pl-0 pb-16">
+          {pokemons.map(pokemon => (
+            <PokemonHit key={pokemon.id} pokemon={pokemon} />
+          ))}
+        </div>
 
-        {hasMore && (
-          <span
-            ref={node => {
-              setObservedNode(node);
-            }}
-          />
-        )}
+        <div className="flex justify-center text-center mb-10">
+          {hasMore ? (
+            <button
+              className="load-more rounded-full text-gray-400 py-2 px-4"
+              onClick={() => refineNext()}
+              ref={node => {
+                setObservedNode(node);
+              }}
+            >
+              Load more Pokemon
+            </button>
+          ) : (
+            pokemons.length > 0 && (
+              <div className="end-of-results text-gray-600">
+                {pokemons.length} Pokemon shown
+              </div>
+            )
+          )}
+        </div>
 
         <style jsx>{`
-          div {
-            padding: 20px;
-            display: grid;
-            grid-gap: 20px;
-            grid-template-columns: repeat(3, 1fr);
+          .load-more {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(
+              40deg,
+              rgba(255, 255, 255, 0.16),
+              rgba(255, 255, 255, 0.1)
+            );
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+              inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+          }
+
+          .load-more:hover,
+          .load-more:focus {
+            outline: none;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+              inset 1px 1px 1px rgba(255, 255, 255, 0.1),
+              inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
+              inset 0 0 10px rgba(255, 255, 255, 0.2);
+          }
+
+          .end-of-results::after {
+            content: "";
+            display: block;
+            margin: auto;
+            margin-top: 16px;
+            height: 3px;
+            width: 150px;
+            border-radius: 8px;
+            background: linear-gradient(
+              40deg,
+              rgba(255, 255, 255, 0.5),
+              rgba(255, 255, 255, 0.24)
+            );
+            box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+              inset 1px 1px 1px rgba(255, 255, 255, 0.1);
           }
         `}</style>
       </div>

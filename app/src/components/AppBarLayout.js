@@ -3,29 +3,14 @@ import PropTypes from "prop-types";
 
 import { AppBar } from "./AppBar";
 
-export const AppBarLayout = ({ children }) => (
-  <div>
-    <AppBar />
-
+export const AppBarLayout = ({ showSearchBox, children }) => (
+  <div className="w-full pt-12">
+    <AppBar showSearchBox={showSearchBox} />
     {children}
-
-    <style jsx>{`
-      div {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        overflow-y: hidden;
-      }
-
-      div > :global(:last-child) {
-        flex: 1;
-        height: 100%;
-        overflow-y: scroll;
-      }
-    `}</style>
   </div>
 );
 
 AppBarLayout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  showSearchBox: PropTypes.bool
 };

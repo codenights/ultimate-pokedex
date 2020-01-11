@@ -73,8 +73,7 @@ export const RangeSlider = connectRange(
         disabled={!canRefine}
         onChange={onChange}
         onUpdate={setTicksValues}
-        rootStyle={{ position: "relative", marginTop: "1.5rem" }}
-        className="ais-RangeSlider"
+        className="w-full h-6 mt-4 mx-3 mr-2 relative ais-RangeSlider"
       >
         <Rail>
           {({ getRailProps }) => (
@@ -136,13 +135,9 @@ export const RangeSlider = connectRange(
         </Ticks>
 
         <style global jsx>{`
-          .ais-RangeSlider {
-            margin: 40px 0;
-            padding: 10px 0;
-          }
 
           .ais-RangeSlider .slider-rail {
-            background-color: rgba(65, 66, 71, 0.08);
+            background-color: rgb(54, 58, 72);
             border-radius: 3px;
             cursor: pointer;
             height: 3px;
@@ -151,36 +146,45 @@ export const RangeSlider = connectRange(
           }
 
           .ais-RangeSlider .slider-track {
-            background-color: #6cf;
+            background: linear-gradient(90deg,rgb(96, 82, 135) 30%, rgb(116, 76, 183) 50%, rgb(157, 99, 231) 70%, rgb(247, 198, 184));
             border-radius: 3px;
             cursor: pointer;
             height: 3px;
             position: absolute;
           }
+          
+          .ais-RangeSlider::after {
+            top: 0;
+            background: linear-gradient(90deg,rgb(157, 99, 231, 0.2), rgba(157, 99, 231, .8));
+            filter: blur(6px);
+            display: block;
+            content: "";
+            width: 100%;
+            height: 4px;
+            position: absolute;
+          }
 
           .ais-RangeSlider .slider-tick {
-            color: #555;
+            color: rgb(113, 128, 150);
             cursor: grab;
             display: flex;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 11px;
             position: absolute;
             text-align: center;
-            top: 30px;
+            top: 8px;
             transform: translateX(-50%);
             user-select: none;
           }
 
           .ais-RangeSlider .slider-handle {
             border-radius: 50%;
-            box-shadow: 0 4px 11px 0 rgba(37, 44, 97, 0.15),
-              0 2px 3px 0 rgba(93, 100, 148, 0.2);
+            box-shadow: 0 2px 8px 1px rgba(0,0,0,.6);
             cursor: grab;
             outline: none;
             position: absolute;
             transform: translate(-50%, -50%);
-            width: 20px;
-            height: 20px;
+            width: 16px;
+            height: 16px;
             z-index: 1;
             background: url("/img/pokeball-tick.svg");
           }

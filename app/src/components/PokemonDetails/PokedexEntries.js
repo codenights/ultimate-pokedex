@@ -4,8 +4,7 @@ import { Section } from "./Section";
 
 export const PokedexEntries = ({ pokemon }) => (
   <Section>
-    <h2>Pokedex entries</h2>
-
+    <h2 className="text-2xl text-gray-500">Pokedex entries</h2>
     <table>
       <thead>
         <tr>
@@ -16,7 +15,7 @@ export const PokedexEntries = ({ pokemon }) => (
       <tbody>
         {pokemon.pokedexEntries.map(({ entry, version }) => (
           <tr key={version.id}>
-            <td style={{ color: version.color, fontWeight: 400 }}>
+            <td style={{ color: version.color }}>
               {version.name}
             </td>
             <td>{entry}</td>
@@ -24,35 +23,5 @@ export const PokedexEntries = ({ pokemon }) => (
         ))}
       </tbody>
     </table>
-
-    <style jsx>{`
-      table {
-        border: 1px solid #eee;
-        border-radius: 4px;
-        background: #f1f1f1;
-      }
-
-      thead {
-        background: #373737;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      thead td {
-        padding: 10px;
-      }
-
-      td {
-        padding: 10px 10px;
-      }
-
-      tbody td {
-        vertical-align: middle;
-      }
-
-      tbody tr:nth-child(even) {
-        background: #fff;
-      }
-    `}</style>
   </Section>
 );

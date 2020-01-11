@@ -35,27 +35,5 @@ export const AboutMove = ({ move }) => (
       <dd>{move.healing ? `${move.healing}%` : "-"}</dd>
     </dl>
 
-    <style jsx>{`
-      dl {
-        display: grid;
-        grid-template-columns: auto 1fr;
-        grid-gap: 10px;
-      }
-
-      dt {
-        opacity: 0.75;
-      }
-
-      dd {
-        font-weight: bold;
-        display: flex;
-        align-items: center;
-        text-transform: capitalize;
-      }
-
-      img {
-        margin-right: 10px;
-      }
-    `}</style>
   </Section>
 );

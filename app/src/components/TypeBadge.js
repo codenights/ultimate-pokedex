@@ -1,23 +1,20 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {TypeIcon} from "./TypeIcon";
 
 export const TypeBadge = ({ type }) => (
-  <span>
-    {type.name}
-
+<span
+    className={"tag flex whitespace-no-wrap rounded-full text-center px-2 items-center p-1 my-2"}
+  >
+    <TypeIcon type={type.name} />
+    <span className="type-name text-md ml-2">{type.name}</span>
+    
     <style jsx>{`
-      span {
-        display: inline-block;
-        border-radius: 4px;
-        padding: 4px 12px;
-        background: ${type.color};
-        color: #fff;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-        font-family: monospace;
-        border: 2px solid rgba(0, 0, 0, 0.25);
+      .type-name {
+        color: var(--color-type-${type.name.toLowerCase()});
       }
     `}</style>
-  </span>
+    </span>
 );
 
 TypeBadge.propTypes = {

@@ -9,7 +9,7 @@ const pokemonHasEvolution = pokemon =>
   pokemon.family.pokemon.evolutions.length > 0;
 
 export const PokemonOverview = ({ pokemon }) => (
-  <section>
+  <section className="hidden top-0 inset-x-0 pt-16 bg-gray-800 h-auto z-90 w-full lg:overflow-y-visible lg:pt-0 lg:w-2/5 lg:block xl:w-2/6 flex text-center">
     <PokemonHeader pokemon={pokemon} />
 
     <Types types={pokemon.types} />
@@ -17,16 +17,5 @@ export const PokemonOverview = ({ pokemon }) => (
     {pokemonHasEvolution(pokemon) && (
       <EvolutionChain pokemon={pokemon.family.pokemon} />
     )}
-
-    <style jsx>{`
-      section {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        background: ${getBackgroundColorFromType(pokemon.types[0])};
-      }
-    `}</style>
   </section>
 );

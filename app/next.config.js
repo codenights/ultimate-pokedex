@@ -1,9 +1,15 @@
 require("dotenv").config();
+const withCSS = require("@zeit/next-css");
 
-module.exports = {
+module.exports = withCSS({
   env: {
-    ALGOLIA_INDEX_NAME: process.env.ALGOLIA_INDEX_NAME,
     ALGOLIA_APP_ID: process.env.ALGOLIA_APP_ID,
-    ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY
+    ALGOLIA_API_KEY: process.env.ALGOLIA_API_KEY,
+    ALGOLIA_INDEX_NAME: process.env.ALGOLIA_INDEX_NAME,
+    ALGOLIA_INDEX_NAME_ID_DESC: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
+    ALGOLIA_INDEX_NAME_HEIGHT_ASC: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
+    ALGOLIA_INDEX_NAME_HEIGHT_DESC: process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
+    ALGOLIA_INDEX_NAME_WEIGHT_ASC: process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
+    ALGOLIA_INDEX_NAME_WEIGHT_DESC: process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC
   }
-};
+});

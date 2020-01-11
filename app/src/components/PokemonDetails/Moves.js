@@ -36,7 +36,7 @@ export const Moves = ({ pokemon }) => {
   return (
     <Section>
       <header>
-        <h2>Moves</h2>
+      <h2 className="text-2xl text-gray-500">Moves</h2>
 
         <select
           name="version-gorups"
@@ -51,38 +51,36 @@ export const Moves = ({ pokemon }) => {
           ))}
         </select>
       </header>
-
-      <table>
+      <table className="table-auto">
         <thead>
-          <tr>
-            <td>Move</td>
-            <td>Type</td>
-            <td>Cat.</td>
-            <td>Power</td>
-            <td>PP</td>
-            <td>Accuracy</td>
-            <td>Learn</td>
+          <tr className="border-b border-gray-800 text-sm text-gray-400">
+            <th className="w-3/12 font-normal">Move</th>
+            <th className="w-2/12 py-2 font-normal">Type</th>
+            <th className="w-2/12 py-2 font-normal">Cat.</th>
+            <th className="w-1/12 py-2 font-normal">Power</th>
+            <th className="w-1/12 py-2 font-normal">PP</th>
+            <th className="w-1/12 py-2 font-normal">Accu.</th>
+            <th className="w-2/12 py-2 font-normal">Learn</th>
           </tr>
         </thead>
-
-        <tbody>
+        <tbody className="text-gray-600">
           {movesByVersionGroup.map(({ move, learn }) => (
             <tr key={move.id}>
-              <td>
+              <td className="border-t border-gray-800 px-4 py-1">
                 <Link href="/move/[moveId]" as={`/move/${move.id}`}>
-                  <a>{move.name}</a>
+                  <a className="text-gray-400">{move.name}</a>
                 </Link>
               </td>
-              <td>
+              <td className="border-t border-gray-800 px-4 py-1">
                 <TypeBadge type={move.type} />
               </td>
-              <td>
+              <td className="border-t border-gray-800 px-4 py-1">
                 <MoveCategoryBadge category={move.damageClass} />
               </td>
-              <td>{move.power}</td>
-              <td>{move.pp}</td>
-              <td>{move.accuracy}</td>
-              <td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.power}</td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.pp}</td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.accuracy}</td>
+              <td className="border-t border-gray-800 px-4 py-1">
                 {learn.method}{" "}
                 {learn.method === "level-up" && <span>({learn.level})</span>}
               </td>
@@ -90,55 +88,6 @@ export const Moves = ({ pokemon }) => {
           ))}
         </tbody>
       </table>
-
-      <style jsx>{`
-        header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 20px;
-        }
-
-        h2 {
-          margin-bottom: 0;
-        }
-
-        select {
-          background: #fff;
-          appearance: none;
-          padding: 10px 20px;
-          font: inherit;
-        }
-
-        table {
-          width: 100%;
-          border: 1px solid #eee;
-          border-radius: 4px;
-          background: #f1f1f1;
-        }
-
-        thead {
-          background: #373737;
-          color: #fff;
-          font-weight: bold;
-        }
-
-        thead td {
-          padding: 10px;
-        }
-
-        td {
-          padding: 10px 10px;
-        }
-
-        tbody td {
-          vertical-align: middle;
-        }
-
-        tbody tr:nth-child(even) {
-          background: #fff;
-        }
-      `}</style>
     </Section>
   );
 };
