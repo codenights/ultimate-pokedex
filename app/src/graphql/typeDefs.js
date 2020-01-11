@@ -95,6 +95,11 @@ export const typeDefs = gql`
     name: String!
     pokemons: [Pokemon!]!
   }
+  
+  type Damage {
+    type: Type!
+    multiplier: Float!
+  }
 
   type Pokemon {
     id: Int!
@@ -116,6 +121,7 @@ export const typeDefs = gql`
     pokedexEntries: [PokemonPokedexEntry!]!
     abilities: [PokemonAbility!]!
     moves: [PokemonMove!]!
+    damagesFrom: [Damage!]!
   }
 
   type Query {
