@@ -191,6 +191,38 @@ function Home() {
                     }}
                   />
                 </Panel>
+
+                <Panel
+                  className="pb-12"
+                  header={
+                    <div className="flex justify-between mb-2">
+                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
+                        Forms
+                      </h2>
+                    </div>
+                  }
+                >
+                  <RefinementList
+                    attribute="isDefaultForm"
+                    defaultRefinement={["true", "false"]}
+                    transformItems={items => {
+                      const transformedItems = items.map(item => ({
+                        ...item,
+                        label:
+                          item.label === "true"
+                            ? "Default forms"
+                            : "Alternative forms",
+                      }));
+
+                      // We want the "Default forms" label to stay first
+                      transformedItems.sort(item =>
+                        item.label.startsWith("Default") ? -1 : 1
+                      );
+
+                      return transformedItems;
+                    }}
+                  />
+                </Panel>
               </div>
             </div>
           </aside>
