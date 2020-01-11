@@ -6,6 +6,11 @@ import { fetchTypeQuery } from "../../src/queries/fetchType";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { executeQuery } from "../../src/queries/executeQuery";
 import { TypeDetail } from "../../src/components/TypeDetail";
+import {
+  ColumnLayout,
+  LeftPane,
+  LeftPaneTitle,
+} from "../../src/components/ColumnLayout/ColumnLayout";
 
 const TypePage = ({ type, statusCode }) => {
   if (statusCode === 404) {
@@ -14,29 +19,19 @@ const TypePage = ({ type, statusCode }) => {
 
   return (
     <AppBarLayout>
+      <Head>
+        <title>{type.name} | Ultimate Pokedex</title>
+      </Head>
+
       <main>
-        <Head>
-          <title>{type.name} | Ultimate Pokedex</title>
-        </Head>
+        <ColumnLayout>
+          <LeftPane>
+            <LeftPaneTitle>{type.name}</LeftPaneTitle>
+          </LeftPane>
 
-        <TypeDetail type={type} />
+          <TypeDetail type={type} />
+        </ColumnLayout>
       </main>
-
-      <style jsx>{`
-        main {
-          overflow-y: auto;
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 20px;
-        }
-
-        @media (min-width: 800px) {
-          main {
-            overflow: hidden;
-            grid-template-columns: 1fr 2fr;
-          }
-        }
-      `}</style>
     </AppBarLayout>
   );
 };

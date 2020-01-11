@@ -1,12 +1,16 @@
 import React from "react";
 import Error from "next/error";
+import Head from "next/head";
 
 import { fetchAbilityQuery } from "../../src/queries/fetchAbility";
-import { AbilityOverview } from "../../src/components/AbilityOverview";
 import { AbilityDetails } from "../../src/components/AbilityDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { executeQuery } from "../../src/queries/executeQuery";
-import Head from "next/head";
+import {
+  ColumnLayout,
+  LeftPane,
+  LeftPaneTitle
+} from "../../src/components/ColumnLayout/ColumnLayout";
 
 const AbilityPage = ({ ability, statusCode }) => {
   if (statusCode === 404) {
@@ -15,27 +19,18 @@ const AbilityPage = ({ ability, statusCode }) => {
 
   return (
     <AppBarLayout>
+      <Head>
+        <title>{ability.name} | Ultimate Pokedex</title>
+      </Head>
+
       <main>
-        <Head>
-          <title>{ability.name} | Ultimate Pokedex</title>
-        </Head>
-        <AbilityOverview ability={ability} />
+        <ColumnLayout>
+          <LeftPane>
+            <LeftPaneTitle>{ability.name}</LeftPaneTitle>
+          </LeftPane>
 
-        <AbilityDetails ability={ability} />
-
-        <style jsx>{`
-          main {
-          }
-
-          @media (min-width: 800px) {
-            main {
-              display: grid;
-              grid-template-columns: 1fr 2fr;
-              height: 100%;
-              overflow: hidden;
-            }
-          }
-        `}</style>
+          <AbilityDetails ability={ability} />
+        </ColumnLayout>
       </main>
     </AppBarLayout>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { connectRefinementList } from "react-instantsearch-dom";
-import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
+import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia/TypeBadgeAlgolia";
 
 export const TypeList = connectRefinementList(({ items, refine }) => {
   return (

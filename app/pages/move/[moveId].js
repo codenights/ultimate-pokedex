@@ -7,6 +7,12 @@ import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { MoveOverview } from "../../src/components/MoveOverview";
 import { MoveDetail } from "../../src/components/MoveDetail";
 import { executeQuery } from "../../src/queries/executeQuery";
+import {
+  ColumnLayout,
+  LeftPane,
+  LeftPaneTitle,
+} from "../../src/components/ColumnLayout/ColumnLayout";
+import { TypeBadge } from "../../src/components/TypeBadge";
 
 const MovePage = ({ move, statusCode }) => {
   if (statusCode === 404) {
@@ -15,38 +21,27 @@ const MovePage = ({ move, statusCode }) => {
 
   return (
     <AppBarLayout>
+      <Head>
+        <title>{move.name} | Ultimate Pokedex</title>
+      </Head>
+
       <main>
-        <Head>
-          <title>{move.name} | Ultimate Pokedex</title>
-        </Head>
+        <ColumnLayout>
+          <LeftPane>
+            <LeftPaneTitle>{move.name}</LeftPaneTitle>
+            <TypeBadge type={move.type} />
+          </LeftPane>
 
-        <MoveOverview move={move} />
-
-        <MoveDetail move={move} />
+          <MoveDetail move={move} />
+        </ColumnLayout>
       </main>
-
-      <style jsx>{`
-        main {
-          overflow-y: auto;
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 20px;
-        }
-
-        @media (min-width: 800px) {
-          main {
-            overflow: hidden;
-            grid-template-columns: 1fr 2fr;
-          }
-        }
-      `}</style>
     </AppBarLayout>
   );
 };
 
 MovePage.getInitialProps = ({ query, req }) =>
   executeQuery(fetchMoveQuery(query.moveId), req, ({ move }) => ({
-    move
+    move,
   }));
 
 export default MovePage;
