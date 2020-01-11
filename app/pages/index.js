@@ -8,14 +8,15 @@ import {
   ClearRefinements,
   Panel,
   RangeInput,
-  SortBy
+  RefinementList,
+  SortBy,
 } from "react-instantsearch-dom";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
 import { Icons } from "../src/components/Icons";
 import {
   getStateFromUrl,
-  getUrlFromState
+  getUrlFromState,
 } from "../src/components/Search/router";
 import { TypeList } from "../src/components/Search/TypeList";
 import { RangeSlider } from "../src/components/Search/RangeSlider";
@@ -77,7 +78,7 @@ function Home() {
                   className="pb-12"
                   header={
                     <div className="flex justify-between mb-2">
-                      <h2 className="text-gray-300 uppercase tracking-wider text-sm">
+                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Types
                       </h2>
 
@@ -93,7 +94,7 @@ function Home() {
                               icon="restore"
                               className="text-white fill-current"
                             />
-                          )
+                          ),
                         }}
                       />
                     </div>
@@ -106,7 +107,7 @@ function Home() {
                   className="pb-12"
                   header={
                     <div className="flex justify-between mb-2">
-                      <h2 className="text-gray-300 uppercase tracking-wider text-sm">
+                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Stats
                       </h2>
 
@@ -122,7 +123,7 @@ function Home() {
                               icon="restore"
                               className="text-white fill-current"
                             />
-                          )
+                          ),
                         }}
                       />
                     </div>
@@ -153,6 +154,43 @@ function Home() {
                     <RangeSlider attribute="stats.speed" />
                   </div>
                 </Panel>
+
+                <Panel
+                  className="pb-12"
+                  header={
+                    <div className="flex justify-between mb-2">
+                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
+                        Abilities
+                      </h2>
+
+                      <ClearRefinements
+                        transformItems={items =>
+                          items.filter(({ attribute }) =>
+                            attribute.startsWith("abilities.")
+                          )
+                        }
+                        translations={{
+                          reset: (
+                            <Icons
+                              icon="restore"
+                              className="text-white fill-current"
+                            />
+                          ),
+                        }}
+                      />
+                    </div>
+                  }
+                >
+                  <RefinementList
+                    attribute="abilities.name"
+                    searchable
+                    showMore
+                    translations={{
+                      placeholder: "Search abilities",
+                      noResults: "No abilities matching.",
+                    }}
+                  />
+                </Panel>
               </div>
             </div>
           </aside>
@@ -160,9 +198,9 @@ function Home() {
           <main className="w-full h-full overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
             <div className="flex justify-between my-4 mx-4">
               <RangeInput
-                attribute="order"
+                attribute="id"
                 translations={{
-                  separator: " → "
+                  separator: " → ",
                 }}
               />
 
@@ -171,28 +209,28 @@ function Home() {
                 items={[
                   {
                     value: process.env.ALGOLIA_INDEX_NAME,
-                    label: "Number asc. ↑"
+                    label: "Number asc. ↑",
                   },
                   {
                     value: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
-                    label: "Number desc. ↓"
+                    label: "Number desc. ↓",
                   },
                   {
                     value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
-                    label: "Height asc. ↑"
+                    label: "Height asc. ↑",
                   },
                   {
                     value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
-                    label: "Height desc. ↓"
+                    label: "Height desc. ↓",
                   },
                   {
                     value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
-                    label: "Weight asc. ↑"
+                    label: "Weight asc. ↑",
                   },
                   {
                     value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC,
-                    label: "Weight desc. ↓"
-                  }
+                    label: "Weight desc. ↓",
+                  },
                 ]}
               />
             </div>
@@ -226,7 +264,8 @@ function Home() {
         }
 
         .ais-SortBy-select,
-        .ais-RangeInput-input {
+        .ais-RangeInput-input,
+        .ais-RefinementList-showMore {
           appearance: none;
           color: #fff;
           border-radius: 8px;
@@ -243,7 +282,10 @@ function Home() {
         }
 
         .ais-SortBy-select:focus,
-        .ais-RangeInput-input:focus {
+        .ais-RangeInput-input:focus,
+        .ais-RefinementList-showMore:hover,
+        .ais-RefinementList-showMore:focus,
+        .ais-RefinementList-showMore:active {
           outline: none;
           border: 1px solid rgba(255, 255, 255, 0.4);
           box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
@@ -259,6 +301,50 @@ function Home() {
         .ais-ClearRefinements-button--disabled {
           opacity: 0.5;
           cursor: not-allowed;
+        }
+
+        .ais-RefinementList {
+          color: #cbd5e0;
+        }
+
+        .ais-RefinementList-searchBox .ais-SearchBox {
+          margin-bottom: 16px;
+        }
+
+        .ais-RefinementList-label {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+        }
+
+        .ais-RefinementList-labelText {
+          width: 100%;
+        }
+
+        .ais-RefinementList-count {
+          color: #718096;
+          font-size: 0.875rem;
+        }
+
+        .ais-RefinementList-checkbox {
+          margin-right: 10px;
+        }
+
+        .ais-RefinementList-showMore {
+          display: block;
+          cursor: pointer;
+          margin: 16px auto auto auto;
+          background: none;
+        }
+
+        .ais-RefinementList-showMore--disabled {
+          cursor: not-allowed;
+        }
+
+        .ais-Highlight-highlighted {
+          font-style: normal;
+          background-color: #718096;
+          color: #fff;
         }
       `}</style>
     </InstantSearch>
