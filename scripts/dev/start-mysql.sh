@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 docker run -t -p 3306:3306 \
   --name ultimate-pokedex-dev \
   -e MYSQL_ROOT_PASSWORD=password \
