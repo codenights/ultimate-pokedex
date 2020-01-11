@@ -7,11 +7,12 @@ import {
   Configure,
   ClearRefinements,
   Panel,
-  SortBy,
-  RangeInput
+  RangeInput,
+  SortBy
 } from "react-instantsearch-dom";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
+import { Icons } from "../src/components/Icons";
 import {
   getStateFromUrl,
   getUrlFromState
@@ -75,16 +76,24 @@ function Home() {
                 <Panel
                   className="pb-12"
                   header={
-                    <div>
+                    <div className="flex justify-between mb-2">
+                      <h2 className="text-gray-300 uppercase tracking-wider text-sm">
+                        Types
+                      </h2>
+
                       <ClearRefinements
-                        className="inline-block bg-gray-600 text-gray-900 text-sm px-2 rounded"
                         transformItems={items =>
                           items.filter(({ attribute }) =>
                             attribute.startsWith("types.")
                           )
                         }
                         translations={{
-                          reset: "Reset"
+                          reset: (
+                            <Icons
+                              icon="restore"
+                              className="text-white fill-current"
+                            />
+                          )
                         }}
                       />
                     </div>
@@ -96,16 +105,24 @@ function Home() {
                 <Panel
                   className="pb-12"
                   header={
-                    <div>
+                    <div className="flex justify-between mb-2">
+                      <h2 className="text-gray-300 uppercase tracking-wider text-sm">
+                        Stats
+                      </h2>
+
                       <ClearRefinements
-                        className="inline-block bg-gray-600 text-gray-900 text-sm px-2 rounded"
                         transformItems={items =>
                           items.filter(({ attribute }) =>
                             attribute.startsWith("stats.")
                           )
                         }
                         translations={{
-                          reset: "Reset"
+                          reset: (
+                            <Icons
+                              icon="restore"
+                              className="text-white fill-current"
+                            />
+                          )
                         }}
                       />
                     </div>
@@ -233,6 +250,15 @@ function Home() {
             inset 1px 1px 1px rgba(255, 255, 255, 0.1),
             inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
             inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .ais-ClearRefinements-button {
+          cursor: pointer;
+        }
+
+        .ais-ClearRefinements-button--disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
       `}</style>
     </InstantSearch>
