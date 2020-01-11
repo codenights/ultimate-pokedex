@@ -12,6 +12,7 @@ import { PokemonRepository } from "../../src/repository/pokemon";
 import { MoveRepository } from "../../src/repository/move";
 import { EggGroupRepository } from "../../src/repository/eggGroup";
 import { AbilityRepository } from "../../src/repository/ability";
+import { DamageRepository } from "../../src/repository/damage";
 import { typeDefs } from "../../src/graphql/typeDefs";
 import { resolvers } from "../../src/graphql/resolvers";
 
@@ -32,7 +33,8 @@ const apolloServer = new ApolloServer({
     versionGroupRepository: VersionGroupRepository(knex),
     evolutionRepository: EvolutionRepository(knex),
     pokedexEntryRepository: PokedexEntryRepository(knex),
-    pokemonMoveRepository: PokemonMoveRepository(knex)
+    pokemonMoveRepository: PokemonMoveRepository(knex),
+    damageRepository: DamageRepository(knex)
   }),
   formatError: err => {
     if (err.extensions && err.extensions.code === "NOT_FOUND") {

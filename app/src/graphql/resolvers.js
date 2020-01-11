@@ -13,6 +13,7 @@ import { VersionResolver } from "./resolvers/version";
 import { PokemonResolver } from "./resolvers/pokemon";
 import { PokemonStatsResolver } from "./resolvers/pokemonStats";
 import { QueryResolver } from "./resolvers/query";
+import { DamageResolver } from "./resolvers/damage";
 
 export const resolvers = {
   Query: QueryResolver,
@@ -29,5 +30,6 @@ export const resolvers = {
   VersionGroup: VersionGroupResolver,
   AbilityPokemon: AbilityPokemonResolver,
   EggGroup: EggGroupResolver,
-  PokemonEvolution: PokemonEvolutionResolver
+  PokemonEvolution: PokemonEvolutionResolver,
+  Damage: DamageResolver
 };

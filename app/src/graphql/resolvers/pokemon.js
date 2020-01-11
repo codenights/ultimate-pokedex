@@ -48,6 +48,10 @@ export const PokemonResolver = {
 
     return { pokemon };
   },
+
   varieties: ({ id }, args, { pokemonRepository }) =>
-    pokemonRepository.findVarietiesByPokemonId(id)
+    pokemonRepository.findVarietiesByPokemonId(id),
+
+  damagesFrom: ({ type_1_id, type_2_id }, args, { damageRepository }) =>
+    damageRepository.findDamagesByTypeIds(type_1_id, type_2_id)
 };
