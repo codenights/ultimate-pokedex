@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "lint": "eslint src/**/*.js --fix"
+    "lint": "eslint src/**/*.js --fix",
+    "migrate": "knex migrate:latest"
   },
   "dependencies": {
     "@nivo/radar": "^0.61.1",
