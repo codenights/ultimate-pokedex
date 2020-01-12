@@ -83,6 +83,7 @@ export const PokemonHit = ({ pokemon }) => {
 
       <style jsx>{`
         .pokemon-name {
+          // prettier-ignore
           text-shadow: 0 0 24px var(--color-type-${pokemon.types[0].name.toLowerCase()}),
           0 0 70px var(--color-type-${pokemon.types[0].name.toLowerCase()});
         }
