@@ -256,6 +256,7 @@ function Home() {
           right: 8px;
           transform: translateY(-50%);
           top: 50%;
+          pointer-events: none;
         }
 
         .ais-SortBy-select,
