@@ -137,6 +137,7 @@ function Home() {
                     attribute="abilities.name"
                     searchable
                     showMore
+                    showMoreLimit={200}
                     translations={{
                       placeholder: "Search abilities",
                       noResults: "No abilities matching.",
@@ -322,7 +323,7 @@ function Home() {
         }
 
         .ais-RefinementList-showMore--disabled {
-          cursor: not-allowed;
+          display: none;
         }
 
         .ais-Highlight-highlighted {
