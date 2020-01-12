@@ -3,7 +3,6 @@ import { connectRefinementList } from "react-instantsearch-dom";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia";
 
 export const TypeList = connectRefinementList(({ items, refine }) => {
-  const hasRefined = items.some(item => item.isRefined);
   return (
     <ul>
       {items.map(type => (
@@ -16,7 +15,12 @@ export const TypeList = connectRefinementList(({ items, refine }) => {
               checked={type.isRefined}
               onChange={() => refine(type.value)}
             />
-            <TypeBadgeAlgolia active={type.isRefined} type={type.label} count={type.count} />
+
+            <TypeBadgeAlgolia
+              active={type.isRefined}
+              type={type.label}
+              count={type.count}
+            />
           </label>
         </li>
       ))}

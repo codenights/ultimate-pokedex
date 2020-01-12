@@ -5,7 +5,6 @@ import algoliasearch from "algoliasearch/lite";
 import {
   InstantSearch,
   Configure,
-  ClearRefinements,
   Panel,
   RangeInput,
   RefinementList,
@@ -13,7 +12,6 @@ import {
 } from "react-instantsearch-dom";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
-import { Icons } from "../src/components/Icons";
 import {
   getStateFromUrl,
   getUrlFromState,
@@ -241,11 +239,23 @@ function Home() {
         }
 
         .ais-RangeInput-input {
-          max-width: 62px;
+          max-width: 80px;
         }
 
         .ais-RangeInput-submit {
           display: none;
+        }
+
+        .ais-SortBy {
+          position: relative;
+        }
+
+        .ais-SortBy::after {
+          content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M14-5v16H-2V-5z'/%3E%3Cpath fill='%23FFF' stroke='%23FFF' stroke-width='.5' d='M2.228 1.332a.664.664 0 0 0-.942.001.665.665 0 0 0-.002.941l4.247 4.247c.259.26.679.26.938 0l4.247-4.247a.664.664 0 0 0-.002-.94.666.666 0 0 0-.942-.002L6 5.105 2.228 1.332z'/%3E%3C/g%3E%3C/svg%3E");
+          position: absolute;
+          right: 8px;
+          transform: translateY(-50%);
+          top: 50%;
         }
 
         .ais-SortBy-select,
@@ -254,8 +264,7 @@ function Home() {
           appearance: none;
           color: #fff;
           border-radius: 8px;
-          min-height: 38px;
-          padding: 8px;
+          padding: 4px 8px;
           border: 1px solid rgba(255, 255, 255, 0.16);
           background: linear-gradient(
             40deg,
@@ -277,6 +286,10 @@ function Home() {
             inset 1px 1px 1px rgba(255, 255, 255, 0.1),
             inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
             inset 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .ais-SortBy-select {
+          padding-right: 24px;
         }
 
         .ais-ClearRefinements-button {
