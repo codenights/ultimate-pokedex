@@ -81,22 +81,6 @@ function Home() {
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Types
                       </h2>
-
-                      <ClearRefinements
-                        transformItems={items =>
-                          items.filter(({ attribute }) =>
-                            attribute.startsWith("types.")
-                          )
-                        }
-                        translations={{
-                          reset: (
-                            <Icons
-                              icon="restore"
-                              className="text-white fill-current"
-                            />
-                          ),
-                        }}
-                      />
                     </div>
                   }
                 >
@@ -110,22 +94,6 @@ function Home() {
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Stats
                       </h2>
-
-                      <ClearRefinements
-                        transformItems={items =>
-                          items.filter(({ attribute }) =>
-                            attribute.startsWith("stats.")
-                          )
-                        }
-                        translations={{
-                          reset: (
-                            <Icons
-                              icon="restore"
-                              className="text-white fill-current"
-                            />
-                          ),
-                        }}
-                      />
                     </div>
                   }
                 >
@@ -162,22 +130,6 @@ function Home() {
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Abilities
                       </h2>
-
-                      <ClearRefinements
-                        transformItems={items =>
-                          items.filter(({ attribute }) =>
-                            attribute.startsWith("abilities.")
-                          )
-                        }
-                        translations={{
-                          reset: (
-                            <Icons
-                              icon="restore"
-                              className="text-white fill-current"
-                            />
-                          ),
-                        }}
-                      />
                     </div>
                   }
                 >
