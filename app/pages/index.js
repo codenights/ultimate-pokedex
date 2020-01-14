@@ -26,8 +26,24 @@ const searchClient = algoliasearch(
   process.env.ALGOLIA_API_KEY
 );
 
+function getTypeAttribute(value) {
+  switch (value) {
+    case "weak":
+      return "weakTo.name";
+    case "resistant":
+      return "resistantTo.name";
+    default:
+      return "types.name";
+  }
+}
+
 function Home() {
   const router = useRouter();
+
+  const initialTypeAttribute = getTypeAttribute();
+  const [typeAttribute, setTypeAttribute] = React.useState(
+    initialTypeAttribute
+  );
   const [searchState, setSearchState] = React.useState(
     getStateFromUrl(router.asPath)
   );
@@ -75,20 +91,47 @@ function Home() {
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Types
                       </h2>
+
+                      <div className="select-container">
+                        <select
+                          onChange={event => {
+                            setTypeAttribute(
+                              getTypeAttribute(event.target.value)
+                            );
+
+                            setSearchState(searchState => ({
+                              ...searchState,
+                              // If user scrolls to page `x` and then changes
+                              // the value of the select element, the results
+                              // will be displayed from page `x`.
+                              // We therefore need to reset the page value.
+                              page: 1,
+                            }));
+                          }}
+                        >
+                          <option value="default">Pokemon type</option>
+                          <option value="weak">Weak to</option>
+                          <option value="resistant">Resistant to</option>
+                        </select>
+                      </div>
                     </div>
                   }
                 >
-                  <TypeList attribute="types.name" operator="and" limit={18} />
+                  <TypeList
+                    attribute={typeAttribute}
+                    operator="and"
+                    limit={18}
+                  />
                 </Panel>
 
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Stats
                       </h2>
@@ -124,7 +167,7 @@ function Home() {
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Abilities
                       </h2>
@@ -146,7 +189,7 @@ function Home() {
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between mb-2">
+                    <div className="flex justify-between items-center mb-2">
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
                         Forms
                       </h2>
@@ -246,10 +289,12 @@ function Home() {
           display: none;
         }
 
+        .select-container,
         .ais-SortBy {
           position: relative;
         }
 
+        .select-container::after,
         .ais-SortBy::after {
           content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M14-5v16H-2V-5z'/%3E%3Cpath fill='%23FFF' stroke='%23FFF' stroke-width='.5' d='M2.228 1.332a.664.664 0 0 0-.942.001.665.665 0 0 0-.002.941l4.247 4.247c.259.26.679.26.938 0l4.247-4.247a.664.664 0 0 0-.002-.94.666.666 0 0 0-.942-.002L6 5.105 2.228 1.332z'/%3E%3C/g%3E%3C/svg%3E");
           position: absolute;
@@ -259,6 +304,7 @@ function Home() {
           pointer-events: none;
         }
 
+        select,
         .ais-SortBy-select,
         .ais-RangeInput-input,
         .ais-RefinementList-showMore {
@@ -276,6 +322,7 @@ function Home() {
             inset 1px 1px 1px rgba(255, 255, 255, 0.1);
         }
 
+        select:focus,
         .ais-SortBy-select:focus,
         .ais-RangeInput-input:focus,
         .ais-RefinementList-showMore:hover,
@@ -289,6 +336,7 @@ function Home() {
             inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
+        .select-container select,
         .ais-SortBy-select {
           padding-right: 24px;
         }
