@@ -8,7 +8,7 @@ export const PokemonList = connectInfiniteHits(
   ({ hits: pokemons, hasMore, refineNext }) => {
     const { setObservedNode } = useIntersectionObserver({
       callback: loadMore,
-      threshold: 0
+      threshold: 0,
     });
 
     function loadMore() {

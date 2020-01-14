@@ -10,6 +10,7 @@ import {
   RefinementList,
   SortBy,
 } from "react-instantsearch-dom";
+import { findResultsState } from "react-instantsearch-dom/server";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
 import {
@@ -26,11 +27,9 @@ const searchClient = algoliasearch(
   process.env.ALGOLIA_API_KEY
 );
 
-function Home() {
+function Home({ searchState: initialSearchState, resultsState, indexName }) {
   const router = useRouter();
-  const [searchState, setSearchState] = React.useState(
-    getStateFromUrl(router.asPath)
-  );
+  const [searchState, setSearchState] = React.useState(initialSearchState);
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
@@ -54,10 +53,31 @@ function Home() {
   }, []);
 
   return (
+    <Search
+      searchClient={searchClient}
+      indexName={indexName}
+      searchState={searchState}
+      resultsState={resultsState}
+      onSearchStateChange={onSearchStateChange}
+    />
+  );
+}
+
+function Search({
+  searchClient,
+  searchState,
+  resultsState,
+  indexName,
+  onSearchStateChange,
+}) {
+  console.log(searchState);
+
+  return (
     <InstantSearch
       searchClient={searchClient}
-      indexName={process.env.ALGOLIA_INDEX_NAME}
+      indexName={indexName}
       searchState={searchState}
+      resultsState={resultsState}
       onSearchStateChange={onSearchStateChange}
       createURL={getUrlFromState}
     >
@@ -349,5 +369,21 @@ function Home() {
     </InstantSearch>
   );
 }
+
+Home.getInitialProps = async ({ asPath }) => {
+  const searchState = getStateFromUrl(asPath);
+  const indexName = searchState.sortBy || process.env.ALGOLIA_INDEX_NAME;
+  const resultsState = await findResultsState(Search, {
+    searchClient,
+    searchState,
+    indexName,
+  });
+
+  return {
+    searchState,
+    resultsState,
+    indexName,
+  };
+};
 
 export default Home;
