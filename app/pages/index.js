@@ -69,11 +69,13 @@ function Search({
   resultsState,
   indexName,
   onSearchStateChange,
+  ...props
 }) {
   console.log(searchState);
 
   return (
     <InstantSearch
+      {...props}
       searchClient={searchClient}
       indexName={indexName}
       searchState={searchState}
