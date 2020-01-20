@@ -10,6 +10,7 @@ import {
   RefinementList,
   SortBy,
 } from "react-instantsearch-dom";
+import { findResultsState } from "react-instantsearch-dom/server";
 
 import { AppBarLayout } from "../src/components/AppBarLayout";
 import {
@@ -37,16 +38,10 @@ function getTypeAttribute(value) {
   }
 }
 
-function Home() {
+function Home({ searchState: initialSearchState, resultsState, indexName }) {
   const router = useRouter();
 
-  const initialTypeAttribute = getTypeAttribute();
-  const [typeAttribute, setTypeAttribute] = React.useState(
-    initialTypeAttribute
-  );
-  const [searchState, setSearchState] = React.useState(
-    getStateFromUrl(router.asPath)
-  );
+  const [searchState, setSearchState] = React.useState(initialSearchState);
   const [debouncedSetState, setDebouncedSetState] = React.useState(null);
 
   const onSearchStateChange = updatedSearchState => {
@@ -70,12 +65,42 @@ function Home() {
   }, []);
 
   return (
+    <Search
+      searchClient={searchClient}
+      indexName={indexName}
+      searchState={searchState}
+      resultsState={resultsState}
+      onSearchStateChange={onSearchStateChange}
+      setSearchState={setSearchState}
+    />
+  );
+}
+
+function Search({
+  searchClient,
+  searchState,
+  resultsState,
+  indexName,
+  onSearchStateChange,
+  onSearchParameters,
+  setSearchState,
+}) {
+  const initialTypeAttribute = getTypeAttribute();
+  const [typeAttribute, setTypeAttribute] = React.useState(
+    initialTypeAttribute
+  );
+
+  return (
     <InstantSearch
       searchClient={searchClient}
-      indexName={process.env.ALGOLIA_INDEX_NAME}
+      indexName={indexName}
       searchState={searchState}
-      onSearchStateChange={onSearchStateChange}
+      resultsState={resultsState}
       createURL={getUrlFromState}
+      onSearchStateChange={onSearchStateChange}
+      // `onSearchParameters` is passed by `findResultsState` when Server-Side
+      // Rendering.
+      onSearchParameters={onSearchParameters}
     >
       <AppBarLayout showSearchBox={true}>
         <Head>
@@ -397,5 +422,21 @@ function Home() {
     </InstantSearch>
   );
 }
+
+Home.getInitialProps = async ({ asPath }) => {
+  const searchState = getStateFromUrl(asPath);
+  const indexName = searchState.sortBy || process.env.ALGOLIA_INDEX_NAME;
+  const resultsState = await findResultsState(Search, {
+    searchClient,
+    searchState,
+    indexName,
+  });
+
+  return {
+    searchState,
+    resultsState,
+    indexName,
+  };
+};
 
 export default Home;
