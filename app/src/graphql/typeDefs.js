@@ -135,5 +135,7 @@ export const typeDefs = gql`
     move(id: Int!): Move!
 
     eggGroup(id: Int!): EggGroup!
+
+    type(id: Int!): Type!
   }
 `;

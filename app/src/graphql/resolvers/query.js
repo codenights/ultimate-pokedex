@@ -22,5 +22,7 @@ export const QueryResolver = {
   move: (obj, { id }, { moveRepository }) =>
     moveRepository.findMoveById.load(id).then(throwNotFoundIfEmpty),
   eggGroup: (obj, { id }, { eggGroupRepository }) =>
-    eggGroupRepository.findEggGroupById.load(id).then(throwNotFoundIfEmpty)
+    eggGroupRepository.findEggGroupById.load(id).then(throwNotFoundIfEmpty),
+  type: (ob, { id }, { typeRepository }) =>
+    typeRepository.findTypeById.load(id).then(throwNotFoundIfEmpty)
 };

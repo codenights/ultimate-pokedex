@@ -1,3 +1,5 @@
+import "../styles/main.css";
+
 import React from "react";
 import App from "next/app";
 import Head from "next/head";
@@ -57,7 +59,6 @@ class UltimatePokedexApp extends App {
             background: rgba(255, 255, 255, 0.5);
           }
         `}</style>
-
       </ShinyMode>
     );
   }

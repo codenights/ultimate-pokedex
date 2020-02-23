@@ -2,13 +2,11 @@ import React from "react";
 import Head from "next/head";
 import Error from "next/error";
 
-import { fetchMoveQuery } from "../../src/queries/fetchMove";
+import { fetchTypeQuery } from "../../src/queries/fetchType";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
-import { MoveOverview } from "../../src/components/MoveOverview";
-import { MoveDetail } from "../../src/components/MoveDetail";
 import { executeQuery } from "../../src/queries/executeQuery";
 
-const MovePage = ({ move, statusCode }) => {
+const TypePage = ({ type, statusCode }) => {
   if (statusCode === 404) {
     return <Error statusCode={404} />;
   }
@@ -17,12 +15,10 @@ const MovePage = ({ move, statusCode }) => {
     <AppBarLayout>
       <main>
         <Head>
-          <title>{move.name} | Ultimate Pokedex</title>
+          <title>{type.name} | Ultimate Pokedex</title>
         </Head>
 
-        <MoveOverview move={move} />
-
-        <MoveDetail move={move} />
+        <h1>{type.name}</h1>
       </main>
 
       <style jsx>{`
@@ -44,9 +40,9 @@ const MovePage = ({ move, statusCode }) => {
   );
 };
 
-MovePage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchMoveQuery(query.moveId), req, ({ move }) => ({
-    move
+TypePage.getInitialProps = ({ query, req }) =>
+  executeQuery(fetchTypeQuery(query.typeId), req, ({ type }) => ({
+    type
   }));
 
-export default MovePage;
+export default TypePage;
