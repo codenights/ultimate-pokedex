@@ -6,6 +6,7 @@ export const typeDefs = gql`
     name: String!
     color: String!
     damagesFrom: [Damage!]!
+    damagesTo: [Damage!]!
     pokemons: [Pokemon!]!
   }
 

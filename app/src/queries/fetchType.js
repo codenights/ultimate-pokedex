@@ -12,6 +12,13 @@ export const fetchTypeQuery = typeId => `
         }
         multiplier
       }
+      damagesTo {
+        type {
+          id
+          name
+        }
+        multiplier
+      }
       pokemons {
         id
         names {

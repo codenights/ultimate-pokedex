@@ -54,5 +54,5 @@ export const PokemonResolver = {
     pokemonRepository.findVarietiesByPokemonId(id),
 
   damagesFrom: ({ type_1_id, type_2_id }, args, { damageRepository }) =>
-    damageRepository.findDamagesByTypeIds(type_1_id, type_2_id)
+    damageRepository.findDamagesFromByTypeIds(type_1_id, type_2_id)
 };
