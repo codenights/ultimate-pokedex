@@ -6,7 +6,7 @@ function Handle({
   domain: [min, max],
   handle: { id, value, percent },
   disabled,
-  getHandleProps
+  getHandleProps,
 }) {
   return (
     <>
@@ -17,9 +17,9 @@ function Handle({
           left: `${percent}%`,
           width: 40,
           height: 25,
-          transform: "translate(-50%, -100%)",
+          transform: "translateX(-50%)",
           cursor: disabled ? "not-allowed" : "grab",
-          zIndex: 1
+          zIndex: 1,
         }}
         aria-hidden={true}
         {...getHandleProps(id)}
@@ -32,7 +32,7 @@ function Handle({
         aria-valuenow={value}
         style={{
           left: `${percent}%`,
-          cursor: disabled ? "not-allowed" : "grab"
+          cursor: disabled ? "not-allowed" : "grab",
         }}
         {...getHandleProps(id)}
       />
@@ -42,14 +42,12 @@ function Handle({
 
 export const RangeSlider = connectRange(
   ({ min, max, refine, currentRefinement, canRefine }) => {
-    if (!canRefine) {
-      return null;
-    }
+    const isDisabled = canRefine === false || min === max;
 
     const domain = [min, max];
     const [ticksValues, setTicksValues] = useState([
       currentRefinement.min,
-      currentRefinement.max
+      currentRefinement.max,
     ]);
 
     const onChange = values => {
@@ -64,13 +62,18 @@ export const RangeSlider = connectRange(
       setTicksValues([currentRefinement.min, currentRefinement.max]);
     }, [currentRefinement]);
 
+    if (isDisabled) {
+      return (
+        <div className="w-full h-6 mt-4 mx-3 mr-2 relative ais-RangeSlider" />
+      );
+    }
+
     return (
       <Slider
         mode={2}
         step={1}
         domain={domain}
         values={[currentRefinement.min, currentRefinement.max]}
-        disabled={!canRefine}
         onChange={onChange}
         onUpdate={setTicksValues}
         className="w-full h-6 mt-4 mx-3 mr-2 relative ais-RangeSlider"
@@ -90,7 +93,7 @@ export const RangeSlider = connectRange(
                   className="slider-track"
                   style={{
                     left: `${source.percent}%`,
-                    width: `${target.percent - source.percent}%`
+                    width: `${target.percent - source.percent}%`,
                   }}
                   {...getTrackProps()}
                 />
@@ -99,32 +102,35 @@ export const RangeSlider = connectRange(
           )}
         </Tracks>
 
-        <Handles>
-          {({ handles, getHandleProps }) => (
-            <div>
-              {handles.map(handle => (
-                <Handle
-                  key={handle.id}
-                  handle={handle}
-                  domain={domain}
-                  getHandleProps={getHandleProps}
-                />
-              ))}
-            </div>
-          )}
-        </Handles>
+        {/* We don't show the handles if a single Pokémon is listed */}
+        {isDisabled === false && (
+          <Handles>
+            {({ handles, getHandleProps }) => (
+              <div>
+                {handles.map(handle => (
+                  <Handle
+                    key={handle.id}
+                    handle={handle}
+                    domain={domain}
+                    getHandleProps={getHandleProps}
+                  />
+                ))}
+              </div>
+            )}
+          </Handles>
+        )}
 
         <Ticks values={ticksValues}>
           {({ ticks }) => (
             <div>
-              {ticks.map(({ id, count, value, percent }) => (
+              {ticks.map(({ id, count, value, percent }, index) => (
                 <div
-                  key={id}
+                  key={[id, index].join(":")}
                   className="slider-tick"
                   style={{
                     marginLeft: `${-(100 / count) / 2}%`,
                     width: `${100 / count}%`,
-                    left: `${percent}%`
+                    left: `${percent}%`,
                   }}
                 >
                   {value}
@@ -135,7 +141,6 @@ export const RangeSlider = connectRange(
         </Ticks>
 
         <style global jsx>{`
-
           .ais-RangeSlider .slider-rail {
             background-color: rgb(54, 58, 72);
             border-radius: 3px;
@@ -146,16 +151,26 @@ export const RangeSlider = connectRange(
           }
 
           .ais-RangeSlider .slider-track {
-            background: linear-gradient(90deg,rgb(96, 82, 135) 30%, rgb(116, 76, 183) 50%, rgb(157, 99, 231) 70%, rgb(247, 198, 184));
+            background: linear-gradient(
+              90deg,
+              rgb(96, 82, 135) 30%,
+              rgb(116, 76, 183) 50%,
+              rgb(157, 99, 231) 70%,
+              rgb(247, 198, 184)
+            );
             border-radius: 3px;
             cursor: pointer;
             height: 3px;
             position: absolute;
           }
-          
+
           .ais-RangeSlider::after {
             top: 0;
-            background: linear-gradient(90deg,rgb(157, 99, 231, 0.2), rgba(157, 99, 231, .8));
+            background: linear-gradient(
+              90deg,
+              rgb(157, 99, 231, 0.2),
+              rgba(157, 99, 231, 0.8)
+            );
             filter: blur(6px);
             display: block;
             content: "";
@@ -178,7 +193,7 @@ export const RangeSlider = connectRange(
 
           .ais-RangeSlider .slider-handle {
             border-radius: 50%;
-            box-shadow: 0 2px 8px 1px rgba(0,0,0,.6);
+            box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.6);
             cursor: grab;
             outline: none;
             position: absolute;
