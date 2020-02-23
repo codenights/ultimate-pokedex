@@ -1,37 +1,38 @@
 import React from "react";
 import { PokemonLink } from "../PokemonLink";
 import { TypeBadge } from "../TypeBadge";
+import { DamageTypeBadge } from "../DamageTypeBadge";
 
 export const TypeDetail = ({ type }) => (
   <div className="px-8 h-full overflow-y-auto border-box text-gray-400">
     <section className="py-8">
-      <h2 className="text-xl mb-4 text-gray-600">About {type.name}</h2>
-    </section>
-
-    <section className="py-8">
       <h2 className="text-xl mb-4 text-gray-600">Damages from</h2>
 
-      <ul>
+      <ul className="inline-flex">
         {type.damagesFrom.map(damageType => (
           <li>
-            {damageType.type.name} x{damageType.multiplier}
+            <DamageTypeBadge
+              type={damageType.type}
+              multiplier={damageType.multiplier}
+            />
           </li>
         ))}
       </ul>
 
       <h2 className="text-xl mb-4 text-gray-600">Damages to</h2>
 
-      <ul>
+      <ul className="inline-flex">
         {type.damagesTo.map(damageType => (
           <li>
-            {damageType.type.name} x{damageType.multiplier}
+            <DamageTypeBadge
+              type={damageType.type}
+              multiplier={damageType.multiplier}
+            />
           </li>
         ))}
       </ul>
 
-      <h2 className="text-xl mb-4 text-gray-600">
-        Pokemon
-      </h2>
+      <h2 className="text-xl mb-4 text-gray-600">Pokemon</h2>
 
       <table className="table-auto w-full">
         <thead>
