@@ -2,113 +2,62 @@ import React from "react";
 import Link from "next/link";
 
 import { TypeBadge } from "../TypeBadge";
-import { Section } from "./Section";
+import { PokemonLink } from "../PokemonLink";
 
 export const AbilityDetails = ({ ability }) => (
-  <div>
-    <Section>
+  <div className="px-8 h-full overflow-y-auto border-box text-gray-400">
+    <section className="py-8">
+      <h2 className="text-xl mb-4 text-gray-600">About {ability.name}</h2>
       <p>{ability.description}</p>
-    </Section>
+    </section>
 
-    <Section>
-      <h2>Pokemons using {ability.name}</h2>
+    <section className="py-8">
+      <h2 className="text-xl mb-4 text-gray-600">
+        Pokemons using {ability.name}
+      </h2>
 
-      <table>
+      <table className="table-auto w-full">
         <thead>
-          <tr>
-            <td>#</td>
-            <td>Pokemon</td>
-            <td>Type(s)</td>
-            <td>Hidden ability</td>
+          <tr className="border-b-2 border-gray-700">
+            <td className="p-4 font-bold">#</td>
+            <td className="p-4 font-bold">Pokemon</td>
+            <td className="p-4 font-bold">Types</td>
           </tr>
         </thead>
 
         <tbody>
           {ability.pokemons.map(({ isHidden, pokemon }) => (
-            <tr key={pokemon.id}>
-              <td># {pokemon.id}</td>
+            <tr key={pokemon.id} className="border-b border-gray-700">
+              <td className="py-2 px-2">{pokemon.id}</td>
 
-              <td>
-                <img src={pokemon.spriteUrl} alt={pokemon.names.en} />
-
-                <Link
-                  href="/pokemon/[nationalId]"
-                  as={`/pokemon/${pokemon.id}`}
+              <td className="py-2 px-2">
+                <PokemonLink
+                  id={pokemon.id}
+                  names={pokemon.names}
+                  types={pokemon.types}
+                  spriteUrl={pokemon.spriteUrl}
                 >
-                  <a>{pokemon.names.en}</a>
-                </Link>
+                  {isHidden && (
+                    <span className="ml-4 px-2 py-0 text-xs rounded bg-indigo-300 text-indigo-900 leading-tight">
+                      Hidden
+                    </span>
+                  )}
+                </PokemonLink>
               </td>
 
-              <td>
-                <ul>
+              <td className="py-2 px-2">
+                <ul className="inline-flex">
                   {pokemon.types.map(type => (
-                    <li key={type.id}>
+                    <li key={type.id} className="mr-4 last:mr-0">
                       <TypeBadge type={type} />
                     </li>
                   ))}
                 </ul>
               </td>
-
-              <td>{isHidden ? "Yes" : "No"}</td>
             </tr>
           ))}
         </tbody>
       </table>
-    </Section>
-
-    <style jsx>{`
-      div {
-        box-sizing: border-box;
-        padding: 20px;
-        height: 100%;
-        overflow-y: auto;
-      }
-
-      img {
-        width: 50px;
-        vertical-align: middle;
-      }
-
-      ul {
-        display: inline-flex;
-      }
-
-      li + li {
-        margin-left: 10px;
-      }
-
-      a {
-        margin: 0 10px;
-      }
-
-      table {
-        width: 100%;
-        border: 1px solid #eee;
-        border-radius: 4px;
-        background: #f1f1f1;
-      }
-
-      thead {
-        background: #373737;
-        color: #fff;
-        font-weight: bold;
-      }
-
-      thead td {
-        padding: 10px;
-      }
-
-      td {
-        padding: 10px 10px;
-      }
-
-      tbody td {
-        vertical-align: middle;
-      }
-
-      tbody tr:nth-child(even) {
-        background: #fff;
-      }
-    `}</style>
+    </section>
   </div>
 );

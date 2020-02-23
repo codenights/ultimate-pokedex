@@ -2,6 +2,7 @@ import React from "react";
 
 import { Section } from "./Section";
 import { PokemonLink } from "../PokemonLink";
+import Link from "next/link";
 
 export const AlternateForms = ({ pokemon }) => {
   if (pokemon.varieties.length === 0) {
@@ -15,10 +16,12 @@ export const AlternateForms = ({ pokemon }) => {
       <ul>
         {pokemon.varieties.map(variety => (
           <li key={variety.id}>
-            <PokemonLink pokemonId={variety.id}>
-              <img src={variety.artworkUrl} alt={variety.name} />
-              <p>{variety.names.en}</p>
-            </PokemonLink>
+            <Link href="/pokemon/[nationalId]" as={`/pokemon/${variety.id}`}>
+              <a>
+                <img src={variety.artworkUrl} alt={variety.name} />
+                <p>{variety.names.en}</p>
+              </a>
+            </Link>
           </li>
         ))}
       </ul>

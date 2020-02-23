@@ -23,7 +23,7 @@ const getMovesByVersionGroups = (moves, selectedVersionGroupId) =>
       ...x,
       learn: x.learn.find(
         ({ versionGroup }) => versionGroup.id === selectedVersionGroupId
-      )
+      ),
     }));
 export const Moves = ({ pokemon }) => {
   const [selectedVersionGroupId, setSelectedVersionGroupId] = useState(18);
@@ -36,10 +36,10 @@ export const Moves = ({ pokemon }) => {
   return (
     <Section>
       <header>
-      <h2 className="text-2xl text-gray-500">Moves</h2>
+        <h2 className="text-2xl text-gray-500">Moves</h2>
 
         <select
-          name="version-gorups"
+          name="version-groups"
           id="version-groups"
           onChange={e => setSelectedVersionGroupId(Number(e.target.value))}
           value={selectedVersionGroupId}
@@ -51,6 +51,7 @@ export const Moves = ({ pokemon }) => {
           ))}
         </select>
       </header>
+
       <table className="table-auto">
         <thead>
           <tr className="border-b border-gray-800 text-sm text-gray-400">
@@ -77,9 +78,15 @@ export const Moves = ({ pokemon }) => {
               <td className="border-t border-gray-800 px-4 py-1">
                 <MoveCategoryBadge category={move.damageClass} />
               </td>
-              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.power}</td>
-              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.pp}</td>
-              <td className="border-t border-gray-800 px-4 py-1 text-center">{move.accuracy}</td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">
+                {move.power}
+              </td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">
+                {move.pp}
+              </td>
+              <td className="border-t border-gray-800 px-4 py-1 text-center">
+                {move.accuracy}
+              </td>
               <td className="border-t border-gray-800 px-4 py-1">
                 {learn.method}{" "}
                 {learn.method === "level-up" && <span>({learn.level})</span>}
