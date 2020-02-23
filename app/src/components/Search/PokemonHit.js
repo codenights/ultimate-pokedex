@@ -3,7 +3,6 @@ import { Highlight } from "react-instantsearch-dom";
 
 import { TypeIcon } from "../TypeIcon";
 import { useShiny } from "../ShinyMode";
-import { PokemonLink } from "../PokemonLink";
 import {
   Card,
   CardFrame,

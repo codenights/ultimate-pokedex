@@ -1,5 +1,5 @@
-export * from "./Search";
+export { SearchBox } from "./SearchBox";
 export { PokemonHit } from "./PokemonHit";
-export { useIntersectionObserver } from "./hooks";
 export { PokemonList } from "./PokemonList";
-export { preparePokemons } from "./PokemonList";
+export { TypeList } from "./TypeList";
+export { RangeSlider } from "./RangeSlider";
