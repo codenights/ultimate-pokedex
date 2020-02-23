@@ -1,11 +1,17 @@
 import React from "react";
 import Error from "next/error";
-import Link from "next/link";
+import Head from "next/head";
 
 import { executeQuery } from "../../src/queries/executeQuery";
 import { fetchEggGroup } from "../../src/queries/fetchEggGroup";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { TypeBadge } from "../../src/components/TypeBadge";
+import { PokemonLink } from "../../src/components/PokemonLink";
+import {
+  ColumnLayout,
+  LeftPane,
+  LeftPaneTitle,
+} from "../../src/components/ColumnLayout/ColumnLayout";
 
 const EggGroupPage = ({ eggGroup, statusCode }) => {
   if (statusCode === 404) {
@@ -14,136 +20,65 @@ const EggGroupPage = ({ eggGroup, statusCode }) => {
 
   return (
     <AppBarLayout>
-      <div>
-        <header>
-          <h1>{eggGroup.name}</h1>
-        </header>
+      <Head>
+        <title>{eggGroup.name} | Ultimate Pokedex</title>
+      </Head>
 
-        <main>
-          <table>
-            <thead>
-            <tr>
-              <td>#</td>
-              <td>Pokemon</td>
-              <td>Type(s)</td>
-            </tr>
-            </thead>
+      <main>
+        <ColumnLayout>
+          <LeftPane>
+            <LeftPaneTitle>{eggGroup.name}</LeftPaneTitle>
+          </LeftPane>
 
-            <tbody>
-            {eggGroup.pokemons.map(pokemon => (
-              <tr key={pokemon.id}>
-                <td># {pokemon.id}</td>
+          <div className="px-8 h-full overflow-y-auto border-box text-gray-400">
+            <section className="py-8">
+              <table className="table-auto w-full">
+                <thead>
+                  <tr className="border-b-2 border-gray-700">
+                    <th className="p-4 font-bold">#</th>
+                    <th className="p-4 font-bold">Pokemon</th>
+                    <th className="p-4 font-bold">Types</th>
+                  </tr>
+                </thead>
 
-                <td>
-                  <img src={pokemon.spriteUrl} alt={pokemon.names.en}/>
+                <tbody>
+                  {eggGroup.pokemons.map(pokemon => (
+                    <tr key={pokemon.id} className="border-b border-gray-700">
+                      <td className="py-2 px-2">{pokemon.id}</td>
 
-                  <Link
-                    href="/pokemon/[nationalId]"
-                    as={`/pokemon/${pokemon.id}`}
-                  >
-                    <a>{pokemon.names.en}</a>
-                  </Link>
-                </td>
+                      <td className="py-2 px-2">
+                        <PokemonLink
+                          id={pokemon.id}
+                          names={pokemon.names}
+                          types={pokemon.types}
+                          spriteUrl={pokemon.spriteUrl}
+                        />
+                      </td>
 
-                <td>
-                  <ul>
-                    {pokemon.types.map(type => (
-                      <li key={type.id}>
-                        <TypeBadge type={type}/>
-                      </li>
-                    ))}
-                  </ul>
-                </td>
-              </tr>
-            ))}
-            </tbody>
-          </table>
-        </main>
-      </div>
-
-      <style jsx>{`
-        div {
-          display: grid;
-          grid-template-columns: 1fr 2fr;
-        }
-  
-        header {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: #76e;
-        }
-  
-        h1 {
-          font-size: 3.5rem;
-          line-height: 1;
-          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-          padding: 20px 0;
-          border: 2px solid rgba(0, 0, 0, 0.2);
-          border-left-color: transparent;
-          border-right-color: transparent;
-        }
-  
-        main {
-          box-sizing: border-box;
-          height: 100%;
-          overflow-y: auto;
-          padding: 20px;
-        }
-  
-        img {
-          width: 50px;
-          vertical-align: middle;
-        }
-  
-        ul {
-          display: inline-flex;
-        }
-  
-        li + li {
-          margin-left: 10px;
-        }
-  
-        a {
-          margin: 0 10px;
-        }
-  
-        table {
-          width: 100%;
-          border: 1px solid #eee;
-          border-radius: 4px;
-          background: #f1f1f1;
-        }
-  
-        thead {
-          background: #373737;
-          color: #fff;
-          font-weight: bold;
-        }
-  
-        thead td {
-          padding: 10px;
-        }
-  
-        td {
-          padding: 10px 10px;
-        }
-  
-        tbody td {
-          vertical-align: middle;
-        }
-  
-        tbody tr:nth-child(even) {
-          background: #fff;
-        }
-      `}</style>
+                      <td className="py-2 px-2">
+                        <ul className="inline-flex">
+                          {pokemon.types.map(type => (
+                            <li key={type.id} className="mr-4 last:mr-0">
+                              <TypeBadge type={type} />
+                            </li>
+                          ))}
+                        </ul>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </div>
+        </ColumnLayout>
+      </main>
     </AppBarLayout>
   );
 };
 
 EggGroupPage.getInitialProps = ({ query, req }) =>
   executeQuery(fetchEggGroup(query.eggGroupId), req, ({ eggGroup }) => ({
-    eggGroup
+    eggGroup,
   }));
 
 export default EggGroupPage;
