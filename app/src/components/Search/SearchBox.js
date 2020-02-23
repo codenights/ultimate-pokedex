@@ -1,8 +1,23 @@
 import React from "react";
 import { connectSearchBox } from "react-instantsearch-dom";
 
+const DEBOUNCE_TIMER = 400;
+
 export const SearchBox = connectSearchBox(props => {
   const inputRef = React.useRef(null);
+  const timerId = React.useRef(null);
+  const [query, setQuery] = React.useState(props.currentRefinement);
+
+  function onChange(event) {
+    const value = event.currentTarget.value;
+
+    clearTimeout(timerId.current);
+    timerId.current = setTimeout(() => {
+      props.refine(value);
+    }, DEBOUNCE_TIMER);
+
+    setQuery(value);
+  }
 
   function onSubmit(event) {
     event.preventDefault();
@@ -11,6 +26,7 @@ export const SearchBox = connectSearchBox(props => {
   }
 
   function onReset() {
+    setQuery("");
     props.refine("");
     inputRef.current.focus();
   }
@@ -35,8 +51,8 @@ export const SearchBox = connectSearchBox(props => {
           spellCheck="false"
           required
           maxLength="512"
-          value={props.currentRefinement}
-          onChange={event => props.refine(event.currentTarget.value)}
+          value={query}
+          onChange={onChange}
           className="ais-SearchBox-input"
         />
 
@@ -56,7 +72,7 @@ export const SearchBox = connectSearchBox(props => {
           type="reset"
           title="Clear query"
           className="ais-SearchBox-reset"
-          hidden={!props.currentRefinement}
+          hidden={!query || props.isSearchStalled === true}
         >
           <svg
             className="ais-SearchBox-resetIcon"
