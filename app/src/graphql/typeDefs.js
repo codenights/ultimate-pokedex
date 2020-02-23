@@ -5,6 +5,9 @@ export const typeDefs = gql`
     id: Int!
     name: String!
     color: String!
+    damagesFrom: [Damage!]!
+    damagesTo: [Damage!]!
+    pokemons: [Pokemon!]!
   }
 
   type PokemonStat {
@@ -135,5 +138,7 @@ export const typeDefs = gql`
     move(id: Int!): Move!
 
     eggGroup(id: Int!): EggGroup!
+
+    type(id: Int!): Type!
   }
 `;

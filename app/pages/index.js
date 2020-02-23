@@ -20,7 +20,6 @@ import {
 import { TypeList } from "../src/components/Search/TypeList";
 import { RangeSlider } from "../src/components/Search/RangeSlider";
 import { PokemonList } from "../src/components/Search/PokemonList";
-import "../styles/main.css";
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,
