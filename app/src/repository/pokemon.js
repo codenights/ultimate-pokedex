@@ -64,9 +64,14 @@ export function PokemonRepository(knex) {
           .distinct()
           .from("pokemon_move")
           .where({
-            move_id: moveId
+            move_id: moveId,
           });
       });
-    }
+    },
+    findPokemonsByTypeId(typeId) {
+      return knex("pokemon")
+        .where("type_1_id", "=", typeId)
+        .orWhere("type_2_id", "=", typeId);
+    },
   };
 }

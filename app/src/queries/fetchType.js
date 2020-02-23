@@ -5,6 +5,25 @@ export const fetchTypeQuery = typeId => `
       id
       name
       color
+      damagesFrom {
+        type {
+          id
+          name
+        }
+        multiplier
+      }
+      pokemons {
+        id
+        names {
+          en
+        }
+        spriteUrl
+        types {
+          color
+          id
+          name
+        }
+      }
     }
   }
 `;

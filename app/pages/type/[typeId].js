@@ -5,6 +5,7 @@ import Error from "next/error";
 import { fetchTypeQuery } from "../../src/queries/fetchType";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { executeQuery } from "../../src/queries/executeQuery";
+import { TypeDetail } from "../../src/components/TypeDetail";
 
 const TypePage = ({ type, statusCode }) => {
   if (statusCode === 404) {
@@ -18,7 +19,7 @@ const TypePage = ({ type, statusCode }) => {
           <title>{type.name} | Ultimate Pokedex</title>
         </Head>
 
-        <h1>{type.name}</h1>
+        <TypeDetail type={type} />
       </main>
 
       <style jsx>{`
@@ -42,7 +43,7 @@ const TypePage = ({ type, statusCode }) => {
 
 TypePage.getInitialProps = ({ query, req }) =>
   executeQuery(fetchTypeQuery(query.typeId), req, ({ type }) => ({
-    type
+    type,
   }));
 
 export default TypePage;

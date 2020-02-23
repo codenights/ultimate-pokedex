@@ -5,6 +5,8 @@ export const typeDefs = gql`
     id: Int!
     name: String!
     color: String!
+    damagesFrom: [Damage!]!
+    pokemons: [Pokemon!]!
   }
 
   type PokemonStat {
