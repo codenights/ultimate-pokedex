@@ -26,7 +26,7 @@ export const Dcard = styled.div`
 `;
 
 export const Card = styled.div.attrs({
-  className: "card"
+  className: "card",
 })`
   height: 130px;
   position: relative;
@@ -68,15 +68,16 @@ export const CardFrame = styled.div`
 `;
 
 export const PokemonArtwork = styled.img.attrs(props => ({
-  src: props.artworkUrl
+  src: props.artworkUrl,
 }))`
   position: absolute;
   filter: drop-shadow(15px 15px 10px rgba(4, 2, 36, 0.377));
   top: 45%;
-  left: 35%;
+  left: 40%;
   transform-origin: center;
   transform: scale(0.65) translateY(-50%) translateX(-55%) translateZ(60px);
   text-align: center;
+  max-height: 180px;
 `;
 
 export const Trigger = styled.div`
