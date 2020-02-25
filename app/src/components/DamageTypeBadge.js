@@ -12,7 +12,6 @@ export const DamageTypeBadge = ({ type, multiplier }) => (
 DamageTypeBadge.propTypes = {
   type: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
   }),
   multiplier: PropTypes.number.isRequired,
 };

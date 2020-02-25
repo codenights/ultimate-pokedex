@@ -44,6 +44,7 @@ const PokemonPage = ({ pokemon, statusCode }) => {
         <Head>
           <title>{pokemon.names.en} | Ultimate Pokedex</title>
         </Head>
+
         <PokemonOverview pokemon={pokemon} />
         <PokemonDetails pokemon={pokemon} />
       </main>
@@ -53,7 +54,7 @@ const PokemonPage = ({ pokemon, statusCode }) => {
 
 PokemonPage.getInitialProps = ({ query, req }) =>
   executeQuery(fetchPokemonQuery(query.nationalId), req, ({ pokemon }) => ({
-    pokemon
+    pokemon,
   }));
 
 export default PokemonPage;

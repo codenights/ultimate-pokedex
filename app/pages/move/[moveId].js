@@ -4,8 +4,7 @@ import Error from "next/error";
 
 import { fetchMoveQuery } from "../../src/queries/fetchMove";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
-import { MoveOverview } from "../../src/components/MoveOverview";
-import { MoveDetail } from "../../src/components/MoveDetail";
+import { MoveDetails } from "../../src/components/MoveDetails";
 import { executeQuery } from "../../src/queries/executeQuery";
 import {
   ColumnLayout,
@@ -32,7 +31,7 @@ const MovePage = ({ move, statusCode }) => {
             <TypeBadge type={move.type} />
           </LeftPane>
 
-          <MoveDetail move={move} />
+          <MoveDetails move={move} />
         </ColumnLayout>
       </main>
     </AppBarLayout>

@@ -31,6 +31,5 @@ export const TypeBadge = ({ type, children }) => (
 TypeBadge.propTypes = {
   type: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
   }),
 };

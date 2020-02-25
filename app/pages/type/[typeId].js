@@ -5,7 +5,7 @@ import Error from "next/error";
 import { fetchTypeQuery } from "../../src/queries/fetchType";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { executeQuery } from "../../src/queries/executeQuery";
-import { TypeDetail } from "../../src/components/TypeDetail";
+import { TypeDetails } from "../../src/components/TypeDetails";
 import {
   ColumnLayout,
   LeftPane,
@@ -29,7 +29,7 @@ const TypePage = ({ type, statusCode }) => {
             <LeftPaneTitle>{type.name}</LeftPaneTitle>
           </LeftPane>
 
-          <TypeDetail type={type} />
+          <TypeDetails type={type} />
         </ColumnLayout>
       </main>
     </AppBarLayout>

@@ -12,6 +12,155 @@ const GlobalStyle = createGlobalStyle`
     );
   }
 
+  .ais-SearchBox {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: #fff;
+  }
+
+  .ais-SearchBox-form {
+    width: 100%;
+  }
+
+  .ais-SearchBox-input {
+    padding: 10px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    appearance: none;
+    border-radius: 8px;
+    height: 38px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: linear-gradient(
+      40deg,
+      rgba(255, 255, 255, 0.24),
+      rgba(255, 255, 255, 0.1)
+    );
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .ais-SearchBox-input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.1),
+      inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+
+  .ais-SearchBox-input::-webkit-search-decoration,
+  .ais-SearchBox-input::-webkit-search-cancel-button,
+  .ais-SearchBox-input::-webkit-search-results-button,
+  .ais-SearchBox-input::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  .ais-SearchBox-submit {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .ais-SearchBox-submitIcon {
+    fill: #fff;
+    width: 14px;
+    height: 14px;
+  }
+
+  .ais-SearchBox-reset,
+  .ais-SearchBox-loadingIndicator {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 100%;
+    right: 0;
+    top: 0;
+  }
+
+  .ais-SearchBox-reset[hidden],
+  .ais-SearchBox-loadingIndicator[hidden] {
+    display: none;
+  }
+
+  .ais-SearchBox-resetIcon {
+    fill: #fff;
+    width: 10px;
+    height: 10px;
+  }
+
+  .ais-RangeSlider .slider-rail {
+    background-color: rgb(54, 58, 72);
+    border-radius: 3px;
+    cursor: pointer;
+    height: 3px;
+    position: absolute;
+    width: 100%;
+  }
+
+  .ais-RangeSlider .slider-track {
+    background: linear-gradient(
+      90deg,
+      rgb(96, 82, 135) 30%,
+      rgb(116, 76, 183) 50%,
+      rgb(157, 99, 231) 70%,
+      rgb(247, 198, 184)
+    );
+    border-radius: 3px;
+    cursor: pointer;
+    height: 3px;
+    position: absolute;
+  }
+
+  .ais-RangeSlider::after {
+    top: 0;
+    background: linear-gradient(
+      90deg,
+      rgb(157, 99, 231, 0.2),
+      rgba(157, 99, 231, 0.8)
+    );
+    filter: blur(6px);
+    display: block;
+    content: "";
+    width: 100%;
+    height: 4px;
+    position: absolute;
+  }
+
+  .ais-RangeSlider .slider-tick {
+    color: rgb(113, 128, 150);
+    cursor: grab;
+    display: flex;
+    font-size: 11px;
+    position: absolute;
+    text-align: center;
+    top: 8px;
+    transform: translateX(-50%);
+    user-select: none;
+  }
+
+  .ais-RangeSlider .slider-handle {
+    border-radius: 50%;
+    box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.6);
+    cursor: grab;
+    outline: none;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    z-index: 1;
+    background: url("/img/pokeball-tick.svg");
+  }
+
   .ais-RangeInput {
     color: #fff;
   }

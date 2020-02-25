@@ -3,7 +3,7 @@ import React from "react";
 import { TypeBadge } from "../TypeBadge";
 import { PokemonLink } from "../PokemonLink";
 
-export const MoveDetail = ({ move }) => (
+export const MoveDetails = ({ move }) => (
   <div className="px-8 h-full overflow-y-auto border-box text-gray-400">
     <section className="py-8">
       <h2 className="text-xl mb-4 text-gray-600">About {move.name}</h2>
@@ -58,12 +58,7 @@ export const MoveDetail = ({ move }) => (
             <tr key={id}>
               <td className="py-2 px-2">{id}</td>
               <td className="py-2 px-2">
-                <PokemonLink
-                  id={id}
-                  names={names}
-                  types={types}
-                  spriteUrl={spriteUrl}
-                />
+                <PokemonLink id={id} names={names} spriteUrl={spriteUrl} />
               </td>
               <td className="py-2 px-2">
                 <ul className="inline-flex">
