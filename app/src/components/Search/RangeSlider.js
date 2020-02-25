@@ -102,23 +102,20 @@ export const RangeSlider = connectRange(
           )}
         </Tracks>
 
-        {/* We don't show the handles if a single Pokémon is listed */}
-        {isDisabled === false && (
-          <Handles>
-            {({ handles, getHandleProps }) => (
-              <div>
-                {handles.map(handle => (
-                  <Handle
-                    key={handle.id}
-                    handle={handle}
-                    domain={domain}
-                    getHandleProps={getHandleProps}
-                  />
-                ))}
-              </div>
-            )}
-          </Handles>
-        )}
+        <Handles>
+          {({ handles, getHandleProps }) => (
+            <div>
+              {handles.map(handle => (
+                <Handle
+                  key={handle.id}
+                  handle={handle}
+                  domain={domain}
+                  getHandleProps={getHandleProps}
+                />
+              ))}
+            </div>
+          )}
+        </Handles>
 
         <Ticks values={ticksValues}>
           {({ ticks }) => (
