@@ -13,7 +13,7 @@ const POKEMON_TO = 890;
 async function run() {
   console.log(
     chalk.bold(
-      `Scraping Pokemon from ${chalk.blue(POKEMON_FROM)} to ${chalk.blue(
+      `Scraping sprites from ${chalk.blue(POKEMON_FROM)} to ${chalk.blue(
         POKEMON_TO
       )} at ${chalk.green(ENDPOINT)}`
     )
@@ -35,7 +35,7 @@ async function run() {
 
   console.log(
     chalk.bold(
-      `Scraping Shiny Pokemon from ${chalk.blue(POKEMON_FROM)} to ${chalk.blue(
+      `Scraping shiny sprites from ${chalk.blue(POKEMON_FROM)} to ${chalk.blue(
         POKEMON_TO
       )} at ${chalk.green(ENDPOINT)}`
     )
