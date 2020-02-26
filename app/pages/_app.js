@@ -58,7 +58,7 @@ class UltimatePokedexApp extends App {
             div {
               align-items: center;
               justify-content: center;
-              background: rgba(255, 255, 255, 0.5);
+              background: rgba(26, 32, 44, 0.64);
             }
           `}</style>
         </ShinyMode>
