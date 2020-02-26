@@ -1,6 +1,8 @@
 const fetch = require("isomorphic-unfetch");
 const nlp = require("compromise");
 
+const { mainIndex } = require("./algoliaIndices");
+
 nlp.extend(require("compromise-syllables"));
 
 const GRAPHQL_ENDPOINT = "http://localhost:3000/api/graphql";
@@ -129,6 +131,16 @@ async function fetchPokemons() {
   return pokemons.map(transformPokemon);
 }
 
+async function saveObjects() {
+  try {
+    const pokemons = await fetchPokemons();
+
+    await mainIndex.saveObjects(pokemons);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
-  fetchPokemons,
+  saveObjects,
 };

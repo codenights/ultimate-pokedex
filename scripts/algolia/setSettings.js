@@ -1,3 +1,5 @@
+const { mainIndex } = require("./algoliaIndices");
+
 const indexSettings = {
   searchableAttributes: [
     "names.en",
@@ -24,6 +26,16 @@ const indexSettings = {
   ],
 };
 
+async function setSettings() {
+  try {
+    await mainIndex.setSettings(indexSettings, {
+      forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = {
-  indexSettings,
+  setSettings,
 };

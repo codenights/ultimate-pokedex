@@ -1,25 +1,9 @@
-require("dotenv").config();
-
-const algoliasearch = require("algoliasearch");
 const ora = require("ora");
 const chalk = require("chalk");
 
-const { fetchPokemons } = require("./fetchPokemons");
-const { indexSettings } = require("./indexSettings");
-
-if (
-  !process.env.ALGOLIA_APP_ID ||
-  !process.env.ALGOLIA_ADMIN_API_KEY ||
-  !process.env.ALGOLIA_INDEX_NAME
-) {
-  throw new Error("You need to set the Algolia environment variables.");
-}
-
-const client = algoliasearch(
-  process.env.ALGOLIA_APP_ID,
-  process.env.ALGOLIA_ADMIN_API_KEY
-);
-const index = client.initIndex(process.env.ALGOLIA_INDEX_NAME);
+const { saveObjects } = require("./saveObjects");
+const { setSettings } = require("./setSettings");
+const { saveRules } = require("./saveRules");
 
 async function run() {
   console.log(
@@ -33,21 +17,20 @@ async function run() {
 
   try {
     spinner.text = "Fetching all Pokemon";
-    const pokemons = await fetchPokemons();
 
     spinner.text = `Indexing Pokemon to the index ${chalk.bold.blue(
       process.env.ALGOLIA_INDEX_NAME
     )}`;
 
     try {
-      await index.saveObjects(pokemons);
+      await saveObjects();
 
       spinner.text = "Setting indices configuration";
 
       try {
-        await index.setSettings(indexSettings, {
-          forwardToReplicas: true,
-        });
+        await setSettings();
+        // @TODO: activate once we want to roll out Rules.
+        // await saveRules();
 
         spinner.succeed("The Algolia indices were updated.");
       } catch (error) {
