@@ -29,8 +29,7 @@ async function run() {
 
       try {
         await setSettings();
-        // @TODO: activate once we want to roll out Rules.
-        // await saveRules();
+        await saveRules();
 
         spinner.succeed("The Algolia indices were updated.");
       } catch (error) {

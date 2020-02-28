@@ -17,22 +17,22 @@ const rules = [
       filterPromotes: true,
     },
   },
-  {
-    objectID: "legendary",
-    description: "Display legendaries",
-    condition: {
-      pattern: "legendary",
-      anchoring: "contains",
-      alternatives: true,
-    },
-    consequence: {
-      params: {
-        facetFilters: ["legendary:true"],
-        query: "",
-      },
-      filterPromotes: true,
-    },
-  },
+  // {
+  //   objectID: "legendary",
+  //   description: "Display legendaries",
+  //   condition: {
+  //     pattern: "legendary",
+  //     anchoring: "contains",
+  //     alternatives: true,
+  //   },
+  //   consequence: {
+  //     params: {
+  //       facetFilters: ["legendary:true"],
+  //       query: "",
+  //     },
+  //     filterPromotes: true,
+  //   },
+  // },
 ];
 
 async function saveRules() {

@@ -2,6 +2,7 @@ const fetch = require("isomorphic-unfetch");
 const nlp = require("compromise");
 
 const { mainIndex } = require("./algoliaIndices");
+const { startersId } = require("./data/starters");
 
 nlp.extend(require("compromise-syllables"));
 
@@ -92,6 +93,7 @@ function transformPokemon(pokemon) {
   return {
     ...pokemon,
     objectID: String(pokemon.id),
+    starter: startersId.includes(pokemon.id),
     nameTokens: {
       en: getNameTokens(nlp(pokemon.names.en).syllables()[0]),
       fr: getNameTokens(nlp(pokemon.names.fr).syllables()[0]),

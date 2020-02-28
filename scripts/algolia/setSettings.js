@@ -23,6 +23,7 @@ const indexSettings = {
     "stats.specialAttack",
     "stats.specialDefense",
     "stats.speed",
+    "starter",
   ],
 };
 
