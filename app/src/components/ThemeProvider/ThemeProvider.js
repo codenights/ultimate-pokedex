@@ -143,20 +143,20 @@ const GlobalStyle = createGlobalStyle`
     font-size: 11px;
     position: absolute;
     text-align: center;
-    top: 8px;
+    top: 10px;
     transform: translateX(-50%);
     user-select: none;
   }
 
   .ais-RangeSlider .slider-handle {
     border-radius: 50%;
-    box-shadow: 0 2px 8px 1px rgba(0, 0, 0, 0.6);
+    border: 2px solid #1a202c;
     cursor: grab;
     outline: none;
     position: absolute;
     transform: translate(-50%, -50%);
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     z-index: 1;
     background: url("/img/pokeball-tick.svg");
   }
@@ -276,6 +276,19 @@ const GlobalStyle = createGlobalStyle`
     font-style: normal;
     background-color: #718096;
     color: #fff;
+  }
+
+  .ais-Panel {
+    background-image: radial-gradient(-20% 48%, #3E4250 0%, #1C2332 54%);
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.36), 7px 7px 18px 0 rgba(0,0,0,0.32), -7px -7px 18px 0 #364056, inset 0 0 0 1px rgba(113,113,195,0.08), inset 1px 1px 8px 0 rgba(28,35,50,0.65), inset 1px 1px 1px 0 rgba(145,172,229,0.36), inset 6px 6px 13px 0 rgba(74,89,121,0.29);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+
+  .ais-Panel-header {
+    border-bottom: 1px solid #576784;
+    margin-bottom: 20px;
   }
 `;
 

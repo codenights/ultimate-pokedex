@@ -4,8 +4,8 @@ const getColorFromTypeFromProps = props =>
   `--color-type-${props.type.name.toLowerCase()}`;
 
 export const PokemonName = styled.div`
-  text-shadow: 0 0 24px var(${getColorFromTypeFromProps}),
-    0 0 70px var(${getColorFromTypeFromProps});
+  /* text-shadow: 0 0 24px var(${getColorFromTypeFromProps}),
+    0 0 70px var(${getColorFromTypeFromProps}); */
 `;
 
 export const Dcard = styled.div`
@@ -13,10 +13,6 @@ export const Dcard = styled.div`
   display: block;
   perspective: 500px;
   height: 120px;
-
-  * {
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  }
 
   mark {
     background: transparent;
@@ -31,6 +27,7 @@ export const Card = styled.div.attrs({
   height: 130px;
   position: relative;
   display: block;
+  border-radius: 7px;
   transform-style: preserve-3d;
   background-size: 150% 150%;
   background-position: center;
@@ -45,6 +42,15 @@ export const Card = styled.div.attrs({
       rgba(26, 32, 44, 0.6) 85%
     ),
     linear-gradient(20deg, #1a202c 55%, var(${getColorFromTypeFromProps}));
+
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+  &:hover {
+    box-shadow: 0 8px 3px rgba(0, 0, 0, 0.24), 0 15px 20px rgba(0, 0, 0, 0.3),
+      0 -2px 5px rgba(200, 200, 200, 0.08),
+      inset 1px 1px 1px rgba(255, 255, 255, 0.3),
+      inset -1px -1px 1px rgba(75, 75, 75, 0.5);
+  }
 
   &::after {
     background-color: var(${getColorFromTypeFromProps});
@@ -78,96 +84,4 @@ export const PokemonArtwork = styled.img.attrs(props => ({
   transform: scale(0.65) translateY(-50%) translateX(-55%) translateZ(60px);
   text-align: center;
   max-height: 180px;
-`;
-
-export const Trigger = styled.div`
-  position: absolute;
-  height: 33.333333%;
-  width: 33.333333%;
-  display: block;
-  z-index: 2;
-  &:hover ~ .card {
-    &::after {
-      content: "";
-      position: absolute;
-      width: 200px;
-      height: 180px;
-      border-radius: 50%;
-      transform: scale(0.75) translateY(-35%) translateX(-20%)
-        translateZ(-100px);
-      filter: blur(30px) opacity(0.6);
-    }
-  }
-  &:nth-child(1) {
-    left: 0%;
-    top: 0%;
-    &:hover ~ .card {
-      transform: rotateY(-8deg) rotateX(5deg);
-      background-position: left bottom;
-    }
-  }
-  &:nth-child(2) {
-    left: 33.333333%;
-    top: 0%;
-    &:hover ~ .card {
-      transform: rotateY(0deg) rotateX(5deg);
-      background-position: center bottom;
-    }
-  }
-  &:nth-child(3) {
-    left: 66.666666%;
-    top: 0%;
-    &:hover ~ .card {
-      transform: rotateY(8deg) rotateX(5deg);
-      background-position: right bottom;
-    }
-  }
-  &:nth-child(4) {
-    left: 0%;
-    top: 33.333333%;
-    &:hover ~ .card {
-      transform: rotateY(-8deg);
-      background-position: left center;
-    }
-  }
-  &:nth-child(5) {
-    left: 33.333333%;
-    top: 33.333333%;
-    &:hover ~ .card {
-      transform: rotateY(0deg) rotateX(0deg);
-      background-position: center;
-    }
-  }
-  &:nth-child(6) {
-    left: 66.666666%;
-    top: 33.333333%;
-    &:hover ~ .card {
-      transform: rotateY(8deg) rotateX(0deg);
-      background-position: right center;
-    }
-  }
-  &:nth-child(7) {
-    left: 0%;
-    top: 66.666666%;
-    &:hover ~ .card {
-      transform: rotateY(-8deg) rotateX(-5deg);
-      background-position: left top;
-    }
-  }
-  &:nth-child(8) {
-    left: 33.333333%;
-    top: 66.666666%;
-    &:hover ~ .card {
-      transform: rotateY(0deg) rotateX(-5deg);
-      background-position: center top;
-    }
-  }
-  &:nth-child(9) {
-    left: 66.666666%;
-    top: 66.666666%;
-    &:hover ~ .card {
-      transform: rotateY(8deg) rotateX(-5deg);
-      background-position: right top;
-    }
-  }
 `;

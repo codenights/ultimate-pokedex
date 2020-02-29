@@ -6,8 +6,6 @@ import {
   InstantSearch,
   Configure,
   Panel,
-  RangeInput,
-  RefinementList,
   SortBy,
 } from "react-instantsearch-dom";
 import { findResultsState } from "react-instantsearch-dom/server";
@@ -106,21 +104,21 @@ function Search({
           <title>Ultimate Pokedex | Home</title>
         </Head>
 
-        <Configure hitsPerPage={40} />
+        <Configure hitsPerPage={40} filters="isDefaultForm:true" />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
-          <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:w-1/5 lg:block xl:w-1/6">
-            <div className="fixed lg:w-1/5 xl:w-1/6 top-16 w-1/5 h-full overflow-y-auto scrolling-touch p-8">
+          <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block w-1/4 md:w-1/3 xl:w-1/5">
+            <div className="fixed top-16 w-1/4 md:w-1/3 xl:w-1/5 h-full overflow-y-auto scrolling-touch py-8 px-6">
               <div>
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
+                    <div className="flex justify-between items-center mb-1">
+                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
                         Types
                       </h2>
 
-                      <div className="select-container">
+                      {/* <div className="select-container">
                         <select
                           onChange={event => {
                             setTypeAttribute(
@@ -141,7 +139,7 @@ function Search({
                           <option value="weak">Weak to</option>
                           <option value="resistant">Resistant to</option>
                         </select>
-                      </div>
+                      </div> */}
                     </div>
                   }
                 >
@@ -162,27 +160,27 @@ function Search({
                     </div>
                   }
                 >
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">HP</span>
                     <RangeSlider attribute="stats.hp" />
                   </div>
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">Atk</span>
                     <RangeSlider attribute="stats.attack" />
                   </div>
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">Def</span>
                     <RangeSlider attribute="stats.defense" />
                   </div>
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">S-Atk</span>
                     <RangeSlider attribute="stats.specialAttack" />
                   </div>
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">S-Def</span>
                     <RangeSlider attribute="stats.specialDefense" />
                   </div>
-                  <div className="tag flex flex-fill text-gray-400 text-sm items-center rounded-full px-4 mb-2 whitespace-no-wrap">
+                  <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
                     <span className="w-16">Speed</span>
                     <RangeSlider attribute="stats.speed" />
                   </div>
@@ -193,98 +191,46 @@ function Search({
                   header={
                     <div className="flex justify-between items-center mb-2">
                       <h2 className="text-gray-400 uppercase tracking-wider text-sm">
-                        Abilities
+                        Sort by
                       </h2>
                     </div>
                   }
                 >
-                  <RefinementList
-                    attribute="abilities.name"
-                    searchable
-                    showMore
-                    showMoreLimit={200}
-                    translations={{
-                      placeholder: "Search abilities",
-                      noResults: "No abilities matching.",
-                    }}
-                  />
-                </Panel>
-
-                <Panel
-                  className="pb-12"
-                  header={
-                    <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
-                        Forms
-                      </h2>
-                    </div>
-                  }
-                >
-                  <RefinementList
-                    attribute="isDefaultForm"
-                    defaultRefinement={["true", "false"]}
-                    transformItems={items => {
-                      const transformedItems = items.map(item => ({
-                        ...item,
-                        label:
-                          item.label === "true"
-                            ? "Default forms"
-                            : "Alternative forms",
-                      }));
-
-                      // We want the "Default forms" label to stay first
-                      transformedItems.sort(item =>
-                        item.label.startsWith("Default") ? -1 : 1
-                      );
-
-                      return transformedItems;
-                    }}
+                  <SortBy
+                    defaultRefinement={process.env.ALGOLIA_INDEX_NAME}
+                    items={[
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME,
+                        label: "Number asc. ↑",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
+                        label: "Number desc. ↓",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
+                        label: "Height asc. ↑",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
+                        label: "Height desc. ↓",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
+                        label: "Weight asc. ↑",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC,
+                        label: "Weight desc. ↓",
+                      },
+                    ]}
                   />
                 </Panel>
               </div>
             </div>
           </aside>
 
-          <main className="w-full h-full overflow-visible lg:w-4/5 xl:w-5/6 bg-gray-900">
-            <div className="flex justify-between my-4 mx-4">
-              <RangeInput
-                attribute="id"
-                translations={{
-                  separator: " → ",
-                }}
-              />
-
-              <SortBy
-                defaultRefinement={process.env.ALGOLIA_INDEX_NAME}
-                items={[
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME,
-                    label: "Number asc. ↑",
-                  },
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
-                    label: "Number desc. ↓",
-                  },
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
-                    label: "Height asc. ↑",
-                  },
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
-                    label: "Height desc. ↓",
-                  },
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
-                    label: "Weight asc. ↑",
-                  },
-                  {
-                    value: process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC,
-                    label: "Weight desc. ↓",
-                  },
-                ]}
-              />
-            </div>
-
+          <main className="w-full h-full overflow-visible w-3/4 md:w-2/3 xl:w-5/6 bg-gray-900">
             <PokemonList />
           </main>
         </div>

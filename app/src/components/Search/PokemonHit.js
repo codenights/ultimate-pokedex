@@ -10,7 +10,6 @@ import {
   Dcard,
   PokemonArtwork,
   PokemonName,
-  Trigger,
 } from "./styles";
 import Link from "next/link";
 
@@ -22,17 +21,7 @@ export const PokemonHit = ({ pokemon }) => {
     <Dcard className="w-1/2 md:w-1/4 xl:w-1/5 mt-24">
       <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
         <a>
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-          <Trigger />
-
-          <Card type={type} className="p-6 mx-3 bg-gray-900 rounded-lg">
+          <Card type={type} className="p-6 mx-3 bg-gray-900">
             <CardFrame className="frame">
               <PokemonArtwork
                 className="-mt-20"
