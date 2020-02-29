@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import uniqBy from "lodash.uniqby";
 import Link from "next/link";
 
+import { Title } from "../../ui";
 import { Section } from "./Section";
 import { TypeBadge } from "../TypeBadge";
 import { MoveCategoryBadge } from "./MoveCategoryBadge";
@@ -25,6 +26,7 @@ const getMovesByVersionGroups = (moves, selectedVersionGroupId) =>
         ({ versionGroup }) => versionGroup.id === selectedVersionGroupId
       ),
     }));
+
 export const Moves = ({ pokemon }) => {
   const [selectedVersionGroupId, setSelectedVersionGroupId] = useState(18);
   const versionGroups = getAllVersionGroups(pokemon.moves);
@@ -36,7 +38,7 @@ export const Moves = ({ pokemon }) => {
   return (
     <Section>
       <header>
-        <h2 className="text-2xl text-gray-500">Moves</h2>
+        <Title>Moves</Title>
 
         <select
           name="version-groups"

@@ -17,32 +17,40 @@ export const fetchPokemonQuery = nationalId => `
     spriteUrl
     spriteShinyUrl
   }
-  
+
   fragment BaseInfo on Pokemon {
     id
     names {
       en
     }
-    
+
     artworkUrl
     spriteUrl
     spriteShinyUrl
-    
+
     weight
     height
     baseHappiness
     captureRate
     genderRate
-    
+
+    damagesFrom {
+      type {
+        id
+        name
+      }
+      multiplier
+    }
+
     stats { ...Stats }
   }
-  
+
   fragment Type on Type {
     id
     name
     color
   }
-  
+
   fragment PokedexEntries on PokemonPokedexEntry {
     version {
       id
@@ -51,7 +59,7 @@ export const fetchPokemonQuery = nationalId => `
     }
     entry
   }
-  
+
   fragment Family on PokemonFamily {
     pokemon {
       ...PokemonPreview
@@ -67,7 +75,7 @@ export const fetchPokemonQuery = nationalId => `
       }
     }
   }
-  
+
   fragment Abilities on PokemonAbility {
     ability {
       id
@@ -75,7 +83,7 @@ export const fetchPokemonQuery = nationalId => `
     }
     isHidden
   }
-  
+
   fragment Move on PokemonMove {
     move {
       id
@@ -99,12 +107,12 @@ export const fetchPokemonQuery = nationalId => `
       }
     }
   }
-  
+
   fragment EggGroup on EggGroup {
     id
     name
   }
-  
+
   fragment Varieties on Pokemon {
     id
     names {
@@ -116,13 +124,13 @@ export const fetchPokemonQuery = nationalId => `
   {
     pokemon(nationalId: ${Number(nationalId)}) {
       ...BaseInfo
-      
+
       types { ...Type }
-      
+
       pokedexEntries { ...PokedexEntries }
-      
+
       family { ... Family }
-      
+
       abilities { ...Abilities }
 
       moves { ...Move }

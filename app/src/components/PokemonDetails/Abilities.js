@@ -1,11 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
+import { Title } from "../../ui";
 import { Section } from "./Section";
 
 export const Abilities = ({ pokemon }) => (
   <Section>
-    <h2 className="text-2xl text-gray-500">Abilities</h2>
+    <Title>Abilities</Title>
 
     <ul>
       {pokemon.abilities.map(({ isHidden, ability }) => (
@@ -18,6 +19,5 @@ export const Abilities = ({ pokemon }) => (
         </li>
       ))}
     </ul>
-
   </Section>
 );

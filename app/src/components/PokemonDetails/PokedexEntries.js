@@ -1,10 +1,12 @@
 import React from "react";
 
+import { Title } from "../../ui";
 import { Section } from "./Section";
 
 export const PokedexEntries = ({ pokemon }) => (
   <Section>
-    <h2 className="text-2xl text-gray-500">Pokedex entries</h2>
+    <Title>Pokedex entries</Title>
+
     <table>
       <thead>
         <tr>
@@ -15,9 +17,7 @@ export const PokedexEntries = ({ pokemon }) => (
       <tbody>
         {pokemon.pokedexEntries.map(({ entry, version }) => (
           <tr key={version.id}>
-            <td style={{ color: version.color }}>
-              {version.name}
-            </td>
+            <td style={{ color: version.color }}>{version.name}</td>
             <td>{entry}</td>
           </tr>
         ))}

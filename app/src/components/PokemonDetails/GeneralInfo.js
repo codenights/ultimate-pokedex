@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
+import styled from "styled-components";
 
+import { Title } from "../../ui";
 import { Section } from "./Section";
 import { GenderRate } from "./GenderRate";
 
@@ -12,44 +14,62 @@ const decimeterToMeter = amount => (amount / 10).toFixed(2);
 
 const decimeterToFeet = amount => (amount * 0.328084).toFixed(2);
 
+const DescriptionTerm = styled.dt`
+  overflow: hidden;
+  white-space: nowrap;
+
+  &::after {
+    content: " .................................................................";
+    color: rgba(98, 116, 152, 0.61);
+  }
+`;
+
+const DescriptionDetails = styled.dd.attrs({
+  className: "text-gray-400 font-bold",
+})``;
+
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
-    <h2 className="text-2xl text-gray-500">About</h2>
+    <Title>About</Title>
 
-    <dl className="flex flex-wrap">
-      <dt className="w-4/12">Weight</dt>
-      <dd className="w-1/2 text-gray-400">
-        {hectogramToKilogram(pokemon.weight)}kg (
-        {hectogramToPound(pokemon.weight)}lbs)
-      </dd>
+    <dl className="grid" style={{ gridTemplateColumns: "250px 1fr" }}>
+      <DescriptionTerm>Weight</DescriptionTerm>
+      <DescriptionDetails>
+        {hectogramToKilogram(pokemon.weight)}{" "}
+        <span className="text-gray-500">kg</span> (
+        {hectogramToPound(pokemon.weight)} lbs)
+      </DescriptionDetails>
 
-      <dt  className="w-4/12">Height</dt>
-      <dd  className="w-1/2 text-gray-400">
-        {decimeterToMeter(pokemon.height)}m ({decimeterToFeet(pokemon.height)}')
-      </dd>
+      <DescriptionTerm>Height</DescriptionTerm>
+      <DescriptionDetails>
+        {decimeterToMeter(pokemon.height)}{" "}
+        <span className="text-gray-500">m</span> (
+        {decimeterToFeet(pokemon.height)}')
+      </DescriptionDetails>
 
-      <dt  className="w-4/12">Base Hapiness</dt>
-      <dd  className="w-1/2 text-gray-400">{pokemon.baseHappiness}</dd>
+      <DescriptionTerm>Base Hapiness</DescriptionTerm>
+      <DescriptionDetails>{pokemon.baseHappiness}</DescriptionDetails>
 
-      <dt  className="w-4/12">Capture Rate</dt>
-      <dd  className="w-1/2 text-gray-400">{pokemon.captureRate}</dd>
+      <DescriptionTerm>Capture Rate</DescriptionTerm>
+      <DescriptionDetails>{pokemon.captureRate}</DescriptionDetails>
 
-      <dt  className="w-4/12">Gender rate</dt>
-      <dd  className="w-1/2 text-gray-400">
+      <DescriptionTerm>Gender rate</DescriptionTerm>
+      <DescriptionDetails>
         <GenderRate pokemon={pokemon} />
-      </dd>
-      
-      <dt className="w-4/12">Egg groups</dt>
-      <dd className="w-1/2 text-gray-400">
-        {pokemon.eggGroups.map(({ id, name }) => (
-          <span key={id}>
-            <Link href="/egg-group/[eggGroupId]" as={`/egg-group/${id}`}>
-              <a>{name}</a>
-            </Link>
-          </span>
-        ))}
-      </dd>
-    </dl>
+      </DescriptionDetails>
 
+      <DescriptionTerm>Egg groups</DescriptionTerm>
+      <DescriptionDetails>
+        <ul className="inline-flex">
+          {pokemon.eggGroups.map(({ id, name }) => (
+            <li key={id} className="mr-1">
+              <Link href="/egg-group/[eggGroupId]" as={`/egg-group/${id}`}>
+                <a>{name}</a>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </DescriptionDetails>
+    </dl>
   </Section>
 );

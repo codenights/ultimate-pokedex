@@ -9,27 +9,26 @@ export const GenderRate = ({ pokemon }) => {
   const percentageMale = 100 - percentageFemale;
 
   return (
-    <span>
-      
-      <span className="flex text-gender-male items-center">
-        {percentageMale}%
+    <div className="inline-flex">
+      <span className="flex items-center">
         <Icons
-        icon="male"
-        className="fill-current mx-1"
-        width="16"
-        height="16"
-      /> male
+          icon="male"
+          className="fill-current mx-1 text-gender-male"
+          width="16"
+          height="16"
+        />
+        {percentageMale} <span className="text-gray-600 ml-1">%</span>
       </span>
-      <span className="flex text-gender-female items-center">
-        {percentageFemale}%
+
+      <span className="flex items-center">
         <Icons
-        icon="female"
-        className="fill-current mx-1"
-        width="16"
-        height="16"
-      />
-        female
+          icon="female"
+          className="fill-current mx-1 text-gender-female"
+          width="16"
+          height="16"
+        />
+        {percentageFemale} <span className="text-gray-600 ml-1">%</span>
       </span>
-    </span>
+    </div>
   );
 };
