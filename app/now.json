@@ -4,9 +4,14 @@
   "alias": "ultimate-pokedex",
   "build": {
     "env": {
-      "ALGOLIA_INDEX_NAME": "@pokedex_algolia_index_name",
       "ALGOLIA_APP_ID": "@pokedex_algolia_app_id",
-      "ALGOLIA_API_KEY": "@pokedex_algolia_api_key"
+      "ALGOLIA_API_KEY": "@pokedex_algolia_api_key",
+      "ALGOLIA_INDEX_NAME": "@pokedex_algolia_index_name",
+      "ALGOLIA_INDEX_NAME_ID_DESC": "@pokedex_algolia_index_name_id_desc",
+      "ALGOLIA_INDEX_NAME_HEIGHT_ASC": "@pokedex_algolia_index_name_height_asc",
+      "ALGOLIA_INDEX_NAME_HEIGHT_DESC": "@pokedex_algolia_index_name_height_desc",
+      "ALGOLIA_INDEX_NAME_WEIGHT_ASC": "@pokedex_algolia_index_name_weight_asc",
+      "ALGOLIA_INDEX_NAME_WEIGHT_DESC": "@pokedex_algolia_index_name_weight_desc"
     }
   },
   "env": {
