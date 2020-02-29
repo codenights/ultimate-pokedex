@@ -21,6 +21,8 @@ const knex = Knex(require("../../knexfile")[env]);
 
 const apolloServer = new ApolloServer({
   typeDefs,
+  playground: true,
+  introspection: true,
   resolvers,
   context: () => ({
     abilityRepository: AbilityRepository(knex),
