@@ -6,7 +6,7 @@ import { TypeIcon } from "./TypeIcon";
 
 export const DamageTypeBadge = ({ type }) => (
   <Link href="/type/[typeId]" as={`/type/${type.id}`}>
-    <a>
+    <a title={type.name}>
       <TypeIcon type={type.name} />
     </a>
   </Link>
