@@ -41,7 +41,7 @@ export const CardItem = styled.li`
 
   & dl {
     display: inline-grid;
-    grid-template-columns: minmax(120px, 1fr) minmax(120px, 1fr) 50px 50px 50px 75px 1fr;
+    grid-template-columns: minmax(110px, 1fr) minmax(120px, 1fr) 50px 50px 50px 75px 1fr;
   }
 
   & dt {
@@ -55,6 +55,6 @@ export const CardItem = styled.li`
 export const CardTitle = styled.div`
   font-size: 1.2em;
   color: white;
-  min-width: 180px;
+  min-width: 150px;
   padding-left: 8px;
 `;

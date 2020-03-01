@@ -146,7 +146,7 @@ export const Stats = ({ pokemon }) => {
             maxValue="auto"
             curve="linearClosed"
             borderWidth={2}
-            margin={{ top: 20, bottom: 20, left: 40, right: 10 }}
+            margin={{ top: 20, bottom: 20, left: 80, right: 10 }}
             gridLevels={5}
             gridShape="linear"
             gridLabelOffset={10}
