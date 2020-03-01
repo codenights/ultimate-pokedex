@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Title, CardList, CardTitle, CardItem } from "../../ui";
 import { Section } from "./Section";
 import { TypeBadge } from "../TypeBadge";
+import { LearnBadge } from "./LearnBadge";
 import { MoveCategoryBadge } from "./MoveCategoryBadge";
 
 const getAllVersionGroups = moves => {
@@ -26,17 +27,6 @@ const getMovesByVersionGroups = (moves, selectedVersionGroupId) =>
         ({ versionGroup }) => versionGroup.id === selectedVersionGroupId
       ),
     }));
-
-function getLearnLabel(learn) {
-  switch (learn.method) {
-    case "machine":
-      return "Machine";
-    case "level-up":
-      return `LVL ${learn.level}`;
-    default:
-      return learn.method;
-  }
-}
 
 export const Moves = ({ pokemon }) => {
   const [selectedVersionGroupId, setSelectedVersionGroupId] = useState(18);
@@ -117,9 +107,11 @@ export const Moves = ({ pokemon }) => {
                 )}
               </div>
 
-              <div className="text-center">
+              <div>
                 <dt>Learn</dt>
-                <dd>{getLearnLabel(learn)}</dd>
+                <dd>
+                  <LearnBadge learn={learn} />
+                </dd>
               </div>
             </dl>
           </CardItem>
