@@ -1,10 +1,10 @@
 import React from "react";
-import Link from "next/link";
 import styled from "styled-components";
 
 import { Title } from "../../ui";
 import { Section } from "./Section";
 import { GenderRate } from "./GenderRate";
+import { EggGroup } from "./EggGroup";
 
 const hectogramToKilogram = amount => (amount / 10).toFixed(2);
 
@@ -63,8 +63,7 @@ export const GeneralInfo = ({ pokemon }) => (
 
       <DescriptionTerm>Capture</DescriptionTerm>
       <DescriptionDetails>
-      {pokemon.captureRate}{" "}
-      <span className="text-gray-600">%</span>
+      {pokemon.captureRate}
       </DescriptionDetails>
 
       <DescriptionTerm>Gender</DescriptionTerm>
@@ -74,12 +73,11 @@ export const GeneralInfo = ({ pokemon }) => (
 
       <DescriptionTerm>Egg groups</DescriptionTerm>
       <DescriptionDetails>
+
         <ul className="inline-flex">
           {pokemon.eggGroups.map(({ id, name }) => (
             <li key={id} className="mr-1">
-              <Link href="/egg-group/[eggGroupId]" as={`/egg-group/${id}`}>
-                <a>{name}</a>
-              </Link>
+              <EggGroup id={id} name={name} />
             </li>
           ))}
         </ul>

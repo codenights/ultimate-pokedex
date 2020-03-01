@@ -29,7 +29,11 @@ module.exports = {
           'gender-female': 'rgb(255, 107, 206)',
           'move-category-status': 'rgb(221, 221, 221)',
           'move-category-physical': 'rgb(255, 242, 111)',
-          'move-category-special': 'rgb(156, 229, 229)'
+          'move-category-special': 'rgb(156, 229, 229)',
+        },
+        fill: {
+          'group-grass': 'rgb(136, 205, 105)',
+          'group-monster': 'rgb(201, 163, 255)'
         }
       }
     },
