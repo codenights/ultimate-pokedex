@@ -8,25 +8,33 @@ import { GenderRate } from "./GenderRate";
 
 const hectogramToKilogram = amount => (amount / 10).toFixed(2);
 
-const hectogramToPound = amount => (amount * 0.220462).toFixed(2);
+// const hectogramToPound = amount => (amount * 0.220462).toFixed(2);
 
 const decimeterToMeter = amount => (amount / 10).toFixed(2);
 
-const decimeterToFeet = amount => (amount * 0.328084).toFixed(2);
+// const decimeterToFeet = amount => (amount * 0.328084).toFixed(2);
 
 const DescriptionTerm = styled.dt`
   overflow: hidden;
   white-space: nowrap;
-
+  margin-bottom: 8px;
+  &::before {
+    content: "•";
+    color: rgba(98, 116, 152, 0.41);
+    margin-right: 8px;
+    display: inline-block;
+  }
   &::after {
     content: " .................................................................";
-    color: rgba(98, 116, 152, 0.61);
+    color: rgba(98, 116, 152, 0.4);
   }
 `;
 
-const DescriptionDetails = styled.dd.attrs({
-  className: "text-gray-400 font-bold",
+const DescriptionDetails = styled.dd
+.attrs({
+  className: "text-gray-300 ml-1",
 })``;
+
 
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
@@ -36,24 +44,30 @@ export const GeneralInfo = ({ pokemon }) => (
       <DescriptionTerm>Weight</DescriptionTerm>
       <DescriptionDetails>
         {hectogramToKilogram(pokemon.weight)}{" "}
-        <span className="text-gray-500">kg</span> (
-        {hectogramToPound(pokemon.weight)} lbs)
+        <span className="text-gray-600">kg</span>
+        {/* ({hectogramToPound(pokemon.weight)} lbs) */}
       </DescriptionDetails>
 
       <DescriptionTerm>Height</DescriptionTerm>
       <DescriptionDetails>
         {decimeterToMeter(pokemon.height)}{" "}
-        <span className="text-gray-500">m</span> (
-        {decimeterToFeet(pokemon.height)}')
+        <span className="text-gray-600">m</span>
+        {/* ({decimeterToFeet(pokemon.height)}') */}
       </DescriptionDetails>
 
-      <DescriptionTerm>Base Hapiness</DescriptionTerm>
-      <DescriptionDetails>{pokemon.baseHappiness}</DescriptionDetails>
+      <DescriptionTerm>Hapiness</DescriptionTerm>
+      <DescriptionDetails>
+      {pokemon.baseHappiness}{" "}
+      <span className="text-gray-600">%</span>
+      </DescriptionDetails>
 
-      <DescriptionTerm>Capture Rate</DescriptionTerm>
-      <DescriptionDetails>{pokemon.captureRate}</DescriptionDetails>
+      <DescriptionTerm>Capture</DescriptionTerm>
+      <DescriptionDetails>
+      {pokemon.captureRate}{" "}
+      <span className="text-gray-600">%</span>
+      </DescriptionDetails>
 
-      <DescriptionTerm>Gender rate</DescriptionTerm>
+      <DescriptionTerm>Gender</DescriptionTerm>
       <DescriptionDetails>
         <GenderRate pokemon={pokemon} />
       </DescriptionDetails>

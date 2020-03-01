@@ -13,17 +13,17 @@ export const GenderRate = ({ pokemon }) => {
       <span className="flex items-center">
         <Icons
           icon="male"
-          className="fill-current mx-1 text-gender-male"
+          className="fill-current mr-1 text-gender-male"
           width="16"
           height="16"
         />
         {percentageMale} <span className="text-gray-600 ml-1">%</span>
       </span>
 
-      <span className="flex items-center">
+      <span className="flex items-center ml-2">
         <Icons
           icon="female"
-          className="fill-current mx-1 text-gender-female"
+          className="fill-current mr-1 text-gender-female"
           width="16"
           height="16"
         />
