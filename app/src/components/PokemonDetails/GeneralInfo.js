@@ -30,11 +30,9 @@ const DescriptionTerm = styled.dt`
   }
 `;
 
-const DescriptionDetails = styled.dd
-.attrs({
+const DescriptionDetails = styled.dd.attrs({
   className: "text-gray-300 ml-1",
 })``;
-
 
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
@@ -55,16 +53,11 @@ export const GeneralInfo = ({ pokemon }) => (
         {/* ({decimeterToFeet(pokemon.height)}') */}
       </DescriptionDetails>
 
-      <DescriptionTerm>Hapiness</DescriptionTerm>
-      <DescriptionDetails>
-      {pokemon.baseHappiness}{" "}
-      <span className="text-gray-600">%</span>
-      </DescriptionDetails>
+      <DescriptionTerm>Happiness</DescriptionTerm>
+      <DescriptionDetails>{pokemon.baseHappiness}</DescriptionDetails>
 
       <DescriptionTerm>Capture</DescriptionTerm>
-      <DescriptionDetails>
-      {pokemon.captureRate}
-      </DescriptionDetails>
+      <DescriptionDetails>{pokemon.captureRate}</DescriptionDetails>
 
       <DescriptionTerm>Gender</DescriptionTerm>
       <DescriptionDetails>
@@ -73,7 +66,6 @@ export const GeneralInfo = ({ pokemon }) => (
 
       <DescriptionTerm>Egg groups</DescriptionTerm>
       <DescriptionDetails>
-
         <ul className="inline-flex">
           {pokemon.eggGroups.map(({ id, name }) => (
             <li key={id} className="mr-1">
