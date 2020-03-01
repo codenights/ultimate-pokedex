@@ -7,7 +7,7 @@ export const EvolutionChain = ({ activePokemon, evolutionList }) => {
   return (
     <Section>
     <Title>Evolutions</Title>
-    <div className="flex">
+    <div className="flex justify-center">
       {evolutionList.map(pokemon => (
         <PokemonPreview
           key={pokemon.id}

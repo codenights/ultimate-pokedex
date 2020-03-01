@@ -24,7 +24,7 @@ function getEvolutionList(pokemon) {
 
 export const PokemonDetails = ({ pokemon }) => (
   <div className="text-gray-600">
-    <div className="flex">
+    <div className="flex py-8">
       <PokemonHeader pokemon={pokemon} />
       <div>
         <GeneralInfo pokemon={pokemon} />
@@ -36,11 +36,10 @@ export const PokemonDetails = ({ pokemon }) => (
         )}
       </div>
     </div>
-
     <Stats pokemon={pokemon} />
-    <Moves pokemon={pokemon} />
     <Abilities pokemon={pokemon} />
+    <Moves pokemon={pokemon} />
     <AlternateForms pokemon={pokemon} />
-    <PokedexEntries pokemon={pokemon} />
+    {/* <PokedexEntries pokemon={pokemon} /> */}
   </div>
 );

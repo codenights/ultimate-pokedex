@@ -11,7 +11,7 @@ export const PokemonPreview = ({ pokemon, active }) => {
   return (
     <div className={cx("flex", { "text-white": active })}>
       <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
-        <a className="text-center">
+        <a className="text-center px-4">
           <img src={spriteUrl} width="80px" />
           <span className="font-pokemon">{pokemon.names.en}</span>
         </a>
