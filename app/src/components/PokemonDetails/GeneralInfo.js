@@ -38,7 +38,7 @@ const DescriptionDetails = styled.dd
 
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
-    <Title>About</Title>
+    <Title>About { pokemon.names.en }</Title>
 
     <dl className="grid" style={{ gridTemplateColumns: "250px 1fr" }}>
       <DescriptionTerm>Weight</DescriptionTerm>

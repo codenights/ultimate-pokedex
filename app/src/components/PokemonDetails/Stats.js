@@ -56,7 +56,7 @@ export const Stats = ({ pokemon }) => {
       <Title>Combat</Title>
 
       <div className="flex w-full">
-        <div className="w-1/2">
+        <div className="w-4/12 p-6">
           <InnerCard>
             <h3
               className="text-xl mb-4 text-gray-600 flex items-center"
@@ -112,7 +112,7 @@ export const Stats = ({ pokemon }) => {
           </InnerCard>
         </div>
 
-        <div className="w-1/2" style={{ height: 400 }}>
+        <div className="w-8/12" style={{ height: 300 }}>
           <ResponsiveRadar
             data={getDataFromPokemon(pokemon)}
             keys={["value"]}
@@ -120,7 +120,7 @@ export const Stats = ({ pokemon }) => {
             maxValue="auto"
             curve="linearClosed"
             borderWidth={2}
-            margin={{ top: 50, bottom: 80, left: 100, right: 100 }}
+            margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
             gridLevels={5}
             gridShape="linear"
             gridLabelOffset={10}
