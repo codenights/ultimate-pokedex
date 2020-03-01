@@ -15,7 +15,8 @@ export function PokemonAbilityRepository(knex) {
         console.log("findByPokemonId:", pokemonIds) ||
         knex("pokemon_ability")
           .whereIn("pokemon_id", pokemonIds)
+          .orderBy("is_hidden", "asc")
           .then(mapManytoEntities(pokemonIds, "pokemon_id"))
-    )
+    ),
   };
 }
