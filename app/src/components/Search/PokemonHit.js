@@ -18,13 +18,12 @@ export const PokemonHit = ({ pokemon }) => {
   const type = pokemon.types[0];
 
   return (
-    <Dcard className="w-1/2 md:w-1/4 xl:w-1/5 mt-24">
+    <Dcard className="w-1/2 md:w-1/4 xl:w-1/5 my-4">
       <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
         <a>
-          <Card type={type} className="p-6 mx-3 bg-gray-900">
-            <CardFrame className="frame">
+          <Card type={type} className="mx-3">
+            <CardFrame className="text-center frame">
               <PokemonArtwork
-                className="-mt-20"
                 artworkUrl={spriteUrl}
                 alt={pokemon.names.en}
               />
@@ -56,7 +55,7 @@ export const PokemonHit = ({ pokemon }) => {
                 </div>
               </CardTitle>
 
-              <div className="absolute pl-2 pt-1">
+              <div className="absolute top-0 left-0 pl-2 pt-1">
                 <span className="text-xl font-bold text-gray-900">
                   {pokemon.id}
                 </span>
@@ -64,7 +63,7 @@ export const PokemonHit = ({ pokemon }) => {
 
               <ul className="absolute top-0 right-0 p-2">
                 {pokemon.types.map(type => (
-                  <li className="mb-2" key={type.name}>
+                  <li className="mb-1" key={type.name}>
                     <TypeIcon type={type.name} />
                   </li>
                 ))}

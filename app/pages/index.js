@@ -107,8 +107,8 @@ function Search({
         <Configure hitsPerPage={40} filters="isDefaultForm:true" />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
-          <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 w-full lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block w-1/4 md:w-1/3 xl:w-1/5">
-            <div className="fixed top-16 w-1/4 md:w-1/3 xl:w-1/5 h-full overflow-y-auto scrolling-touch py-8 px-6">
+          <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block" style={{width: '400px'}}>
+            <div className="fixed top-16 h-full overflow-y-auto scrolling-touch py-8 px-6"  style={{width: '300px'}}>
               <div>
                 <Panel
                   className="pb-12"
@@ -154,7 +154,7 @@ function Search({
                   className="pb-12"
                   header={
                     <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
+                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
                         Stats
                       </h2>
                     </div>
@@ -190,7 +190,7 @@ function Search({
                   className="pb-12"
                   header={
                     <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-400 uppercase tracking-wider text-sm">
+                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
                         Sort by
                       </h2>
                     </div>
@@ -230,7 +230,7 @@ function Search({
             </div>
           </aside>
 
-          <main className="w-full h-full overflow-visible w-3/4 md:w-2/3 xl:w-5/6 bg-gray-900">
+          <main className="w-full h-full overflow-visible bg-gray-900">
             <PokemonList />
           </main>
         </div>

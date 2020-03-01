@@ -279,8 +279,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .ais-Panel {
-    background-image: radial-gradient(-20% 48%, #3E4250 0%, #1C2332 54%);
-    box-shadow: 0 0 8px 0 rgba(0,0,0,0.36), 7px 7px 18px 0 rgba(0,0,0,0.32), -7px -7px 18px 0 #364056, inset 0 0 0 1px rgba(113,113,195,0.08), inset 1px 1px 8px 0 rgba(28,35,50,0.65), inset 1px 1px 1px 0 rgba(145,172,229,0.36), inset 6px 6px 13px 0 rgba(74,89,121,0.29);
+    background-image: radial-gradient( circle at 2% 2%, rgba(60, 71, 97,0.32), rgba(29, 35, 48,0.32) 40%, rgba(42, 40, 45,0.32) 85% );
+    box-shadow: 0 0 8px 0 rgba(0,0,0,0.36), 6px 6px 24px 0 rgba(0,0,0,0.4), -5px -5px 12px 0 #364056, inset 0 0 0 1px rgba(113,113,195,0.08), inset 1px 1px 8px 0 rgba(28,35,50,0.65), inset 1px 1px 1px 0 rgba(145,172,229,0.36), inset 6px 6px 13px 0 rgba(74,89,121,0.29);
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 30px;

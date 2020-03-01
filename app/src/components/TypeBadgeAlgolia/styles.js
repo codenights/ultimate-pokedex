@@ -5,7 +5,7 @@ const getColorFromTypeFromProps = props =>
 
 export const Tag = styled.span`
   cursor: pointer;
-  color: #757a83;
+  color: #718096;
 
   &.active {
     background-image: linear-gradient(
