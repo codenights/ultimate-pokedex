@@ -7,13 +7,9 @@ import { TypeIcon } from "./TypeIcon";
 export const TypeBadge = ({ type, children }) => (
   <Link href="/type/[typeId]" as={`/type/${type.id}`}>
     <a>
-      <span
-        className={
-          "tag flex whitespace-no-wrap rounded-full text-center px-2 items-center p-1 my-2"
-        }
-      >
+      <span className={"flex whitespace-no-wrap text-center items-center"}>
         <TypeIcon type={type.name} />
-        <span className="type-name text-md ml-2">{type.name}</span>
+        <span className="type-name text-md ml-1">{type.name}</span>
 
         {children}
 
