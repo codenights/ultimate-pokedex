@@ -24,10 +24,9 @@ export const PokemonHit = ({ pokemon }) => {
           <Card type={type} className="mx-3">
             <CardFrame className="text-center frame">
               <PokemonArtwork
-                artworkUrl={spriteUrl}
+                artworkUrl={`https://res.cloudinary.com/hilnmyskv/image/upload/q_auto:eco,w_160/v1583100880/pokedex_artwork/${pokemon.id}.webp`}
                 alt={pokemon.names.en}
               />
-
               <CardTitle>
                 <PokemonName
                   type={type}

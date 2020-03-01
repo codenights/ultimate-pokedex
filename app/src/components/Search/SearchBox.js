@@ -1,7 +1,7 @@
 import React from "react";
 import { connectSearchBox } from "react-instantsearch-dom";
 
-const DEBOUNCE_TIMER = 400;
+const DEBOUNCE_TIMER = 0;
 
 export const SearchBox = connectSearchBox(props => {
   const inputRef = React.useRef(null);
