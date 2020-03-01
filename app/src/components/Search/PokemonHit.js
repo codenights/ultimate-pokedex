@@ -22,9 +22,9 @@ export const PokemonHit = ({ pokemon }) => {
       <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
         <a>
           <Card type={type} className="mx-3">
-            <CardFrame className="text-center frame">
+            <CardFrame className="fade fade-in text-center frame">
               <PokemonArtwork
-                artworkUrl={`https://res.cloudinary.com/hilnmyskv/image/upload/q_auto:eco,w_160/v1583100880/pokedex_artwork/${pokemon.id}.webp`}
+                artworkUrl={`https://res.cloudinary.com/hilnmyskv/image/upload/q_auto:eco,w_110/v1583100880/pokedex_artwork/${pokemon.id}.webp`}
                 alt={pokemon.names.en}
               />
               <CardTitle>

@@ -104,7 +104,7 @@ function Search({
           <title>Ultimate Pokedex | Home</title>
         </Head>
 
-        <Configure hitsPerPage={40} filters="isDefaultForm:true" />
+        <Configure hitsPerPage={20} filters="isDefaultForm:true" />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
           <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block" style={{width: '400px'}}>
