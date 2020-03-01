@@ -1,14 +1,14 @@
 import React from "react";
 import Link from "next/link";
+import cx from "classnames";
 
 import { useShiny } from "../ShinyMode";
-import { PokemonLink } from "../PokemonLink";
 
-export const PokemonPreview = ({ pokemon }) => {
+export const PokemonPreview = ({ pokemon, active }) => {
   const spriteUrl = useShiny(pokemon.spriteUrl, pokemon.spriteShinyUrl);
 
   return (
-    <div className="flex">
+    <div className={cx("flex", { "text-white": active })}>
       <Link href="/pokemon/[nationalId]" as={`/pokemon/${pokemon.id}`}>
         <a>
           <img src={spriteUrl} />
