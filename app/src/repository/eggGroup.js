@@ -21,7 +21,8 @@ export function EggGroupRepository(knex) {
           )
           .select("egg_group.*", "pokemon_id")
           .whereIn("pokemon_id", pokemonIds)
+          .orderBy("name", "asc")
           .then(mapManytoEntities(pokemonIds, "pokemon_id"))
-    )
+    ),
   };
 }
