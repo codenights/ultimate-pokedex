@@ -107,7 +107,7 @@ export const Moves = ({ pokemon }) => {
                 )}
               </div>
 
-              <div>
+              <div className="ml-6">
                 <dt>Learn</dt>
                 <dd>
                   <LearnBadge learn={learn} />

@@ -45,6 +45,7 @@ class UltimatePokedexApp extends App {
         <ShinyMode>
           <Head>
             <link rel="icon" id="favicon" href="/favicon.ico" />
+            <link rel="stylesheet" href="https://use.typekit.net/mvi1qfn.css" />
           </Head>
           <Component {...pageProps} />
 

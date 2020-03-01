@@ -3,7 +3,6 @@ import Head from "next/head";
 import Error from "next/error";
 
 import { fetchPokemonQuery } from "../../src/queries/fetchPokemon";
-import { PokemonOverview } from "../../src/components/PokemonOverview/PokemonOverview";
 import { PokemonDetails } from "../../src/components/PokemonDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { executeQuery } from "../../src/queries/executeQuery";
@@ -45,8 +44,12 @@ const PokemonPage = ({ pokemon, statusCode }) => {
           <title>{pokemon.names.en} | Ultimate Pokedex</title>
         </Head>
 
-        <PokemonOverview pokemon={pokemon} />
-        <PokemonDetails pokemon={pokemon} />
+        <div className="mx-auto container font-body max-w-3xl">
+          <PokemonDetails pokemon={pokemon} />
+        </div>
+
+
+
       </main>
     </AppBarLayout>
   );

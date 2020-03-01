@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Title = styled.h2.attrs({
-  className: "text-2xl text-gray-500 uppercase mb-4",
+  className: "text-xl text-gray-700 uppercase mb-4",
 })`
   border-bottom: 1px solid #2d3748;
 `;
@@ -41,7 +41,7 @@ export const CardItem = styled.li`
 
   & dl {
     display: inline-grid;
-    grid-template-columns: minmax(175px, 1fr) minmax(175px, 1fr) 50px 50px 50px 1fr;
+    grid-template-columns: minmax(120px, 1fr) minmax(100px, 1fr) 50px 50px 50px 75px 1fr;
   }
 
   & dt {
@@ -53,8 +53,6 @@ export const CardItem = styled.li`
 `;
 
 export const CardTitle = styled.div`
-  font-family: Futura-Medium;
-  color: #fff;
-  letter-spacing: 0;
+  font-size: 1.3em;
   min-width: 150px;
 `;
