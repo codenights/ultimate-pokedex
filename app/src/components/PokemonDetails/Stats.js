@@ -64,7 +64,7 @@ export const Stats = ({ pokemon }) => {
       <Title>Combat</Title>
 
       <div className="flex w-full">
-        <div className="w-64 p-6">
+        <div className="w-5/12 mt-6">
           <InnerCard>
             <h3
               className="text-xl mb-3 text-gray-400 flex items-center"
@@ -80,8 +80,8 @@ export const Stats = ({ pokemon }) => {
             </h3>
 
             {Object.keys(groupBy(weaknesses, 'multiplier')).map(damageMultiplier => (
-              <div className="mb-1" key={damageMultiplier}>
-                <div className="mb-1">⨉{damageMultiplier} Damage from </div>
+              <div className="mb-2" key={damageMultiplier}>
+                <span className="mb-2 mr-2">⨉ <span className="text-gray-400">{damageMultiplier}</span> damage from </span>
                 {weaknesses.filter(damage => damage.multiplier == damageMultiplier).map(damageType => (
                   <span key={damageType.type.name}  className="mr-2">
                     <DamageTypeBadge
@@ -98,7 +98,6 @@ export const Stats = ({ pokemon }) => {
           <InnerCard>
             <h3
               className="text-xl mb-3 text-gray-400 flex items-center"
-
             >
               <svg width="22" height="22" viewBox="0 0 28 28" className="mr-2">
                 <path
@@ -111,8 +110,8 @@ export const Stats = ({ pokemon }) => {
             </h3>
 
             {Object.keys(groupBy(resistance, 'multiplier')).map(damageMultiplier => (
-              <div className="mb-3" key={damageMultiplier}>
-                <div className="mb-1">⨉{damageMultiplier} Damage from </div>
+              <div className="mb-2" key={damageMultiplier}>
+                <span className="mb-2 mr-2">⨉ <span className="text-gray-400">{damageMultiplier}</span> damage from </span>
                 {resistance.filter(damage => damage.multiplier == damageMultiplier).map(damageType => (
                   <span key={damageType.type.name} className="mr-2">
                     <DamageTypeBadge
@@ -124,11 +123,10 @@ export const Stats = ({ pokemon }) => {
               </div>
             ))}
 
-
           </InnerCard>
         </div>
 
-        <div className="w-8/12" style={{ height: 300 }}>
+        <div className="w-7/12" style={{ height: 260 }}>
           <ResponsiveRadar
             data={getDataFromPokemon(pokemon)}
             keys={["value"]}
@@ -136,7 +134,7 @@ export const Stats = ({ pokemon }) => {
             maxValue="auto"
             curve="linearClosed"
             borderWidth={2}
-            margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+            margin={{ top: 20, bottom: 20, left: 40, right: 10 }}
             gridLevels={5}
             gridShape="linear"
             gridLabelOffset={10}

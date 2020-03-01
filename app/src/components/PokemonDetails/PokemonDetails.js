@@ -23,8 +23,8 @@ function getEvolutionList(pokemon) {
 }
 
 export const PokemonDetails = ({ pokemon }) => (
-  <div className="text-gray-600">
-    <div className="flex py-8">
+  <div className="text-gray-600  pt-4 pb-24">
+    <div className="flex">
       <PokemonHeader pokemon={pokemon} />
       <div className="w-6/12">
         <GeneralInfo pokemon={pokemon} />
