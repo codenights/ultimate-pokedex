@@ -38,9 +38,9 @@ const DescriptionDetails = styled.dd
 
 export const GeneralInfo = ({ pokemon }) => (
   <Section>
-    <Title>About { pokemon.names.en }</Title>
+    <Title>About</Title>
 
-    <dl className="grid" style={{ gridTemplateColumns: "180px 1fr" }}>
+    <dl className="grid" style={{ gridTemplateColumns: "200px 1fr" }}>
       <DescriptionTerm>Weight</DescriptionTerm>
       <DescriptionDetails>
         {hectogramToKilogram(pokemon.weight)}{" "}

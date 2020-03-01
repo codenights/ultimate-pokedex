@@ -1,12 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-import { TypeBadge } from "./TypeBadge";
+import { TypeIcon } from "./TypeIcon";
 
 export const DamageTypeBadge = ({ type, multiplier }) => (
-  <TypeBadge type={type}>
-    <span className="pl-2 text-sm tracking-wide">⨉{multiplier}</span>
-  </TypeBadge>
+  <TypeIcon type={type.name} />
 );
 
 DamageTypeBadge.propTypes = {

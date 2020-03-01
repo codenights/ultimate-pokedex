@@ -8,8 +8,8 @@ export const TypeIcon = ({ type }) => (
     <Icons
       icon={type}
       className={`fill-current inline align-baseline text-type-${type.toLowerCase()}`}
-      width="14"
-      height="14"
+      width="18"
+      height="18"
     />
   </span>
 );

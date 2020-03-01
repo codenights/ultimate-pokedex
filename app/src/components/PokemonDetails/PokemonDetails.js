@@ -26,7 +26,7 @@ export const PokemonDetails = ({ pokemon }) => (
   <div className="text-gray-600">
     <div className="flex py-8">
       <PokemonHeader pokemon={pokemon} />
-      <div>
+      <div className="w-6/12">
         <GeneralInfo pokemon={pokemon} />
         {pokemonHasEvolution(pokemon) && (
           <EvolutionChain
