@@ -31,16 +31,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font: inherit;
     appearance: none;
-    border-radius: 8px;
+    border-radius: 19px;
     height: 38px;
     border: 1px solid rgba(255, 255, 255, 0.16);
-    background: linear-gradient(
-      40deg,
-      rgba(255, 255, 255, 0.24),
-      rgba(255, 255, 255, 0.1)
-    );
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
-      inset 1px 1px 1px rgba(255, 255, 255, 0.1);
+    background: #1A202C;
+    box-shadow: 1px 1px 0 0 rgba(156,157,158,0.1), inset 2px 5px 0 0 rgba(24,23,23,0.5);
   }
 
   .ais-SearchBox-input:focus {
