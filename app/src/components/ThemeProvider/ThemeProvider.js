@@ -287,8 +287,10 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .ais-Panel-header {
-    border-bottom: 1px solid #576784;
+    border-bottom: 1px solid rgba(87, 103, 132, 0.4);
     margin-bottom: 20px;
+    color: #5B6878;
+    font-family: Futura-Medium;
   }
 `;
 

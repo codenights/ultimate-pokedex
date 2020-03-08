@@ -120,9 +120,7 @@ function Search({
                   className="pb-12"
                   header={
                     <div className="flex justify-between items-center mb-1">
-                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
-                        Types
-                      </h2>
+                      <h2 className="uppercase text-sm">Types</h2>
 
                       {/* <div className="select-container">
                         <select
@@ -159,10 +157,8 @@ function Search({
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
-                        Stats
-                      </h2>
+                    <div className="flex justify-between items-center mb-1">
+                      <h2 className="uppercase text-sm">Stats</h2>
                     </div>
                   }
                 >
@@ -195,10 +191,8 @@ function Search({
                 <Panel
                   className="pb-12"
                   header={
-                    <div className="flex justify-between items-center mb-2">
-                      <h2 className="text-gray-500 uppercase tracking-wider text-sm">
-                        Sort by
-                      </h2>
+                    <div className="flex justify-between items-center mb-1">
+                      <h2 className="uppercase text-sm">Sort by</h2>
                     </div>
                   }
                 >
