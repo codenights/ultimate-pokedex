@@ -3,10 +3,12 @@ import qs from "qs";
 const supportedIndices = [
   process.env.ALGOLIA_INDEX_NAME,
   process.env.ALGOLIA_INDEX_NAME_ID_DESC,
+  process.env.ALGOLIA_INDEX_NAME_NAME_ASC,
+  process.env.ALGOLIA_INDEX_NAME_NAME_DESC,
   process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
   process.env.ALGOLIA_INDEX_NAME_HEIGHT_DESC,
   process.env.ALGOLIA_INDEX_NAME_WEIGHT_ASC,
-  process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC
+  process.env.ALGOLIA_INDEX_NAME_WEIGHT_DESC,
 ];
 
 function removeEmptyValues(value) {
@@ -41,7 +43,7 @@ function routerUrlReducer(state, [key, value]) {
   if (key === "query" && value) {
     return {
       ...state,
-      query: encodeURIComponent(value)
+      query: encodeURIComponent(value),
     };
   }
 
@@ -53,7 +55,7 @@ function routerUrlReducer(state, [key, value]) {
 
       return {
         ...state,
-        sort: sortingStrategy
+        sort: sortingStrategy,
       };
     }
   }
@@ -61,7 +63,7 @@ function routerUrlReducer(state, [key, value]) {
   if (key === "refinementList" && value && value["types.name"]) {
     return {
       ...state,
-      types: value["types.name"].join("+")
+      types: value["types.name"].join("+"),
     };
   }
 
@@ -74,8 +76,8 @@ function routerUrlReducer(state, [key, value]) {
         def: getRangeUrlValue(value["stats.defense"]),
         "spe-atk": getRangeUrlValue(value["stats.specialAttack"]),
         "spe-def": getRangeUrlValue(value["stats.specialDefense"]),
-        speed: getRangeUrlValue(value["stats.speed"])
-      })
+        speed: getRangeUrlValue(value["stats.speed"]),
+      }),
     };
   }
 
@@ -86,7 +88,7 @@ export function getUrlFromState(state) {
   const queryParameters = Object.entries(state).reduce(routerUrlReducer, {});
   const queryString = qs.stringify(queryParameters, {
     addQueryPrefix: true,
-    encode: false
+    encode: false,
   });
 
   return `/${queryString}`;
@@ -100,16 +102,16 @@ function routerStateReducer(state, [key, value]) {
         ...state.range,
         [statName]: {
           min: getRangeStateValue(value.split(":")[0]),
-          max: getRangeStateValue(value.split(":")[1])
-        }
-      }
+          max: getRangeStateValue(value.split(":")[1]),
+        },
+      },
     };
   }
 
   if (key === "query" && value) {
     return {
       ...state,
-      query: decodeURIComponent(value)
+      query: decodeURIComponent(value),
     };
   }
 
@@ -119,7 +121,7 @@ function routerStateReducer(state, [key, value]) {
     if (supportedIndices.includes(sortBy)) {
       return {
         ...state,
-        sortBy
+        sortBy,
       };
     }
   }
@@ -129,8 +131,8 @@ function routerStateReducer(state, [key, value]) {
       ...state,
       refinementList: {
         ...state.refinementList,
-        "types.name": value.split(" ")
-      }
+        "types.name": value.split(" "),
+      },
     };
   }
 
@@ -165,7 +167,7 @@ export function getStateFromUrl(url) {
   const cleanUrl = url.charAt(0) === "/" ? url.slice(1) : url;
   const rawState = qs.parse(cleanUrl, {
     arrayLimit: 1000,
-    ignoreQueryPrefix: true
+    ignoreQueryPrefix: true,
   });
   const state = Object.entries(rawState).reduce(routerStateReducer, {});
 

@@ -107,8 +107,14 @@ function Search({
         <Configure hitsPerPage={20} filters="isDefaultForm:true" />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
-          <aside className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block" style={{width: '400px'}}>
-            <div className="fixed top-16 h-full overflow-y-auto scrolling-touch py-8 px-6"  style={{width: '300px'}}>
+          <aside
+            className="hidden fixed top-0 inset-x-0 pt-16 h-full z-90 lg:static lg:h-auto lg:overflow-y-visible lg:pt-0 lg:block"
+            style={{ width: "400px" }}
+          >
+            <div
+              className="fixed top-16 h-full overflow-y-auto scrolling-touch py-8 px-6"
+              style={{ width: "300px" }}
+            >
               <div>
                 <Panel
                   className="pb-12"
@@ -206,6 +212,14 @@ function Search({
                       {
                         value: process.env.ALGOLIA_INDEX_NAME_ID_DESC,
                         label: "Number desc. ↓",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_NAME_ASC,
+                        label: "Name asc. ↑",
+                      },
+                      {
+                        value: process.env.ALGOLIA_INDEX_NAME_NAME_DESC,
+                        label: "Name desc. ↓",
                       },
                       {
                         value: process.env.ALGOLIA_INDEX_NAME_HEIGHT_ASC,
