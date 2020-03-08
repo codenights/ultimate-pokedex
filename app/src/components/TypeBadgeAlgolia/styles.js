@@ -3,6 +3,26 @@ import styled from "styled-components";
 const getColorFromTypeFromProps = props =>
   `--color-type-${props.type.toLowerCase()}`;
 
+export const TypeName = styled.span`
+  &.active {
+    color: var(${getColorFromTypeFromProps});
+    text-shadow: 0 0 12px var(${getColorFromTypeFromProps});
+  }
+`;
+
+export const TypeCount = styled.span`
+  color: #515969;
+  font-weight: 600;
+
+  &.active {
+    color: #8497be;
+  }
+`;
+
+export const TypeIconWrapper = styled.span.attrs({
+  className: "relative",
+})``;
+
 export const Tag = styled.span`
   cursor: pointer;
   color: #718096;
@@ -26,20 +46,20 @@ export const Tag = styled.span`
       color: #8497be;
     }
   }
-`;
 
-export const TypeName = styled.span`
-  &.active {
-    color: var(${getColorFromTypeFromProps});
-    text-shadow: 0 0 12px var(${getColorFromTypeFromProps});
+  &:not(.active).isSecondType ${TypeIconWrapper}::before {
+    content: "+";
+    color: #fff;
+    position: absolute;
+    font-family: Futura-Medium;
+    top: -8px;
+    right: -5px;
+    text-shadow: 0 1px 4px #000;
+    opacity: 0;
+    transition: opacity 150ms;
   }
-`;
 
-export const TypeCount = styled.span`
-  color: #515969;
-  font-weight: 600;
-
-  &.active {
-    color: #8497be;
+  &:not(.active).isSecondType:hover ${TypeIconWrapper}::before {
+    opacity: 1;
   }
 `;

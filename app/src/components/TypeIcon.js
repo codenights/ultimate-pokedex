@@ -1,4 +1,5 @@
 import React from "react";
+
 import { Icons } from "./Icons";
 
 export const TypeIcon = ({ type }) => (

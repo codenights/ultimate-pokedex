@@ -3,19 +3,22 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 
 import { TypeIcon } from "../TypeIcon";
-import { Tag, TypeCount, TypeName } from "./styles";
+import { Tag, TypeIconWrapper, TypeCount, TypeName } from "./styles";
 
-export const TypeBadgeAlgolia = ({ type, count, active }) => (
+export const TypeBadgeAlgolia = ({ type, count, active, isSecondType }) => (
   <Tag
     type={type}
     className={cx(
       "w-full flex flex-fill whitespace-no-wrap rounded-full text-center items-center px-2 py-1 my-1",
       {
         active,
+        isSecondType,
       }
     )}
   >
-    <TypeIcon type={type} />
+    <TypeIconWrapper className="flex items-center">
+      <TypeIcon type={type} />
+    </TypeIconWrapper>
 
     <TypeName type={type} className={cx("text-md ml-2", { active })}>
       {type}
