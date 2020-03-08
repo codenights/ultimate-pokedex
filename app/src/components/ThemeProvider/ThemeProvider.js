@@ -149,10 +149,15 @@ const GlobalStyle = createGlobalStyle`
     cursor: grab;
     outline: none;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) rotate(30deg);
     width: 24px;
     height: 24px;
     z-index: 1;
+    background: url("/img/pokeball-tick-active.svg");
+  }
+
+  .ais-RangeSlider--noRefinement .slider-handle {
+    transform: translate(-50%, -50%) rotate(0);
     background: url("/img/pokeball-tick.svg");
   }
 

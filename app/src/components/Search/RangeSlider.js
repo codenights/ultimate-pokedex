@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connectRange } from "react-instantsearch-dom";
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
+import cx from "classnames";
 
 function Handle({
   domain: [min, max],
@@ -76,7 +77,10 @@ export const RangeSlider = connectRange(
         values={[currentRefinement.min, currentRefinement.max]}
         onChange={onChange}
         onUpdate={setTicksValues}
-        className="w-full h-6 mt-4 mx-3 mr-2 relative ais-RangeSlider"
+        className={cx("w-full h-6 mt-4 mx-3 mr-2 relative ais-RangeSlider", {
+          ["ais-RangeSlider--noRefinement"]:
+            currentRefinement.min === min && currentRefinement.max === max,
+        })}
       >
         <Rail>
           {({ getRailProps }) => (
