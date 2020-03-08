@@ -17,6 +17,22 @@ const rules = [
       filterPromotes: true,
     },
   },
+  {
+    objectID: "fabulous",
+    description: "Display fabulous",
+    condition: {
+      pattern: "fabulous",
+      anchoring: "contains",
+      alternatives: true,
+    },
+    consequence: {
+      params: {
+        facetFilters: ["fabulous:true"],
+        query: "",
+      },
+      filterPromotes: true,
+    },
+  },
   // {
   //   objectID: "legendary",
   //   description: "Display legendaries",

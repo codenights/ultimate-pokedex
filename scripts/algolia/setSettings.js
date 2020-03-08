@@ -24,6 +24,7 @@ const indexSettings = {
     "stats.specialDefense",
     "stats.speed",
     "starter",
+    "fabulous",
   ],
 };
 
