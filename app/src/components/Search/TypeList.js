@@ -3,7 +3,7 @@ import { connectRefinementList } from "react-instantsearch-dom";
 import { TypeBadgeAlgolia } from "../TypeBadgeAlgolia/TypeBadgeAlgolia";
 
 export const TypeList = connectRefinementList(({ items, refine }) => {
-  const isSecondType = items.filter(x => x.isRefined).length === 1;
+  const isSecondType = items.filter(x => x.isRefined).length >= 1;
 
   // We use a static list because we know all Pokemon types already. We want
   // all of them to show all the time.

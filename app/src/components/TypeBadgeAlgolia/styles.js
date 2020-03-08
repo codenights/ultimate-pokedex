@@ -47,8 +47,7 @@ export const Tag = styled.span`
     }
   }
 
-  &:not(.active).isSecondType ${TypeIconWrapper}::before {
-    content: "+";
+  &.isSecondType ${TypeIconWrapper}::before {
     color: #fff;
     position: absolute;
     font-family: Futura-Medium;
@@ -57,9 +56,18 @@ export const Tag = styled.span`
     text-shadow: 0 1px 4px #000;
     opacity: 0;
     transition: opacity 150ms;
+    text-align: right;
   }
 
-  &:not(.active).isSecondType:hover ${TypeIconWrapper}::before {
+  &:not(.active).isSecondType ${TypeIconWrapper}::before {
+    content: "+";
+  }
+
+  &.active.isSecondType ${TypeIconWrapper}::before {
+    content: "–";
+  }
+
+  &.isSecondType:hover ${TypeIconWrapper}::before {
     opacity: 1;
   }
 `;
