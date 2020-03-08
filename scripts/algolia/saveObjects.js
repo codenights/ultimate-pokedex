@@ -2,6 +2,7 @@ const fetch = require("isomorphic-unfetch");
 const nlp = require("compromise");
 
 const { mainIndex } = require("./algoliaIndices");
+const { generationsId } = require("./data/generations");
 const { startersId } = require("./data/starters");
 const { fabulousId } = require("./data/fabulous");
 const { babiesId } = require("./data/babies");
@@ -92,10 +93,23 @@ function getPublicImageUrl(path) {
   return `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/app/public${path}`;
 }
 
+function getGeneration(pokemon) {
+  const generationIndex = generationsId.findIndex(
+    range => pokemon.id >= range[0] && pokemon.id <= range[1]
+  );
+
+  if (generationIndex === -1) {
+    return null;
+  }
+
+  return generationIndex + 1;
+}
+
 function transformPokemon(pokemon) {
   return {
     ...pokemon,
     objectID: String(pokemon.id),
+    generation: getGeneration(pokemon),
     starter: startersId.includes(pokemon.id),
     fabulous: fabulousId.includes(pokemon.id),
     baby: babiesId.includes(pokemon.id),
