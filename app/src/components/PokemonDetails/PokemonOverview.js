@@ -13,9 +13,11 @@ function getEvolutionList(pokemon) {
       return [];
     }
 
-    const evolution = nextPokemon.evolutions[0].pokemon;
+    const evolution = nextPokemon.evolutions.map(
+      evolution => evolution.pokemon
+    );
 
-    return [evolution].concat(getEvolutionListRec(evolution));
+    return [...evolution].concat(getEvolutionListRec(evolution));
   }
 
   return [pokemon].concat(getEvolutionListRec(pokemon));

@@ -6,16 +6,17 @@ import { PokemonPreview } from "./PokemonPreview";
 export const EvolutionChain = ({ activePokemon, evolutionList }) => {
   return (
     <Section>
-    <Title>Evolutions</Title>
-    <div className="flex justify-center">
-      {evolutionList.map(pokemon => (
-        <PokemonPreview
-          key={pokemon.id}
-          pokemon={pokemon}
-          active={activePokemon.id === pokemon.id}
-        />
-      ))}
-    </div>
+      <Title>Evolutions</Title>
+
+      <div className="flex justify-center items-center overflow-x-scroll">
+        {evolutionList.map(pokemon => (
+          <PokemonPreview
+            key={pokemon.id}
+            pokemon={pokemon}
+            active={activePokemon.id === pokemon.id}
+          />
+        ))}
+      </div>
     </Section>
   );
 };
