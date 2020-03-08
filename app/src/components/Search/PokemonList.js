@@ -1,20 +1,45 @@
 import React from "react";
-import { connectInfiniteHits } from "react-instantsearch-dom";
+import {
+  connectInfiniteHits,
+  connectStateResults,
+} from "react-instantsearch-dom";
 
 import { useIntersectionObserver } from "../hooks";
 import { PokemonHit } from "./PokemonHit";
+import { Title } from "../../ui";
+
+const NoResults = connectStateResults(props => {
+  return (
+    <div className="py-8 px-4 text-gray-300">
+      <Title>No Pokemon found</Title>
+
+      {props.searchState.refinementList ? (
+        <p>Try removing filters to find more Pokemon.</p>
+      ) : (
+        <p>Can‘t remember its name? Try searching for its color or shape.</p>
+      )}
+    </div>
+  );
+});
 
 export const PokemonList = connectInfiniteHits(
   ({ hits: pokemons, hasMore, refineNext }) => {
+    const loadMore = React.useCallback(
+      function loadMore() {
+        if (typeof window !== "undefined" && window.scrollY > 0) {
+          refineNext();
+        }
+      },
+      [refineNext]
+    );
+
     const { setObservedNode } = useIntersectionObserver({
       callback: loadMore,
       threshold: 0,
     });
 
-    function loadMore() {
-      if (typeof window !== "undefined" && window.scrollY > 0) {
-        refineNext();
-      }
+    if (pokemons.length === 0) {
+      return <NoResults />;
     }
 
     return (
