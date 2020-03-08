@@ -14,7 +14,10 @@ import {
 import Link from "next/link";
 
 export const PokemonHit = ({ pokemon }) => {
-  const spriteUrl = useShiny(pokemon.artworkUrl, pokemon.spriteShinyUrl);
+  const imageUrl = useShiny(
+    `https://res.cloudinary.com/hilnmyskv/image/upload/q_auto:eco,w_110/v1583100880/pokedex_artwork/${pokemon.id}.webp`,
+    pokemon.spriteShinyUrl
+  );
   const type = pokemon.types[0];
 
   return (
@@ -23,10 +26,7 @@ export const PokemonHit = ({ pokemon }) => {
         <a>
           <Card type={type} className="mx-3">
             <CardFrame className="fade fade-in text-center frame">
-              <PokemonArtwork
-                artworkUrl={`https://res.cloudinary.com/hilnmyskv/image/upload/q_auto:eco,w_110/v1583100880/pokedex_artwork/${pokemon.id}.webp`}
-                alt={pokemon.names.en}
-              />
+              <PokemonArtwork artworkUrl={imageUrl} alt={pokemon.names.en} />
               <CardTitle>
                 <PokemonName
                   type={type}
