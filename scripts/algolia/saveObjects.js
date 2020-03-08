@@ -5,6 +5,7 @@ const { mainIndex } = require("./algoliaIndices");
 const { startersId } = require("./data/starters");
 const { fabulousId } = require("./data/fabulous");
 const { babiesId } = require("./data/babies");
+const { legendariesId } = require("./data/legendaries");
 
 nlp.extend(require("compromise-syllables"));
 
@@ -98,6 +99,7 @@ function transformPokemon(pokemon) {
     starter: startersId.includes(pokemon.id),
     fabulous: fabulousId.includes(pokemon.id),
     baby: babiesId.includes(pokemon.id),
+    legendary: legendariesId.includes(pokemon.id),
     nameTokens: {
       en: getNameTokens(nlp(pokemon.names.en).syllables()[0]),
       fr: getNameTokens(nlp(pokemon.names.fr).syllables()[0]),

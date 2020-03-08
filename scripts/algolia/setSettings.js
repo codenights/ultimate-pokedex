@@ -26,6 +26,7 @@ const indexSettings = {
     "starter",
     "fabulous",
     "baby",
+    "legendary",
   ],
 };
 
