@@ -33,6 +33,22 @@ const rules = [
       filterPromotes: true,
     },
   },
+  {
+    objectID: "baby",
+    description: "Display babies",
+    condition: {
+      pattern: "baby",
+      anchoring: "contains",
+      alternatives: true,
+    },
+    consequence: {
+      params: {
+        facetFilters: ["baby:true"],
+        query: "",
+      },
+      filterPromotes: true,
+    },
+  },
   // {
   //   objectID: "legendary",
   //   description: "Display legendaries",

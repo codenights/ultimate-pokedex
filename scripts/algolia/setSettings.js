@@ -25,6 +25,7 @@ const indexSettings = {
     "stats.speed",
     "starter",
     "fabulous",
+    "baby",
   ],
 };
 
