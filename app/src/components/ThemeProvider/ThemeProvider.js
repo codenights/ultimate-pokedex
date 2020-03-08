@@ -95,9 +95,9 @@ const GlobalStyle = createGlobalStyle`
 
   .ais-RangeSlider .slider-rail {
     background-color: rgb(54, 58, 72);
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
-    height: 3px;
+    height: 4px;
     position: absolute;
     width: 100%;
   }
@@ -110,9 +110,9 @@ const GlobalStyle = createGlobalStyle`
       rgb(157, 99, 231) 70%,
       rgb(247, 198, 184)
     );
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
-    height: 3px;
+    height: 4px;
     position: absolute;
   }
 

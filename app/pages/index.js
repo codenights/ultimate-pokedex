@@ -163,27 +163,75 @@ function Search({
                   }
                 >
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">HP</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/hp.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      HP
+                    </span>
                     <RangeSlider attribute="stats.hp" />
                   </div>
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">Atk</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/attack.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      Atk
+                    </span>
                     <RangeSlider attribute="stats.attack" />
                   </div>
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">Def</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/defense.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      Def
+                    </span>
                     <RangeSlider attribute="stats.defense" />
                   </div>
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">S-Atk</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/special-attack.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      S.Atk
+                    </span>
                     <RangeSlider attribute="stats.specialAttack" />
                   </div>
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">S-Def</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/special-defense.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      S.Def
+                    </span>
                     <RangeSlider attribute="stats.specialDefense" />
                   </div>
                   <div className="flex flex-fill text-gray-600 text-sm items-center whitespace-no-wrap mb-1">
-                    <span className="w-16">Speed</span>
+                    <span className="w-24 flex mr-2">
+                      <img
+                        src="/icons/stats/speed.svg"
+                        className="mr-2"
+                        width={19}
+                        height={19}
+                      />{" "}
+                      Spd
+                    </span>
                     <RangeSlider attribute="stats.speed" />
                   </div>
                 </Panel>
