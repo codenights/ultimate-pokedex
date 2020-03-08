@@ -64,16 +64,20 @@ export const GeneralInfo = ({ pokemon }) => (
         <GenderRate pokemon={pokemon} />
       </DescriptionDetails>
 
-      <DescriptionTerm>Egg groups</DescriptionTerm>
-      <DescriptionDetails>
-        <ul className="inline-flex">
-          {pokemon.eggGroups.map(({ id, name }) => (
-            <li key={id} className="mr-1">
-              <EggGroup id={id} name={name} />
-            </li>
-          ))}
-        </ul>
-      </DescriptionDetails>
+      {pokemon.eggGroups.length > 0 && (
+        <>
+          <DescriptionTerm>Egg groups</DescriptionTerm>
+          <DescriptionDetails>
+            <ul className="inline-flex">
+              {pokemon.eggGroups.map(({ id, name }) => (
+                <li key={id} className="mr-1">
+                  <EggGroup id={id} name={name} />
+                </li>
+              ))}
+            </ul>
+          </DescriptionDetails>
+        </>
+      )}
     </dl>
   </Section>
 );
