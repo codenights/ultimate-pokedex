@@ -16,7 +16,7 @@ export const AppBar = ({ showSearchBox = false }) => (
     <div className="w-1/4">
       <Link href="/">
         <a className="">
-          <img src="/logo.svg" />
+          <img src="/logo.svg" alt="Ultimate Pokedex" />
         </a>
       </Link>
     </div>

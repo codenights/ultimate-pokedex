@@ -4,15 +4,17 @@ import { ResponsiveRadar } from "@nivo/radar";
 import { Title, InnerCard } from "../../ui";
 import { Section } from "./Section";
 import { DamageTypeBadge } from "../DamageTypeBadge";
-import { array } from "prop-types";
 
-const getDataFromPokemon = pokemon =>
-  Object.keys(pokemon.stats).map(statName => ({
-    stat: statName
-      .replace(/([A-Z])/g, " $1")
-      .replace(/^./, str => str.toUpperCase()),
-    value: pokemon.stats[statName],
-  }));
+const getDataFromPokemon = pokemon => {
+  return [
+    { stat: "HP", value: pokemon.stats.hp },
+    { stat: "Atk", value: pokemon.stats.attack },
+    { stat: "Def", value: pokemon.stats.defense },
+    { stat: "Spd", value: pokemon.stats.speed },
+    { stat: "S-Def", value: pokemon.stats.specialDefense },
+    { stat: "S-Atk", value: pokemon.stats.specialAttack },
+  ];
+};
 
 const getDotColor = ({ value }) => {
   if (value <= 70) {
@@ -63,8 +65,8 @@ export const Stats = ({ pokemon }) => {
     <Section>
       <Title>Combat</Title>
 
-      <div className="flex w-full">
-        <div className="w-5/12 mt-6">
+      <div className="flex flex-col md:flex-row">
+        <div className="md:w-5/12 mt-6">
           <InnerCard>
             <h3 className="text-xl mb-3 text-gray-400 flex items-center">
               <svg width="22" height="22" viewBox="0 0 28 28" className="mr-2">
@@ -138,7 +140,7 @@ export const Stats = ({ pokemon }) => {
           </InnerCard>
         </div>
 
-        <div className="w-7/12" style={{ height: 260 }}>
+        <div className="mt-4 md:mt-0 md:w-7/12" style={{ height: 260 }}>
           <ResponsiveRadar
             data={getDataFromPokemon(pokemon)}
             keys={["value"]}

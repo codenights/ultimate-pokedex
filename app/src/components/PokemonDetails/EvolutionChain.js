@@ -8,7 +8,7 @@ export const EvolutionChain = ({ activePokemon, evolutionList }) => {
     <Section>
       <Title>Evolutions</Title>
 
-      <div className="flex justify-center items-center overflow-x-scroll">
+      <div className="flex items-center overflow-x-scroll">
         {evolutionList.map(pokemon => (
           <PokemonPreview
             key={pokemon.id}

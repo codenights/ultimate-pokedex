@@ -27,10 +27,10 @@ function getEvolutionList(pokemon) {
 }
 
 export const PokemonDetails = ({ pokemon }) => (
-  <div className="text-gray-600  pt-4 pb-24">
-    <div className="flex">
+  <div className="text-gray-600 pt-4 pb-24">
+    <div className="flex flex-col md:flex-row">
       <PokemonHeader pokemon={pokemon} />
-      <div className="w-6/12">
+      <div className="md:w-6/12">
         <GeneralInfo pokemon={pokemon} />
         {pokemonHasEvolution(pokemon) && (
           <EvolutionChain
