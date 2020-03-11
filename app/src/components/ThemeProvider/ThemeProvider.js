@@ -12,87 +12,6 @@ const GlobalStyle = createGlobalStyle`
     );
   }
 
-  .ais-SearchBox {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    color: #fff;
-  }
-
-  .ais-SearchBox-form {
-    width: 100%;
-  }
-
-  .ais-SearchBox-input {
-    padding: 10px 40px;
-    width: 100%;
-    box-sizing: border-box;
-    font: inherit;
-    appearance: none;
-    border-radius: 19px;
-    height: 38px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    background: #1A202C;
-    box-shadow: 1px 1px 0 0 rgba(156,157,158,0.1), inset 2px 5px 0 0 rgba(24,23,23,0.5);
-  }
-
-  .ais-SearchBox-input:focus {
-    outline: none;
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.3),
-      inset 1px 1px 1px rgba(255, 255, 255, 0.1),
-      inset 0 0 2px 0 rgba(255, 255, 255, 0.2),
-      inset 0 0 10px rgba(255, 255, 255, 0.2);
-  }
-
-  .ais-SearchBox-input::-webkit-search-decoration,
-  .ais-SearchBox-input::-webkit-search-cancel-button,
-  .ais-SearchBox-input::-webkit-search-results-button,
-  .ais-SearchBox-input::-webkit-search-results-decoration {
-    display: none;
-  }
-
-  .ais-SearchBox-submit {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    width: 40px;
-    height: 100%;
-    top: 0;
-    left: 0;
-  }
-
-  .ais-SearchBox-submitIcon {
-    fill: #fff;
-    width: 14px;
-    height: 14px;
-  }
-
-  .ais-SearchBox-reset,
-  .ais-SearchBox-loadingIndicator {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 100%;
-    right: 0;
-    top: 0;
-  }
-
-  .ais-SearchBox-reset[hidden],
-  .ais-SearchBox-loadingIndicator[hidden] {
-    display: none;
-  }
-
-  .ais-SearchBox-resetIcon {
-    fill: #fff;
-    width: 10px;
-    height: 10px;
-  }
-
   .ais-RangeSlider .slider-rail {
     background-color: rgb(54, 58, 72);
     border-radius: 4px;
@@ -236,10 +155,6 @@ const GlobalStyle = createGlobalStyle`
 
   .ais-RefinementList {
     color: #cbd5e0;
-  }
-
-  .ais-RefinementList-searchBox .ais-SearchBox {
-    margin-bottom: 16px;
   }
 
   .ais-RefinementList-label {

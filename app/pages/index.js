@@ -18,6 +18,7 @@ import {
 import { TypeList } from "../src/components/Search/TypeList";
 import { RangeSlider } from "../src/components/Search/RangeSlider";
 import { PokemonList } from "../src/components/Search/PokemonList";
+import { CurrentRefinements } from "../src/components/Search/CurrentRefinements";
 
 const searchClient = algoliasearch(
   process.env.ALGOLIA_APP_ID,
@@ -287,6 +288,7 @@ function Search({
           </aside>
 
           <main className="w-full h-full overflow-visible bg-gray-900">
+            <CurrentRefinements />
             <PokemonList />
           </main>
         </div>
