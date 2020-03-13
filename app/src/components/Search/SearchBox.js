@@ -4,7 +4,7 @@ import { connectSearchBox } from "react-instantsearch-dom";
 
 import { FilterPanel } from "./FilterPanel";
 
-const DEBOUNCE_TIMER = 50;
+const DEBOUNCE_TIMER = 0;
 
 export const SearchBox = connectSearchBox(props => {
   const inputRef = React.useRef(null);
