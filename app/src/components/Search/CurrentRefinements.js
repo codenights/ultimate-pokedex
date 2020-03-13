@@ -30,6 +30,34 @@ const RefinementLabel = ({ attribute, label }) => {
         />
       </>
     );
+  } else if (attribute === "weakTo.name") {
+    return (
+      <>
+        Weak to
+        <TypeBadge
+          type={{
+            name: label,
+            // @TODO: get the ID somewhere to have a correct link
+            id: label,
+          }}
+          className="ml-2"
+        />
+      </>
+    );
+  } else if (attribute === "resistantTo.name") {
+    return (
+      <>
+        Resistant to
+        <TypeBadge
+          type={{
+            name: label,
+            // @TODO: get the ID somewhere to have a correct link
+            id: label,
+          }}
+          className="ml-2"
+        />
+      </>
+    );
   } else if (attribute === "abilities.name") {
     return (
       <>

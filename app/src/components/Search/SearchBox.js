@@ -123,6 +123,9 @@ export const SearchBox = connectSearchBox(props => {
           onChange("");
           setIsOpen(false);
         }}
+        onEmpty={() => {
+          setIsOpen(false);
+        }}
       />
     </Container>
   );
