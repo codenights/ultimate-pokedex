@@ -27,6 +27,7 @@ export const SearchBox = connectSearchBox(props => {
     event.preventDefault();
     event.stopPropagation();
     inputRef.current.blur();
+    setIsOpen(false);
   }
 
   function onReset() {
@@ -75,9 +76,7 @@ export const SearchBox = connectSearchBox(props => {
           value={query}
           onChange={event => onChange(event.currentTarget.value)}
           onFocus={() => setIsOpen(true)}
-          style={{
-            borderRadius: isOpen ? "19px 19px 0 0" : 19,
-          }}
+          isOpen={isOpen}
         />
 
         <SubmitButton type="submit" title="Search">
@@ -145,6 +144,7 @@ const Form = styled.form`
 
 const Input = styled.input`
   padding: 10px 40px;
+  border-radius: ${props => (props.isOpen ? "19px 19px 0 0" : "19px")};
   width: 100%;
   box-sizing: border-box;
   font: inherit;
