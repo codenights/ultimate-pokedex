@@ -152,6 +152,7 @@ function Search({
                     attribute={typeAttribute}
                     operator="and"
                     limit={18}
+                    searchState={searchState}
                   />
                 </Panel>
 
