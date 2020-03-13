@@ -13,9 +13,9 @@ const indexSettings = {
   attributesForFaceting: [
     "id",
     "isDefaultForm",
-    "types.name",
-    "weakTo.name",
-    "resistantTo.name",
+    "searchable(types.name)",
+    "searchable(weakTo.name)",
+    "searchable(resistantTo.name)",
     "searchable(abilities.name)",
     "stats.hp",
     "stats.attack",
