@@ -1,6 +1,5 @@
 import React from "react";
 
-import { getBackgroundColorFromType } from "../../utils/colors";
 import { TypeBadge } from "../TypeBadge";
 
 export const MoveOverview = ({ move }) => (
