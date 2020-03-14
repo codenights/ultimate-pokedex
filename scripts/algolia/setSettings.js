@@ -12,7 +12,6 @@ const indexSettings = {
   ],
   attributesForFaceting: [
     "id",
-    "isDefaultForm",
     "searchable(types.name)",
     "searchable(weakTo.name)",
     "searchable(resistantTo.name)",

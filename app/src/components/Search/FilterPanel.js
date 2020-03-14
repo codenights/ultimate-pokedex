@@ -95,7 +95,6 @@ export function FilterPanel(props) {
         {
           indexName: process.env.ALGOLIA_INDEX_NAME,
           params: {
-            filters: "isDefaultForm:true",
             facetName: "weakTo.name",
             facetQuery: props.query,
             maxFacetHits: 3,
@@ -104,7 +103,6 @@ export function FilterPanel(props) {
         {
           indexName: process.env.ALGOLIA_INDEX_NAME,
           params: {
-            filters: "isDefaultForm:true",
             facetName: "resistantTo.name",
             facetQuery: props.query,
             maxFacetHits: 3,
@@ -113,7 +111,6 @@ export function FilterPanel(props) {
         {
           indexName: process.env.ALGOLIA_INDEX_NAME,
           params: {
-            filters: "isDefaultForm:true",
             facetName: "abilities.name",
             facetQuery: props.query,
             maxFacetHits: 3,

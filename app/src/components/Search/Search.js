@@ -56,7 +56,7 @@ export function Search({
           <title>Ultimate Pokedex | Home</title>
         </Head>
 
-        <Configure hitsPerPage={20} filters="isDefaultForm:true" />
+        <Configure hitsPerPage={20} />
 
         <div className="flex w-h-screen overflow-y-auto scrolling-touch">
           <aside

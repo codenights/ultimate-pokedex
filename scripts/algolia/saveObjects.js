@@ -106,8 +106,10 @@ function getGeneration(pokemon) {
 }
 
 function transformPokemon(pokemon) {
+  const { isDefaultForm, ...props } = pokemon;
+
   return {
-    ...pokemon,
+    ...props,
     objectID: String(pokemon.id),
     generation: getGeneration(pokemon),
     starter: startersId.includes(pokemon.id),
@@ -150,13 +152,16 @@ async function fetchPokemons() {
   const { data } = await response.json();
   const { pokemons } = data;
 
-  return pokemons.map(transformPokemon);
+  return pokemons
+    .filter(pokemon => pokemon.isDefaultForm === true)
+    .map(transformPokemon);
 }
 
 async function saveObjects() {
   try {
     const pokemons = await fetchPokemons();
 
+    await mainIndex.clearObjects();
     await mainIndex.saveObjects(pokemons);
   } catch (error) {
     console.error(error);
