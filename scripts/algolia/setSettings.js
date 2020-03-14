@@ -9,6 +9,7 @@ const indexSettings = {
     "unordered(nameTokens.en)",
     "unordered(nameTokens.fr)",
     "unordered(nameTokens.ja)",
+    "classification",
   ],
   attributesForFaceting: [
     "id",
@@ -22,6 +23,9 @@ const indexSettings = {
     "stats.specialAttack",
     "stats.specialDefense",
     "stats.speed",
+    "classification",
+    "genderRate",
+    "captureRate",
     "generation",
     "starter",
     "fabulous",

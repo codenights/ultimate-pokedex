@@ -1,3 +1,5 @@
+const path = require("path");
+const { readJSON } = require("fs-extra");
 const fetch = require("isomorphic-unfetch");
 const nlp = require("compromise");
 
@@ -157,9 +159,41 @@ async function fetchPokemons() {
     .map(transformPokemon);
 }
 
+async function fetchMissingPokemons() {
+  const pokemons7thGen = await readJSON(
+    path.join(__dirname, "../../data/pokemon-next/7-gen.json")
+  );
+  const pokemons8thGen = await readJSON(
+    path.join(__dirname, "../../data/pokemon-next/8-gen.json")
+  );
+
+  return [...pokemons7thGen, ...pokemons8thGen].map(pokemon => ({
+    ...pokemon,
+    objectID: String(pokemon.id),
+    generation: getGeneration(pokemon),
+    starter: startersId.includes(pokemon.id),
+    fabulous: fabulousId.includes(pokemon.id),
+    baby: babiesId.includes(pokemon.id),
+    legendary: legendariesId.includes(pokemon.id),
+    nameTokens: {
+      en: getNameTokens(nlp(pokemon.names.en).syllables()[0]),
+      fr: getNameTokens(nlp(pokemon.names.fr).syllables()[0]),
+      ja: [],
+    },
+    artworkUrl: getPublicImageUrl(`/artwork/${pokemon.id}.png`),
+    spriteUrl: getPublicImageUrl(`/sprite/${pokemon.id}.png`),
+    spriteShinyUrl: getPublicImageUrl(`/sprite-shiny/${pokemon.id}.png`),
+    weakTo: [],
+    resistantTo: [],
+  }));
+}
+
 async function saveObjects() {
   try {
-    const pokemons = await fetchPokemons();
+    const pokemons = [
+      ...(await fetchPokemons()),
+      ...(await fetchMissingPokemons()),
+    ];
 
     await mainIndex.clearObjects();
     await mainIndex.saveObjects(pokemons);
