@@ -76,9 +76,11 @@ export const CurrentRefinements = connectCurrentRefinements(props => {
     return null;
   }
 
+  const items = props.items.filter(item => item.items);
+
   return (
     <FilterList className="pt-8">
-      {props.items.map(item =>
+      {items.map(item =>
         item.items.map(refinement => {
           return (
             <FilterListItem key={refinement.label}>
