@@ -5,14 +5,14 @@ import cx from "classnames";
 import { TypeIcon } from "../TypeIcon";
 import { Tag, TypeIconWrapper, TypeCount, TypeName } from "./styles";
 
-export const TypeBadgeAlgolia = ({ type, count, active, isSecondType }) => (
+export const TypeBadgeAlgolia = ({ type, count, active, value }) => (
   <Tag
     type={type}
     className={cx(
       "w-full flex flex-fill whitespace-no-wrap rounded-full text-center items-center px-2 py-1 my-1",
       {
         active,
-        isSecondType,
+        typeModifier: value.length !== 1,
       }
     )}
   >

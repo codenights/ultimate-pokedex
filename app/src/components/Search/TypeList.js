@@ -24,16 +24,22 @@ const typeNames = [
 ];
 
 function getTypes({ items, searchState }) {
-  return typeNames.map(typeName => ({
-    label: typeName,
-    value: [typeName],
-    count: 0,
-    isRefined:
-      searchState.refinementList &&
-      searchState.refinementList["types.name"] &&
-      searchState.refinementList["types.name"].indexOf(typeName) !== -1,
-    ...items.find(x => x.label === typeName),
-  }));
+  return typeNames.map(typeName => {
+    const refinement = items.find(x => x.label === typeName);
+    const isRefined =
+      (refinement && refinement.isRefined) ||
+      (searchState.refinementList &&
+        searchState.refinementList["types.name"] &&
+        searchState.refinementList["types.name"].indexOf(typeName) !== -1);
+
+    return {
+      label: typeName,
+      value: isRefined ? [] : [typeName],
+      count: 0,
+      isRefined,
+      ...refinement,
+    };
+  });
 }
 
 export const TypeList = connectRefinementList(
@@ -43,7 +49,6 @@ export const TypeList = connectRefinementList(
     // Adding a single value to the `value` array means that there will be a
     // single value after refinement, which resets any multiple-type refinements.
     const types = getTypes({ items, searchState });
-    const isSecondType = items.filter(x => x.isRefined).length >= 1;
 
     return (
       <ul>
@@ -59,10 +64,10 @@ export const TypeList = connectRefinementList(
               />
 
               <TypeBadgeAlgolia
-                isSecondType={isSecondType && type.count > 0}
                 active={type.isRefined}
                 type={type.label}
                 count={type.count}
+                value={type.value}
               />
             </label>
           </li>

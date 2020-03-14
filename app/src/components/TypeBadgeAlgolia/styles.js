@@ -47,7 +47,7 @@ export const Tag = styled.span`
     }
   }
 
-  &.isSecondType ${TypeIconWrapper}::before {
+  &.typeModifier ${TypeIconWrapper}::before {
     color: #fff;
     position: absolute;
     font-family: Futura-Medium;
@@ -59,15 +59,15 @@ export const Tag = styled.span`
     text-align: right;
   }
 
-  &:not(.active).isSecondType ${TypeIconWrapper}::before {
+  &:not(.active).typeModifier ${TypeIconWrapper}::before {
     content: "+";
   }
 
-  &.active.isSecondType ${TypeIconWrapper}::before {
+  &.active.typeModifier ${TypeIconWrapper}::before {
     content: "–";
   }
 
-  &.isSecondType:hover ${TypeIconWrapper}::before {
+  &.typeModifier:hover ${TypeIconWrapper}::before {
     opacity: 1;
   }
 `;
