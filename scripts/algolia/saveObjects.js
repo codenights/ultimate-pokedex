@@ -153,10 +153,18 @@ async function fetchPokemons() {
   });
   const { data } = await response.json();
   const { pokemons } = data;
+  const additionalPokemonData = await readJSON(
+    path.join(__dirname, "../../data/pokemon-next/all-gens.json")
+  );
 
   return pokemons
     .filter(pokemon => pokemon.isDefaultForm === true)
-    .map(transformPokemon);
+    .map((pokemon, id) =>
+      transformPokemon({
+        ...pokemon,
+        ...additionalPokemonData[id],
+      })
+    );
 }
 
 async function fetchMissingPokemons() {
