@@ -1,6 +1,7 @@
 const { mainIndex } = require("./algoliaIndices");
 
 const indexSettings = {
+  // Relevance essentials
   searchableAttributes: [
     "names.en",
     "names.fr",
@@ -13,6 +14,26 @@ const indexSettings = {
     "unordered(color)",
     "unordered(shape)",
   ],
+  ranking: [
+    "asc(id)",
+    "typo",
+    "geo",
+    "words",
+    "filters",
+    "proximity",
+    "attribute",
+    "exact",
+  ],
+  // Relevance optimizations
+  disableTypoToleranceOnAttributes: [
+    "objectID",
+    "nameTokens.en",
+    "nameTokens.fr",
+    "nameTokens.ja",
+    "color",
+    "shape",
+  ],
+  // Filtering and faceting
   attributesForFaceting: [
     "id",
     "searchable(types.name)",
@@ -36,24 +57,16 @@ const indexSettings = {
     "baby",
     "legendary",
   ],
-  disableTypoToleranceOnAttributes: [
-    "objectID",
-    "nameTokens.en",
-    "nameTokens.fr",
-    "nameTokens.ja",
-    "color",
-    "shape",
-  ],
+  // Pagination and display
+  attributesToHighlight: ["names.en", "names.fr", "names.ja"],
+  highlightPreTag: "<mark>",
+  highlightPostTag: "</mark>",
 };
 
 async function setSettings() {
-  try {
-    await mainIndex.setSettings(indexSettings, {
-      forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
-    });
-  } catch (error) {
-    console.error(error);
-  }
+  await mainIndex.setSettings(indexSettings, {
+    forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
+  });
 }
 
 module.exports = {

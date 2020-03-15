@@ -196,14 +196,10 @@ const rules = [
 ];
 
 async function saveRules() {
-  try {
-    for (const rule of rules) {
-      await mainIndex.saveRule(rule, {
-        forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
-      });
-    }
-  } catch (error) {
-    console.error(error);
+  for (const rule of rules) {
+    await mainIndex.saveRule(rule, {
+      forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
+    });
   }
 }
 

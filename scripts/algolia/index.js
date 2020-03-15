@@ -15,37 +15,27 @@ async function run() {
   );
   const spinner = ora().start();
 
+  spinner.text = "Fetching all Pokemon";
+
+  spinner.text = `Indexing Pokemon to the index ${chalk.bold.blue(
+    process.env.ALGOLIA_INDEX_NAME
+  )}`;
+
   try {
-    spinner.text = "Fetching all Pokemon";
+    await saveObjects();
 
-    spinner.text = `Indexing Pokemon to the index ${chalk.bold.blue(
-      process.env.ALGOLIA_INDEX_NAME
-    )}`;
+    spinner.text = "Setting indices configuration";
+    await setSettings();
 
-    try {
-      await saveObjects();
+    spinner.text = "Saving rules";
+    await saveRules();
 
-      spinner.text = "Setting indices configuration";
-
-      try {
-        await setSettings();
-        await saveRules();
-
-        spinner.succeed("The Algolia indices were updated.");
-      } catch (error) {
-        spinner.stop();
-
-        throw error;
-      }
-    } catch (error) {
-      spinner.stop();
-
-      throw error;
-    }
+    spinner.succeed("The Algolia indices were updated.");
   } catch (error) {
     spinner.stop();
+    spinner.fail(chalk.red(error.message));
 
-    throw error;
+    console.error(error);
   }
 }
 

@@ -108,11 +108,20 @@ function getGeneration(pokemon) {
 }
 
 function transformPokemon(pokemon) {
-  const { isDefaultForm, ...props } = pokemon;
-
   return {
-    ...props,
+    id: pokemon.id,
     objectID: String(pokemon.id),
+    names: pokemon.names,
+    captureRate: pokemon.captureRate,
+    genderRate: pokemon.genderRate,
+    stats: pokemon.stats,
+    types: pokemon.types,
+    color: pokemon.color,
+    shape: pokemon.shape,
+    weight: pokemon.weight,
+    height: pokemon.height,
+    baseHappiness: pokemon.baseHappiness,
+    eggGroups: pokemon.eggGroups,
     generation: getGeneration(pokemon),
     starter: startersId.includes(pokemon.id),
     fabulous: fabulousId.includes(pokemon.id),
@@ -197,17 +206,13 @@ async function fetchMissingPokemons() {
 }
 
 async function saveObjects() {
-  try {
-    const pokemons = [
-      ...(await fetchPokemons()),
-      ...(await fetchMissingPokemons()),
-    ];
+  const pokemons = [
+    ...(await fetchPokemons()),
+    ...(await fetchMissingPokemons()),
+  ];
 
-    await mainIndex.clearObjects();
-    await mainIndex.saveObjects(pokemons);
-  } catch (error) {
-    console.error(error);
-  }
+  await mainIndex.clearObjects();
+  await mainIndex.saveObjects(pokemons);
 }
 
 module.exports = {
