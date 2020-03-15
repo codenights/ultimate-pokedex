@@ -4,7 +4,7 @@ import { mapManytoEntities, mapRowsToEntities } from "../utils/dataloader";
 export function PokemonRepository(knex) {
   return {
     findAllPokemons() {
-      return knex("pokemon").orderBy("order");
+      return knex("pokemon").orderBy("id");
     },
     findPokemonById: new DataLoader(
       pokemonIds =>
