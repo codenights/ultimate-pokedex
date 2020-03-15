@@ -36,6 +36,14 @@ const indexSettings = {
     "baby",
     "legendary",
   ],
+  disableTypoToleranceOnAttributes: [
+    "objectID",
+    "nameTokens.en",
+    "nameTokens.fr",
+    "nameTokens.ja",
+    "color",
+    "shape",
+  ],
 };
 
 async function setSettings() {
