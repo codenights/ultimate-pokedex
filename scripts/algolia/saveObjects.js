@@ -118,6 +118,7 @@ function transformPokemon(pokemon) {
     types: pokemon.types,
     color: pokemon.color,
     shape: pokemon.shape,
+    classification: pokemon.classification,
     weight: pokemon.weight,
     height: pokemon.height,
     baseHappiness: pokemon.baseHappiness,
@@ -130,7 +131,7 @@ function transformPokemon(pokemon) {
     nameTokens: {
       en: getNameTokens(nlp(pokemon.names.en).syllables()[0]),
       fr: getNameTokens(nlp(pokemon.names.fr).syllables()[0]),
-      ja: getNameTokens(nlp(pokemon.names.ja).syllables()[0]),
+      ja: [],
     },
     artworkUrl: getPublicImageUrl(pokemon.artworkUrl),
     spriteUrl: getPublicImageUrl(pokemon.spriteUrl),
@@ -165,51 +166,27 @@ async function fetchPokemons() {
   const additionalPokemonData = await readJSON(
     path.join(__dirname, "../../data/pokemon-next/all-gens.json")
   );
-
-  return pokemons
-    .filter(pokemon => pokemon.isDefaultForm === true)
-    .map((pokemon, id) =>
-      transformPokemon({
-        ...pokemon,
-        ...additionalPokemonData[id],
-      })
-    );
-}
-
-async function fetchMissingPokemons() {
-  const pokemons7thGen = await readJSON(
-    path.join(__dirname, "../../data/pokemon-next/7-gen.json")
-  );
   const pokemons8thGen = await readJSON(
     path.join(__dirname, "../../data/pokemon-next/8-gen.json")
   );
 
-  return [...pokemons7thGen, ...pokemons8thGen].map(pokemon => ({
-    ...pokemon,
-    objectID: String(pokemon.id),
-    generation: getGeneration(pokemon),
-    starter: startersId.includes(pokemon.id),
-    fabulous: fabulousId.includes(pokemon.id),
-    baby: babiesId.includes(pokemon.id),
-    legendary: legendariesId.includes(pokemon.id),
-    nameTokens: {
-      en: getNameTokens(nlp(pokemon.names.en).syllables()[0]),
-      fr: getNameTokens(nlp(pokemon.names.fr).syllables()[0]),
-      ja: [],
-    },
-    artworkUrl: getPublicImageUrl(`/artwork/${pokemon.id}.png`),
-    spriteUrl: getPublicImageUrl(`/sprite/${pokemon.id}.png`),
-    spriteShinyUrl: getPublicImageUrl(`/sprite-shiny/${pokemon.id}.png`),
-    weakTo: [],
-    resistantTo: [],
-  }));
+  return pokemons
+    .filter(pokemon => pokemon.isDefaultForm === true)
+    .map((pokemon, id) => {
+      const pokemon8thData = pokemons8thGen.find(
+        pokemon => pokemon.id - 1 === id
+      );
+
+      return transformPokemon({
+        ...pokemon,
+        ...additionalPokemonData[id],
+        classification: pokemon8thData ? pokemon8thData.classification : null,
+      });
+    });
 }
 
 async function saveObjects() {
-  const pokemons = [
-    ...(await fetchPokemons()),
-    ...(await fetchMissingPokemons()),
-  ];
+  const pokemons = await fetchPokemons();
 
   await mainIndex.clearObjects();
   await mainIndex.saveObjects(pokemons);
