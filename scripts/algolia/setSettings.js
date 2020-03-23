@@ -1,4 +1,23 @@
-const { mainIndex } = require("./algoliaIndices");
+const {
+  mainIndex,
+  idDescIndex,
+  nameAscIndex,
+  nameDescIndex,
+  heightAscIndex,
+  heightDescIndex,
+  weightAscIndex,
+  weightDescIndex,
+} = require("./algoliaIndices");
+
+const defaultRanking = [
+  "typo",
+  "geo",
+  "words",
+  "filters",
+  "proximity",
+  "attribute",
+  "exact",
+];
 
 const indexSettings = {
   // Relevance essentials
@@ -14,16 +33,7 @@ const indexSettings = {
     "unordered(color)",
     "unordered(shape)",
   ],
-  ranking: [
-    "asc(id)",
-    "typo",
-    "geo",
-    "words",
-    "filters",
-    "proximity",
-    "attribute",
-    "exact",
-  ],
+  ranking: ["asc(id)", ...defaultRanking],
   // Relevance optimizations
   disableTypoToleranceOnAttributes: [
     "objectID",
@@ -67,6 +77,30 @@ async function setSettings() {
   await mainIndex.setSettings(indexSettings, {
     forwardToReplicas: mainIndex.indexName.startsWith("dev_") === false,
   });
+
+  if (mainIndex.indexName.startsWith("dev_") === false) {
+    await idDescIndex.setSettings({
+      ranking: ["desc(id)", ...defaultRanking],
+    });
+    await nameAscIndex.setSettings({
+      ranking: ["asc(names.en)", ...defaultRanking],
+    });
+    await nameDescIndex.setSettings({
+      ranking: ["desc(names.en)", ...defaultRanking],
+    });
+    await heightAscIndex.setSettings({
+      ranking: ["asc(height)", ...defaultRanking],
+    });
+    await heightDescIndex.setSettings({
+      ranking: ["desc(height)", ...defaultRanking],
+    });
+    await weightAscIndex.setSettings({
+      ranking: ["asc(weight)", ...defaultRanking],
+    });
+    await weightDescIndex.setSettings({
+      ranking: ["desc(weight)", ...defaultRanking],
+    });
+  }
 }
 
 module.exports = {
