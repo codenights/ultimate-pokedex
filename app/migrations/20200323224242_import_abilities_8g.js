@@ -2,9 +2,9 @@ const path = require("path");
 const { readJSON } = require("fs-extra");
 
 const DIR = path.join(__dirname, "../../data/pokemon-next");
-const ABILITIES_FILE = path.join(DIR, "abilities-8-gen.json");
+const FILE = path.join(DIR, "abilities-8-gen.json");
 
-const mapAbilityToAbilityDatabase = ability => ({
+const mapToDatabase = ability => ({
   id: ability.id,
   name_en: ability.name,
   name_fr: null,
@@ -12,18 +12,18 @@ const mapAbilityToAbilityDatabase = ability => ({
   description: ability.description,
 });
 
-const insert8thGenAbilities = async knex => {
-  const abilities = await readJSON(ABILITIES_FILE);
+const insertAll = async knex => {
+  const abilities = await readJSON(FILE);
 
   for (const ability of abilities) {
-    const abilityDatabase = mapAbilityToAbilityDatabase(ability);
+    const abilityDatabase = mapToDatabase(ability);
     console.log("Importing ability: ", abilityDatabase.id);
 
     await knex.insert(abilityDatabase).into("ability");
   }
 };
 
-const delete8thGenAbilities = async knex => {
+const deleteAll = async knex => {
   await knex("ability")
     .where("id", ">", 233)
     .andWhere("id", "<", 259)
@@ -31,9 +31,9 @@ const delete8thGenAbilities = async knex => {
 };
 
 exports.up = async knex => {
-  await insert8thGenAbilities(knex);
+  await insertAll(knex);
 };
 
 exports.down = async knex => {
-  await delete8thGenAbilities(knex);
+  await deleteAll(knex);
 };

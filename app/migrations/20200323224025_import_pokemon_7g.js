@@ -1,8 +1,8 @@
 const path = require("path");
 const { readJSON } = require("fs-extra");
 
-const POKEMON_DIR = path.join(__dirname, "../../data/pokemon-next");
-const POKEMON_FILE = path.join(POKEMON_DIR, "8-gen.json");
+const DIR = path.join(__dirname, "../../data/pokemon-next");
+const FILE = path.join(DIR, "7-gen.json");
 
 const mapPokemonToPokemonDatabase = pokemon => ({
   id: pokemon.id,
@@ -35,7 +35,6 @@ const mapPokemonToPokemonSpeciesDatabase = pokemon => {
   return {
     pokemon_id: pokemon.id,
     version_id: 26,
-    // @TODO: get the actual entry somewhere.
     entry: "",
   };
 };
@@ -55,8 +54,8 @@ const mapPokemonToEggGroupDatabase = (pokemon, eggGroup) => {
   };
 };
 
-const insert8thGenPokemons = async knex => {
-  const pokemons = await readJSON(POKEMON_FILE);
+const insertAll = async knex => {
+  const pokemons = await readJSON(FILE);
 
   for (const pokemon of pokemons) {
     const pokemonDatabase = mapPokemonToPokemonDatabase(pokemon);
@@ -82,32 +81,32 @@ const insert8thGenPokemons = async knex => {
   }
 };
 
-const delete8thGenPokemons = async knex => {
+const deleteAll = async knex => {
   await knex("pokedex_entry")
-    .where("pokemon_id", ">", 809)
-    .andWhere("pokemon_id", "<", 891)
+    .where("pokemon_id", 808)
+    .orWhere("pokemon_id", 809)
     .del();
 
   await knex("pokemon_ability")
-    .where("pokemon_id", ">", 809)
-    .andWhere("pokemon_id", "<", 891)
+    .where("pokemon_id", 808)
+    .orWhere("pokemon_id", 809)
     .del();
 
   await knex("egg_group_pokemon")
-    .where("pokemon_id", ">", 809)
-    .andWhere("pokemon_id", "<", 891)
+    .where("pokemon_id", 808)
+    .orWhere("pokemon_id", 809)
     .del();
 
   await knex("pokemon")
-    .where("id", ">", 809)
-    .andWhere("id", "<", 891)
+    .where("id", 808)
+    .orWhere("id", 809)
     .del();
 };
 
 exports.up = async knex => {
-  await insert8thGenPokemons(knex);
+  await insertAll(knex);
 };
 
 exports.down = async knex => {
-  await delete8thGenPokemons(knex);
+  await deleteAll(knex);
 };
