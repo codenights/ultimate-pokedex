@@ -41,13 +41,14 @@ const PokemonPage = ({ pokemon, statusCode }) => {
     <AppBarLayout>
       <main className="flex w-h-screen overflow-y-auto scrolling-touch bg-black">
         <Head>
-          <title>{pokemon.names.en} | Ultimate Pokedex</title>
+          <title>
+            {pokemon.names.en} #{pokemon.id} | Ultimate Pokedex
+          </title>
         </Head>
 
         <div className="mx-auto container font-body max-w-3xl p-8 bg-gray-900">
           <PokemonDetails pokemon={pokemon} />
         </div>
-
       </main>
     </AppBarLayout>
   );
