@@ -36,6 +36,10 @@ export const Moves = ({ pokemon }) => {
     selectedVersionGroupId
   );
 
+  if (movesByVersionGroup.length === 0) {
+    return null;
+  }
+
   return (
     <Section>
       <header>
