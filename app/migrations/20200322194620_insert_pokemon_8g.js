@@ -43,8 +43,7 @@ const mapPokemonToPokemonSpeciesDatabase = pokemon => {
 const mapPokemonToAbilityDatabase = (pokemon, ability) => {
   return {
     pokemon_id: pokemon.id,
-    // @TODO: `ability` set to `null` don't exist yet in the DB.
-    ability_id: ability.id === null ? 1 : ability.id,
+    ability_id: ability.id,
     is_hidden: ability.isHidden,
   };
 };
