@@ -179,6 +179,7 @@ const SubmitButton = styled.button`
   position: absolute;
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 40px;
   height: 100%;
   top: 0;
