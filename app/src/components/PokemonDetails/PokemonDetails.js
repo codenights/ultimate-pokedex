@@ -11,19 +11,19 @@ const pokemonHasEvolution = pokemon =>
   pokemon.family.pokemon.evolutions.length > 0;
 
 function getEvolutionList(pokemon) {
-  function getEvolutionListRec(nextPokemon) {
-    if (!nextPokemon.evolutions || nextPokemon.evolutions.length === 0) {
-      return [];
+  function getEvolutionListRec(pokemon) {
+    if (!pokemon.evolutions) {
+      return pokemon;
     }
 
-    const evolution = nextPokemon.evolutions.map(
-      evolution => evolution.pokemon
+    return [pokemon].concat(
+      ...pokemon.evolutions.map(evolution =>
+        getEvolutionListRec(evolution.pokemon)
+      )
     );
-
-    return [...evolution].concat(getEvolutionListRec(evolution));
   }
 
-  return [pokemon].concat(getEvolutionListRec(pokemon));
+  return getEvolutionListRec(pokemon);
 }
 
 export const PokemonDetails = ({ pokemon }) => (
