@@ -30,15 +30,16 @@ const getMovesByVersionGroups = (moves, selectedVersionGroupId) =>
 
 export const Moves = ({ pokemon }) => {
   const [selectedVersionGroupId, setSelectedVersionGroupId] = useState(18);
+
+  if (pokemon.moves.length === 0) {
+    return null;
+  }
+
   const versionGroups = getAllVersionGroups(pokemon.moves);
   const movesByVersionGroup = getMovesByVersionGroups(
     pokemon.moves,
     selectedVersionGroupId
   );
-
-  if (movesByVersionGroup.length === 0) {
-    return null;
-  }
 
   return (
     <Section>
