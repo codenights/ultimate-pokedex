@@ -1,29 +1,15 @@
 require("dotenv").config();
-const path = require("path");
 
-let developmentConfig = {
-  client: "sqlite3",
+const developmentConfig = {
+  client: "mysql",
   connection: {
-    filename: "./db.sqlite3"
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.DATABASE_NAME,
   },
-  migrations: {
-    directory: path.join(__dirname, "migrations")
-  },
-  useNullAsDefault: true
+  debug: !!process.env.DATABASE_DEBUG,
 };
-
-if (process.env.DATABASE_DRIVER === "MYSQL") {
-  developmentConfig = {
-    client: "mysql",
-    connection: {
-      host: process.env.DATABASE_HOST,
-      user: process.env.DATABASE_USER,
-      password: process.env.DATABASE_PASSWORD,
-      database: process.env.DATABASE_NAME
-    },
-    debug: !!process.env.DATABASE_DEBUG
-  };
-}
 
 module.exports = {
   development: developmentConfig,
@@ -34,7 +20,7 @@ module.exports = {
       user: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      ssl: true
-    }
-  }
+      ssl: true,
+    },
+  },
 };
