@@ -1,5 +1,5 @@
 import path from "path";
-import { readJSON } from "fs-extra";
+import { readJSON, pathExists } from "fs-extra";
 import * as Knex from "knex";
 
 import { Pokemon, Pokemon8G } from "./types/Pokemon";
@@ -10,6 +10,7 @@ import {
   extractIdFromUrl,
 } from "./utils";
 
+const PUBLIC_DIR = path.join(__dirname, "../../public");
 const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
 const POKEMON_DIR = path.join(__dirname, "../../../data/pokemon");
 const POKEMON_FORM_DIR = path.join(__dirname, "../../../data/pokemon-form");
@@ -109,6 +110,14 @@ async function getPokemonNames(
   }
 }
 
+function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
+  const pokemonArtworkUrl = `/artwork/${pokemon.id}.png`;
+  const speciesArtworkUrl = `/artwork/${species.id}.png`;
+  const pokemonArtworkPath = path.join(PUBLIC_DIR, pokemonArtworkUrl);
+
+  return pathExists(pokemonArtworkPath) ? pokemonArtworkUrl : speciesArtworkUrl;
+}
+
 async function mapToTable(
   species: PokemonSpecies,
   pokemon: Pokemon
@@ -133,9 +142,9 @@ async function mapToTable(
     stat_speed: findStatByName(pokemon, "speed"),
     type_1_id: findType1Id(pokemon),
     type_2_id: findType2Id(pokemon),
-    artwork_url: `/artwork/${pokemon.id}.png`,
-    sprite_url: `/sprite/${pokemon.id}.png`,
-    shiny_sprite_url: `/sprite-shiny/${pokemon.id}.png`,
+    artwork_url: getArtworkUrl(species, pokemon),
+    sprite_url: `/sprite/${species.id}.png`,
+    shiny_sprite_url: `/sprite-shiny/${species.id}.png`,
   };
 }
 

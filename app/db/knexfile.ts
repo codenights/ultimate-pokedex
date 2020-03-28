@@ -1,6 +1,8 @@
 import { Config } from "knex";
 
-require("dotenv").config();
+require("dotenv").config({
+  path: "../.env",
+});
 
 const development: Config = {
   client: "mysql",

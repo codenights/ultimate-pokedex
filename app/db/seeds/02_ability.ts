@@ -8,7 +8,7 @@ import { getDirectoryContent, findEntityByLanguageName } from "./utils";
 const ABILITY_DIR = path.join(__dirname, "../../../data/ability");
 const ABILITIY_8G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "abilities-8-gen.json"
 );
 

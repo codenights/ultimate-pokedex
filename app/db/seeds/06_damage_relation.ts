@@ -4,7 +4,7 @@ import * as Knex from "knex";
 import { Type, DamageRelations } from "./types/Type";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
-const DIR = path.join(__dirname, "../../data/type");
+const DIR = path.join(__dirname, "../../../data/type");
 
 const DAMAGE_MULTIPLIER_MAP = {
   double_damage_from: {
