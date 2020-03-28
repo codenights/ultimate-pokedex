@@ -17,7 +17,7 @@ import { typeDefs } from "../../src/graphql/typeDefs";
 import { resolvers } from "../../src/graphql/resolvers";
 
 const env = process.env.NODE_ENV || "development";
-const knex = Knex(require("../../knexfile")[env]);
+const knex = Knex(require("../../db/knexfile")[env]);
 
 const apolloServer = new ApolloServer({
   typeDefs,
