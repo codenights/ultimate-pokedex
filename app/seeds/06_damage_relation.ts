@@ -1,19 +1,9 @@
+import * as Knex from "knex";
+
 const path = require("path");
 const { getDirectoryContent, extractIdFromUrl } = require("./utils");
 
-const TYPES_DIR = path.join(__dirname, "../../data/type");
-
-const createDamageRelationsTable = async knex =>
-  knex.schema.createTable("damage_relation", table => {
-    table.integer("type_1").unsigned().notNullable();
-    table.foreign("type_1").references("type.id");
-
-    table.integer("type_2").unsigned().notNullable();
-    table.foreign("type_2").references("type.id");
-
-    table.string("relation").notNullable();
-    table.float("multiplier").unsigned().notNullable();
-  });
+const DIR = path.join(__dirname, "../../data/type");
 
 const DAMAGE_MULTIPLIER_MAP = {
   double_damage_from: {
@@ -42,11 +32,20 @@ const DAMAGE_MULTIPLIER_MAP = {
   },
 };
 
-const importDamageRelations = async knex => {
-  const allTypes = await getDirectoryContent(TYPES_DIR);
-  const relations = [];
+type DamageRelationDatabase = {
+  type_1: number;
+  type_2: number;
+  relation: string;
+  multiplier: number;
+};
 
-  for (const { damage_relations, id } of allTypes) {
+exports.seed = async (knex: Knex) => {
+  console.log("Importing damage relations...");
+
+  const types = await getDirectoryContent(DIR);
+  const damageRelations: DamageRelationDatabase[] = [];
+
+  for (const { damage_relations, id } of types) {
     for (const damageType in damage_relations) {
       const otherTypes = damage_relations[damageType];
 
@@ -54,7 +53,7 @@ const importDamageRelations = async knex => {
         const type_2_id = extractIdFromUrl("type", url);
         const { relation, multiplier } = DAMAGE_MULTIPLIER_MAP[damageType];
 
-        relations.push({
+        damageRelations.push({
           type_1: id,
           type_2: type_2_id,
           relation,
@@ -64,12 +63,5 @@ const importDamageRelations = async knex => {
     }
   }
 
-  await knex("damage_relation").insert(relations).into("damage_relation");
+  await knex("damage_relation").del().insert(damageRelations);
 };
-
-exports.up = async knex => {
-  await createDamageRelationsTable(knex);
-  await importDamageRelations(knex);
-};
-
-exports.down = knex => knex.schema.dropTable("damage_relation");

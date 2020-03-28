@@ -18,9 +18,9 @@ export function PokemonRepository(knex) {
         console.log("findPokemonsByEggGroupId:", eggGroupIds) ||
         knex("pokemon")
           .innerJoin(
-            "egg_group_pokemon",
+            "pokemon_egg_group",
             "pokemon.id",
-            "egg_group_pokemon.pokemon_id"
+            "pokemon_egg_group.pokemon_id"
           )
           .select("pokemon.*", "egg_group_id")
           .whereIn("egg_group_id", eggGroupIds)

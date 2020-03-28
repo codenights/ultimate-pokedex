@@ -8,7 +8,8 @@
     "start": "next start",
     "export": "next export",
     "lint": "eslint src/**/*.js --fix",
-    "migrate": "knex migrate:latest",
+    "migrate": "knex migrate:latest --knexpath ./knexfile.ts",
+    "seed": "knex seed:run --knexpath ./knexfile.ts",
     "deploy": "now --prod"
   },
   "dependencies": {
