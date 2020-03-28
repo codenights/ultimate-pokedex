@@ -1,3 +1,23 @@
+type TypeName =
+  | "poison"
+  | "grass"
+  | "fire"
+  | "flying"
+  | "water"
+  | "electric"
+  | "dragon"
+  | "ice"
+  | "fighting"
+  | "rock"
+  | "ground"
+  | "psychic"
+  | "bug"
+  | "dark"
+  | "steel"
+  | "fairy"
+  | "ghost"
+  | "normal";
+
 export interface Type {
   damage_relations: DamageRelations;
   game_indices: GameIndex[];
@@ -5,15 +25,15 @@ export interface Type {
   id: number;
   move_damage_class: Resource;
   moves: Resource[];
-  name: string;
+  name: TypeName;
   names: Name[];
   pokemon: Pokemon[];
 }
 
 export interface DamageRelations {
   double_damage_from: Resource[];
-  double_damage_to: any[];
-  half_damage_from: any[];
+  double_damage_to: Resource[];
+  half_damage_from: Resource[];
   half_damage_to: Resource[];
   no_damage_from: Resource[];
   no_damage_to: Resource[];

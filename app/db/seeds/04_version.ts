@@ -1,14 +1,14 @@
+import path from "path";
 import * as Knex from "knex";
 import { Version } from "./types/Version";
 
-const path = require("path");
-const {
+import {
   getDirectoryContent,
   findEntityByLanguageName,
   extractIdFromUrl,
-} = require("./utils");
+} from "./utils";
 
-const DIR = path.join(__dirname, "../../data/version");
+const DIR = path.join(__dirname, "../../../data/version");
 
 const COLOR_BY_VERSION = {
   "ultra-sun": "#db8624",
@@ -65,9 +65,7 @@ function mapToTable(version: Version): VersionDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing versions...");
 
-  const versions: VersionDatabase[] = (await getDirectoryContent(DIR)).map(
-    mapToTable
-  );
+  const versions = (await getDirectoryContent<Version>(DIR)).map(mapToTable);
 
-  await knex("version").del().insert(versions);
+  await knex<VersionDatabase>("version").del().insert(versions);
 };

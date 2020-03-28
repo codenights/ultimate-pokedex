@@ -1,10 +1,10 @@
+import path from "path";
 import * as Knex from "knex";
+
 import { Type } from "./types/Type";
+import { getDirectoryContent } from "./utils";
 
-const path = require("path");
-const { getDirectoryContent } = require("./utils");
-
-const DIR = path.join(__dirname, "../../data/type");
+const DIR = path.join(__dirname, "../../../data/type");
 const COLORS_BY_TYPE = {
   poison: "#a59",
   grass: "#7c5",
@@ -43,9 +43,7 @@ function mapToTable(type: Type): TypeDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing types...");
 
-  const types: TypeDatabase[] = (await getDirectoryContent(DIR)).map(
-    mapToTable
-  );
+  const types = (await getDirectoryContent<Type>(DIR)).map(mapToTable);
 
-  await knex("type").del().insert(types);
+  await knex<TypeDatabase>("type").del().insert(types);
 };

@@ -1,14 +1,14 @@
+import path from "path";
 import * as Knex from "knex";
-import { Move } from "./types/Move";
 
-const path = require("path");
-const {
+import { Move } from "./types/Move";
+import {
   getDirectoryContent,
   findEntityByLanguageName,
   extractIdFromUrl,
-} = require("./utils");
+} from "./utils";
 
-const DIR = path.join(__dirname, "../../data/move");
+const DIR = path.join(__dirname, "../../../data/move");
 
 type MoveDatabase = {
   id: number;
@@ -50,9 +50,7 @@ function mapToTable(move: Move): MoveDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing moves...");
 
-  const moves: MoveDatabase[] = (await getDirectoryContent(DIR)).map(
-    mapToTable
-  );
+  const moves = (await getDirectoryContent<Move>(DIR)).map(mapToTable);
 
-  await knex("move").del().insert(moves);
+  await knex<MoveDatabase>("move").del().insert(moves);
 };

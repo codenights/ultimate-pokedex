@@ -1,20 +1,20 @@
+import path from "path";
 import * as Knex from "knex";
 import { EggGroup } from "./types/EggGroup";
 import { Pokemon8G } from "./types/Pokemon";
 
-const path = require("path");
-const { readJSON } = require("fs-extra");
-const { getDirectoryContent, extractIdFromUrl } = require("./utils");
+import { readJSON } from "fs-extra";
+import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
-const EGG_GROUP_DIR = path.join(__dirname, "../../data/egg-group");
+const EGG_GROUP_DIR = path.join(__dirname, "../../../data/egg-group");
 const POKEMON_7G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "7-gen.json"
 );
 const POKEMON_8G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "8-gen.json"
 );
 
@@ -27,7 +27,7 @@ exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon / Egg groups...");
 
   const pokemonEggGroupsEntries: PokemonEggGroupDatabase[] = [];
-  const eggGroups: EggGroup[] = await getDirectoryContent(EGG_GROUP_DIR);
+  const eggGroups = await getDirectoryContent<EggGroup>(EGG_GROUP_DIR);
 
   for (const eggGroup of eggGroups) {
     const eggGroupEntries: PokemonEggGroupDatabase[] = eggGroup.pokemon_species.map(
@@ -52,5 +52,7 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  await knex("pokemon_egg_group").del().insert(pokemonEggGroupsEntries);
+  await knex<PokemonEggGroupDatabase>("pokemon_egg_group")
+    .del()
+    .insert(pokemonEggGroupsEntries);
 };

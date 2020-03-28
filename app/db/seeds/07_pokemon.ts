@@ -1,26 +1,25 @@
+import path from "path";
+import { readJSON } from "fs-extra";
 import * as Knex from "knex";
-import { Pokemon } from "./types/Pokemon";
-import { PokemonSpecies } from "./types/PokemonSpecies";
 
-const path = require("path");
-const { readJSON } = require("fs-extra");
-
-const {
+import { Pokemon, Pokemon8G } from "./types/Pokemon";
+import { PokemonSpecies, Variety } from "./types/PokemonSpecies";
+import {
   getDirectoryContent,
   findEntityByLanguageName,
   extractIdFromUrl,
-} = require("./utils");
+} from "./utils";
 
-const SPECIES_DIR = path.join(__dirname, "../../data/pokemon-species");
-const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
-const POKEMON_FORM_DIR = path.join(__dirname, "../../data/pokemon-form");
+const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
+const POKEMON_DIR = path.join(__dirname, "../../../data/pokemon");
+const POKEMON_FORM_DIR = path.join(__dirname, "../../../data/pokemon-form");
 const POKEMON_7G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next/7-gen.json"
+  "../../../data/pokemon-next/7-gen.json"
 );
 const POKEMON_8G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next/8-gen.json"
+  "../../../data/pokemon-next/8-gen.json"
 );
 
 const findStatByName = (pokemon: Pokemon, statName: string) =>
@@ -36,7 +35,7 @@ const findTypeId = (slot: number) => (pokemon: Pokemon) =>
 const findType1Id = findTypeId(1);
 const findType2Id = findTypeId(2);
 
-const findPokemonByVariety = variety => {
+const findPokemonByVariety = (variety: Variety) => {
   const pokemonId = extractIdFromUrl("pokemon", variety.pokemon.url);
   return readJSON(path.join(POKEMON_DIR, `${pokemonId}.json`));
 };
@@ -140,7 +139,7 @@ async function mapToTable(
   };
 }
 
-function mapPokemon8gToTable(pokemon): PokemonDatabase {
+function mapPokemon8gToTable(pokemon: Pokemon8G): PokemonDatabase {
   return {
     id: pokemon.id,
     species_id: pokemon.id,
@@ -173,7 +172,7 @@ exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon...");
 
   const pokemonEntries: PokemonDatabase[] = [];
-  const allSpecies = await getDirectoryContent(SPECIES_DIR);
+  const allSpecies = await getDirectoryContent<PokemonSpecies>(SPECIES_DIR);
 
   for (const species of allSpecies) {
     const pokemons = await Promise.all<Pokemon>(
@@ -186,14 +185,14 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  const pokemonEntries7g = (await readJSON(POKEMON_7G_FILE)).map(
-    mapPokemon8gToTable
-  );
-  const pokemonEntries8g = (await readJSON(POKEMON_8G_FILE)).map(
-    mapPokemon8gToTable
-  );
+  const pokemonEntries7g: PokemonDatabase[] = (
+    await readJSON(POKEMON_7G_FILE)
+  ).map(mapPokemon8gToTable);
+  const pokemonEntries8g: PokemonDatabase[] = (
+    await readJSON(POKEMON_8G_FILE)
+  ).map(mapPokemon8gToTable);
 
   pokemonEntries.push(...pokemonEntries7g, ...pokemonEntries8g);
 
-  await knex("pokemon").del().insert(pokemonEntries);
+  await knex<PokemonDatabase>("pokemon").del().insert(pokemonEntries);
 };

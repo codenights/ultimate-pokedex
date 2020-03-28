@@ -1,11 +1,11 @@
+import path from "path";
+import { readJSON } from "fs-extra";
 import * as Knex from "knex";
+
 import { Ability, Ability8G } from "./types/Ability";
+import { getDirectoryContent, findEntityByLanguageName } from "./utils";
 
-const path = require("path");
-const { readJSON } = require("fs-extra");
-const { getDirectoryContent, findEntityByLanguageName } = require("./utils");
-
-const ABILITY_DIR = path.join(__dirname, "../../data/ability");
+const ABILITY_DIR = path.join(__dirname, "../../../data/ability");
 const ABILITIY_8G_FILE = path.join(
   __dirname,
   "../../data/pokemon-next",
@@ -47,14 +47,14 @@ function map8gAbilitiesToTable(ability: Ability8G): AbilityDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing abilities...");
 
-  const abilities: AbilityDatabase[] = (
-    await getDirectoryContent(ABILITY_DIR)
-  ).map(mapToTable);
-  const abilities8g = (await readJSON(ABILITIY_8G_FILE)).map(
+  const abilities = (await getDirectoryContent<Ability>(ABILITY_DIR)).map(
+    mapToTable
+  );
+  const abilities8g: Ability8G[] = (await readJSON(ABILITIY_8G_FILE)).map(
     map8gAbilitiesToTable
   );
 
-  await knex("ability")
+  await knex<AbilityDatabase>("ability")
     .del()
     .insert([...abilities, ...abilities8g]);
 };

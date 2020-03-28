@@ -1,20 +1,20 @@
+import path from "path";
 import * as Knex from "knex";
+import { readJSON } from "fs-extra";
+
 import { Ability } from "./types/Ability";
 import { Pokemon8G } from "./types/Pokemon";
+import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
-const path = require("path");
-const { readJSON } = require("fs-extra");
-const { getDirectoryContent, extractIdFromUrl } = require("./utils");
-
-const ABILITY_DIR = path.join(__dirname, "../../data/ability");
+const ABILITY_DIR = path.join(__dirname, "../../../data/ability");
 const POKEMON_7G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "7-gen.json"
 );
 const POKEMON_8G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "8-gen.json"
 );
 
@@ -28,7 +28,7 @@ exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon / Abilities...");
 
   const pokemonAbilityEntries: PokemonAbilityDatabase[] = [];
-  const abilities: Ability[] = await getDirectoryContent(ABILITY_DIR);
+  const abilities = await getDirectoryContent<Ability>(ABILITY_DIR);
 
   for (const ability of abilities) {
     for (const pokemonAbility of ability.pokemon) {
@@ -53,5 +53,7 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  await knex("pokemon_ability").del().insert(pokemonAbilityEntries);
+  await knex<PokemonAbilityDatabase>("pokemon_ability")
+    .del()
+    .insert(pokemonAbilityEntries);
 };

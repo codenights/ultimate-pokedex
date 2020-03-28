@@ -1,10 +1,10 @@
+import path from "path";
 import * as Knex from "knex";
+
 import { Pokemon, VersionGroupDetail, Resource } from "./types/Pokemon";
+import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
-const path = require("path");
-const { getDirectoryContent, extractIdFromUrl } = require("./utils");
-
-const DIR = path.join(__dirname, "../../data/pokemon");
+const DIR = path.join(__dirname, "../../../data/pokemon");
 
 type PokemonMoveDatabase = {
   pokemon_id: number;
@@ -37,7 +37,7 @@ function mapToTable(
 exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon / Moves...");
 
-  const pokemons: Pokemon[] = await getDirectoryContent(DIR);
+  const pokemons = await getDirectoryContent<Pokemon>(DIR);
 
   await knex("pokemon_move").del();
 

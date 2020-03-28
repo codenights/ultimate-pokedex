@@ -1,21 +1,24 @@
+import path from "path";
+import { readJSON } from "fs-extra";
 import * as Knex from "knex";
+
 import { Pokemon, Pokemon8G } from "./types/Pokemon";
 import { PokemonSpecies, FlavorTextEntry } from "./types/PokemonSpecies";
+import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
-const path = require("path");
-const { readJSON } = require("fs-extra");
-const { getDirectoryContent, extractIdFromUrl } = require("./utils");
-
-const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
-const POKEMON_SPECIES_DIR = path.join(__dirname, "../../data/pokemon-species");
+const POKEMON_DIR = path.join(__dirname, "../../../data/pokemon");
+const POKEMON_SPECIES_DIR = path.join(
+  __dirname,
+  "../../../data/pokemon-species"
+);
 const POKEMON_7G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "7-gen.json"
 );
 const POKEMON_8G_FILE = path.join(
   __dirname,
-  "../../data/pokemon-next",
+  "../../../data/pokemon-next",
   "8-gen.json"
 );
 
@@ -42,8 +45,8 @@ exports.seed = async (knex: Knex) => {
   const pokedexEntries: PokedexEntryDatabase[] = [];
 
   // Prior to 8th gen (excluding Meltan and Melmetal)
-  const pokemons = await getDirectoryContent(POKEMON_DIR);
-  const findSpeciesByPokemon = pokemon => {
+  const pokemons = await getDirectoryContent<Pokemon>(POKEMON_DIR);
+  const findSpeciesByPokemon = (pokemon: Pokemon) => {
     const speciesId = extractIdFromUrl("pokemon-species", pokemon.species.url);
     return readJSON(path.join(POKEMON_SPECIES_DIR, `${speciesId}.json`));
   };
@@ -71,5 +74,7 @@ exports.seed = async (knex: Knex) => {
     pokedexEntries.push(pokedexEntry);
   }
 
-  await knex("pokedex_entry").del().insert(pokedexEntries);
+  await knex<PokedexEntryDatabase>("pokedex_entry")
+    .del()
+    .insert(pokedexEntries);
 };
