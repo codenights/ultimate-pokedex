@@ -5,6 +5,6 @@ export const PokemonMoveResolver = {
   learn: ({ id, pokemon_id }, args, { pokemonMoveRepository }) =>
     pokemonMoveRepository.findPokemonMoveByPokemonIdAndMoveId.load({
       pokemonId: pokemon_id,
-      moveId: id
-    })
+      moveId: id,
+    }),
 };

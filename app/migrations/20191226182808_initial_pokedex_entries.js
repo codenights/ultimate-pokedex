@@ -8,15 +8,9 @@ const POKEMON_SPECIES_DIR = path.join(__dirname, "../../data/pokemon-species");
 const createPokedexEntryTable = knex =>
   knex.schema.createTable("pokedex_entry", table => {
     table.increments("id");
-    table
-      .integer("pokemon_id")
-      .unsigned()
-      .notNullable();
+    table.integer("pokemon_id").unsigned().notNullable();
     table.foreign("pokemon_id").references("pokemon.id");
-    table
-      .integer("version_id")
-      .unsigned()
-      .notNullable();
+    table.integer("version_id").unsigned().notNullable();
     table.foreign("version_id").references("version.id");
 
     table.string("entry").notNullable();
@@ -30,7 +24,7 @@ const findSpeciesByPokemon = pokemon => {
 const mapPokdexEntryToPokedexEntryDatabase = (pokedexEntry, pokemon) => ({
   pokemon_id: pokemon.id,
   version_id: extractIdFromUrl("version", pokedexEntry.version.url),
-  entry: pokedexEntry.flavor_text
+  entry: pokedexEntry.flavor_text,
 });
 
 const insertAllPokedexEntries = async knex => {

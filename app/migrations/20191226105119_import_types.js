@@ -20,16 +20,12 @@ const COLORS_BY_TYPE = {
   steel: "#aab",
   fairy: "#e9e",
   ghost: "#66b",
-  normal: "#aa9"
+  normal: "#aa9",
 };
 
 const createTypeTable = knex =>
   knex.schema.createTable("type", table => {
-    table
-      .integer("id")
-      .unsigned()
-      .notNullable()
-      .primary();
+    table.integer("id").unsigned().notNullable().primary();
     table.string("color").notNullable();
     table.string("name_en").notNullable();
   });
@@ -37,7 +33,7 @@ const createTypeTable = knex =>
 const mapTypeToTypeDatabase = type => ({
   id: type.id,
   color: COLORS_BY_TYPE[type.name],
-  name_en: type.names.find(x => x.language.name === "en").name
+  name_en: type.names.find(x => x.language.name === "en").name,
 });
 
 const insertTypes = async knex => {

@@ -10,7 +10,7 @@ export function PokemonMoveRepository(knex) {
         for (const { pokemonId, moveId } of ids) {
           query.orWhere({
             pokemon_id: pokemonId,
-            move_id: moveId
+            move_id: moveId,
           });
         }
 
@@ -25,8 +25,8 @@ export function PokemonMoveRepository(knex) {
         );
       },
       {
-        cacheKeyFn: ids => `${ids.pokemonId}_${ids.moveId}`
+        cacheKeyFn: ids => `${ids.pokemonId}_${ids.moveId}`,
       }
-    )
+    ),
   };
 }

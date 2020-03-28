@@ -24,10 +24,7 @@ const insertAll = async knex => {
 };
 
 const deleteAll = async knex => {
-  await knex("ability")
-    .where("id", ">", 233)
-    .andWhere("id", "<", 259)
-    .del();
+  await knex("ability").where("id", ">", 233).andWhere("id", "<", 259).del();
 };
 
 exports.up = async knex => {

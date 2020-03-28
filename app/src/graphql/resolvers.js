@@ -31,5 +31,5 @@ export const resolvers = {
   AbilityPokemon: AbilityPokemonResolver,
   EggGroup: EggGroupResolver,
   PokemonEvolution: PokemonEvolutionResolver,
-  Damage: DamageResolver
+  Damage: DamageResolver,
 };

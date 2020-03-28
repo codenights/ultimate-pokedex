@@ -1,7 +1,7 @@
 import fetch from "isomorphic-unfetch";
 
 const MAP_ERRORS = {
-  NOT_FOUND: 404
+  NOT_FOUND: 404,
 };
 
 const throwIfUnhandledErrors = (errors = []) => {
@@ -27,7 +27,7 @@ export const executeQuery = async (query, req, getResults) => {
   const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query })
+    body: JSON.stringify({ query }),
   });
   const { data, errors } = await response.json();
 
@@ -35,6 +35,6 @@ export const executeQuery = async (query, req, getResults) => {
 
   return {
     ...getResults(data || {}),
-    statusCode: getStatusCode(errors)
+    statusCode: getStatusCode(errors),
   };
 };

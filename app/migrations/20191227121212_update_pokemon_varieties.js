@@ -18,7 +18,7 @@ exports.up = async knex => {
       console.log("Updating pokemon:", pokemon.id);
       await knex("pokemon")
         .update({
-          artwork_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.id}.png`
+          artwork_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.id}.png`,
         })
         .where({ id: pokemon.id });
     }
@@ -31,7 +31,7 @@ exports.down = async knex => {
   for (const pokemon of pokemons) {
     await knex("pokemon")
       .update({
-        artwork_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.species_id}.png`
+        artwork_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${pokemon.species_id}.png`,
       })
       .where({ id: pokemon.id });
   }

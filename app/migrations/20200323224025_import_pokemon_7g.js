@@ -97,10 +97,7 @@ const deleteAll = async knex => {
     .orWhere("pokemon_id", 809)
     .del();
 
-  await knex("pokemon")
-    .where("id", 808)
-    .orWhere("id", 809)
-    .del();
+  await knex("pokemon").where("id", 808).orWhere("id", 809).del();
 };
 
 exports.up = async knex => {

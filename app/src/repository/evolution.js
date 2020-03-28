@@ -9,6 +9,6 @@ export function EvolutionRepository(knex) {
         knex("evolution")
           .whereIn("evolves_from_id", pokemonIds)
           .then(mapManytoEntities(pokemonIds, "evolves_from_id"))
-    )
+    ),
   };
 }

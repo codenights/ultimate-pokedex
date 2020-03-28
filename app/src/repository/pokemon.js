@@ -29,10 +29,8 @@ export function PokemonRepository(knex) {
     // TODO: Dataloader
     findVarietiesByPokemonId(pokemonId) {
       return knex("pokemon")
-        .whereIn("species_id", function() {
-          this.select("species_id")
-            .from("pokemon")
-            .where({ id: pokemonId });
+        .whereIn("species_id", function () {
+          this.select("species_id").from("pokemon").where({ id: pokemonId });
         })
         .andWhere("id", "!=", pokemonId);
     },
@@ -53,19 +51,14 @@ export function PokemonRepository(knex) {
         }
       } while (!isBaseEvolutionFound);
 
-      return knex("pokemon")
-        .first()
-        .where({ id: currentStageId });
+      return knex("pokemon").first().where({ id: currentStageId });
     },
     // TODO: dataloader
     findPokemonsByMoveId(moveId) {
-      return knex("pokemon").whereIn("id", function() {
-        this.select("pokemon_id")
-          .distinct()
-          .from("pokemon_move")
-          .where({
-            move_id: moveId,
-          });
+      return knex("pokemon").whereIn("id", function () {
+        this.select("pokemon_id").distinct().from("pokemon_move").where({
+          move_id: moveId,
+        });
       });
     },
     findPokemonsByTypeId(typeId) {

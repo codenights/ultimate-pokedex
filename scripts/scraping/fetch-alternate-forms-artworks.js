@@ -24,7 +24,7 @@ async function run() {
         speciesId: extractIdFromUrl("pokemon-species", x.species.url).padStart(
           3,
           "0"
-        )
+        ),
       })),
     "nationalId"
   ).sort((a, b) => a.nationalId - b.nationalId);

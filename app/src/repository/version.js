@@ -16,6 +16,6 @@ export function VersionRepository(knex) {
         knex("version")
           .whereIn("version_group_id", versionGroupIds)
           .then(mapManytoEntities(versionGroupIds, "version_group_id"))
-    )
+    ),
   };
 }

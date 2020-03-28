@@ -13,7 +13,7 @@ export const PokemonResolver = {
   names: ({ name_en, name_fr, name_ja }) => ({
     en: name_en,
     fr: name_fr,
-    ja: name_ja
+    ja: name_ja,
   }),
 
   types: ({ type_1_id, type_2_id }, args, { typeRepository }) =>
@@ -40,7 +40,7 @@ export const PokemonResolver = {
 
     return moves.map(x => ({
       ...x,
-      pokemon_id: id
+      pokemon_id: id,
     }));
   },
 
@@ -54,5 +54,5 @@ export const PokemonResolver = {
     pokemonRepository.findVarietiesByPokemonId(id),
 
   damagesFrom: ({ type_1_id, type_2_id }, args, { damageRepository }) =>
-    damageRepository.findDamagesFromByTypeIds(type_1_id, type_2_id)
+    damageRepository.findDamagesFromByTypeIds(type_1_id, type_2_id),
 };

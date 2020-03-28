@@ -19,7 +19,7 @@ async function fetchById(nationalId, hrefPath, outDir, extension) {
   const assetUrl = `https://img.pokemondb.net/sprites/${hrefPath}/${name}.${extension}`;
 
   const response = await axios.get(assetUrl, {
-    responseType: "arraybuffer"
+    responseType: "arraybuffer",
   });
 
   await writeFile(path.join(outDir, `${nationalId}.png`), response.data);

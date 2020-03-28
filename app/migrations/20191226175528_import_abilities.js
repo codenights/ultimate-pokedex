@@ -5,11 +5,7 @@ const ABILITY_DIR = path.join(__dirname, "../../data/ability");
 
 const createAbilityTable = async knex =>
   knex.schema.createTable("ability", table => {
-    table
-      .integer("id")
-      .unsigned()
-      .notNullable()
-      .primary();
+    table.integer("id").unsigned().notNullable().primary();
     table.string("name_en").notNullable();
     table.string("name_fr");
     table.string("name_ja");
@@ -25,7 +21,7 @@ const mapAbilityToAbilityDatabase = ability => ({
   name_ja: findEntityByLanguageName(ability.names, "roomaji")
     ? findEntityByLanguageName(ability.names, "roomaji").name
     : null,
-  description: findEntityByLanguageName(ability.effect_entries, "en").effect
+  description: findEntityByLanguageName(ability.effect_entries, "en").effect,
 });
 
 const insertAllAbilities = async knex => {

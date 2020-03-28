@@ -60,25 +60,11 @@ function getBaseHappiness(value) {
 }
 
 function getHeight(value) {
-  return (
-    Number(
-      value
-        .split("\t")
-        .splice(-1)[0]
-        .replace("m", "")
-    ) * 10
-  );
+  return Number(value.split("\t").splice(-1)[0].replace("m", "")) * 10;
 }
 
 function getWeight(value) {
-  return (
-    Number(
-      value
-        .split("\t")
-        .splice(-1)[0]
-        .replace("kg", "")
-    ) * 10
-  );
+  return Number(value.split("\t").splice(-1)[0].replace("kg", "")) * 10;
 }
 
 function getStats(value) {

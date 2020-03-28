@@ -9,6 +9,6 @@ export function VersionGroupRepository(knex) {
         knex("version_group")
           .whereIn("id", versionGroupIds)
           .then(mapRowsToEntities(versionGroupIds, "id"))
-    )
+    ),
   };
 }

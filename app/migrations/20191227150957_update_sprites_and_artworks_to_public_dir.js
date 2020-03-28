@@ -13,12 +13,10 @@ exports.up = async knex => {
     const newUrls = {
       artwork_url: makePublicUrl(pokemon.artwork_url),
       sprite_url: makePublicUrl(pokemon.sprite_url),
-      shiny_sprite_url: makePublicUrl(pokemon.shiny_sprite_url)
+      shiny_sprite_url: makePublicUrl(pokemon.shiny_sprite_url),
     };
 
-    await knex("pokemon")
-      .update(newUrls)
-      .where({ id: pokemon.id });
+    await knex("pokemon").update(newUrls).where({ id: pokemon.id });
   }
 };
 
@@ -34,11 +32,9 @@ exports.down = async knex => {
     const newUrls = {
       artwork_url: makeOldUrl(pokemon.artwork_url),
       sprite_url: makeOldUrl(pokemon.sprite_url),
-      shiny_sprite_url: makeOldUrl(pokemon.shiny_sprite_url)
+      shiny_sprite_url: makeOldUrl(pokemon.shiny_sprite_url),
     };
 
-    await knex("pokemon")
-      .update(newUrls)
-      .where({ id: pokemon.id });
+    await knex("pokemon").update(newUrls).where({ id: pokemon.id });
   }
 };

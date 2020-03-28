@@ -7,5 +7,5 @@ export const VersionGroupResolver = {
     );
 
     return versions.map(R.prop("name_en")).join(" / ");
-  }
+  },
 };

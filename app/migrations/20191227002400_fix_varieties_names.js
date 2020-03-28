@@ -41,13 +41,11 @@ exports.up = async knex => {
     const name_fr = applySuffix(pokemon.name_fr, suffixFr);
     const name_ja = applySuffix(pokemon.name_ja, suffixJa);
 
-    await knex("pokemon")
-      .where({ id: alternateForm.id })
-      .update({
-        name_en,
-        name_fr,
-        name_ja
-      });
+    await knex("pokemon").where({ id: alternateForm.id }).update({
+      name_en,
+      name_fr,
+      name_ja,
+    });
   }
 };
 
@@ -72,12 +70,10 @@ exports.down = async knex => {
       ? findEntityByLanguageName(species.names, "roomaji").name
       : null;
 
-    await knex("pokemon")
-      .where({ id: alternateForm.id })
-      .update({
-        name_en,
-        name_fr,
-        name_ja
-      });
+    await knex("pokemon").where({ id: alternateForm.id }).update({
+      name_en,
+      name_fr,
+      name_ja,
+    });
   }
 };

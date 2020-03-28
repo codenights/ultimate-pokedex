@@ -5,50 +5,41 @@ const TYPES_DIR = path.join(__dirname, "../../data/type");
 
 const createDamageRelationsTable = async knex =>
   knex.schema.createTable("damage_relation", table => {
-    table
-      .integer("type_1")
-      .unsigned()
-      .notNullable();
+    table.integer("type_1").unsigned().notNullable();
     table.foreign("type_1").references("type.id");
 
-    table
-      .integer("type_2")
-      .unsigned()
-      .notNullable();
+    table.integer("type_2").unsigned().notNullable();
     table.foreign("type_2").references("type.id");
 
     table.string("relation").notNullable();
-    table
-      .float("multiplier")
-      .unsigned()
-      .notNullable();
+    table.float("multiplier").unsigned().notNullable();
   });
 
 const DAMAGE_MULTIPLIER_MAP = {
   double_damage_from: {
     relation: "FROM",
-    multiplier: 2
+    multiplier: 2,
   },
   double_damage_to: {
     relation: "TO",
-    multiplier: 2
+    multiplier: 2,
   },
   half_damage_from: {
     relation: "FROM",
-    multiplier: 0.5
+    multiplier: 0.5,
   },
   half_damage_to: {
     relation: "TO",
-    multiplier: 0.5
+    multiplier: 0.5,
   },
   no_damage_from: {
     relation: "FROM",
-    multiplier: 0
+    multiplier: 0,
   },
   no_damage_to: {
     relation: "TO",
-    multiplier: 0
-  }
+    multiplier: 0,
+  },
 };
 
 const importDamageRelations = async knex => {
@@ -67,15 +58,13 @@ const importDamageRelations = async knex => {
           type_1: id,
           type_2: type_2_id,
           relation,
-          multiplier
+          multiplier,
         });
       }
     }
   }
 
-  await knex("damage_relation")
-    .insert(relations)
-    .into("damage_relation");
+  await knex("damage_relation").insert(relations).into("damage_relation");
 };
 
 exports.up = async knex => {

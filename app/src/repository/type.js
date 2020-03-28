@@ -9,6 +9,6 @@ export function TypeRepository(knex) {
         knex("type")
           .whereIn("id", typeIds)
           .then(mapRowsToEntities(typeIds, "id"))
-    )
+    ),
   };
 }

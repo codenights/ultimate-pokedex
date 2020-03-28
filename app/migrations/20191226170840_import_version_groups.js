@@ -6,11 +6,7 @@ const VERSION_GROUP_DIR = path.join(__dirname, "../../data/version-group");
 const createVersionGroupTable = async knex =>
   knex.schema
     .createTable("version_group", table => {
-      table
-        .integer("id")
-        .unsigned()
-        .notNullable()
-        .primary();
+      table.integer("id").unsigned().notNullable().primary();
     })
     .alterTable("version", table => {
       table.integer("version_group_id").unsigned();
@@ -18,7 +14,7 @@ const createVersionGroupTable = async knex =>
     });
 
 const mapVersionGroupToVersionGroupDatabase = versionGroup => ({
-  id: versionGroup.id
+  id: versionGroup.id,
 });
 
 const insertAllVersionGroups = async knex => {

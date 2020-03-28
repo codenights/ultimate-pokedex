@@ -12,6 +12,6 @@ export function AbilityRepository(knex) {
         knex("ability")
           .whereIn("id", abilityIds)
           .then(mapRowsToEntities(abilityIds, "id"))
-    )
+    ),
   };
 }

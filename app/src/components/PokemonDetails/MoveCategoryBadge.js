@@ -2,12 +2,7 @@ import React from "react";
 import { Icons } from "../Icons";
 
 function capitalize(value) {
-  return (
-    value
-      .toString()
-      .charAt(0)
-      .toUpperCase() + value.toString().slice(1)
-  );
+  return value.toString().charAt(0).toUpperCase() + value.toString().slice(1);
 }
 
 export const MoveCategoryBadge = ({ category }) => (

@@ -9,7 +9,7 @@ import { executeQuery } from "../../src/queries/executeQuery";
 import {
   ColumnLayout,
   LeftPane,
-  LeftPaneTitle
+  LeftPaneTitle,
 } from "../../src/components/ColumnLayout/ColumnLayout";
 
 const AbilityPage = ({ ability, statusCode }) => {
@@ -38,7 +38,7 @@ const AbilityPage = ({ ability, statusCode }) => {
 
 AbilityPage.getInitialProps = ({ query, req }) =>
   executeQuery(fetchAbilityQuery(query.abilityId), req, ({ ability }) => ({
-    ability
+    ability,
   }));
 
 export default AbilityPage;

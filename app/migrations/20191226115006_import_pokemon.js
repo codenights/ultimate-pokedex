@@ -12,52 +12,24 @@ const createPokemonTable = knex =>
     // --------------------------------------- //
     // General info
     // --------------------------------------- //
-    table
-      .integer("id")
-      .unsigned()
-      .notNullable()
-      .primary();
-    table
-      .integer("species_id")
-      .unsigned()
-      .notNullable();
+    table.integer("id").unsigned().notNullable().primary();
+    table.integer("species_id").unsigned().notNullable();
     table.string("name_en").notNullable();
     table.string("name_fr");
     table.string("name_ja");
-    table
-      .integer("base_experience")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("height")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("order")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("weight")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("base_happiness")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("capture_rate")
-      .unsigned()
-      .notNullable();
+    table.integer("base_experience").unsigned().notNullable();
+    table.integer("height").unsigned().notNullable();
+    table.integer("order").unsigned().notNullable();
+    table.integer("weight").unsigned().notNullable();
+    table.integer("base_happiness").unsigned().notNullable();
+    table.integer("capture_rate").unsigned().notNullable();
     table.integer("gender_rate").notNullable();
     table.boolean("is_default_form").notNullable();
 
     // --------------------------------------- //
     // Types
     // --------------------------------------- //
-    table
-      .integer("type_1_id")
-      .unsigned()
-      .notNullable();
+    table.integer("type_1_id").unsigned().notNullable();
     table.integer("type_2_id").unsigned();
 
     table.foreign("type_1_id").references("type.id");
@@ -66,30 +38,12 @@ const createPokemonTable = knex =>
     // --------------------------------------- //
     // Stats
     // --------------------------------------- //
-    table
-      .integer("stat_hp")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("stat_attack")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("stat_defense")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("stat_special_attack")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("stat_special_defense")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("stat_speed")
-      .unsigned()
-      .notNullable();
+    table.integer("stat_hp").unsigned().notNullable();
+    table.integer("stat_attack").unsigned().notNullable();
+    table.integer("stat_defense").unsigned().notNullable();
+    table.integer("stat_special_attack").unsigned().notNullable();
+    table.integer("stat_special_defense").unsigned().notNullable();
+    table.integer("stat_speed").unsigned().notNullable();
 
     // --------------------------------------- //
     // Sprites
@@ -140,7 +94,7 @@ const mapPokemonToPokemonDatabase = (species, pokemon) => ({
   type_2_id: findType2Id(pokemon),
   artwork_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/artwork/${species.id}.png`,
   sprite_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite/${species.id}.png`,
-  shiny_sprite_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite-shiny/${species.id}.png`
+  shiny_sprite_url: `https://raw.githubusercontent.com/codenights/ultimate-pokedex/master/dev-server/data/image/sprite-shiny/${species.id}.png`,
 });
 
 const findPokemonByVariety = variety => {

@@ -12,5 +12,5 @@ export const AppBarLayout = ({ showSearchBox, children }) => (
 
 AppBarLayout.propTypes = {
   children: PropTypes.node.isRequired,
-  showSearchBox: PropTypes.bool
+  showSearchBox: PropTypes.bool,
 };

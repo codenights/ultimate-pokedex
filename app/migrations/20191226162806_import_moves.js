@@ -2,31 +2,21 @@ const path = require("path");
 const {
   findEntityByLanguageName,
   extractIdFromUrl,
-  getDirectoryContent
+  getDirectoryContent,
 } = require("./utils");
 
 const MOVE_DIR = path.join(__dirname, "../../data/move");
 
 const createMoveTable = async knex =>
   knex.schema.createTable("move", table => {
-    table
-      .integer("id")
-      .unsigned()
-      .notNullable()
-      .primary();
+    table.integer("id").unsigned().notNullable().primary();
     table.string("damage_class").notNullable();
     table.string("name").notNullable();
     table.integer("accuracy").unsigned();
     table.integer("power").unsigned();
-    table
-      .integer("pp")
-      .unsigned()
-      .notNullable();
+    table.integer("pp").unsigned().notNullable();
     table.integer("priority").notNullable();
-    table
-      .integer("type_id")
-      .unsigned()
-      .notNullable();
+    table.integer("type_id").unsigned().notNullable();
 
     table.foreign("type_id").references("type.id");
   });
@@ -39,7 +29,7 @@ const mapMoveToMoveDatabase = move => ({
   power: move.power,
   pp: move.pp,
   priority: move.priority,
-  type_id: extractIdFromUrl("type", move.type.url)
+  type_id: extractIdFromUrl("type", move.type.url),
 });
 
 const insertAllMoves = async knex => {

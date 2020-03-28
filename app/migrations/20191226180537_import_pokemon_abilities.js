@@ -6,15 +6,9 @@ const ABILITY_DIR = path.join(__dirname, "../../data/ability");
 const createPokemonAbilityTable = async knex =>
   knex.schema.createTable("pokemon_ability", table => {
     table.increments("id");
-    table
-      .integer("pokemon_id")
-      .unsigned()
-      .notNullable();
+    table.integer("pokemon_id").unsigned().notNullable();
     table.foreign("pokemon_id").references("pokemon.id");
-    table
-      .integer("ability_id")
-      .unsigned()
-      .notNullable();
+    table.integer("ability_id").unsigned().notNullable();
     table.foreign("ability_id").references("ability.id");
     table.boolean("is_hidden").notNullable();
   });
@@ -25,7 +19,7 @@ const mapPokemonAbilityToPokemonAbilityDatabase = (
 ) => ({
   pokemon_id: extractIdFromUrl("pokemon", pokemonAbility.pokemon.url),
   ability_id: ability.id,
-  is_hidden: pokemonAbility.is_hidden
+  is_hidden: pokemonAbility.is_hidden,
 });
 
 const importAllPokemonAbilities = async knex => {

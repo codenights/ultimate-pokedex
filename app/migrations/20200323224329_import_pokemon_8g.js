@@ -98,10 +98,7 @@ const deleteAll = async knex => {
     .andWhere("pokemon_id", "<", 891)
     .del();
 
-  await knex("pokemon")
-    .where("id", ">", 809)
-    .andWhere("id", "<", 891)
-    .del();
+  await knex("pokemon").where("id", ">", 809).andWhere("id", "<", 891).del();
 };
 
 exports.up = async knex => {

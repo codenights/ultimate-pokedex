@@ -6,18 +6,9 @@ const POKEMON_DIR = path.join(__dirname, "../../data/pokemon");
 const createPokemonMoveTable = async knex =>
   knex.schema.createTable("pokemon_move", table => {
     table.increments("id");
-    table
-      .integer("move_id")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("pokemon_id")
-      .unsigned()
-      .notNullable();
-    table
-      .integer("version_group_id")
-      .unsigned()
-      .notNullable();
+    table.integer("move_id").unsigned().notNullable();
+    table.integer("pokemon_id").unsigned().notNullable();
+    table.integer("version_group_id").unsigned().notNullable();
     table.string("learn_method").notNullable();
     table.integer("learned_at").unsigned();
 
@@ -42,7 +33,7 @@ const mapPokemonMoveToPokemonMoveDatabase = (
       versionGroupDetails.version_group.url
     ),
     learn_method: versionGroupDetails.move_learn_method.name,
-    learned_at: isLevelUpMethod ? versionGroupDetails.level_learned_at : null
+    learned_at: isLevelUpMethod ? versionGroupDetails.level_learned_at : null,
   };
 };
 

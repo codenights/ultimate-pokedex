@@ -36,7 +36,7 @@ const apolloServer = new ApolloServer({
     evolutionRepository: EvolutionRepository(knex),
     pokedexEntryRepository: PokedexEntryRepository(knex),
     pokemonMoveRepository: PokemonMoveRepository(knex),
-    damageRepository: DamageRepository(knex)
+    damageRepository: DamageRepository(knex),
   }),
   formatError: err => {
     if (err.extensions && err.extensions.code === "NOT_FOUND") {
@@ -45,13 +45,13 @@ const apolloServer = new ApolloServer({
 
     console.error(err);
     return new Error("Internal server error.");
-  }
+  },
 });
 
 export const config = {
   api: {
-    bodyParser: false
-  }
+    bodyParser: false,
+  },
 };
 
 export default apolloServer.createHandler({ path: "/api/graphql" });

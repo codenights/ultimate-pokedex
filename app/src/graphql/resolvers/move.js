@@ -11,5 +11,5 @@ export const MoveResolver = {
     typeRepository.findTypeById.load(type_id),
 
   pokemons: ({ id }, args, { pokemonRepository }) =>
-    pokemonRepository.findPokemonsByMoveId(id)
+    pokemonRepository.findPokemonsByMoveId(id),
 };

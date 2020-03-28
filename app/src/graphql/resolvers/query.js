@@ -24,5 +24,5 @@ export const QueryResolver = {
   eggGroup: (obj, { id }, { eggGroupRepository }) =>
     eggGroupRepository.findEggGroupById.load(id).then(throwNotFoundIfEmpty),
   type: (obj, { id }, { typeRepository }) =>
-    typeRepository.findTypeById.load(id).then(throwNotFoundIfEmpty)
+    typeRepository.findTypeById.load(id).then(throwNotFoundIfEmpty),
 };

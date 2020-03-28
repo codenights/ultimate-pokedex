@@ -4,7 +4,7 @@ export function useIntersectionObserver({
   callback,
   root,
   rootMargin,
-  threshold
+  threshold,
 }) {
   const [node, setNode] = React.useState(null);
   const observer = React.useRef(null);
@@ -21,7 +21,7 @@ export function useIntersectionObserver({
     observer.current = new window.IntersectionObserver(callback, {
       root,
       rootMargin,
-      threshold
+      threshold,
     });
 
     if (node) {
@@ -34,6 +34,6 @@ export function useIntersectionObserver({
   }, [node, root, rootMargin, threshold]);
 
   return {
-    setObservedNode: setNode
+    setObservedNode: setNode,
   };
 }

@@ -6,5 +6,5 @@ export const PokemonStatsResolver = {
   defense: R.prop("stat_defense"),
   specialAttack: R.prop("stat_special_attack"),
   specialDefense: R.prop("stat_special_defense"),
-  speed: R.prop("stat_speed")
+  speed: R.prop("stat_speed"),
 };

@@ -32,16 +32,12 @@ const COLOR_BY_VERSION = {
   blue: "#5d81d6",
   red: "#c03028",
   colosseum: "#8471bd",
-  xd: "#8471bd"
+  xd: "#8471bd",
 };
 
 const createVersionTable = async knex =>
   knex.schema.createTable("version", table => {
-    table
-      .integer("id")
-      .unsigned()
-      .notNullable()
-      .primary();
+    table.integer("id").unsigned().notNullable().primary();
     table.string("color").notNullable();
     table.string("name_en").notNullable();
   });
@@ -49,7 +45,7 @@ const createVersionTable = async knex =>
 const mapVersionToVersionDatabase = version => ({
   id: version.id,
   color: COLOR_BY_VERSION[version.name],
-  name_en: findEntityByLanguageName(version.names, "en").name
+  name_en: findEntityByLanguageName(version.names, "en").name,
 });
 
 const insertAllVersions = async knex => {
