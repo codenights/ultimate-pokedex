@@ -2,7 +2,11 @@ import path from "path";
 import * as Knex from "knex";
 import { readJSON } from "fs-extra";
 
-import { EvolutionChain, Evolution } from "./types/Evolution";
+import { Evolution } from "../../db/types";
+import {
+  EvolutionChain,
+  Evolution as EvolutionSource,
+} from "./types/Evolution";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
 const EVOLUTION_DIR = path.join(__dirname, "../../../data/evolution-chain");
@@ -11,12 +15,7 @@ const EVOLUTION_8G_FILE = path.join(
   "../../../data/pokemon-next/evolutions-8-gen.json"
 );
 
-type EvolutionDatabase = {
-  evolves_from_id: number;
-  evolves_to_id: number;
-};
-
-function mapToTable(evolution: EvolutionChain): EvolutionDatabase[] {
+function mapToTable(evolution: EvolutionChain): Evolution[] {
   return evolution.evolves_to.map(x => ({
     evolves_from_id: extractIdFromUrl("pokemon-species", evolution.species.url),
     evolves_to_id: extractIdFromUrl("pokemon-species", x.species.url),
@@ -36,8 +35,8 @@ const findEvolutions = (evolution: EvolutionChain) => {
 exports.seed = async (knex: Knex) => {
   console.log("Importing evolutions...");
 
-  const evolutionEntries: EvolutionDatabase[] = [];
-  const evolutions = await getDirectoryContent<Evolution>(EVOLUTION_DIR);
+  const evolutionEntries: Evolution[] = [];
+  const evolutions = await getDirectoryContent<EvolutionSource>(EVOLUTION_DIR);
 
   for (const evolution of evolutions) {
     evolutionEntries.push(...findEvolutions(evolution.chain));
@@ -45,5 +44,5 @@ exports.seed = async (knex: Knex) => {
 
   evolutionEntries.push(...(await readJSON(EVOLUTION_8G_FILE)));
 
-  await knex<EvolutionDatabase>("evolution").del().insert(evolutionEntries);
+  await knex<Evolution>("evolution").del().insert(evolutionEntries);
 };

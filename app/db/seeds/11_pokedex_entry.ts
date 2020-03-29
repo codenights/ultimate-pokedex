@@ -2,6 +2,7 @@ import path from "path";
 import { readJSON } from "fs-extra";
 import * as Knex from "knex";
 
+import { PokedexEntry } from "../../db/types";
 import { Pokemon, Pokemon8G } from "./types/Pokemon";
 import { PokemonSpecies, FlavorTextEntry } from "./types/PokemonSpecies";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
@@ -22,16 +23,10 @@ const POKEMON_8G_FILE = path.join(
   "8-gen.json"
 );
 
-type PokedexEntryDatabase = {
-  pokemon_id: number;
-  version_id: number;
-  entry: string;
-};
-
 function mapToTable(
   pokedexEntry: FlavorTextEntry,
   pokemon: Pokemon
-): PokedexEntryDatabase {
+): PokedexEntry {
   return {
     pokemon_id: pokemon.id,
     version_id: extractIdFromUrl("version", pokedexEntry.version.url),
@@ -42,7 +37,7 @@ function mapToTable(
 exports.seed = async (knex: Knex) => {
   console.log("Importing Pokedex entries...");
 
-  const pokedexEntries: PokedexEntryDatabase[] = [];
+  const pokedexEntries: PokedexEntry[] = [];
 
   // Prior to 8th gen (excluding Meltan and Melmetal)
   const pokemons = await getDirectoryContent<Pokemon>(POKEMON_DIR);
@@ -74,7 +69,5 @@ exports.seed = async (knex: Knex) => {
     pokedexEntries.push(pokedexEntry);
   }
 
-  await knex<PokedexEntryDatabase>("pokedex_entry")
-    .del()
-    .insert(pokedexEntries);
+  await knex<PokedexEntry>("pokedex_entry").del().insert(pokedexEntries);
 };

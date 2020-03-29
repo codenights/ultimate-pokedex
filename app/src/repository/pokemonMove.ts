@@ -1,11 +1,22 @@
+import * as Knex from "knex";
 import DataLoader from "dataloader";
 
-export function PokemonMoveRepository(knex) {
+import { PokemonMove } from "../../db/types";
+
+type PokemonMoveKeys = {
+  pokemonId: number;
+  moveId: number;
+};
+
+export function PokemonMoveRepository(knex: Knex) {
   return {
-    findPokemonMoveByPokemonIdAndMoveId: new DataLoader(
+    findPokemonMoveByPokemonIdAndMoveId: new DataLoader<
+      PokemonMoveKeys,
+      PokemonMove[]
+    >(
       ids => {
         console.log("findPokemonMoveByPokemonIdAndMoveId:", ids);
-        let query = knex("pokemon_move");
+        let query = knex<PokemonMove>("pokemon_move");
 
         for (const { pokemonId, moveId } of ids) {
           query.orWhere({
@@ -25,7 +36,7 @@ export function PokemonMoveRepository(knex) {
         );
       },
       {
-        cacheKeyFn: ids => `${ids.pokemonId}_${ids.moveId}`,
+        cacheKeyFn: ids => `${ids.pokemonId}_${ids.moveId}` as any,
       }
     ),
   };

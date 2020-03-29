@@ -1,7 +1,8 @@
 import path from "path";
 import * as Knex from "knex";
 
-import { Move } from "./types/Move";
+import { Move } from "../../db/types";
+import { Move as MoveSource } from "./types/Move";
 import {
   getDirectoryContent,
   findEntityByLanguageName,
@@ -10,23 +11,7 @@ import {
 
 const DIR = path.join(__dirname, "../../../data/move");
 
-type MoveDatabase = {
-  id: number;
-  name: string;
-  description: string;
-  type_id: number;
-  damage_class: string;
-  accuracy: number | null;
-  power: number | null;
-  pp: number;
-  priority: number;
-  critical_rate: number;
-  drain: number | null;
-  flinch_chance: number;
-  healing: number | null;
-};
-
-function mapToTable(move: Move): MoveDatabase {
+function mapToTable(move: MoveSource): Move {
   return {
     id: move.id,
     name: findEntityByLanguageName(move.names, "en").name,
@@ -50,7 +35,7 @@ function mapToTable(move: Move): MoveDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing moves...");
 
-  const moves = (await getDirectoryContent<Move>(DIR)).map(mapToTable);
+  const moves = (await getDirectoryContent<MoveSource>(DIR)).map(mapToTable);
 
-  await knex<MoveDatabase>("move").del().insert(moves);
+  await knex<Move>("move").del().insert(moves);
 };

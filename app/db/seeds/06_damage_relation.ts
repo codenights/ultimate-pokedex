@@ -1,7 +1,8 @@
 import path from "path";
 import * as Knex from "knex";
 
-import { Type, DamageRelations } from "./types/Type";
+import { DamageRelation } from "../../db/types";
+import { Type, DamageRelations as DamageRelationsSource } from "./types/Type";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
 const DIR = path.join(__dirname, "../../../data/type");
@@ -33,27 +34,21 @@ const DAMAGE_MULTIPLIER_MAP = {
   },
 };
 
-type DamageRelationDatabase = {
-  type_1: number;
-  type_2: number;
-  relation: string;
-  multiplier: number;
-};
-
 exports.seed = async (knex: Knex) => {
   console.log("Importing damage relations...");
 
   const types = await getDirectoryContent<Type>(DIR);
-  const damageRelations: DamageRelationDatabase[] = [];
+  const damageRelations: DamageRelation[] = [];
 
   for (const { damage_relations, id } of types) {
     for (const damageType in damage_relations) {
-      const otherTypes = damage_relations[damageType as keyof DamageRelations];
+      const otherTypes =
+        damage_relations[damageType as keyof DamageRelationsSource];
 
       for (const { url } of otherTypes) {
         const type_2_id = extractIdFromUrl("type", url);
         const { relation, multiplier } = DAMAGE_MULTIPLIER_MAP[
-          damageType as keyof DamageRelations
+          damageType as keyof DamageRelationsSource
         ];
 
         damageRelations.push({
@@ -66,7 +61,5 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  await knex<DamageRelationDatabase>("damage_relation")
-    .del()
-    .insert(damageRelations);
+  await knex<DamageRelation>("damage_relation").del().insert(damageRelations);
 };

@@ -1,24 +1,17 @@
 import path from "path";
 import * as Knex from "knex";
 
+import { PokemonMove } from "../../db/types";
 import { Pokemon, VersionGroupDetail, Resource } from "./types/Pokemon";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
 
 const DIR = path.join(__dirname, "../../../data/pokemon");
 
-type PokemonMoveDatabase = {
-  pokemon_id: number;
-  move_id: number;
-  version_group_id: number;
-  learn_method: string;
-  learned_at: number | null;
-};
-
 function mapToTable(
   move: Resource,
   pokemon: Pokemon,
   versionGroupDetails: VersionGroupDetail
-): PokemonMoveDatabase {
+): PokemonMove {
   const isLevelUpMethod =
     versionGroupDetails.move_learn_method.name === "level-up";
 

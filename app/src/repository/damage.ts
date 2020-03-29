@@ -1,6 +1,8 @@
-export function DamageRepository(knex) {
+import * as Knex from "knex";
+
+export function DamageRepository(knex: Knex) {
   return {
-    findDamagesFromByTypeIds: (type_1_id, type_2_id) =>
+    findDamagesFromByTypeIds: (type_1_id: number, type_2_id: number) =>
       knex("damage_relation")
         .select("t2.id as type_from_id")
         .select(
@@ -28,7 +30,7 @@ export function DamageRepository(knex) {
         .groupBy("t2.id")
         .having("total_multiplier", "!=", 1),
 
-    findDamagesToByTypeIds: (type_1_id, type_2_id) =>
+    findDamagesToByTypeIds: (type_1_id: number, type_2_id: number) =>
       knex("damage_relation")
         .select("t2.id as type_from_id")
         .select(

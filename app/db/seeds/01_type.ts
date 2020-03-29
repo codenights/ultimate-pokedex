@@ -1,7 +1,8 @@
 import path from "path";
 import * as Knex from "knex";
 
-import { Type } from "./types/Type";
+import { Type } from "../../db/types";
+import { Type as TypeSource } from "./types/Type";
 import { getDirectoryContent } from "./utils";
 
 const DIR = path.join(__dirname, "../../../data/type");
@@ -26,13 +27,7 @@ const COLORS_BY_TYPE = {
   normal: "#aa9",
 };
 
-type TypeDatabase = {
-  id: number;
-  color: string;
-  name_en: string;
-};
-
-function mapToTable(type: Type): TypeDatabase {
+function mapToTable(type: TypeSource): Type {
   return {
     id: type.id,
     color: COLORS_BY_TYPE[type.name],
@@ -43,7 +38,7 @@ function mapToTable(type: Type): TypeDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing types...");
 
-  const types = (await getDirectoryContent<Type>(DIR)).map(mapToTable);
+  const types = (await getDirectoryContent<TypeSource>(DIR)).map(mapToTable);
 
-  await knex<TypeDatabase>("type").del().insert(types);
+  await knex<Type>("type").del().insert(types);
 };

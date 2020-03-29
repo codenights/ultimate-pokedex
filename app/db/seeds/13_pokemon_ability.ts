@@ -2,6 +2,7 @@ import path from "path";
 import * as Knex from "knex";
 import { readJSON } from "fs-extra";
 
+import { PokemonAbility } from "../../db/types";
 import { Ability } from "./types/Ability";
 import { Pokemon8G } from "./types/Pokemon";
 import { getDirectoryContent, extractIdFromUrl } from "./utils";
@@ -18,16 +19,10 @@ const POKEMON_8G_FILE = path.join(
   "8-gen.json"
 );
 
-type PokemonAbilityDatabase = {
-  pokemon_id: number;
-  ability_id: number;
-  is_hidden: boolean;
-};
-
 exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon / Abilities...");
 
-  const pokemonAbilityEntries: PokemonAbilityDatabase[] = [];
+  const pokemonAbilityEntries: PokemonAbility[] = [];
   const abilities = await getDirectoryContent<Ability>(ABILITY_DIR);
 
   for (const ability of abilities) {
@@ -53,7 +48,7 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  await knex<PokemonAbilityDatabase>("pokemon_ability")
+  await knex<PokemonAbility>("pokemon_ability")
     .del()
     .insert(pokemonAbilityEntries);
 };

@@ -1,6 +1,8 @@
 import path from "path";
 import * as Knex from "knex";
-import { Version } from "./types/Version";
+
+import { Version } from "../../db/types";
+import { Version as VersionSource } from "./types/Version";
 
 import {
   getDirectoryContent,
@@ -43,14 +45,7 @@ const COLOR_BY_VERSION = {
   xd: "#8471bd",
 };
 
-type VersionDatabase = {
-  id: number;
-  color: string;
-  name_en: string;
-  version_group_id: number;
-};
-
-function mapToTable(version: Version): VersionDatabase {
+function mapToTable(version: VersionSource): Version {
   return {
     id: version.id,
     color: COLOR_BY_VERSION[version.name],
@@ -65,7 +60,9 @@ function mapToTable(version: Version): VersionDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing versions...");
 
-  const versions = (await getDirectoryContent<Version>(DIR)).map(mapToTable);
+  const versions = (await getDirectoryContent<VersionSource>(DIR)).map(
+    mapToTable
+  );
 
-  await knex<VersionDatabase>("version").del().insert(versions);
+  await knex<Version>("version").del().insert(versions);
 };

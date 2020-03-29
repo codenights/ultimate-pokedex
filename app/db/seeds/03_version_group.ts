@@ -1,16 +1,13 @@
 import path from "path";
 import * as Knex from "knex";
 
-import { VersionGroup } from "./types/VersionGroup";
+import { VersionGroup } from "../../db/types";
+import { VersionGroup as VersionGroupSource } from "./types/VersionGroup";
 import { getDirectoryContent } from "./utils";
 
 const DIR = path.join(__dirname, "../../../data/version-group");
 
-type VersionGroupDatabase = {
-  id: number;
-};
-
-function mapToTable(versionGroup: VersionGroup): VersionGroupDatabase {
+function mapToTable(versionGroup: VersionGroupSource): VersionGroup {
   return {
     id: versionGroup.id,
   };
@@ -19,9 +16,9 @@ function mapToTable(versionGroup: VersionGroup): VersionGroupDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing version groups...");
 
-  const versionGroups = (await getDirectoryContent<VersionGroup>(DIR)).map(
-    mapToTable
-  );
+  const versionGroups = (
+    await getDirectoryContent<VersionGroupSource>(DIR)
+  ).map(mapToTable);
 
-  await knex<VersionGroupDatabase>("version_group").del().insert(versionGroups);
+  await knex<VersionGroup>("version_group").del().insert(versionGroups);
 };

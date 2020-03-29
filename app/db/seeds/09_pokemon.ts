@@ -2,16 +2,20 @@ import path from "path";
 import { readJSON, pathExists } from "fs-extra";
 import * as Knex from "knex";
 
-import { Pokemon, Pokemon8G } from "./types/Pokemon";
+import { Pokemon } from "../../db/types";
+import {
+  Pokemon as PokemonSource,
+  Pokemon8G as Pokemon8GSource,
+} from "./types/Pokemon";
 import { PokemonSpecies, Variety } from "./types/PokemonSpecies";
+import { Color } from "./types/Color";
+import { Shape } from "./types/Shape";
+import { Classification } from "./types/Classification";
 import {
   getDirectoryContent,
   findEntityByLanguageName,
   extractIdFromUrl,
 } from "./utils";
-import { Color } from "./types/Color";
-import { Shape } from "./types/Shape";
-import { Classification } from "./types/Classification";
 
 const PUBLIC_DIR = path.join(__dirname, "../../public");
 const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
@@ -36,10 +40,10 @@ const CLASSIFICATION_FILE = path.join(
   "../../../data/classification/classifications.json"
 );
 
-const findStatByName = (pokemon: Pokemon, statName: string) =>
+const findStatByName = (pokemon: PokemonSource, statName: string) =>
   pokemon.stats.find(x => x.stat.name === statName).base_stat;
 
-const findTypeId = (slot: number) => (pokemon: Pokemon) =>
+const findTypeId = (slot: number) => (pokemon: PokemonSource) =>
   pokemon.types
     .filter(x => x.slot === slot)
     .map(x => x.type.url)
@@ -54,40 +58,10 @@ const findPokemonByVariety = (variety: Variety) => {
   return readJSON(path.join(POKEMON_DIR, `${pokemonId}.json`));
 };
 
-type PokemonDatabase = {
-  id: number;
-  species_id: number;
-  name_en: string;
-  name_fr: string;
-  name_ja: string;
-  base_experience: number;
-  height: number;
-  order: number;
-  weight: number;
-  base_happiness: number;
-  capture_rate: number;
-  gender_rate: number;
-  is_default_form: boolean;
-  stat_hp: number;
-  stat_attack: number;
-  stat_defense: number;
-  stat_special_attack: number;
-  stat_special_defense: number;
-  stat_speed: number;
-  classification: string;
-  color_id: number;
-  shape_id: number;
-  type_1_id: number;
-  type_2_id: number;
-  artwork_url: string;
-  sprite_url: string;
-  shiny_sprite_url: string;
-};
-
 async function getPokemonNames(
   species: PokemonSpecies,
-  pokemon: Pokemon
-): Promise<Pick<PokemonDatabase, "name_en" | "name_fr" | "name_ja">> {
+  pokemon: PokemonSource
+): Promise<Pick<Pokemon, "name_en" | "name_fr" | "name_ja">> {
   const names = {
     name_en: findEntityByLanguageName(species.names, "en").name,
     name_fr: findEntityByLanguageName(species.names, "fr")
@@ -126,7 +100,7 @@ async function getPokemonNames(
   }
 }
 
-async function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
+async function getArtworkUrl(species: PokemonSpecies, pokemon: PokemonSource) {
   const pokemonArtworkUrl = `/artwork/${pokemon.id}.png`;
   const speciesArtworkUrl = `/artwork/${species.id}.png`;
   const pokemonArtworkPath = path.join(PUBLIC_DIR, pokemonArtworkUrl);
@@ -138,11 +112,11 @@ async function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
 
 async function mapToTable(
   species: PokemonSpecies,
-  pokemon: Pokemon,
+  pokemon: PokemonSource,
   colorId: number,
   shapeId: number,
   classification: string
-): Promise<PokemonDatabase> {
+): Promise<Pokemon> {
   return {
     id: pokemon.id,
     species_id: species.id,
@@ -173,11 +147,11 @@ async function mapToTable(
 }
 
 function mapPokemon8gToTable(
-  pokemon: Pokemon8G,
+  pokemon: Pokemon8GSource,
   colorId: number,
   shapeId: number,
   classification: string
-): PokemonDatabase {
+): Pokemon {
   return {
     id: pokemon.id,
     species_id: pokemon.id,
@@ -218,7 +192,7 @@ type PokemonExtraInfo = {
 exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon...");
 
-  const pokemonEntries: PokemonDatabase[] = [];
+  const pokemonEntries: Pokemon[] = [];
   const allSpecies = await getDirectoryContent<PokemonSpecies>(SPECIES_DIR);
   const pokemonsExtraInfo: PokemonExtraInfo[] = await readJSON(
     POKEMON_UNTIL_7G_FILE
@@ -228,7 +202,7 @@ exports.seed = async (knex: Knex) => {
   const classifications: Classification[] = await readJSON(CLASSIFICATION_FILE);
 
   for (const species of allSpecies) {
-    const pokemons = await Promise.all<Pokemon>(
+    const pokemons = await Promise.all<PokemonSource>(
       species.varieties.map(findPokemonByVariety)
     );
 
@@ -246,10 +220,10 @@ exports.seed = async (knex: Knex) => {
     }
   }
 
-  const pokemonEntries7gAnd8g: PokemonDatabase[] = [
+  const pokemonEntries7gAnd8g: Pokemon[] = [
     ...(await readJSON(POKEMON_7G_FILE)),
     ...(await readJSON(POKEMON_8G_FILE)),
-  ].map((pokemon: Pokemon8G) =>
+  ].map((pokemon: Pokemon8GSource) =>
     mapPokemon8gToTable(
       pokemon,
       colors.find(color => color.name === pokemon.color).id,
@@ -261,5 +235,5 @@ exports.seed = async (knex: Knex) => {
 
   pokemonEntries.push(...pokemonEntries7gAnd8g);
 
-  await knex<PokemonDatabase>("pokemon").del().insert(pokemonEntries);
+  await knex<Pokemon>("pokemon").del().insert(pokemonEntries);
 };

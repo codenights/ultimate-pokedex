@@ -2,7 +2,11 @@ import path from "path";
 import { readJSON } from "fs-extra";
 import * as Knex from "knex";
 
-import { Ability, Ability8G } from "./types/Ability";
+import { Ability } from "../../db/types";
+import {
+  Ability as AbilitySource,
+  Ability8G as Ability8GSource,
+} from "./types/Ability";
 import { getDirectoryContent, findEntityByLanguageName } from "./utils";
 
 const ABILITY_DIR = path.join(__dirname, "../../../data/ability");
@@ -12,15 +16,7 @@ const ABILITIY_8G_FILE = path.join(
   "abilities-8-gen.json"
 );
 
-type AbilityDatabase = {
-  id: number;
-  name_en: string;
-  name_fr: string;
-  name_ja: string;
-  description: string;
-};
-
-function mapToTable(ability: Ability): AbilityDatabase {
+function mapToTable(ability: AbilitySource): Ability {
   return {
     id: ability.id,
     name_en: findEntityByLanguageName(ability.names, "en").name,
@@ -34,7 +30,7 @@ function mapToTable(ability: Ability): AbilityDatabase {
   };
 }
 
-function map8gAbilitiesToTable(ability: Ability8G): AbilityDatabase {
+function map8gAbilitiesToTable(ability: Ability8GSource): Ability {
   return {
     id: ability.id,
     name_en: ability.name,
@@ -47,14 +43,14 @@ function map8gAbilitiesToTable(ability: Ability8G): AbilityDatabase {
 exports.seed = async (knex: Knex) => {
   console.log("Importing abilities...");
 
-  const abilities = (await getDirectoryContent<Ability>(ABILITY_DIR)).map(
+  const abilities = (await getDirectoryContent<AbilitySource>(ABILITY_DIR)).map(
     mapToTable
   );
-  const abilities8g: Ability8G[] = (await readJSON(ABILITIY_8G_FILE)).map(
+  const abilities8g: Ability8GSource[] = (await readJSON(ABILITIY_8G_FILE)).map(
     map8gAbilitiesToTable
   );
 
-  await knex<AbilityDatabase>("ability")
+  await knex<Ability>("ability")
     .del()
     .insert([...abilities, ...abilities8g]);
 };
