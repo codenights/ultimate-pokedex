@@ -23,7 +23,7 @@ const getStatusCode = errors => {
 };
 
 export const executeQuery = async (query, req, getResults) => {
-  const baseUrl = req ? `http://${req.headers.host}` : "";
+  const baseUrl = req ? `http://${req.headers.host}` : "http://localhost:3000";
   const response = await fetch(`${baseUrl}/api/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
