@@ -142,6 +142,7 @@ const GlobalStyle = createGlobalStyle`
   .select-container select,
   .ais-SortBy-select {
     padding-right: 24px;
+    width: 100%;
   }
 
   .ais-ClearRefinements-button {
