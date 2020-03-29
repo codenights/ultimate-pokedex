@@ -104,6 +104,16 @@ export const typeDefs = gql`
     multiplier: Float!
   }
 
+  type Color {
+    id: Int!
+    name: String!
+  }
+
+  type Shape {
+    id: Int!
+    name: String!
+  }
+
   type Pokemon {
     id: Int!
     names: PokemonName
@@ -119,6 +129,9 @@ export const typeDefs = gql`
     genderRate: Int!
     varieties: [Pokemon!]!
     stats: PokemonStat!
+    classification: String
+    color: Color!
+    shape: Shape!
     types: [Type!]!
     evolutions: [PokemonEvolution!]!
     family: PokemonFamily!
@@ -140,5 +153,9 @@ export const typeDefs = gql`
     eggGroup(id: Int!): EggGroup!
 
     type(id: Int!): Type!
+
+    color(id: Int!): Color!
+
+    shape(id: Int!): Shape!
   }
 `;

@@ -7,6 +7,8 @@ import { PokemonMoveLearnResolver } from "./resolvers/pokemonMoveLearn";
 import { MoveResolver } from "./resolvers/move";
 import { PokemonMoveResolver } from "./resolvers/pokemonMove";
 import { TypeResolver } from "./resolvers/type";
+import { ColorResolver } from "./resolvers/color";
+import { ShapeResolver } from "./resolvers/shape";
 import { AbilityResolver } from "./resolvers/ability";
 import { PokemonAbilityResolver } from "./resolvers/pokemonAbility";
 import { VersionResolver } from "./resolvers/version";
@@ -24,6 +26,8 @@ export const resolvers = {
   Version: VersionResolver,
   Ability: AbilityResolver,
   Type: TypeResolver,
+  Color: ColorResolver,
+  Shape: ShapeResolver,
   PokemonMove: PokemonMoveResolver,
   Move: MoveResolver,
   PokemonMoveLearn: PokemonMoveLearnResolver,

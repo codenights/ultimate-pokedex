@@ -25,4 +25,8 @@ export const QueryResolver = {
     eggGroupRepository.findEggGroupById.load(id).then(throwNotFoundIfEmpty),
   type: (obj, { id }, { typeRepository }) =>
     typeRepository.findTypeById.load(id).then(throwNotFoundIfEmpty),
+  color: (obj, { id }, { colorRepository }) =>
+    colorRepository.colorTypeById.load(id).then(throwNotFoundIfEmpty),
+  shape: (obj, { id }, { shapeRepository }) =>
+    shapeRepository.findShapeById.load(id).then(throwNotFoundIfEmpty),
 };

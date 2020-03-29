@@ -32,6 +32,13 @@ const query = `
       baseHappiness
       captureRate
       genderRate
+      classification
+      color {
+        name
+      }
+      shape {
+        name
+      }
       stats {
         hp
         attack
@@ -116,8 +123,8 @@ function transformPokemon(pokemon) {
     genderRate: pokemon.genderRate,
     stats: pokemon.stats,
     types: pokemon.types,
-    color: pokemon.color,
-    shape: pokemon.shape,
+    color: pokemon.color.name,
+    shape: pokemon.shape.name,
     classification: pokemon.classification,
     weight: pokemon.weight,
     height: pokemon.height,
@@ -163,26 +170,10 @@ async function fetchPokemons() {
   });
   const { data } = await response.json();
   const { pokemons } = data;
-  const additionalPokemonData = await readJSON(
-    path.join(__dirname, "../../data/pokemon-next/all-gens.json")
-  );
-  const pokemons8thGen = await readJSON(
-    path.join(__dirname, "../../data/pokemon-next/8-gen.json")
-  );
 
   return pokemons
     .filter(pokemon => pokemon.isDefaultForm === true)
-    .map((pokemon, id) => {
-      const pokemon8thData = pokemons8thGen.find(
-        pokemon => pokemon.id - 1 === id
-      );
-
-      return transformPokemon({
-        ...pokemon,
-        ...additionalPokemonData[id],
-        classification: pokemon8thData ? pokemon8thData.classification : null,
-      });
-    });
+    .map(transformPokemon);
 }
 
 async function saveObjects() {

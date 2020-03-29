@@ -9,6 +9,7 @@ export const PokemonResolver = {
   genderRate: R.prop("gender_rate"),
   stats: R.identity,
   isDefaultForm: R.prop("is_default_form"),
+  classification: R.prop("classification"),
 
   names: ({ name_en, name_fr, name_ja }) => ({
     en: name_en,
@@ -22,6 +23,12 @@ export const PokemonResolver = {
         .filter(Boolean)
         .map(typeId => typeRepository.findTypeById.load(typeId))
     ),
+
+  color: ({ color_id }, args, { colorRepository }) =>
+    colorRepository.findColorById.load(color_id),
+
+  shape: ({ shape_id }, args, { shapeRepository }) =>
+    shapeRepository.findShapeById.load(shape_id),
 
   evolutions: ({ id }, args, { evolutionRepository }) =>
     evolutionRepository.findEvolutionsByPokemonId.load(id),

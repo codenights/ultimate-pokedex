@@ -8,6 +8,8 @@ import { PokemonAbilityRepository } from "../../src/repository/pokemonAbility";
 import { VersionGroupRepository } from "../../src/repository/versionGroup";
 import { VersionRepository } from "../../src/repository/version";
 import { TypeRepository } from "../../src/repository/type";
+import { ColorRepository } from "../../src/repository/color";
+import { ShapeRepository } from "../../src/repository/shape";
 import { PokemonRepository } from "../../src/repository/pokemon";
 import { MoveRepository } from "../../src/repository/move";
 import { EggGroupRepository } from "../../src/repository/eggGroup";
@@ -31,6 +33,8 @@ const apolloServer = new ApolloServer({
     moveRepository: MoveRepository(knex),
     pokemonRepository: PokemonRepository(knex),
     typeRepository: TypeRepository(knex),
+    colorRepository: ColorRepository(knex),
+    shapeRepository: ShapeRepository(knex),
     versionRepository: VersionRepository(knex),
     versionGroupRepository: VersionGroupRepository(knex),
     evolutionRepository: EvolutionRepository(knex),
