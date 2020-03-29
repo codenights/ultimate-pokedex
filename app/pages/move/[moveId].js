@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
-import Error from "next/error";
 
+import Error from "../_error";
 import { fetchMoveQuery } from "../../src/queries/fetchMove";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
 import { MoveDetails } from "../../src/components/MoveDetails";

@@ -1,7 +1,7 @@
 import React from "react";
-import Error from "next/error";
 import Head from "next/head";
 
+import Error from "../_error";
 import { executeQuery } from "../../src/queries/executeQuery";
 import { fetchEggGroup } from "../../src/queries/fetchEggGroup";
 import { AppBarLayout } from "../../src/components/AppBarLayout";

@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
-import Error from "next/error";
 
+import Error from "../_error";
 import { fetchPokemonQuery } from "../../src/queries/fetchPokemon";
 import { PokemonDetails } from "../../src/components/PokemonDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";

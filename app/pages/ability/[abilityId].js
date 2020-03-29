@@ -1,7 +1,7 @@
 import React from "react";
-import Error from "next/error";
 import Head from "next/head";
 
+import Error from "../_error";
 import { fetchAbilityQuery } from "../../src/queries/fetchAbility";
 import { AbilityDetails } from "../../src/components/AbilityDetails";
 import { AppBarLayout } from "../../src/components/AppBarLayout";
