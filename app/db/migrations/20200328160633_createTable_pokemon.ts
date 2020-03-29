@@ -24,7 +24,7 @@ exports.up = async (knex: Knex) => {
     // --------------------------------------- //
     table.integer("color_id").unsigned().notNullable();
     table.integer("shape_id").unsigned().notNullable();
-    table.string("classification");
+    table.string("classification").notNullable();
 
     table.foreign("color_id").references("color.id");
     table.foreign("shape_id").references("shape.id");

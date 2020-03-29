@@ -11,6 +11,7 @@ import {
 } from "./utils";
 import { Color } from "./types/Color";
 import { Shape } from "./types/Shape";
+import { Classification } from "./types/Classification";
 
 const PUBLIC_DIR = path.join(__dirname, "../../public");
 const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
@@ -30,6 +31,10 @@ const POKEMON_UNTIL_7G_FILE = path.join(
 );
 const COLOR_FILE = path.join(__dirname, "../../../data/color/colors.json");
 const SHAPE_FILE = path.join(__dirname, "../../../data/shape/shapes.json");
+const CLASSIFICATION_FILE = path.join(
+  __dirname,
+  "../../../data/classification/classifications.json"
+);
 
 const findStatByName = (pokemon: Pokemon, statName: string) =>
   pokemon.stats.find(x => x.stat.name === statName).base_stat;
@@ -69,7 +74,7 @@ type PokemonDatabase = {
   stat_special_attack: number;
   stat_special_defense: number;
   stat_speed: number;
-  classification: string | null;
+  classification: string;
   color_id: number;
   shape_id: number;
   type_1_id: number;
@@ -134,9 +139,9 @@ async function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
 async function mapToTable(
   species: PokemonSpecies,
   pokemon: Pokemon,
-  colors: Color[],
-  shapes: Shape[],
-  pokemonExtraInfo: PokemonExtraInfo
+  colorId: number,
+  shapeId: number,
+  classification: string
 ): Promise<PokemonDatabase> {
   return {
     id: pokemon.id,
@@ -156,9 +161,9 @@ async function mapToTable(
     stat_special_attack: findStatByName(pokemon, "special-attack"),
     stat_special_defense: findStatByName(pokemon, "special-defense"),
     stat_speed: findStatByName(pokemon, "speed"),
-    classification: null,
-    color_id: colors.find(color => color.name === pokemonExtraInfo.color).id,
-    shape_id: shapes.find(shape => shape.name === pokemonExtraInfo.shape).id,
+    classification: classification,
+    color_id: colorId,
+    shape_id: shapeId,
     type_1_id: findType1Id(pokemon),
     type_2_id: findType2Id(pokemon),
     artwork_url: await getArtworkUrl(species, pokemon),
@@ -169,8 +174,9 @@ async function mapToTable(
 
 function mapPokemon8gToTable(
   pokemon: Pokemon8G,
-  colors: Color[],
-  shapes: Shape[]
+  colorId: number,
+  shapeId: number,
+  classification: string
 ): PokemonDatabase {
   return {
     id: pokemon.id,
@@ -192,9 +198,9 @@ function mapPokemon8gToTable(
     stat_special_attack: pokemon.stats.specialAttack,
     stat_special_defense: pokemon.stats.specialDefense,
     stat_speed: pokemon.stats.speed,
-    classification: pokemon.classification,
-    color_id: colors.find(color => color.name === pokemon.color).id,
-    shape_id: shapes.find(shape => shape.name === pokemon.shape).id,
+    classification: classification,
+    color_id: colorId,
+    shape_id: shapeId,
     type_1_id: pokemon.types[0].id,
     type_2_id: pokemon.types[1] ? pokemon.types[1].id : null,
     artwork_url: `/artwork/${pokemon.id}.png`,
@@ -219,6 +225,7 @@ exports.seed = async (knex: Knex) => {
   );
   const colors: Color[] = await readJSON(COLOR_FILE);
   const shapes: Shape[] = await readJSON(SHAPE_FILE);
+  const classifications: Classification[] = await readJSON(CLASSIFICATION_FILE);
 
   for (const species of allSpecies) {
     const pokemons = await Promise.all<Pokemon>(
@@ -226,25 +233,33 @@ exports.seed = async (knex: Knex) => {
     );
 
     for (const pokemon of pokemons) {
+      const pokemonExtraInfo = pokemonsExtraInfo.find(x => x.id === species.id);
       const pokemonEntry = await mapToTable(
         species,
         pokemon,
-        colors,
-        shapes,
-        pokemonsExtraInfo.find(x => x.id === species.id)
+        colors.find(color => color.name === pokemonExtraInfo.color).id,
+        shapes.find(shape => shape.name === pokemonExtraInfo.shape).id,
+        classifications.find(classification => classification.id === species.id)
+          .name
       );
       pokemonEntries.push(pokemonEntry);
     }
   }
 
-  const pokemonEntries7g: PokemonDatabase[] = (
-    await readJSON(POKEMON_7G_FILE)
-  ).map((pokemon: Pokemon8G) => mapPokemon8gToTable(pokemon, colors, shapes));
-  const pokemonEntries8g: PokemonDatabase[] = (
-    await readJSON(POKEMON_8G_FILE)
-  ).map((pokemon: Pokemon8G) => mapPokemon8gToTable(pokemon, colors, shapes));
+  const pokemonEntries7gAnd8g: PokemonDatabase[] = [
+    ...(await readJSON(POKEMON_7G_FILE)),
+    ...(await readJSON(POKEMON_8G_FILE)),
+  ].map((pokemon: Pokemon8G) =>
+    mapPokemon8gToTable(
+      pokemon,
+      colors.find(color => color.name === pokemon.color).id,
+      shapes.find(shape => shape.name === pokemon.shape).id,
+      classifications.find(classification => classification.id === pokemon.id)
+        .name
+    )
+  );
 
-  pokemonEntries.push(...pokemonEntries7g, ...pokemonEntries8g);
+  pokemonEntries.push(...pokemonEntries7gAnd8g);
 
   await knex<PokemonDatabase>("pokemon").del().insert(pokemonEntries);
 };

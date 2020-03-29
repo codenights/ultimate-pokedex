@@ -129,7 +129,7 @@ export const typeDefs = gql`
     genderRate: Int!
     varieties: [Pokemon!]!
     stats: PokemonStat!
-    classification: String
+    classification: String!
     color: Color!
     shape: Shape!
     types: [Type!]!

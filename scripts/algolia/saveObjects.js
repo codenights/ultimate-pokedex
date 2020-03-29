@@ -116,8 +116,8 @@ function getGeneration(pokemon) {
 
 function transformPokemon(pokemon) {
   return {
-    id: pokemon.id,
     objectID: String(pokemon.id),
+    id: pokemon.id,
     names: pokemon.names,
     captureRate: pokemon.captureRate,
     genderRate: pokemon.genderRate,
