@@ -9,28 +9,24 @@ import { executeQuery } from "../../src/queries/executeQuery";
 
 const CANVAS_SIZE = 16;
 
-const setFavicon = pokemon => {
-  if (!process.browser || !pokemon) return;
-
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  const img = document.createElement("img");
-  const favicon = document.getElementById("favicon");
-
-  canvas.height = canvas.width = CANVAS_SIZE;
-
-  img.onload = () => {
-    ctx.drawImage(img, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
-    favicon.href = canvas.toDataURL("image/png");
-  };
-
-  img.crossOrigin = "Anonymous";
-  img.src = pokemon.spriteUrl;
-};
-
 const PokemonPage = ({ pokemon, statusCode }) => {
   useEffect(() => {
-    setFavicon(pokemon);
+    if (!pokemon) return;
+
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = document.createElement("img");
+    const favicon = document.querySelector<HTMLLinkElement>("#favicon");
+
+    canvas.height = canvas.width = CANVAS_SIZE;
+
+    img.onload = () => {
+      ctx.drawImage(img, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+      favicon.href = canvas.toDataURL("image/png");
+    };
+
+    img.crossOrigin = "Anonymous";
+    img.src = pokemon.spriteUrl;
   }, [pokemon]);
 
   if (statusCode === 404) {
