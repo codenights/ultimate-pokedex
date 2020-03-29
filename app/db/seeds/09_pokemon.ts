@@ -9,6 +9,8 @@ import {
   findEntityByLanguageName,
   extractIdFromUrl,
 } from "./utils";
+import { Color } from "./types/Color";
+import { Shape } from "./types/Shape";
 
 const PUBLIC_DIR = path.join(__dirname, "../../public");
 const SPECIES_DIR = path.join(__dirname, "../../../data/pokemon-species");
@@ -22,6 +24,12 @@ const POKEMON_8G_FILE = path.join(
   __dirname,
   "../../../data/pokemon-next/8-gen.json"
 );
+const POKEMON_UNTIL_7G_FILE = path.join(
+  __dirname,
+  "../../../data/pokemon-next/all-gens.json"
+);
+const COLOR_FILE = path.join(__dirname, "../../../data/color/colors.json");
+const SHAPE_FILE = path.join(__dirname, "../../../data/shape/shapes.json");
 
 const findStatByName = (pokemon: Pokemon, statName: string) =>
   pokemon.stats.find(x => x.stat.name === statName).base_stat;
@@ -61,6 +69,9 @@ type PokemonDatabase = {
   stat_special_attack: number;
   stat_special_defense: number;
   stat_speed: number;
+  classification: string | null;
+  color_id: number;
+  shape_id: number;
   type_1_id: number;
   type_2_id: number;
   artwork_url: string;
@@ -77,8 +88,8 @@ async function getPokemonNames(
     name_fr: findEntityByLanguageName(species.names, "fr")
       ? findEntityByLanguageName(species.names, "fr").name
       : null,
-    name_ja: findEntityByLanguageName(species.names, "roomaji")
-      ? findEntityByLanguageName(species.names, "roomaji").name
+    name_ja: findEntityByLanguageName(species.names, "ja")
+      ? findEntityByLanguageName(species.names, "ja").name
       : null,
   };
 
@@ -95,8 +106,8 @@ async function getPokemonNames(
     const rawSuffixFr = findEntityByLanguageName(form.form_names, "fr")
       ? findEntityByLanguageName(form.form_names, "fr").name
       : null;
-    const rawSuffixJa = findEntityByLanguageName(form.form_names, "roomaji")
-      ? findEntityByLanguageName(form.form_names, "roomaji").name
+    const rawSuffixJa = findEntityByLanguageName(form.form_names, "ja")
+      ? findEntityByLanguageName(form.form_names, "ja").name
       : null;
     const suffixEn = rawSuffixEn;
     const suffixFr = rawSuffixFr || suffixEn;
@@ -110,17 +121,22 @@ async function getPokemonNames(
   }
 }
 
-function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
+async function getArtworkUrl(species: PokemonSpecies, pokemon: Pokemon) {
   const pokemonArtworkUrl = `/artwork/${pokemon.id}.png`;
   const speciesArtworkUrl = `/artwork/${species.id}.png`;
   const pokemonArtworkPath = path.join(PUBLIC_DIR, pokemonArtworkUrl);
 
-  return pathExists(pokemonArtworkPath) ? pokemonArtworkUrl : speciesArtworkUrl;
+  return (await pathExists(pokemonArtworkPath))
+    ? pokemonArtworkUrl
+    : speciesArtworkUrl;
 }
 
 async function mapToTable(
   species: PokemonSpecies,
-  pokemon: Pokemon
+  pokemon: Pokemon,
+  colors: Color[],
+  shapes: Shape[],
+  pokemonExtraInfo: PokemonExtraInfo
 ): Promise<PokemonDatabase> {
   return {
     id: pokemon.id,
@@ -140,15 +156,22 @@ async function mapToTable(
     stat_special_attack: findStatByName(pokemon, "special-attack"),
     stat_special_defense: findStatByName(pokemon, "special-defense"),
     stat_speed: findStatByName(pokemon, "speed"),
+    classification: null,
+    color_id: colors.find(color => color.name === pokemonExtraInfo.color).id,
+    shape_id: shapes.find(shape => shape.name === pokemonExtraInfo.shape).id,
     type_1_id: findType1Id(pokemon),
     type_2_id: findType2Id(pokemon),
-    artwork_url: getArtworkUrl(species, pokemon),
+    artwork_url: await getArtworkUrl(species, pokemon),
     sprite_url: `/sprite/${species.id}.png`,
     shiny_sprite_url: `/sprite-shiny/${species.id}.png`,
   };
 }
 
-function mapPokemon8gToTable(pokemon: Pokemon8G): PokemonDatabase {
+function mapPokemon8gToTable(
+  pokemon: Pokemon8G,
+  colors: Color[],
+  shapes: Shape[]
+): PokemonDatabase {
   return {
     id: pokemon.id,
     species_id: pokemon.id,
@@ -169,6 +192,9 @@ function mapPokemon8gToTable(pokemon: Pokemon8G): PokemonDatabase {
     stat_special_attack: pokemon.stats.specialAttack,
     stat_special_defense: pokemon.stats.specialDefense,
     stat_speed: pokemon.stats.speed,
+    classification: pokemon.classification,
+    color_id: colors.find(color => color.name === pokemon.color).id,
+    shape_id: shapes.find(shape => shape.name === pokemon.shape).id,
     type_1_id: pokemon.types[0].id,
     type_2_id: pokemon.types[1] ? pokemon.types[1].id : null,
     artwork_url: `/artwork/${pokemon.id}.png`,
@@ -177,11 +203,22 @@ function mapPokemon8gToTable(pokemon: Pokemon8G): PokemonDatabase {
   };
 }
 
+type PokemonExtraInfo = {
+  id: number;
+  color: string;
+  shape: string;
+};
+
 exports.seed = async (knex: Knex) => {
   console.log("Importing Pokemon...");
 
   const pokemonEntries: PokemonDatabase[] = [];
   const allSpecies = await getDirectoryContent<PokemonSpecies>(SPECIES_DIR);
+  const pokemonsExtraInfo: PokemonExtraInfo[] = await readJSON(
+    POKEMON_UNTIL_7G_FILE
+  );
+  const colors: Color[] = await readJSON(COLOR_FILE);
+  const shapes: Shape[] = await readJSON(SHAPE_FILE);
 
   for (const species of allSpecies) {
     const pokemons = await Promise.all<Pokemon>(
@@ -189,17 +226,23 @@ exports.seed = async (knex: Knex) => {
     );
 
     for (const pokemon of pokemons) {
-      const pokemonEntry = await mapToTable(species, pokemon);
+      const pokemonEntry = await mapToTable(
+        species,
+        pokemon,
+        colors,
+        shapes,
+        pokemonsExtraInfo.find(x => x.id === species.id)
+      );
       pokemonEntries.push(pokemonEntry);
     }
   }
 
   const pokemonEntries7g: PokemonDatabase[] = (
     await readJSON(POKEMON_7G_FILE)
-  ).map(mapPokemon8gToTable);
+  ).map((pokemon: Pokemon8G) => mapPokemon8gToTable(pokemon, colors, shapes));
   const pokemonEntries8g: PokemonDatabase[] = (
     await readJSON(POKEMON_8G_FILE)
-  ).map(mapPokemon8gToTable);
+  ).map((pokemon: Pokemon8G) => mapPokemon8gToTable(pokemon, colors, shapes));
 
   pokemonEntries.push(...pokemonEntries7g, ...pokemonEntries8g);
 

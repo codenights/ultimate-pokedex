@@ -20,6 +20,16 @@ exports.up = async (knex: Knex) => {
     table.boolean("is_default_form").notNullable();
 
     // --------------------------------------- //
+    // Look
+    // --------------------------------------- //
+    table.integer("color_id").unsigned().notNullable();
+    table.integer("shape_id").unsigned().notNullable();
+    table.string("classification");
+
+    table.foreign("color_id").references("color.id");
+    table.foreign("shape_id").references("shape.id");
+
+    // --------------------------------------- //
     // Types
     // --------------------------------------- //
     table.integer("type_1_id").unsigned().notNullable();
