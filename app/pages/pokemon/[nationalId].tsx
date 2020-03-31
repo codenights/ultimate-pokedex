@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import Error from "../_error";
@@ -50,9 +51,21 @@ const PokemonPage = ({ pokemon, statusCode }) => {
   );
 };
 
-PokemonPage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchPokemonQuery(query.nationalId), req, ({ pokemon }) => ({
-    pokemon,
-  }));
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
+  const props = await executeQuery(
+    fetchPokemonQuery(query.nationalId),
+    req,
+    ({ pokemon }) => ({
+      pokemon,
+    })
+  );
+
+  return {
+    props,
+  };
+};
 
 export default PokemonPage;

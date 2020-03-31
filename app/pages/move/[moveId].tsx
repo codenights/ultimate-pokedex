@@ -1,4 +1,5 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import Error from "../_error";
@@ -38,9 +39,21 @@ const MovePage = ({ move, statusCode }) => {
   );
 };
 
-MovePage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchMoveQuery(query.moveId), req, ({ move }) => ({
-    move,
-  }));
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
+  const props = await executeQuery(
+    fetchMoveQuery(query.moveId),
+    req,
+    ({ move }) => ({
+      move,
+    })
+  );
+
+  return {
+    props,
+  };
+};
 
 export default MovePage;

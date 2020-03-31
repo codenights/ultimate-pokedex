@@ -1,4 +1,5 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import Error from "../_error";
@@ -36,9 +37,21 @@ const AbilityPage = ({ ability, statusCode }) => {
   );
 };
 
-AbilityPage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchAbilityQuery(query.abilityId), req, ({ ability }) => ({
-    ability,
-  }));
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
+  const props = await executeQuery(
+    fetchAbilityQuery(query.abilityId),
+    req,
+    ({ ability }) => ({
+      ability,
+    })
+  );
+
+  return {
+    props,
+  };
+};
 
 export default AbilityPage;

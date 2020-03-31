@@ -1,4 +1,5 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import Error from "../_error";
@@ -36,9 +37,21 @@ const TypePage = ({ type, statusCode }) => {
   );
 };
 
-TypePage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchTypeQuery(query.typeId), req, ({ type }) => ({
-    type,
-  }));
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
+  const props = await executeQuery(
+    fetchTypeQuery(query.typeId),
+    req,
+    ({ type }) => ({
+      type,
+    })
+  );
+
+  return {
+    props,
+  };
+};
 
 export default TypePage;

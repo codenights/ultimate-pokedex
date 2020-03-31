@@ -4,14 +4,12 @@ import Link from "next/link";
 
 import { TypeIcon } from "./TypeIcon";
 
-export const TypeBadge = ({ type, children, ...props }) => (
+export const TypeBadge = ({ type, ...props }) => (
   <Link href="/type/[typeId]" as={`/type/${type.id}`}>
     <a {...props}>
       <span className={"flex whitespace-no-wrap text-center items-center"}>
         <TypeIcon type={type.name} />
         <span className="type-name text-md ml-1">{type.name}</span>
-
-        {children}
 
         <style jsx>{`
           .type-name {

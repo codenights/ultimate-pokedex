@@ -1,4 +1,5 @@
 import React from "react";
+import { GetServerSideProps } from "next";
 import Head from "next/head";
 
 import Error from "../_error";
@@ -36,9 +37,21 @@ const EggGroupPage = ({ eggGroup, statusCode }) => {
   );
 };
 
-EggGroupPage.getInitialProps = ({ query, req }) =>
-  executeQuery(fetchEggGroup(query.eggGroupId), req, ({ eggGroup }) => ({
-    eggGroup,
-  }));
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  req,
+}) => {
+  const props = await executeQuery(
+    fetchEggGroup(query.eggGroupId),
+    req,
+    ({ eggGroup }) => ({
+      eggGroup,
+    })
+  );
+
+  return {
+    props,
+  };
+};
 
 export default EggGroupPage;
