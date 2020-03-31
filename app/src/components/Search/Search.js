@@ -31,8 +31,8 @@ export function Search({
   resultsState,
   indexName,
   onSearchStateChange,
-  onSearchParameters,
-  setSearchState,
+  // setSearchState,
+  ...props
 }) {
   const initialTypeAttribute = getTypeAttribute();
   const [typeAttribute, setTypeAttribute] = React.useState(
@@ -47,9 +47,9 @@ export function Search({
       resultsState={resultsState}
       createURL={getUrlFromState}
       onSearchStateChange={onSearchStateChange}
-      // `onSearchParameters` is passed by `findResultsState` when Server-Side
-      // Rendering.
-      onSearchParameters={onSearchParameters}
+      // `onSearchParameters` is passed in the props by `findResultsState` when
+      // server-side rendering.
+      {...props}
     >
       <AppBarLayout showSearchBox={true}>
         <Head>
