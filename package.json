@@ -3,5 +3,11 @@
   "workspaces": [
     "app",
     "scripts"
-  ]
+  ],
+  "scripts": {
+    "mysql:start": "./scripts/dev/start-mysql.sh",
+    "mysql:migrate": "cd app && knex migrate:latest --cwd db/",
+    "mysql:rollback": "cd app && knex migrate:rollback --cwd db/",
+    "mysql:seed": "cd app && knex seed:run --cwd db/"
+  }
 }
