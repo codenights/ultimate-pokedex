@@ -1,9 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-import { RefinementHeader } from "./RefinementHeader";
 import { TypeBadge } from "../../TypeBadge";
 import { DamageTypeBadge } from "../../DamageTypeBadge";
+import { RefinementHeader } from "./RefinementHeader";
+import { RefinementCard, RefinementItem, RefinementDetails } from "./style";
 
 const TYPE_MAP = {
   Normal: 1,
@@ -69,7 +70,7 @@ export function TypeRefinement(props) {
   }, []);
 
   return (
-    <RefinementItem>
+    <Refinement>
       <RefinementCard>
         <RefinementHeader onRemove={() => props.refine(props.value)}>
           Type
@@ -82,7 +83,7 @@ export function TypeRefinement(props) {
           />
         </RefinementHeader>
 
-        <div css={{ marginTop: 4 }}>
+        <RefinementContent>
           <RefinementDetails>
             <TypeCategory className="text-xl text-gray-400 flex items-center">
               <svg width="18" height="18" viewBox="0 0 28 28" className="mr-2">
@@ -138,37 +139,30 @@ export function TypeRefinement(props) {
               </TypeList>
             )}
           </RefinementDetails>
-        </div>
+        </RefinementContent>
       </RefinementCard>
-    </RefinementItem>
+    </Refinement>
   );
 }
 
-const RefinementItem = styled.li`
-  &:not(:last-of-type) {
-    margin-right: 18px;
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 `;
 
-const RefinementCard = styled.div`
-  background-image: linear-gradient(180deg, #2f3544 0%, #1a202c 100%);
-  box-shadow: 0 3px 7px 0 rgba(0, 0, 0, 0.39),
-    inset 1px 1px 0 0 rgba(255, 255, 255, 0.12);
-  border-radius: 4px;
-  padding: 11px;
-  color: #fff;
-  min-width: 290px;
+const RefinementContent = styled.div`
+  display: none;
+  margin-top: 4;
 `;
 
-const RefinementDetails = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 9px;
-  background: rgba(27, 33, 45, 0.6);
-  box-shadow: 1px 1px 0 0 rgba(255, 255, 255, 0.11),
-    inset 1px 1px 4px 0 rgba(0, 0, 0, 0.33);
-  border-radius: 3px;
-  padding: 7px 11px;
+const Refinement = styled(RefinementItem)`
+  &:hover ${RefinementContent} {
+    display: block;
+  }
 `;
 
 const TypeCategory = styled.span`
@@ -182,4 +176,6 @@ const TypeList = styled.ul`
   display: flex;
   align-items: center;
   line-height: 0;
+  opacity: 0;
+  animation: ${fadeIn} 250ms ease-out forwards;
 `;
